@@ -129,7 +129,7 @@ Run `python3 scripts/build_datasets.py` to regenerate JSON and offline JS bundle
 
 ## Publication boundary
 
-[Open the published presentation](https://anulum.github.io/ATLAS-REACTORUM/04_interactive_presentation/).
+[Open the published presentation](https://anulum.github.io/atlas-reactorum/04_interactive_presentation/).
 GitHub Pages serves the complete release tree, retaining the sibling source
 catalogues and relative asset paths. Local use remains available through
 `index.html`; no build server or runtime API is required. Publisher source

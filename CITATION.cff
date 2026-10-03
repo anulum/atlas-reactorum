@@ -30,7 +30,7 @@ keywords:
   - chemical engineering
   - research data
 license: AGPL-3.0-or-later
-repository-code: "https://github.com/anulum/ATLAS-REACTORUM"
-url: "https://anulum.github.io/ATLAS-REACTORUM/04_interactive_presentation/"
+repository-code: "https://github.com/anulum/atlas-reactorum"
+url: "https://anulum.github.io/atlas-reactorum/04_interactive_presentation/"
 version: "0.1.0"
 date-released: "2026-10-03"

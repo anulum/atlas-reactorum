@@ -22,7 +22,7 @@ fabricated: a large record count is not a count of unique reactor vessels.
 
 ## Open the atlas
 
-[Open Atlas Reactorum online](https://anulum.github.io/ATLAS-REACTORUM/04_interactive_presentation/).
+[Open Atlas Reactorum online](https://anulum.github.io/atlas-reactorum/04_interactive_presentation/).
 
 Open [`04_interactive_presentation/index.html`](04_interactive_presentation/index.html)
 in a modern browser. It is fully static, carries no runtime dependencies, and
