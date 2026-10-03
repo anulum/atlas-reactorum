@@ -37,7 +37,12 @@ def test_world_map_is_visible_on_initial_desktop_and_mobile_entry(
     browser: Browser, native_browser: BrowserEndpoints
 ) -> None:
     """Open the real page with no anchor and use its map before library navigation."""
-    for width, height, mobile in ((1440, 1000, False), (375, 812, True)):
+    for width, height, mobile, font in (
+        (1440, 1000, False, None),
+        (375, 812, True, None),
+        (375, 812, True, "DejaVu Sans"),
+        (375, 812, True, "monospace"),
+    ):
         browser.command(
             "Emulation.setDeviceMetricsOverride",
             {"width": width, "height": height, "deviceScaleFactor": 1, "mobile": mobile},
@@ -46,6 +51,10 @@ def test_world_map_is_visible_on_initial_desktop_and_mobile_entry(
             browser.command("Page.navigate", {"url": "about:blank"})
             browser.command("Page.navigate", {"url": native_browser["page"]})
             browser.wait_ready()
+            if font is not None:
+                browser.evaluate(
+                    "document.documentElement.style.setProperty('--sans', " + json.dumps(font) + ")"
+                )
             assert (
                 browser.evaluate("""(() => {
               const canvas = document.querySelector('#mapHost canvas');
