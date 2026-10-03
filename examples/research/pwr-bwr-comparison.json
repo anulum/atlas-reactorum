@@ -1,0 +1,536 @@
+{
+  "schema_version": "atlas-comparison-1.0.0",
+  "metadata_license": "AGPL-3.0-or-later",
+  "source_rights": "catalogue-only; original not redistributed",
+  "snapshot": {
+    "profile_sha256": "6b9dc7c94cbf537518001ebf239ad0a03fee796199a21a5ada2c0610d85f9666",
+    "inputs": {
+      "taxonomy_sha256": "88ef46ebb4a9f5682e77620d524f1a8de4bcd371dcb6c99c2b16aa1eb53dc0a4",
+      "citations_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7",
+      "audit_sha256": "2bf1eed42222d5b094dff2fdd5028c721ab8b70527f1cb05e794586f9e7faa84"
+    }
+  },
+  "selection": {
+    "entry_ids": [
+      "pwr",
+      "bwr"
+    ]
+  },
+  "profiles": [
+    {
+      "entry_id": "pwr",
+      "legacy_kind": "architecture",
+      "entity_kind": {
+        "category": "architecture",
+        "basis": "legacy-kind-mapping",
+        "decision": "provisional"
+      },
+      "bound_values": {
+        "name": "PWR",
+        "kind": "architecture",
+        "family": "Water-cooled fission",
+        "principle": "Pressurised primary water transfers core heat to a separate steam system.",
+        "strength": "Extensive operating experience",
+        "challenge": "High-pressure boundary integrity and spent-fuel handling",
+        "maturity": "deployed",
+        "evidence": "established",
+        "source_urls": [
+          "https://www.nrc.gov/cdn/legacy/reading-rm/training/reactor-concepts-training-course.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/te_1544_web.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/RDS-2-45_web.pdf"
+        ]
+      },
+      "taxonomy_record": {
+        "id": "pwr",
+        "name": "PWR",
+        "domain": "fission",
+        "family": "Water-cooled fission",
+        "parent": "Water-cooled fission",
+        "kind": "architecture",
+        "maturity": "deployed",
+        "evidence": "established",
+        "principle": "Pressurised primary water transfers core heat to a separate steam system.",
+        "strength": "Extensive operating experience",
+        "challenge": "High-pressure boundary integrity and spent-fuel handling",
+        "temp": "Design and application dependent; see source",
+        "mode": "Design dependent",
+        "scale": null,
+        "control": null,
+        "source_ids": [
+          "nrc",
+          "pris",
+          "pwrExperience"
+        ],
+        "source_urls": [
+          "https://www.nrc.gov/cdn/legacy/reading-rm/training/reactor-concepts-training-course.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/te_1544_web.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/RDS-2-45_web.pdf"
+        ],
+        "evidence_scope": "Established process or reactor architecture; individual designs require separate qualification.",
+        "reviewed_on": "2026-10-01",
+        "parent_id": null,
+        "source_audit": "Introductory reference mapping; per-claim source audit pending"
+      },
+      "claims": [
+        {
+          "claim_id": "pwr:classification:1",
+          "topic": "classification",
+          "original_statement": "PWR is identified as a basic reactor type.",
+          "citation": {
+            "id": "pwr:classification:1",
+            "topic": "classification",
+            "statement": "PWR is identified as a basic reactor type.",
+            "source_id": "iaea-te1544",
+            "section": "2.1.3 Classification",
+            "pdf_pages": [
+              11
+            ],
+            "printed_pages": [
+              "4"
+            ],
+            "scope": "Names the type; current deployment and complete physical definition require separate evidence.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "pwr:principle:1",
+          "topic": "principle",
+          "original_statement": "Pressurised primary water transfers core heat to a separate steam system.",
+          "citation": {
+            "id": "pwr:principle:1",
+            "topic": "principle",
+            "statement": "Pressurised primary water transfers core heat to a separate steam system.",
+            "source_id": "nrc-r100",
+            "section": "Primary and Secondary Systems of a PWR; Basic Functionality of a PWR: Steam Production",
+            "pdf_pages": [
+              75,
+              76
+            ],
+            "printed_pages": [
+              "75",
+              "76"
+            ],
+            "scope": "Primary pressure and heat exchange between separate circuits only; no universal pressure, temperature, current fleet share or complete entry qualification is inferred.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "pwr:strength:1",
+          "topic": "strength",
+          "original_statement": "Extensive operating experience",
+          "citation": {
+            "id": "pwr:strength:1",
+            "topic": "strength",
+            "statement": "Extensive operating experience",
+            "source_id": "iaea-rds2-2025",
+            "section": "Table 2: Type and net electrical power of operational reactors; Table 14: Operational reactors, 31 December 2024",
+            "pdf_pages": [
+              17,
+              18,
+              36
+            ],
+            "printed_pages": [
+              "10",
+              "11",
+              "29"
+            ],
+            "scope": "Qualitative breadth and duration of PWR operating experience: type-labelled fleet and older commercial operation examples in the dated PRIS publication. No cumulative all-reactor years assigned to PWR, uninterrupted operation, current fleet total, safety superiority or whole-entry acceptance.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "pwr:challenge:1",
+          "topic": "challenge",
+          "original_statement": "High-pressure boundary integrity and spent-fuel handling",
+          "citation": {
+            "id": "pwr:challenge:1",
+            "topic": "challenge",
+            "statement": "High-pressure boundary integrity and spent-fuel handling",
+            "source_id": "nrc-r100",
+            "section": "Pressurized Water Reactor Systems: Chapter Overview; Basic Functionality of a PWR: Steam Production",
+            "pdf_pages": [
+              73,
+              76
+            ],
+            "printed_pages": [
+              "73",
+              "76"
+            ],
+            "scope": "Supports the high-pressure coolant-boundary component. Pressure maintains liquid water in the core; no universal pressure value, specific failure probability or current legal obligation is inferred.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "pwr:challenge:2",
+          "topic": "challenge",
+          "original_statement": "High-pressure boundary integrity and spent-fuel handling",
+          "citation": {
+            "id": "pwr:challenge:2",
+            "topic": "challenge",
+            "statement": "High-pressure boundary integrity and spent-fuel handling",
+            "source_id": "nrc-r100",
+            "section": "Fuel Transfer; Spent Fuel Bridge Crane; Spent (Exhausted) Fuel",
+            "pdf_pages": [
+              179,
+              182,
+              185
+            ],
+            "printed_pages": [
+              "179",
+              "182",
+              "185"
+            ],
+            "scope": "Supports spent-fuel handling, shielding and continuing decay-heat removal. This is an engineering burden, not a current licensing interpretation. Historical storage waiting periods, fleet/site counts and repository forecasts are not adopted.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "id": "temperature",
+          "state": "not_reviewed",
+          "reason": "The catalogue text has not been normalized with source-bound units, conditions and a system boundary.",
+          "original_text": "Design and application dependent; see source"
+        }
+      ],
+      "review_disposition": {
+        "complete_entry_review": false,
+        "source_inspection": {
+          "basis": "author-source-inspection",
+          "author": null,
+          "claim_ids": [
+            "pwr:classification:1",
+            "pwr:principle:1",
+            "pwr:strength:1",
+            "pwr:challenge:1",
+            "pwr:challenge:2"
+          ],
+          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+        },
+        "classification": {
+          "state": "open",
+          "basis": "legacy-kind-mapping",
+          "questions": [
+            "Sources inherited from family group; applicability of each URL to this entry is not individually established.",
+            "Assign references per entry and per claim with page/section pointers."
+          ]
+        },
+        "independent_review": null,
+        "historical_audit": {
+          "id": "pwr",
+          "name": "PWR",
+          "classification_ok": "plausible-provisional",
+          "source_directness": "introductory-family-mapping; per-claim verification pending",
+          "source_access": "pdf-extracted | pdf-response-text-unavailable",
+          "issue": "Sources inherited from family group; applicability of each URL to this entry is not individually established.",
+          "recommended_action": "Assign references per entry and per claim with page/section pointers.",
+          "verified_source_url": "",
+          "audit_date": "2026-09-26"
+        }
+      }
+    },
+    {
+      "entry_id": "bwr",
+      "legacy_kind": "architecture",
+      "entity_kind": {
+        "category": "architecture",
+        "basis": "legacy-kind-mapping",
+        "decision": "provisional"
+      },
+      "bound_values": {
+        "name": "BWR",
+        "kind": "architecture",
+        "family": "Water-cooled fission",
+        "principle": "Coolant boils in the core and supplies steam directly to the turbine.",
+        "strength": "Direct steam cycle",
+        "challenge": "Two-phase stability and radioactive steam circuit",
+        "maturity": "deployed",
+        "evidence": "established",
+        "source_urls": [
+          "https://www.nrc.gov/cdn/legacy/reading-rm/training/reactor-concepts-training-course.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/te_1544_web.pdf",
+          "https://www.nrc.gov/sites/default/files/doc_library/cdn/legacy/reading-rm/basic-ref/students/for-educators/03.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/TCS-69web.pdf"
+        ]
+      },
+      "taxonomy_record": {
+        "id": "bwr",
+        "name": "BWR",
+        "domain": "fission",
+        "family": "Water-cooled fission",
+        "parent": "Water-cooled fission",
+        "kind": "architecture",
+        "maturity": "deployed",
+        "evidence": "established",
+        "principle": "Coolant boils in the core and supplies steam directly to the turbine.",
+        "strength": "Direct steam cycle",
+        "challenge": "Two-phase stability and radioactive steam circuit",
+        "temp": "Design and application dependent; see source",
+        "mode": "Design dependent",
+        "scale": null,
+        "control": null,
+        "source_ids": [
+          "nrc",
+          "pris",
+          "nrcBwr",
+          "passiveWater"
+        ],
+        "source_urls": [
+          "https://www.nrc.gov/cdn/legacy/reading-rm/training/reactor-concepts-training-course.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/te_1544_web.pdf",
+          "https://www.nrc.gov/sites/default/files/doc_library/cdn/legacy/reading-rm/basic-ref/students/for-educators/03.pdf",
+          "https://www-pub.iaea.org/MTCD/Publications/PDF/TCS-69web.pdf"
+        ],
+        "evidence_scope": "Established process or reactor architecture; individual designs require separate qualification.",
+        "reviewed_on": "2026-10-01",
+        "parent_id": null,
+        "source_audit": "Introductory reference mapping; per-claim source audit pending"
+      },
+      "claims": [
+        {
+          "claim_id": "bwr:classification:1",
+          "topic": "classification",
+          "original_statement": "BWR is identified as a basic reactor type.",
+          "citation": {
+            "id": "bwr:classification:1",
+            "topic": "classification",
+            "statement": "BWR is identified as a basic reactor type.",
+            "source_id": "iaea-te1544",
+            "section": "2.1.3 Classification",
+            "pdf_pages": [
+              11
+            ],
+            "printed_pages": [
+              "4"
+            ],
+            "scope": "Names the type; current deployment and complete physical definition require separate evidence.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "bwr:principle:1",
+          "topic": "principle",
+          "original_statement": "Coolant boils in the core and supplies steam directly to the turbine.",
+          "citation": {
+            "id": "bwr:principle:1",
+            "topic": "principle",
+            "statement": "Coolant boils in the core and supplies steam directly to the turbine.",
+            "source_id": "nrc-r100",
+            "section": "Nuclear Power for Electrical Generation: BWRs",
+            "pdf_pages": [
+              21
+            ],
+            "printed_pages": [
+              "21"
+            ],
+            "scope": "Core steam generation and direct contact with the core only; the 2017 US fleet proportions on this page are not current fleet data.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "bwr:principle:2",
+          "topic": "principle",
+          "original_statement": "Coolant boils in the core and supplies steam directly to the turbine.",
+          "citation": {
+            "id": "bwr:principle:2",
+            "topic": "principle",
+            "statement": "Coolant boils in the core and supplies steam directly to the turbine.",
+            "source_id": "nrc-bwr-systems",
+            "section": "Boiling Water Reactor Plant",
+            "pdf_pages": [
+              2
+            ],
+            "printed_pages": [
+              "3-2"
+            ],
+            "scope": "Steam passes through moisture separation before the main turbine; directly means no separate primary-to-secondary steam generator, not the absence of intermediate equipment.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "bwr:strength:1",
+          "topic": "strength",
+          "original_statement": "Direct steam cycle",
+          "citation": {
+            "id": "bwr:strength:1",
+            "topic": "strength",
+            "statement": "Direct steam cycle",
+            "source_id": "nrc-r100",
+            "section": "Nuclear Power for Electrical Generation: BWRs; Basic Functionality of a PWR",
+            "pdf_pages": [
+              21,
+              78
+            ],
+            "printed_pages": [
+              "21",
+              "78"
+            ],
+            "scope": "Supports the direct-cycle configuration as a design characteristic; it does not establish an economic advantage, universal turbine shielding rule or plant-specific safety assessment.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "bwr:challenge:1",
+          "topic": "challenge",
+          "original_statement": "Two-phase stability and radioactive steam circuit",
+          "citation": {
+            "id": "bwr:challenge:1",
+            "topic": "challenge",
+            "statement": "Two-phase stability and radioactive steam circuit",
+            "source_id": "iaea-passive-water",
+            "section": "2.1.2 Boiling water reactor: core design and recirculation",
+            "pdf_pages": [
+              18
+            ],
+            "printed_pages": [
+              "9"
+            ],
+            "scope": "Core vapour and flow/feedback interactions support the two-phase-stability concern. Conditional mechanism, not a claim that every BWR is unstable; example Table2 numbers and geometry are not universal design requirements.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        },
+        {
+          "claim_id": "bwr:challenge:2",
+          "topic": "challenge",
+          "original_statement": "Two-phase stability and radioactive steam circuit",
+          "citation": {
+            "id": "bwr:challenge:2",
+            "topic": "challenge",
+            "statement": "Two-phase stability and radioactive steam circuit",
+            "source_id": "nrc-r100",
+            "section": "Neutron Activation; Nitrogen-16 and the BWR Main Steam system",
+            "pdf_pages": [
+              139,
+              140
+            ],
+            "printed_pages": [
+              "139",
+              "140"
+            ],
+            "scope": "Supports the radioactive primary-steam circuit and shielding implications of water activation, including nitrogen-16. Does not imply current site dose exceedance, arbitrary contamination of the turbine, a mandatory delay-loop design or current regulatory instructions.",
+            "reviewed_on": "2026-10-01",
+            "review_basis": "author-source-inspection"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "id": "temperature",
+          "state": "not_reviewed",
+          "reason": "The catalogue text has not been normalized with source-bound units, conditions and a system boundary.",
+          "original_text": "Design and application dependent; see source"
+        }
+      ],
+      "review_disposition": {
+        "complete_entry_review": false,
+        "source_inspection": {
+          "basis": "author-source-inspection",
+          "author": null,
+          "claim_ids": [
+            "bwr:classification:1",
+            "bwr:principle:1",
+            "bwr:principle:2",
+            "bwr:strength:1",
+            "bwr:challenge:1",
+            "bwr:challenge:2"
+          ],
+          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+        },
+        "classification": {
+          "state": "open",
+          "basis": "legacy-kind-mapping",
+          "questions": [
+            "Sources inherited from family group; applicability of each URL to this entry is not individually established.",
+            "Assign references per entry and per claim with page/section pointers."
+          ]
+        },
+        "independent_review": null,
+        "historical_audit": {
+          "id": "bwr",
+          "name": "BWR",
+          "classification_ok": "plausible-provisional",
+          "source_directness": "introductory-family-mapping; per-claim verification pending",
+          "source_access": "pdf-extracted | pdf-response-text-unavailable",
+          "issue": "Sources inherited from family group; applicability of each URL to this entry is not individually established.",
+          "recommended_action": "Assign references per entry and per claim with page/section pointers.",
+          "verified_source_url": "",
+          "audit_date": "2026-09-26"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "iaea-passive-water",
+      "title": "Passive Safety Systems in Water Cooled Reactors: An Overview and Demonstration with Basic Principle Simulators",
+      "url": "https://www-pub.iaea.org/MTCD/Publications/PDF/TCS-69web.pdf",
+      "sha256": "a94defe8dd6d15b660c92245dbfcc0d17d7ed701da2ad0c991068e29cea212e6",
+      "captured_at": "2026-10-01T03:54:06.190697+00:00",
+      "format": "pdf",
+      "page_count": 168,
+      "access": "catalogue-only; original not redistributed",
+      "capture_method": "publisher-tls"
+    },
+    {
+      "id": "iaea-te1544",
+      "title": "Nuclear Power Plant Design Characteristics: Structure of Nuclear Power Plant Design Characteristics in the IAEA PRIS Database",
+      "url": "https://www-pub.iaea.org/MTCD/Publications/PDF/te_1544_web.pdf",
+      "sha256": "f5781cce9720d165c9d15b04bc9c8074fdf6339fe677032ff43b4ed3f9a82672",
+      "captured_at": "2026-10-01T03:52:32.462089+00:00",
+      "format": "pdf",
+      "page_count": 40,
+      "access": "catalogue-only; original not redistributed",
+      "capture_method": "publisher-tls"
+    },
+    {
+      "id": "nrc-r100",
+      "title": "NRC Reactor Concepts (R-100) Training Course",
+      "url": "https://www.nrc.gov/cdn/legacy/reading-rm/training/reactor-concepts-training-course.pdf",
+      "sha256": "7c72736716363aec44745352ed2cde83e4e6f90da88974ddc83e7c5c40bea64d",
+      "captured_at": null,
+      "capture_method": "retained-source-review",
+      "format": "pdf",
+      "page_count": 292,
+      "access": "catalogue-only; original not redistributed"
+    },
+    {
+      "id": "nrc-bwr-systems",
+      "title": "Reactor Concepts Manual: Boiling Water Reactor Systems",
+      "url": "https://www.nrc.gov/sites/default/files/doc_library/cdn/legacy/reading-rm/basic-ref/students/for-educators/03.pdf",
+      "sha256": "d4a35338e8ce6f5346320ca05df7a0dfb8f0f75419c706689abccfcdc11ae345",
+      "captured_at": null,
+      "capture_method": "retained-source-review",
+      "format": "pdf",
+      "page_count": 18,
+      "access": "catalogue-only; original not redistributed"
+    },
+    {
+      "id": "iaea-rds2-2025",
+      "title": "Nuclear Power Reactors in the World, 2025 Edition",
+      "url": "https://www-pub.iaea.org/MTCD/Publications/PDF/RDS-2-45_web.pdf",
+      "sha256": "13d54c9049491f7701e4e42dc657f4707c3d5aed1c890e9c044864a08d971204",
+      "captured_at": "2026-10-01T15:12:20.676933+00:00",
+      "capture_method": "publisher-tls",
+      "format": "pdf",
+      "page_count": 100,
+      "access": "catalogue-only; original not redistributed"
+    }
+  ],
+  "parameter_comparisons": [
+    {
+      "parameter_id": "temperature",
+      "state": "not_comparable",
+      "reason": "At least one entry has no source-bound numeric value. Original text and missing-value reasons are retained."
+    }
+  ]
+}

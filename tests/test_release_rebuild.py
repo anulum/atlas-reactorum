@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import subprocess
@@ -32,6 +33,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
     env = {**os.environ, "SOURCE_DATE_EPOCH": "1790782681", "PYTHONDONTWRITEBYTECODE": "1"}
     for command in (
         ["node", "04_interactive_presentation/scripts/export_taxonomy.cjs"],
+        ["node", "04_interactive_presentation/scripts/evidence_history.cjs", "--build", "."],
         [sys.executable, "04_interactive_presentation/scripts/build_datasets.py"],
         [sys.executable, "metadata/coverage_audit/build_coverage.py"],
         ["/usr/bin/bash", "metadata/build_inventory.sh"],
@@ -39,7 +41,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
         result = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=60)
         assert result.returncode == 0, result.stderr.decode()
     # Only the provenance label was stale: actual record payloads remain exact.
-    for product in PRODUCTS[:7]:
+    for product in PRODUCTS[:11]:
         assert (root / product).read_bytes() == (ROOT / product).read_bytes()
     return root
 
@@ -86,6 +88,39 @@ def test_corrupted_accepted_javascript_is_detected_by_real_export(
         handle.write(b"\n")
     before = snapshot(release_candidate)
     assert f"reproducibility: product changed {product}" in reproduce(release_candidate, tmp_path)
+    assert snapshot(release_candidate) == before
+
+
+def test_unimported_current_source_cannot_be_replaced_by_retained_history(
+    release_candidate: Path, tmp_path: Path
+) -> None:
+    """Refuse a journal whose latest explicit observation differs from the real exporter."""
+    source = release_candidate / "04_interactive_presentation/data/taxonomy-evidence-profiles.json"
+    document = json.loads(source.read_text())
+    document["records"][0]["parameters"][0]["reason"] += " Controlled source update."
+    changed = tmp_path / "changed-profiles.json"
+    changed.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n")
+    journal = release_candidate / "metadata/evidence_history/history.json"
+    successor = tmp_path / "successor-history.json"
+    node = shutil.which("node")
+    assert node is not None
+    result = subprocess.run(
+        [
+            node,
+            str(release_candidate / "04_interactive_presentation/scripts/evidence_history.cjs"),
+            "--import",
+            str(journal),
+            str(changed),
+            "2026-10-04T07:20:00.000Z",
+            str(successor),
+        ],
+        capture_output=True,
+        timeout=60,
+    )
+    assert result.returncode == 0, result.stderr.decode()
+    shutil.copy2(successor, journal)
+    before = snapshot(release_candidate)
+    assert "reproducibility: history exited 2" in reproduce(release_candidate, tmp_path)
     assert snapshot(release_candidate) == before
 
 
@@ -254,3 +289,77 @@ def test_public_source_copy_preserves_catalogue_directories_and_refuses_symlinks
     (release_candidate / "README-alias.md").symlink_to(release_candidate / "README.md")
     with pytest.raises(OSError, match="symlink"):
         copy_source(release_candidate, tmp_path / "refused-source-copy")
+
+
+@pytest.mark.parametrize("entrypoint", ["make", "preflight"])
+@pytest.mark.parametrize("explicit_selector", [False, True])
+def test_selected_full_python_overrides_real_stdlib_only_ambient_python(
+    release_candidate: Path, tmp_path: Path, entrypoint: str, explicit_selector: bool
+) -> None:
+    """Use both public builders with a real dependency-free ambient interpreter."""
+    ambient = tmp_path / "stdlib-environment"
+    created = subprocess.run(
+        [sys.executable, "-m", "venv", "--without-pip", str(ambient)],
+        capture_output=True,
+        timeout=60,
+    )
+    assert created.returncode == 0, created.stderr.decode()
+    dependency = subprocess.run(
+        [str(ambient / "bin/python"), "-c", "import jsonschema"],
+        capture_output=True,
+        timeout=10,
+    )
+    assert dependency.returncode != 0 and b"ModuleNotFoundError" in dependency.stderr
+    environment = {
+        **os.environ,
+        "PATH": str(ambient / "bin") + os.pathsep + os.environ["PATH"],
+        "SOURCE_DATE_EPOCH": "1790782681",
+        "PYTHONDONTWRITEBYTECODE": "1",
+    }
+    environment.pop("ATLAS_PYTHON", None)
+    if explicit_selector:
+        environment["ATLAS_PYTHON"] = sys.executable
+    command = (
+        ["make", "build", "VENV=" + str(Path(sys.executable).parent.parent)]
+        if entrypoint == "make"
+        else [
+            sys.executable,
+            str(ROOT / "tools/preflight.py"),
+            "--root",
+            str(release_candidate),
+            "--check",
+            "reproducibility",
+        ]
+    )
+    before = snapshot(release_candidate)
+    result = subprocess.run(
+        command, cwd=release_candidate, env=environment, capture_output=True, timeout=180
+    )
+    assert result.returncode == 0, result.stderr.decode() + result.stdout.decode()
+    assert snapshot(release_candidate) == before
+
+
+@pytest.mark.parametrize("entrypoint", ["make", "preflight"])
+def test_explicit_unavailable_python_selector_refuses_and_preserves_accepted_products(
+    release_candidate: Path, tmp_path: Path, entrypoint: str
+) -> None:
+    """Keep explicit interpreter refusal instead of silently selecting another Python."""
+    environment = {**os.environ, "ATLAS_PYTHON": str(tmp_path / "unavailable-python")}
+    command = (
+        ["make", "build", "VENV=" + str(Path(sys.executable).parent.parent)]
+        if entrypoint == "make"
+        else [
+            sys.executable,
+            str(ROOT / "tools/preflight.py"),
+            "--root",
+            str(release_candidate),
+            "--check",
+            "reproducibility",
+        ]
+    )
+    before = snapshot(release_candidate)
+    result = subprocess.run(
+        command, cwd=release_candidate, env=environment, capture_output=True, timeout=180
+    )
+    assert result.returncode != 0
+    assert snapshot(release_candidate) == before

@@ -1,6 +1,10 @@
 sha256	copies	paths
+1b35c51cf12b5da796a8fa1a8d794914e5365bb173f030b3a30574f0a1e34cf7	2	./04_interactive_presentation/data/evidence-history.json.license | ./metadata/evidence_history/history.json.license
 34408793925e127bc5e0b7fc589f88196fc06dfb6432ac8cd2cdd49f30dae8a0	2	./metadata/company_audit/depth_round8/reviewed_inputs/reviewed_sources.tsv | ./metadata/company_audit/depth_round8/source_registry.tsv
 4021a756be90b54bd3f3e1dac32525430bfcce93fb49a99bb21dbee9a24df53d	2	./metadata/company_audit/depth_round8/enrichment_overlays.tsv | ./metadata/company_audit/depth_round8/reviewed_inputs/reviewed_profiles.tsv
+60a86c92b2da3cb365cf8e22e4907b2488068c31663129afacfdf43eed35b214	2	./04_interactive_presentation/data/evidence-history.json | ./metadata/evidence_history/history.json
 640bae831a78d72503f6de9c7107c7c3b511cf117f83d2fe39a778d6cf045d06	2	./05_global_reactor_map/imports/fusion/ffdb/visible_data.frames | ./tests/data/fusion_ffdb/visible_data.frames
 65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8	3	./04_interactive_presentation/data/anulum_reactor_repos.json | ./metadata/anulum_github/reactor_repositories.json | ./metadata/reactor_portfolio/sources/65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8.json
 bdcd27cdb08bdf4af6713e5aac352d3725691933e06d1aeab262753c30325fa3	2	./metadata/company_audit/depth_round8/field_source_bindings.tsv | ./metadata/company_audit/depth_round8/reviewed_inputs/field_source_bindings.tsv
+db7209c986990ca8eb8183f219e6e639f427176eded156923188c1d34a581ee1	2	./04_interactive_presentation/data/taxonomy-evidence-profiles.json | ./metadata/evidence_profiles/profiles.json
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855	2	./.nojekyll | ./04_interactive_presentation/.nojekyll

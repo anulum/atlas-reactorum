@@ -1,0 +1,676 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas Reactorum evidence profiles 1.0.0",
+  "description": "Catalogue metadata with explicit snapshot, preserved source support and provisional entity mapping; no complete entry acceptance or publisher rights grant.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_count",
+    "inputs",
+    "sources",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taxonomy_sha256",
+        "citations_sha256",
+        "audit_sha256"
+      ],
+      "properties": {
+        "taxonomy_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "citations_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "audit_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "url",
+          "sha256",
+          "captured_at",
+          "capture_method",
+          "format",
+          "page_count",
+          "access"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https://[a-zA-Z0-9.-]+/\\S*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "captured_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "capture_method": {
+            "enum": [
+              "publisher-tls",
+              "retained-source-review"
+            ]
+          },
+          "format": {
+            "enum": [
+              "pdf",
+              "html",
+              "xml"
+            ]
+          },
+          "page_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "access": {
+            "const": "catalogue-only; original not redistributed"
+          }
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entry_id",
+          "legacy_kind",
+          "entity_kind",
+          "bound_values",
+          "claims",
+          "parameters",
+          "review_disposition",
+          "taxonomy_record"
+        ],
+        "properties": {
+          "entry_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "legacy_kind": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "entity_kind": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "category",
+              "basis",
+              "decision"
+            ],
+            "properties": {
+              "category": {
+                "enum": [
+                  "architecture",
+                  "subtype",
+                  "development-class",
+                  "geometry",
+                  "configuration",
+                  "operating-mode",
+                  "ignition-scheme",
+                  "device",
+                  "process-class",
+                  "system-integration"
+                ]
+              },
+              "basis": {
+                "const": "legacy-kind-mapping"
+              },
+              "decision": {
+                "const": "provisional"
+              }
+            }
+          },
+          "bound_values": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "kind",
+              "family",
+              "principle",
+              "strength",
+              "challenge",
+              "maturity",
+              "evidence",
+              "source_urls"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "kind": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "family": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "principle": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "strength": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "challenge": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "maturity": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\t\\r\\n]+$"
+              },
+              "source_urls": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[^\\t\\r\\n]+$"
+                },
+                "minItems": 1
+              }
+            }
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_id",
+                "topic",
+                "original_statement",
+                "citation"
+              ],
+              "properties": {
+                "claim_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[^\\t\\r\\n]+$"
+                },
+                "topic": {
+                  "enum": [
+                    "classification",
+                    "fuel-state-classification",
+                    "historical-operation",
+                    "operating-mode",
+                    "principle",
+                    "strength",
+                    "challenge"
+                  ]
+                },
+                "original_statement": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[^\\t\\r\\n]+$"
+                },
+                "citation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "topic",
+                    "statement",
+                    "source_id",
+                    "section",
+                    "pdf_pages",
+                    "printed_pages",
+                    "scope",
+                    "reviewed_on",
+                    "review_basis"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "topic": {
+                      "enum": [
+                        "classification",
+                        "fuel-state-classification",
+                        "historical-operation",
+                        "operating-mode",
+                        "principle",
+                        "strength",
+                        "challenge"
+                      ]
+                    },
+                    "statement": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "source_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "section": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "pdf_pages": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "printed_pages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^[^\\t\\r\\n]+$"
+                      }
+                    },
+                    "scope": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "reviewed_on": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "review_basis": {
+                      "const": "author-source-inspection"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "state",
+                    "value",
+                    "unit",
+                    "conditions",
+                    "system_boundary",
+                    "claim_ids",
+                    "conversion_method",
+                    "original_text"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "state": {
+                      "const": "known"
+                    },
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "conditions": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "system_boundary": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "claim_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "^[^\\t\\r\\n]+$"
+                      },
+                      "minItems": 1,
+                      "uniqueItems": true
+                    },
+                    "conversion_method": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "original_text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "state",
+                    "reason",
+                    "original_text"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "state": {
+                      "enum": [
+                        "not_reported",
+                        "not_reviewed",
+                        "not_applicable",
+                        "disputed"
+                      ]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "original_text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "review_disposition": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "complete_entry_review",
+              "source_inspection",
+              "classification",
+              "independent_review",
+              "historical_audit"
+            ],
+            "properties": {
+              "complete_entry_review": {
+                "const": false
+              },
+              "source_inspection": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "basis",
+                  "author",
+                  "claim_ids",
+                  "source_snapshot_sha256"
+                ],
+                "properties": {
+                  "basis": {
+                    "const": "author-source-inspection"
+                  },
+                  "author": {
+                    "type": "null"
+                  },
+                  "claim_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "uniqueItems": true
+                  },
+                  "source_snapshot_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                }
+              },
+              "classification": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "state",
+                  "basis",
+                  "questions"
+                ],
+                "properties": {
+                  "state": {
+                    "const": "open"
+                  },
+                  "basis": {
+                    "const": "legacy-kind-mapping"
+                  },
+                  "questions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[^\\t\\r\\n]+$"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                }
+              },
+              "independent_review": {
+                "type": "null"
+              },
+              "historical_audit": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "name",
+                  "classification_ok",
+                  "source_directness",
+                  "source_access",
+                  "issue",
+                  "recommended_action",
+                  "verified_source_url",
+                  "audit_date"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "classification_ok": {
+                    "type": "string"
+                  },
+                  "source_directness": {
+                    "type": "string"
+                  },
+                  "source_access": {
+                    "type": "string"
+                  },
+                  "issue": {
+                    "type": "string"
+                  },
+                  "recommended_action": {
+                    "type": "string"
+                  },
+                  "verified_source_url": {
+                    "type": "string"
+                  },
+                  "audit_date": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "taxonomy_record": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "domain",
+              "family",
+              "parent",
+              "kind",
+              "maturity",
+              "evidence",
+              "principle",
+              "strength",
+              "challenge",
+              "temp",
+              "mode",
+              "evidence_scope",
+              "reviewed_on",
+              "source_audit",
+              "scale",
+              "control",
+              "source_ids",
+              "source_urls",
+              "parent_id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "parent": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "maturity": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              },
+              "principle": {
+                "type": "string"
+              },
+              "strength": {
+                "type": "string"
+              },
+              "challenge": {
+                "type": "string"
+              },
+              "temp": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "evidence_scope": {
+                "type": "string"
+              },
+              "reviewed_on": {
+                "type": "string"
+              },
+              "source_audit": {
+                "type": "string"
+              },
+              "scale": {
+                "type": "null"
+              },
+              "control": {
+                "type": "null"
+              },
+              "source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_urls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

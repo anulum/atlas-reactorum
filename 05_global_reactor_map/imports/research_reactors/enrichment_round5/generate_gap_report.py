@@ -204,6 +204,19 @@ def main() -> None:
     before = {row["field"]: row for row in summary if row["stage"] == "before_round5"}
     after = {row["field"]: row for row in summary if row["stage"] == "after_round5"}
     report = [
+        "<!--",
+        # This SPDX text belongs to the generated report, not this Python file.
+        # REUSE-IgnoreStart
+        "SPDX-License-Identifier: AGPL-3.0-or-later",
+        # REUSE-IgnoreEnd
+        "Commercial license available",
+        "© Concepts 1996–2026 Miroslav Šotek. All rights reserved.",
+        "© Code 2020–2026 Miroslav Šotek. All rights reserved.",
+        "ORCID: 0009-0009-3560-0851",
+        "Contact: www.anulum.li | protoscience@anulum.li",
+        "Atlas Reactorum — 05_global_reactor_map/imports/research_reactors/enrichment_round5/field_completeness_report.md",
+        "-->",
+        "",
         "# Research-reactor round-5 gap report",
         "",
         "Generated 2026-09-28 from all 172 base IDs. The baseline applies rounds 1-4; the comparison then applies round 5.",

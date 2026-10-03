@@ -9,8 +9,8 @@
 
 """Rebuild the published presentation and library inventory in a fresh source tree.
 
-The contract is the offline release build in Makefile: taxonomy export, layer
-integration, coverage report and library inventory. Source acquisition and
+The contract is the offline release build in Makefile: taxonomy export, retained
+evidence history, layer integration, coverage report and library inventory. Source acquisition and
 historical editorial audits are inputs to this build, not implicit refreshes.
 The dataset step decodes the pinned FFDB visible-data selection and requires both cached
 catalogue products to match it before emitting presentation records.
@@ -49,6 +49,10 @@ PRODUCTS = tuple(
         f"{DATA}/taxonomy-expanded.sources.tsv",
         f"{DATA}/taxonomy-audit.json",
         f"{DATA}/taxonomy-audit.js",
+        f"{DATA}/taxonomy-evidence-profiles.json",
+        f"{DATA}/taxonomy-evidence-profiles.js",
+        f"{DATA}/evidence-history.json",
+        f"{DATA}/evidence-history.js",
         f"{DATA}/global_reactors.sample.json",
         f"{DATA}/global_reactors.sample.js",
         f"{DATA}/fusion_companies.sample.json",
@@ -163,7 +167,10 @@ def copy_source(root: Path, destination: Path) -> None:
 
 
 def reproduce(root: Path, workspace: Path | None = None, *, timeout: float = 1800) -> list[str]:
-    """Execute all four offline release build steps without writing the candidate.
+    """Execute all five offline release build steps without writing the candidate.
+
+    The taxonomy validator receives this process's interpreter by default.
+    An explicitly supplied ATLAS_PYTHON selector retains its original semantics.
 
     Parameters
     ----------
@@ -204,13 +211,27 @@ def reproduce(root: Path, workspace: Path | None = None, *, timeout: float = 180
             steps = (
                 ("taxonomy", ["node", "04_interactive_presentation/scripts/export_taxonomy.cjs"]),
                 (
+                    "history",
+                    [
+                        "node",
+                        "04_interactive_presentation/scripts/evidence_history.cjs",
+                        "--build",
+                        ".",
+                    ],
+                ),
+                (
                     "datasets",
                     [sys.executable, "04_interactive_presentation/scripts/build_datasets.py"],
                 ),
                 ("coverage", [sys.executable, "metadata/coverage_audit/build_coverage.py"]),
                 ("inventory", ["bash", "metadata/build_inventory.sh"]),
             )
-            environment = {**os.environ, "SOURCE_DATE_EPOCH": epoch, "PYTHONDONTWRITEBYTECODE": "1"}
+            environment = {
+                **os.environ,
+                "SOURCE_DATE_EPOCH": epoch,
+                "PYTHONDONTWRITEBYTECODE": "1",
+                "ATLAS_PYTHON": os.environ.get("ATLAS_PYTHON", sys.executable),
+            }
             for name, command in steps:
                 # Fixed build argv in owned source copy; no shell; finite deadline.
                 result = subprocess.run(  # nosec B603

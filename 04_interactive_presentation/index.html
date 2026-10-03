@@ -30,22 +30,24 @@ Atlas Reactorum — 04_interactive_presentation/index.html
       <nav class="topnav" aria-label="Main navigation">
         <button class="nav-dot active" data-target="intro">
           <span>01</span> Thesis</button
+        ><button class="nav-dot" data-target="learn">
+          <span>02</span> Learn</button
         ><button class="nav-dot" data-target="taxonomy">
-          <span>02</span> Taxonomy</button
+          <span>03</span> Taxonomy</button
         ><button class="nav-dot" data-target="global-map">
-          <span>03</span> Facilities</button
+          <span>04</span> Facilities</button
         ><button class="nav-dot" data-target="compare">
-          <span>04</span> Compare</button
+          <span>05</span> Compare</button
         ><button class="nav-dot" data-target="plasma">
-          <span>05</span> Plasma</button
+          <span>06</span> Plasma</button
         ><button class="nav-dot" data-target="companies">
-          <span>06</span> Companies</button
+          <span>07</span> Companies</button
         ><button class="nav-dot" data-target="chemistry">
-          <span>07</span> Chemistry</button
+          <span>08</span> Chemistry</button
         ><button class="nav-dot" data-target="frontier">
-          <span>08</span> Frontier</button
+          <span>09</span> Frontier</button
         ><button class="nav-dot" data-target="sources">
-          <span>09</span> Sources
+          <span>10</span> Sources
         </button>
       </nav>
       <button
@@ -82,12 +84,12 @@ Atlas Reactorum — 04_interactive_presentation/index.html
           <strong>strength of evidence</strong> separate.
         </p>
         <div class="hero-actions">
-          <button class="primary" data-jump="taxonomy">
-            Explore the atlas ↓</button
-          ><a class="secondary" href="../00_index/README.md"
-            >Open research library</a
-          >
+          <a class="primary" href="#learn">Understand a principle</a>
+          <a class="secondary" href="#compare">Compare systems</a>
+          <a class="secondary" href="#global-map">Explore the map</a>
         </div>
+        <p><a class="secondary" href="../00_index/README.md">Open research library</a>
+          <a class="secondary" href="#taxonomy">Browse taxonomy</a></p>
         <div class="hero-stats">
           <div>
             <strong id="typeCount">30+</strong
@@ -105,16 +107,45 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </aside>
       </section>
 
-      <section id="taxonomy" class="panel light" data-section="02">
+      <section id="learn" class="panel light" data-section="02">
+        <header class="section-head">
+          <div><div class="kicker">Follow a source-linked question</div>
+            <h2 id="learningHeading">Understand<br />a principle.</h2></div>
+          <p>Read the original examples, inspect their sources and check a concrete
+            distinction. Change the reading depth while retaining the same evidence.</p>
+        </header>
+        <p>Each path has an explicit learning goal and a source-linked question.
+          A correct choice in this interface does not measure human comprehension
+          or validate a reactor. <a href="README.md#source-linked-learning">Read the learning guide</a>.</p>
+        <div class="learning-controls">
+          <label>Question path<select id="learningPath"></select></label>
+          <label>Reading depth<select id="learningDepth">
+            <option value="overview">Overview</option>
+            <option value="research">Research detail</option>
+          </select></label>
+        </div>
+        <p id="learningStatus" role="status" aria-live="polite">Loading the source-bound learning path.</p>
+        <div class="learning-actions">
+          <a id="learningShare" aria-disabled="true">Share this path</a>
+          <a id="learningDownload" aria-disabled="true">Download path and original evidence (JSON)</a>
+          <a id="learningCompare" aria-disabled="true">Compare these same examples</a>
+        </div>
+        <div id="learningView" aria-labelledby="learningHeading"></div>
+        <noscript><p>Open the <a href="README.md#source-linked-learning">learning guide</a>
+          for the questions, original data links and source-reading instructions.</p></noscript>
+      </section>
+
+      <section id="taxonomy" class="panel light" data-section="03">
         <header class="section-head">
           <div>
-            <span class="kicker">02 / Taxonomy</span>
+            <span class="kicker">03 / Taxonomy</span>
             <h2>Map the reactor space</h2>
           </div>
           <p>
             Explore domains, families and subtypes. Entries include physical
             configurations, operating modes and deployment classes; they are not
             a count of mutually exclusive reactor designs.
+            <a href="#evidence-history">Follow claim history or propose a correction</a>.
           </p>
         </header>
         <div class="map-toolbar" role="search">
@@ -151,16 +182,51 @@ Atlas Reactorum — 04_interactive_presentation/index.html
           <span id="activeFilterText">across all domains</span>
         </div>
         <div id="reactorGrid" class="reactor-grid" aria-live="polite"></div>
+        <div id="evidence-history" class="history-workspace" aria-labelledby="historyHeading">
+          <h3 id="historyHeading">Follow the evidence. Improve its wording.</h3>
+          <p>Inspect original claims and their dated Atlas observations. Propose a correction
+            with a source and locator. The proposal stays pending until a curator reviews it;
+            accepted data change through a separate source edit and explicit journal import.</p>
+          <div class="history-controls">
+            <label>Entry<select id="historyEntry"></select></label>
+            <label>Claim<select id="historyClaim"></select></label>
+            <label>Atlas observation<select id="historyRevision"></select></label>
+          </div>
+          <p id="historyStatus" role="status" aria-live="polite">Loading the retained original revision.</p>
+          <div class="history-actions">
+            <a id="historyShare" aria-disabled="true">Share this exact revision</a>
+            <a id="historyDownload" aria-disabled="true">Download original claim history (JSON)</a>
+          </div>
+          <div id="historyView"></div>
+          <form id="correctionForm">
+            <fieldset id="correctionFields" disabled>
+              <legend>Prepare a source-backed correction</legend>
+              <label>Proposed wording<textarea name="proposed_statement" required rows="3"></textarea></label>
+              <label>Source URL (HTTPS)<input name="source_url" type="url" required placeholder="https://…"></label>
+              <label>Page or section locator<input name="locator" required></label>
+              <label>Reason for the correction<textarea name="reason" required rows="2"></textarea></label>
+              <label>Contributor name or handle<input name="submitted_by" required></label>
+              <button type="submit" class="primary">Prepare proposal</button>
+            </fieldset>
+          </form>
+          <p id="correctionStatus" role="status" aria-live="polite"></p>
+          <a id="correctionDownload" aria-disabled="true">Download pending proposal (JSON)</a>
+          <p>The form prepares a local download. It sends no submission. Follow the
+            <a href="../CONTRIBUTING.md#evidence-corrections">correction guide</a> to provide the
+            retained proposal to a curator. Source documents retain their original rights.</p>
+          <noscript><p>Read the <a href="../metadata/evidence_history/README.md">journal and correction guide</a>
+            and the <a href="data/evidence-history.json">retained original history</a>.</p></noscript>
+        </div>
         <dialog id="reactorDialog" aria-labelledby="dialogTitle">
           <button class="dialog-close" aria-label="Close">×</button>
           <div id="dialogBody"></div>
         </dialog>
       </section>
 
-      <section id="global-map" class="panel facility-panel" data-section="03">
+      <section id="global-map" class="panel facility-panel" data-section="04">
         <header class="section-head">
           <div>
-            <span class="kicker">03 / Facilities</span>
+            <span class="kicker">04 / Facilities</span>
             <h2>Where reactor research happens</h2>
           </div>
           <p>
@@ -224,15 +290,15 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </p>
       </section>
 
-      <section id="compare" class="panel dark" data-section="04">
+      <section id="compare" class="panel dark" data-section="05">
         <header class="section-head">
           <div>
-            <span class="kicker">04 / Decisions</span>
+            <span class="kicker">05 / Decisions</span>
             <h2>Compare without false precision</h2>
           </div>
           <p>
-            Select up to three systems. Ratings are qualitative orientation, not
-            an engineering or investment model.
+            Select two or three systems. Compare original descriptions and
+            source context, then share or download the same data version.
           </p>
         </header>
         <div class="compare-controls">
@@ -243,6 +309,11 @@ Atlas Reactorum — 04_interactive_presentation/index.html
               <option value="">— optional —</option>
             </select></label
           >
+        </div>
+        <p id="compareStatus" role="status" aria-live="polite"></p>
+        <div class="comparison-actions">
+          <a id="compareShare" aria-disabled="true">Open a link to this comparison</a>
+          <a id="compareDownload" aria-disabled="true">Download comparison with sources (JSON)</a>
         </div>
         <div id="compareView" class="compare-view"></div>
         <div class="evidence-legend">
@@ -281,10 +352,10 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </div>
       </section>
 
-      <section id="plasma" class="panel plasma" data-section="05">
+      <section id="plasma" class="panel plasma" data-section="06">
         <header class="section-head">
           <div>
-            <span class="kicker">05 / Plasma fusion</span>
+            <span class="kicker">06 / Plasma fusion</span>
             <h2>Keep the star off the wall</h2>
           </div>
           <p>
@@ -362,10 +433,10 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </div>
       </section>
 
-      <section id="companies" class="panel company-panel" data-section="06">
+      <section id="companies" class="panel company-panel" data-section="07">
         <header class="section-head">
           <div>
-            <span class="kicker">06 / Fusion landscape</span>
+            <span class="kicker">07 / Fusion landscape</span>
             <h2>Companies are claims, teams and evidence</h2>
           </div>
           <p>
@@ -407,10 +478,10 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </p>
       </section>
 
-      <section id="chemistry" class="panel cream" data-section="07">
+      <section id="chemistry" class="panel cream" data-section="08">
         <header class="section-head">
           <div>
-            <span class="kicker">07 / Chemical &amp; biochemical</span>
+            <span class="kicker">08 / Chemical &amp; biochemical</span>
             <h2>Flow determines behaviour</h2>
           </div>
           <p>
@@ -472,10 +543,10 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </aside>
       </section>
 
-      <section id="frontier" class="panel hybrid" data-section="08">
+      <section id="frontier" class="panel hybrid" data-section="09">
         <header class="section-head">
           <div>
-            <span class="kicker">08 / Hybrid &amp; frontier</span>
+            <span class="kicker">09 / Hybrid &amp; frontier</span>
             <h2>Between disciplines — and evidence levels</h2>
           </div>
           <p>
@@ -583,10 +654,10 @@ Atlas Reactorum — 04_interactive_presentation/index.html
         </aside>
       </section>
 
-      <section id="sources" class="panel sources" data-section="09">
+      <section id="sources" class="panel sources" data-section="10">
         <header class="section-head">
           <div>
-            <span class="kicker">09 / Sources &amp; ecosystem</span>
+            <span class="kicker">10 / Sources &amp; ecosystem</span>
             <h2>From map to auditable record</h2>
           </div>
           <p>
@@ -664,7 +735,7 @@ Atlas Reactorum — 04_interactive_presentation/index.html
     </main>
     <div class="slide-controls" aria-label="Presentation controls">
       <button id="prevSlide" aria-label="Previous section">←</button
-      ><span id="slideStatus">01 / 09</span
+      ><span id="slideStatus">01 / 10</span
       ><button id="nextSlide" aria-label="Next section">→</button>
     </div>
     <noscript
@@ -677,6 +748,8 @@ Atlas Reactorum — 04_interactive_presentation/index.html
     <script src="data/fusion_companies.sample.js"></script>
     <script src="data/taxonomy-expanded.js"></script>
     <script src="data/taxonomy-audit.js"></script>
+    <script src="data/taxonomy-evidence-profiles.js"></script>
+    <script src="data/evidence-history.js"></script>
     <script src="data/anulum_reactor_repos.js"></script>
     <script src="map/projection.js"></script>
     <script src="map/coastline.js"></script>
@@ -686,6 +759,16 @@ Atlas Reactorum — 04_interactive_presentation/index.html
     <script src="map/renderer.js"></script>
     <script src="map/engine.js"></script>
 <script src="taxonomy-claim-sources.js"></script>
+<script src="taxonomy-evidence-profile.js"></script>
+<script src="taxonomy-comparison.js"></script>
+<script src="taxonomy-comparison-controller.js"></script>
+<script src="learning-path-catalogue.js"></script>
+<script src="learning-paths.js"></script>
+<script src="learning-path-controller.js"></script>
+<script src="evidence-history.js"></script>
+<script src="evidence-corrections.js"></script>
+<script src="evidence-history-render.js"></script>
+<script src="evidence-history-controller.js"></script>
 <script src="app.js"></script>
   </body>
 </html>

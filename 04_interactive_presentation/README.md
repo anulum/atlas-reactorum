@@ -12,7 +12,7 @@ Atlas Reactorum — interactive presentation documentation
 
 An English-first, evidence-bounded presentation covering nuclear fission, plasma fusion, chemical and biochemical reactors, and hybrid or emerging systems. It is a no-build static site: no package manager, framework, remote font or runtime API is required.
 
-This interface is a local research prototype. Repository validation applies to the retained local snapshot. Hosted publication and deployment require their own review.
+The static interface is released with the repository snapshot. Unknown values, source dates, evidence boundaries and per-source rights remain visible. Hosted availability is checked separately from reproducibility and source validation.
 
 ## Open locally
 
@@ -23,9 +23,50 @@ Keyboard: Left/Right or Page Up/Page Down moves between sections; Home/End moves
 
 The facility view reports live domain counts and can export the complete current filter result as CSV or JSON. The 250-card display cap affects rendering only; it does not truncate map points, search, counts or exports.
 
+## Compare, cite and share
+
+Choose two or three distinct catalogue entries in the comparison section. The
+controls use stable IDs; display names do not identify records. Source
+disclosures retain the original statements, locators and retrieval limits.
+Legacy maturity and evidence labels remain classifications open to review.
+Missing numerical values and their reasons are displayed explicitly.
+
+The share link restores the selected IDs in their original order and the exact
+complete-profile version. JSON downloads contain the same selection, original
+profiles, supporting sources, three source-input hashes, metadata licence and
+catalogue-only rights boundary. Browser Back/Forward restores each selection.
+Unsupported links, unknown IDs and unavailable snapshots visibly refuse; the
+current catalogue never silently replaces a linked older version. Retaining a
+link does not guarantee that its old snapshot will remain hosted.
+
+`taxonomy-comparison.js` exposes `AtlasTaxonomyComparison.snapshot(document)`,
+`createComparison(document, snapshot, entryIds)`,
+`renderComparison(document, snapshot, entryIds)`,
+`shareUrl(pageUrl, snapshot, entryIds)` and `readUrl(pageUrl)`. The first three
+are asynchronous. Snapshot identity is SHA-256 of
+`UTF8(JSON.stringify(document))`, using the property and array order of the
+complete generated profile document. This covers changes to profiles or sources
+that leave the original taxonomy hash unchanged. The bundle schema is
+`atlas-comparison-1.0.0`; URL state uses `#compare?version=1&snapshot=…&entry=…`
+with two or three repeated ordered `entry` fields. Ordinary page anchors remain
+ordinary navigation; duplicate/unknown comparison fields are refused.
+
+Parameter compatibility requires a numeric value for each entry and identical
+declared unit, conditions, system boundary and conversion method. That result
+is metadata compatibility, not scientific acceptance. No ranking, arithmetic
+aggregation, numerical conversion or guessed missing value is introduced.
+Each original value and supporting claim remains in the export.
+
+`taxonomy-comparison-controller.js` wires the actual controls, navigation and
+JSON file download. Its rendering captures one immutable document and discards
+obsolete asynchronous selections. The dedicated native tests exercise complete
+real profiles and actual Chrome navigation, keyboard/mobile disclosure and
+file download. Web Crypto is required; an unavailable catalogue or hash service
+shows a refusal rather than a fabricated comparison.
+
 ## Evidence boundary
 
-The expanded taxonomy indexes 135 entries: 29 fission, 32 fusion, 52 chemical/biochemical and 22 hybrid/emerging. These include architectures, subtypes and operating modes that can overlap. `data/taxonomy-expanded.sources.tsv` exposes each source mapping. The scientific/editorial audit from `../metadata/taxonomy_audit/` is integrated into `data/taxonomy-audit.*` and the detail dialog for all 135 entries. The first pass covered 123; the 11 later additions were audited on 2026-09-29, and the merged critical/subcritical entry was split into two, so no entry is marked `not-yet-audited`. This is classification and source-scope triage, not full per-claim verification. Rebuild both exports with `node scripts/export_taxonomy.cjs`.
+The expanded taxonomy indexes 135 entries: 29 fission, 32 fusion, 52 chemical/biochemical and 22 hybrid/emerging. These include architectures, subtypes and operating modes that can overlap. `data/taxonomy-expanded.sources.tsv` exposes each source mapping. The scientific/editorial audit from `../metadata/taxonomy_audit/` is integrated into `data/taxonomy-audit.*` and the detail dialog for all 135 entries. The first pass covered 123; the 11 later additions were audited on 2026-09-29, and the merged critical/subcritical entry was split into two, so no entry is marked `not-yet-audited`. This is classification and source-scope triage, not full per-claim verification. Rebuild all five taxonomy products with `node scripts/export_taxonomy.cjs`. The [evidence profile contract](../metadata/evidence_profiles/README.md) adds a versioned whole-catalogue profile, explicit snapshot validation, provisional entity categories, dated historical questions and a single-profile JSON download. Original claim and source locators remain available; source support is distinct from an independent whole-entry decision.
 
 The detail dialog now shows 599 source-inspected statements for 135 entries,
 including exact sections, separate printed/PDF pages and each source's support
@@ -88,14 +129,17 @@ Run `python3 scripts/build_datasets.py` to regenerate JSON and offline JS bundle
 
 ## Publication boundary
 
-Open the presentation locally. Hosted publication is a separate reviewed
-operation after repository and artifact-custody checks. The historical deployment prototype remains in local handover custody and is
-not an approved workflow. Internal asset paths are
-relative, and the presentation expects its sibling source catalogues.
+[Open the published presentation](https://anulum.github.io/ATLAS-REACTORUM/04_interactive_presentation/).
+GitHub Pages serves the complete release tree, retaining the sibling source
+catalogues and relative asset paths. Local use remains available through
+`index.html`; no build server or runtime API is required. Publisher source
+terms apply to their own records and do not change with hosting.
 
 ## Files
 
+- `learning-path-catalogue.js`, `learning-paths.js`, `learning-path-controller.js` — authored questions, source-preserving learning contract and actual browser controls;
 - `index.html`, `styles.css`, `app.js` — application;
+- `taxonomy-comparison.js`, `taxonomy-comparison-controller.js` — reproducible comparison contract and browser controls;
 - `data/` — generated JSON and offline JavaScript datasets, with JSON Schemas;
 - `SOURCES.tsv` — claim/source map;
 - `ATTRIBUTION.md` — source and licensing boundary;
@@ -106,8 +150,78 @@ relative, and the presentation expects its sibling source catalogues.
 Run `./validate.sh` to check JSON, JavaScript syntax, required files and accidental
 non-English UI residue. It runs the map tests and dedicated citation/export tests,
 requiring 100 per cent line, branch and function coverage for the citation
-validator, native exporter and detail serializer. Browser rendering should still
+validator, native exporter, detail serializer and comparison contract. Browser rendering should still
 be inspected after substantive visual edits.
+
+## Claim history and corrections
+
+Within the taxonomy section, choose an entry, claim and Atlas observation.
+Read the original statement, source locator and stated support boundary, then
+expand the complete original revision. Observation, acquisition and claim review
+dates remain separate; unknown publication or event dates stay unknown. The
+first observation is a baseline, not reconstructed historical evidence.
+
+Share an exact dated revision or download the original claim-history bundle.
+Links bind the complete journal and dated revision hashes as well as stable
+entry and claim identities. Missing or stale versions refuse visibly with
+exports disabled; they do not silently load current wording. Earlier journal
+versions must be retained separately when publishing successors.
+
+The correction form prepares a local pending-proposal JSON. Provide different
+proposed wording, an anonymous HTTPS source, a page or section locator, your
+reason and contributor name. Download the proposal for curator review using
+the [correction guide](../CONTRIBUTING.md#evidence-corrections). The form sends
+no submission and changes no accepted source content. Curator decisions retain
+the original proposal; a reviewed source edit and explicit import are separate.
+
+The [journal contract](../metadata/evidence_history/README.md) documents the
+native CLI, custody, dates and source rights. `evidence-history.js` validates
+retained snapshots and claim revisions; `evidence-corrections.js` binds pending
+proposals and decisions to original revisions; `evidence-history-render.js`
+provides escaped timelines and exact links; `evidence-history-controller.js`
+wires the actual controls and local downloads. The native contract suites run
+in `validate.sh`; actual browser cases are in `tests/test_evidence_history_browser.py`.
+
+## Source-linked learning
+
+Choose **Understand a principle** from the opening page or **Learn** from the
+navigation. Six paths cover water loops, magnetic confinement, chemical flow,
+wastewater configurations, electrochemical processes and neutron-source
+evidence. Each names a learning goal and provides a four-step reading route:
+read the original principle, inspect its source locator, check the stated limit
+and compare the same profiles.
+
+**Overview** collapses the full evidence profile; **Research** shows it directly.
+Both retain the exact original descriptions, challenges, evidence scope,
+citations, source rights and missing-value reasons. The JSON download is
+identical in both depths. **Compare these examples** opens the existing
+two/three-entry comparison with the same ordered identities and data snapshot.
+
+Choose an example in the native radio group and use **Check against the source**.
+Feedback identifies the original statement and its support boundary. **Not
+established by these statements** is available as an explicit reading choice.
+These checks assess agreement with a cited statement; they do not establish
+human comprehension, whole-entry review or physical-device performance.
+
+**Share this path** retains its stable path identity, reading depth and separate
+SHA-256 hashes for the complete profile document and authored question catalogue.
+Reloading the link restores that same version. Missing, duplicated, unknown or
+stale fields visibly refuse restoration and disable exports; selecting an
+available path starts a new current session. No current data is silently
+substituted into a stale link. Hashes identify content; the static page still
+needs that version to be present.
+
+Selects, radio groups, disclosures and action links use native keyboard controls.
+The learning layout adapts to narrow screens and honours reduced-motion
+scrolling. Downloads contain catalogue metadata and original supporting source
+records; third-party document bodies are not redistributed.
+
+The dedicated `tests/learning_paths.test.cjs` checks all six paths and the
+complete owning catalogue/model at 100 per cent native line, branch and function
+coverage. `tests/test_learning_paths_browser.py` exercises the actual complete
+page in native Chrome, including keyboard controls, mobile layout, downloads,
+history and source-version refusals. Its CDP records retain the original
+controller source and native execution ranges; they are a separate measurement.
 
 
 ### Full-data browser checks
@@ -142,3 +256,11 @@ records the original cell, source identifier, capture date, licence and hash;
 unknown reactor composition and current physical operation remain unknown.
 The facility dataset uses schema 1.1.0. Search, facility details and filtered
 CSV/JSON retain these fields, and CSV carries the assertion array as JSON.
+
+## Reuse a comparison in research
+
+After downloading an ordered comparison, retain its original file hash and the
+whole-profile snapshot hash from a trusted manifest. The
+[research notebook and reader](../examples/research/README.md) restore the same
+selection, claims, sources and missing values outside the browser. The reader
+refuses changed source content rather than substituting a newer snapshot.

@@ -10,6 +10,13 @@ Atlas Reactorum — 00_index/CATALOG_SCHEMA.md
 
 # Catalog schema
 
+The [evidence profile schema](../metadata/evidence_profiles/profiles.schema.json)
+version 1.0.0 supplements the source catalogues. Its
+[reader and migration contract](../metadata/evidence_profiles/README.md)
+preserves complete original taxonomy records, citations, source identities,
+historical decisions, hashes and bounded source access. Entity mapping remains
+provisional; missing normalized values have explicit states and reasons.
+
 Section catalogs use tab-separated values with these columns:
 
 | Column | Meaning |

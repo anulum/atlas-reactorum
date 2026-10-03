@@ -24,8 +24,10 @@ scope. They provide evidence for that scope, not a whole-candidate verdict.
 | Types | `make typecheck` | Strict mypy across every source directory |
 | Python tests | `make test` | Enumerates every production Python source directory; requires 100 % statements and branches |
 | Map engine | `node --test 04_interactive_presentation/map/tests/*.test.js` | Projection, indexing, clustering and rendering behaviour |
-| Taxonomy citations | `make validate` | Complete 135-entry input, 599 statements, exact principle/strength/challenge bindings, real export and detail serializer; 100 % lines, branches and functions for the three owning modules |
+| Taxonomy citations | `make validate` | Complete 135-entry input, 599 statements, exact principle/strength/challenge bindings, real export and detail serializer; 100 % lines, branches and functions for the four owning modules |
 | Presentation | `04_interactive_presentation/validate.sh` | Actual assets, JSON schemas, interface language and native map/citation tests |
+| Learning contract | `04_interactive_presentation/validate.sh` | Six source-bound paths, original answer claims, identical evidence in both depths and dual-hash links; 100 % native lines, branches and functions for the authored catalogue and learning model |
+| Learning browser | `.venv/bin/python -m pytest tests/test_learning_paths_browser.py` | Real navigation, source-linked answers, version refusal, keyboard/mobile controls and actual file downloads; original CDP controller source/range/function evidence |
 | Browser | `.venv/bin/python -m pytest tests/test_browser_checks.py` | Complete loaded presentation through native Chrome, including the public DevTools CLI |
 | Licences | `.venv/bin/python -m reuse lint` | File-level attribution and licensing metadata; publisher grants remain a separate review |
 | Source security | `.venv/bin/python -m bandit -r . -x ./tests -f json` | Unsuppressed production-source scan; current residuals are described below |
@@ -58,12 +60,19 @@ inventory's empty-file report.
 ## Reproducibility and selected sources
 
 `preflight.py` copies public source files into a fresh external temporary
-tree, omitting all 18 expected offline release products. It runs the native
-Node taxonomy exporter, Python dataset integrator, Python coverage report and
+tree, omitting all 22 expected offline release products. It runs the native
+Node taxonomy exporter, retained-history builder, Python dataset integrator, Python coverage report and
 shell inventory builder, in that order. Every output must be created and
 match its accepted bytes; staged inputs must remain intact, and undeclared
 outputs fail. The accepted candidate is never deleted or overwritten.
 A builder that does nothing cannot pass.
+
+The reproducibility runner supplies its own Python interpreter to the Node
+taxonomy validator. `make build` supplies the configured `VENV` interpreter.
+An explicit `ATLAS_PYTHON` setting retains its selector semantics; an unavailable
+interpreter fails without replacing accepted products. Dedicated real-environment
+regressions put a dependency-free Python on PATH and exercise both public
+entry points with the selected complete development environment.
 
 The inventory receipt's recorded UTC timestamp supplies `SOURCE_DATE_EPOCH`
 to the shell builder. This reproduces its existing date exactly; no timestamp
@@ -94,6 +103,24 @@ completeness.
 
 ## Native browser evidence
 
+History changes run the four dedicated native contract suites through
+`validate.sh`: original journal, source-bound corrections, escaped timeline/
+exact links and actual import/build/curator CLI. Their four owning modules
+require 100 per cent native line, branch and function coverage. Actual Chrome
+cases in `tests/test_evidence_history_browser.py` preserve the served controller
+source/hash and original UTF-16 native regions/functions, with a complete
+module teardown gate. They exercise real import successors, exact revision
+reload/Back, source absence/return, local pending-proposal custody, concurrent
+results, mobile keyboard/disclosure and actual downloads. The trusted-local
+host may require the existing explicit `ATLAS_BROWSER_NO_SANDBOX=1` test mode.
+
+The retained journal input is validated against the current complete profile
+export before either presentation output is built. Reproduction retains that
+input exactly; it never generates a new observation from the reproducibility
+epoch. Missing or changed accepted history products and source/journal mismatch
+are detected by the actual release tests. Proposal review records decisions
+without applying accepted source edits or establishing authenticated authorship.
+
 The browser tests use a separate temporary Chrome profile, loopback-only
 DevTools and the complete actual Atlas application. Normal and optimised
 Python CLI runs, protocol errors, deadlines, search, filters, dialogs, map
@@ -110,6 +137,14 @@ Record which mode ran. The option changes the browser launch only; it does
 not relax checks or substitute assets. Manual page selection and endpoint
 requirements are documented in the
 [presentation README](04_interactive_presentation/README.md#full-data-browser-checks).
+
+Learning-browser evidence preserves native Chrome ranges and function identities
+against the exact original controller source. At module teardown every native
+source interval and function must have an execution count. These records are
+distinct from Node's line/branch/function report for the catalogue and model;
+native CDP regions are not relabelled as AST branches. The six machine answer
+checks verify agreement with their cited statement. They do not measure human
+learning outcomes, scientific acceptance or operating-device performance.
 
 ## Current focused checkpoint: 2 October 2026
 
@@ -146,9 +181,10 @@ redistributing the full viewer renderer. Strict mypy, Ruff, formatting and
 docstring checks passed for the relevant source and tests. Node 24.21.0 ran
 85 map cases and 125 citation/export/serializer cases; the three owning
 citation modules retain 100 % line, branch and function coverage. Native
-18-product offline reproduction passes without fresh acquisition.
+Before evidence profiles were added, the native 18-product offline
+reproduction passed without fresh acquisition.
 
-The complete 93-module production Python scan reports zero annotated Bandit
+The preceding 93-module production Python scan reports zero annotated Bandit
 findings. With annotations ignored, it retains 24 low-severity B404/B603
 subprocess reports, with no medium/high findings or scan errors. The removed
 historical URL-opening sink is replaced by a public acquisition refusal.
@@ -161,6 +197,35 @@ on both pinned Python versions. The accepted boundary assumes trusted operators,
 native-tool lookup and local sibling scripts, with finite per-process
 deadlines. It does not establish descendant-process containment, source
 permissions or whole release approval.
+
+## Evidence profile qualification (2026-10-03)
+
+The complete 135-entry profile migration retains 599 citations, 148 sources and
+all 21 original taxonomy fields per entry. Forty-one dedicated public API/CLI cases
+passed on each of Python 3.12.14 and 3.14.7. The owning validator covers all 175
+statements and 74 branch exits, with no exclusions. Actual subprocess measurement
+includes the native entry point and optimized refusal; duplicate JSON members,
+nonfinite values, unknown sources and invalid last records refuse. A real owned
+concurrent source edit is refused before a mixed snapshot can be returned.
+An unknown last-record parent is refused by the public migration and reader,
+including the optimized CLI, even when input hashes match the changed source.
+The original reproduction accepted that parent in migration while the exporter
+refused it; this mismatch is corrected without altering any catalogue value.
+
+Node 24.21.0 passed 147 citation, export and profile-rendering cases with 100 %
+line, branch and function coverage in the four owning modules. The existing 85
+map cases passed. Three native Chrome cases exercised every one of the 135
+dialogs, all 599 citations, keyboard disclosures, mobile width, reload and an
+actual single-profile JSON download. Ordinary final-product I/O errors roll
+back replaced products; this does not promise atomic multi-file reads or
+power-loss durability.
+
+The earlier forty owning reconstruction cases passed with the 20-product release contract.
+Ruff, NumPy docstrings, format, strict mypy and the new validator's source-security
+scan passed; documented paths, ownership headers and credential-content checks
+also passed. These are scoped software checks, not a new whole Atlas suite,
+hosted CI result, scientific verdict or publisher licence grant. Independent
+whole-entry classification remains open, and no complete-entry flag is promoted.
 
 ## Historical whole-suite checkpoint
 
@@ -210,10 +275,11 @@ Complete scientific-entry review and current maturity/evidence classifications
 remain pending. Source locators, software tests and custody receipts do not
 certify reactor performance or commercial readiness.
 
-The shared Tier-0 structural auditor also currently rejects the unchanged
-GitHub API array fixture as though every JSON document must be an object.
-That shared-tool contract must be corrected while retaining the original
-source bytes and duplicate-key rejection; it is not a dataset corruption.
+Historical pre-commit finding, resolved on 2026-10-03: the shared Tier-0
+structural auditor rejected the unchanged GitHub API array fixture as though
+every JSON document had to be an object. The corrected generic JSON contract
+accepts arrays and scalars while retaining object-only governance profiles,
+duplicate-key rejection and original source bytes.
 Atlas is outside the device family map, as documented in ADR 0001.
 
 Every JSON path in the complete first candidate requires an exact adjacent
@@ -222,10 +288,53 @@ retain their publisher licence expressions and copyrights; owner records
 describe concepts, code and provenance packaging only. JSON schemas, source
 cells, frozen input hashes and generated products remain unchanged.
 
-The shared commit wrapper currently rejects genuine additional foreign
-copyright records despite the required owner records being present. That
-compatibility defect needs its canonical correction before the first commit.
-Removing foreign notices or changing their licences is not an admissible fix.
+Historical pre-commit finding, resolved on 2026-10-03: the shared commit wrapper
+rejected genuine additional foreign copyright records. The corrected staged
+sidecar contract requires both owner records exactly once and retains distinct
+publisher records. Publisher notices and licence expressions remain intact.
+
+The corrected shared contracts passed the same 184 dedicated public CLI and
+native Git cases on Python 3.12.14 and 3.14.7. These are 184 unique cases, not a
+whole Atlas suite. Native subprocess measurement covers all 61 changed lines
+and 18 changed branch exits; the structural auditor is fully covered. The
+whole commit wrapper remains partially covered (282 of 290 statements and
+120 of 128 branch exits in the author's measurement). Independent review
+qualified the shared compatibility repairs and preservation of all 739 first
+commit blobs within that scope. It requested this documentation correction;
+it did not grant whole-programme, scientific or release acceptance. The local
+first commit exists; no push, hosted CI, deployment or release follows from
+these checks.
 
 Correctness CI has no path filter. A workflow that did not exercise a changed
 surface at its exact revision supplies no acceptance evidence.
+
+## Reproducible comparison contract
+
+The comparison contract uses the complete real profile document for snapshot
+identity, rather than only the inherited taxonomy hash. Its dedicated public
+Node API checks cover all 135 actual entries, source-preserving exports,
+ordered stable-ID URL restoration, unavailable versions, missing parameters,
+zero values and incompatible declared units/conditions/boundaries/conversions.
+No parameter is numerically merged and no scientific review flag is promoted.
+
+`validate.sh` includes the dedicated comparison contract at the existing
+100 per cent line/branch/function floor. Run the actual browser boundary with
+`python -m pytest tests/test_taxonomy_comparison_browser.py`; the maintained
+fixture selects the exact observed URL of its one owned native page and
+retains source-bound CDP execution records. The normal Chrome sandbox is the
+default; the documented trusted-local host override remains explicit.
+Browser tests do not replace a human comprehension study or deployment review.
+
+## Research comparison restoration
+
+`tests/test_research_comparison.py` exercises the real public API and CLI against
+the complete source catalogue, changed originals, unavailable snapshots and
+an actual Chrome-downloaded comparison. Measure the entire owning
+`tools.research_comparison` module at the unchanged 100 % statement/branch floor.
+`validate.sh` enforces 100 % native line/branch/function coverage for the dedicated
+research reader; all 135 original identities round-trip. The Jupyter notebook
+must execute its real cells against the accepted snapshot and reproduce the
+same result on a second execution. Keep actual executed notebooks and failures
+privately; the public notebook contains input cells without claimed outputs.
+See [the research contract](examples/research/README.md) for expected hashes,
+canonical input, original rights and interpretation boundaries.

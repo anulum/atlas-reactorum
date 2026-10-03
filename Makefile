@@ -8,10 +8,11 @@
 
 PYTHON ?= python3.12
 VENV   ?= .venv
+ATLAS_PYTHON ?= $(abspath $(VENV))/bin/python
 SHELL  := /bin/bash
 
 .DEFAULT_GOAL := help
-.PHONY: help setup hooks lint typecheck test validate build verify preflight clean
+.PHONY: help setup hooks lint typecheck test validate build verify preflight clean research-example
 
 help:  ## List the available targets
 	@grep -hE '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed 's/:.*##/\t/' | sort
@@ -46,7 +47,8 @@ validate:  ## Presentation checks, including the map engine tests
 	PATH="$(abspath $(VENV))/bin:$$PATH" bash 04_interactive_presentation/validate.sh
 
 build:  ## Verify pinned FFDB and regenerate offline exports and inventory
-	node 04_interactive_presentation/scripts/export_taxonomy.cjs
+	ATLAS_PYTHON="$(ATLAS_PYTHON)" node 04_interactive_presentation/scripts/export_taxonomy.cjs
+	node 04_interactive_presentation/scripts/evidence_history.cjs --build .
 	$(VENV)/bin/python 04_interactive_presentation/scripts/build_datasets.py
 	$(VENV)/bin/python metadata/coverage_audit/build_coverage.py
 	./metadata/build_inventory.sh
@@ -58,3 +60,6 @@ verify: lint typecheck test validate preflight  ## Everything a change must pass
 
 clean:  ## Remove local caches and scratch space
 	rm -rf .mypy_cache .ruff_cache .pytest_cache .pytest-scratch .coverage
+
+research-example:  ## Restore the included comparison without changing source files
+	$(VENV)/bin/python -c 'import json; from pathlib import Path; from tools.research_comparison import restore_comparison; p=Path("examples/research"); m=json.loads((p/"comparison-manifest.json").read_text()); print(json.dumps(restore_comparison(Path.cwd(),p/m["comparison_file"],m["profile_sha256"],m["bundle_sha256"]),ensure_ascii=False,indent=2,allow_nan=False))'

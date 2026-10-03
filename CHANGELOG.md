@@ -13,13 +13,60 @@ ATLAS REACTORUM — public documentation
 All notable changes to this project are documented here. The format follows
 Keep a Changelog, and the project adheres to Semantic Versioning.
 
+## [Unreleased]
+
+## [0.1.0] — 2026-10-03
+
+First public release of the source-linked atlas, static presentation and offline research library.
+
+- Reproduce the existing round-4 and round-5 research reports with their
+  original provenance headers, retaining all report values and source inputs.
+
+- Retain strict source-specific terms checking while accepting the reviewed
+  Swiss portal page whose sole byte change is its global dataset counter.
+  The original usage terms and dataset attribution requirements are unchanged.
+
+- Add a source-linked research notebook and bounded CLI/API restoration of
+  original comparison downloads with explicit whole-profile and file hashes.
+  Preserve original statements, locators, rights and missing numeric values;
+  refuse changed or unavailable source snapshots.
+- Retain complete original evidence-profile snapshots with explicit Atlas
+  observation dates, claim/source revisions and dated removal/return identities.
+  Add exact historical links, source-preserving downloads and locally prepared
+  pending corrections with separate curator decisions and reviewed source edits.
+  The native offline build validates the retained journal and reproduces 22
+  products without inventing source dates or automatically promoting proposals.
+
+- Propagate the selected development Python into taxonomy validation from both
+  `make build` and reproducibility preflight. Preserve explicit `ATLAS_PYTHON`
+  selection and refusal instead of depending on an ambient Python's packages.
+
+- Add six source-linked learning paths spanning water loops, magnetic
+  confinement, chemical flow, wastewater treatment, electrochemical processes
+  and neutron-source evidence. Overview/research depths retain identical
+  evidence downloads; answer feedback cites the original statement and scope.
+  Share links bind data and learning-content hashes and refuse stale versions.
+
+- Add ordered stable-ID comparisons, complete-profile snapshot share links
+  and source-preserving JSON downloads, with explicit missing-value/context
+  limits and refusal of unavailable linked data versions.
+
+- Add source-bound evidence profiles for all 135 entries, retaining all 599
+  citations, 148 sources and original taxonomy/audit values.
+- Add explicit snapshot validation and migration APIs, two versioned exports,
+  keyboard-accessible questions and single-profile JSON downloads.
+- Preserve original export formats and unknown dates; keep provisional entity
+  mapping separate from source support and independent whole-entry review.
+- Correct the dated validation history of the repaired shared JSON and
+  publisher copyright compatibility findings.
+
 The FFDB input is now an explicit data-only selection with separate artifact
 and original-response hashes. All visible raw/display source cells remain
 unchanged; the full renderer and permission-page HTML are retained privately.
 The registered producer refuses mismatched source kind, origin or acquisition
 date. Publisher data uses its source-specific permission reference.
 
-## [Unreleased]
+### Catalogue, data and repository changes
 
 ### Repository hygiene
 

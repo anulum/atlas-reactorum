@@ -184,6 +184,19 @@ def main() -> None:
     before = {r["field"]: r for r in global_rows if r["stage"] == "after_round3"}
     after = {r["field"]: r for r in global_rows if r["stage"] == "after_round4"}
     report = [
+        "<!--",
+        # This SPDX text belongs to the generated report, not this Python file.
+        # REUSE-IgnoreStart
+        "SPDX-License-Identifier: AGPL-3.0-or-later",
+        # REUSE-IgnoreEnd
+        "Commercial license available",
+        "© Concepts 1996–2026 Miroslav Šotek. All rights reserved.",
+        "© Code 2020–2026 Miroslav Šotek. All rights reserved.",
+        "ORCID: 0009-0009-3560-0851",
+        "Contact: www.anulum.li | protoscience@anulum.li",
+        "Atlas Reactorum — 05_global_reactor_map/imports/research_reactors/enrichment_round4/field_completeness_report.md",
+        "-->",
+        "",
         "# Research-reactor field completeness",
         "",
         "Generated 2026-09-28 from the 172-row base plus non-empty overlay values. The baseline is the effective state after rounds 1-3; the comparison includes round 4.",

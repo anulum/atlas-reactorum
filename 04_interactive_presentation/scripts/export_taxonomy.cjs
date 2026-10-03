@@ -11,10 +11,12 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { spawnSync } = require("node:child_process");
+const { createHash } = require("node:crypto");
 const { readCitations } = require("./taxonomy_citations.cjs");
 
 /**
- * Rebuild all three taxonomy products from one complete, source-bound candidate.
+ * Rebuild all five taxonomy products from one complete, source-bound candidate.
  *
  * @param {string} repositoryRoot Candidate root, including taxonomy and audit metadata.
  * @returns {object} Entry, historical audit and per-domain counts.
@@ -72,9 +74,47 @@ function exportTaxonomy(repositoryRoot) {
   const auditDocument = { schema_version: "1.3.0", record_count: auditRecords.length, records: auditRecords };
   const serializedAudit = JSON.stringify(auditDocument, null, 2) + "\n";
   const serializedTsv = [fields.join("\t"), ...exportedRows.map(row => fields.map(field => cell(row[field])).join("\t"))].join("\n") + "\n";
-  fs.writeFileSync(path.join(root, "data/taxonomy-expanded.sources.tsv"), serializedTsv);
-  fs.writeFileSync(path.join(root, "data/taxonomy-audit.json"), serializedAudit);
-  fs.writeFileSync(path.join(root, "data/taxonomy-audit.js"), `window.REACTOR_TAXONOMY_AUDIT = ${serializedAudit.trimEnd()};\n`);
+  const snapshot = createHash("sha256").update(fs.readFileSync(path.join(root, "data/taxonomy-expanded.js"))).digest("hex");
+  const validated = spawnSync(process.env.ATLAS_PYTHON || "python3", [
+    path.resolve(__dirname, "../../metadata/evidence_profiles/validate.py"),
+    "--root", repositoryRoot, "--snapshot", snapshot,
+  ], { encoding: "utf8", timeout: 45000, maxBuffer: 8 * 1024 * 1024 });
+  if (validated.status !== 0) throw new Error("Evidence profiles: complete snapshot validation failed");
+  const serializedProfiles = JSON.stringify(JSON.parse(validated.stdout), null, 2) + "\n";
+  const products = new Map([
+    ["taxonomy-expanded.sources.tsv", serializedTsv],
+    ["taxonomy-audit.json", serializedAudit],
+    ["taxonomy-audit.js", `window.REACTOR_TAXONOMY_AUDIT = ${serializedAudit.trimEnd()};\n`],
+    ["taxonomy-evidence-profiles.json", serializedProfiles],
+    ["taxonomy-evidence-profiles.js", `window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = ${serializedProfiles.trimEnd()};\n`],
+  ]);
+  // Prepare the complete set before publishing any member. Roll back replaced
+  // members on an I/O failure; invalid inputs never reach this transaction.
+  const dataRoot = path.join(root, "data");
+  const stage = fs.mkdtempSync(path.join(dataRoot, ".taxonomy-build-"));
+  const originals = new Map();
+  const published = [];
+  try {
+    for (const [name, content] of products) {
+      fs.writeFileSync(path.join(stage, name), content);
+    }
+    for (const name of products.keys()) {
+      const target = path.join(dataRoot, name);
+      originals.set(name, fs.existsSync(target) ? fs.readFileSync(target) : null);
+      fs.renameSync(path.join(stage, name), target);
+      published.push(name);
+    }
+  } catch (error) {
+    for (const name of published.reverse()) {
+      const target = path.join(dataRoot, name);
+      const original = originals.get(name);
+      if (original === null) fs.unlinkSync(target);
+      else fs.writeFileSync(target, original);
+    }
+    throw error;
+  } finally {
+    fs.rmSync(stage, { recursive: true });
+  }
   return {
     entries: rows.length,
     audited: audits.filter(row => ids.has(row.id)).length,

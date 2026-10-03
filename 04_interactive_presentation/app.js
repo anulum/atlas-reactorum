@@ -642,8 +642,6 @@ function openReactor(n) {
           ? `${r.taxonomy_audit.classification_ok}. ${r.taxonomy_audit.source_directness}`
           : "Not yet audited.",
       ],
-      ["Audit issue", r.taxonomy_audit?.issue],
-      ["Recommended action", r.taxonomy_audit?.recommended_action],
     ]
       .map(
         ([k, v]) =>
@@ -651,39 +649,8 @@ function openReactor(n) {
       )
       .join(
         "",
-      )}</dl>${AtlasTaxonomyCitations.render(r.taxonomy_audit?.claim_citations || [])}<h3>Sources</h3><div class="detail-sources">${sourceLinks(r.source_urls || r.sources) || "Source mapping pending."}</div></div>`;
+      )}</dl>${AtlasTaxonomyEvidenceProfiles.render(window.REACTOR_TAXONOMY_EVIDENCE_PROFILES, window.REACTOR_TAXONOMY_EVIDENCE_PROFILES.inputs.taxonomy_sha256, r)}<h3>Sources</h3><div class="detail-sources">${sourceLinks(r.source_urls || r.sources) || "Source mapping pending."}</div></div>`;
   $("#reactorDialog").showModal();
-}
-function initCompare() {
-  let opts = reactors.map((r) => `<option>${esc(r.name)}</option>`).join("");
-  $("#compareA").innerHTML = opts;
-  $("#compareB").innerHTML = opts;
-  $("#compareC").insertAdjacentHTML("beforeend", opts);
-  let fission =
-      reactors.find((r) => r.name === "PWR") ||
-      reactors.find((r) => r.domain === "fission") ||
-      reactors[0],
-    fusion =
-      reactors.find((r) => r.name === "Tokamak") ||
-      reactors.find((r) => r.domain === "fusion") ||
-      reactors[1] ||
-      reactors[0];
-  $("#compareA").value = fission.name;
-  $("#compareB").value = fusion.name;
-  ["compareA", "compareB", "compareC"].forEach(
-    (id) => ($("#" + id).onchange = renderCompare),
-  );
-  renderCompare();
-}
-function renderCompare() {
-  let rows = [$("#compareA").value, $("#compareB").value, $("#compareC").value]
-    .filter(Boolean)
-    .map((n) => reactors.find((r) => r.name === n))
-    .filter(Boolean);
-  let line = (label, key, fn = (v) => v) =>
-    `<tr><th scope="row">${esc(label)}</th>${rows.map((r) => `<td>${esc(fn(r[key]) || "Not specified")}</td>`).join("")}</tr>`;
-  $("#compareView").innerHTML =
-    `<table class="comparison"><thead><tr><th>Dimension</th>${rows.map((r) => `<th>${esc(r.name)}</th>`).join("")}</tr></thead><tbody>${line("Domain", "domain", (v) => domainLabels[v])}${line("Family", "family")}${line("Maturity", "maturity", (v) => maturityLabels[v] || v)}${line("Evidence scope", "evidence_scope")}${line("Strength", "strength")}${line("Critical challenge", "challenge")}${line("Temperature", "temp")}${line("Mode", "mode")}</tbody></table>`;
 }
 const fusionDetails = {
   magnetic: [
@@ -1230,7 +1197,9 @@ function initNav() {
 document.addEventListener("DOMContentLoaded", () => {
   $("#typeCount").textContent = reactors.length;
   initFilters();
-  initCompare();
+  AtlasTaxonomyComparisonController.start(reactors);
+  AtlasLearningPathController.start(reactors);
+  AtlasEvidenceHistoryController.start();
   renderFusion("magnetic");
   renderFlow("batch");
   renderRepos();

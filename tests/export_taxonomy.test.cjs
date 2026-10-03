@@ -21,12 +21,13 @@ const script = path.join(root, "04_interactive_presentation/scripts/export_taxon
 const data = "04_interactive_presentation/data";
 const input = "metadata/taxonomy_audit/claim_citations.json";
 const audit = "metadata/taxonomy_audit/audit.tsv";
-const outputs = ["taxonomy-expanded.sources.tsv", "taxonomy-audit.json", "taxonomy-audit.js"];
+const outputs = ["taxonomy-expanded.sources.tsv", "taxonomy-audit.json", "taxonomy-audit.js", "taxonomy-evidence-profiles.json", "taxonomy-evidence-profiles.js"];
+const profiles = "metadata/evidence_profiles/profiles.json";
 
 function candidate(context) {
   const dir = fs.mkdtempSync(path.join(process.env.ATLAS_TEST_WORKSPACE || os.tmpdir(), "atlas-taxonomy-export-"));
   context.after(() => fs.rmSync(dir, { recursive: true }));
-  for (const relative of [input, audit, `${data}/taxonomy-expanded.js`, ...outputs.map(name => `${data}/${name}`)]) {
+  for (const relative of [input, audit, profiles, `${data}/taxonomy-expanded.js`, ...outputs.map(name => `${data}/${name}`)]) {
     const target = path.join(dir, relative);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.copyFileSync(path.join(root, relative), target);
@@ -121,14 +122,12 @@ test("native default CLI reproduces the canonical products from another working 
   assert.deepEqual(productBytes(root), before);
 });
 
-test("missing historical audit stays unaudited without manufacturing whole-entry approval", context => {
+test("complete profile export refuses a missing historical audit without changing products", context => {
   const dir = candidate(context);
   fs.unlinkSync(path.join(dir, audit));
-  assert.equal(exportTaxonomy(dir).audited, 0);
-  const document = JSON.parse(fs.readFileSync(path.join(dir, data, "taxonomy-audit.json"), "utf8"));
-  assert.equal(document.records.length, 135);
-  assert.ok(document.records.every(row => row.classification_ok === "not-yet-audited" && row.complete_entry_review === false));
-  assert.equal(document.records.flatMap(row => row.claim_citations).length, 599);
+  const before = productBytes(dir);
+  assert.throws(() => exportTaxonomy(dir), /complete snapshot validation failed/);
+  assert.deepEqual(productBytes(dir), before);
 });
 
 for (const [label, appended, expected] of [
@@ -257,6 +256,10 @@ test("a valid full-catalogue export with one pending source review renders an ho
   const used = new Set(document.records.flatMap(row => row.citations.map(claim => claim.source_id)));
   document.sources = document.sources.filter(source => used.has(source.id));
   fs.writeFileSync(path.join(dir, input), JSON.stringify(document));
+  const snapshot = createHash("sha256").update(fs.readFileSync(path.join(dir, data, "taxonomy-expanded.js"))).digest("hex");
+  const migrated = spawnSync("python3", [path.join(root, "metadata/evidence_profiles/validate.py"), "--root", dir, "--snapshot", snapshot, "--migrate"], { encoding: "utf8", timeout: 15000, maxBuffer: 8 * 1024 * 1024 });
+  assert.equal(migrated.status, 0, migrated.stderr);
+  fs.writeFileSync(path.join(dir, profiles), migrated.stdout);
   const result = spawnSync(process.execPath, [script, "--root", dir], { encoding: "utf8", timeout: 15000 });
   assert.equal(result.status, 0, result.stdout + result.stderr);
   const exported = JSON.parse(fs.readFileSync(path.join(dir, data, "taxonomy-audit.json"), "utf8"));
@@ -269,4 +272,45 @@ test("a valid full-catalogue export with one pending source review renders an ho
   assert.match(html, /No claim-level citation has been added/);
   assert.ok(!html.includes("<li>"));
   assert.ok(!html.includes("Source copy retrieved:"));
+});
+
+for (const originalOutputs of [true, false]) {
+  test(`real final-output I/O refusal rolls back all prior products (originals ${originalOutputs})`, context => {
+    const dir = candidate(context);
+    const before = productBytes(dir).slice(0, -1);
+    if (!originalOutputs) for (const name of outputs.slice(0, -1)) fs.unlinkSync(path.join(dir, data, name));
+    const last = path.join(dir, data, outputs.at(-1));
+    fs.unlinkSync(last);
+    fs.mkdirSync(last);
+    assert.throws(() => exportTaxonomy(dir), /EISDIR/);
+    for (const [index, name] of outputs.slice(0, -1).entries()) {
+      const target = path.join(dir, data, name);
+      if (originalOutputs) assert.deepEqual(fs.readFileSync(target), before[index]);
+      else assert.equal(fs.existsSync(target), false);
+    }
+    assert.ok(fs.statSync(last).isDirectory());
+    assert.ok(!fs.readdirSync(path.join(dir, data)).some(name => name.startsWith(".taxonomy-build-")));
+  });
+}
+
+test("unavailable explicitly selected Python refuses before any old or new product is published", context => {
+  const dir = candidate(context);
+  const before = productBytes(dir);
+  const result = spawnSync(process.execPath, [script, "--root", dir], {
+    env: {...process.env, ATLAS_PYTHON: path.join(dir, "nonexistent-python")},
+    encoding: "utf8", timeout: 15000,
+  });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /complete snapshot validation failed/);
+  assert.deepEqual(productBytes(dir), before);
+});
+
+test("malformed 135th authored evidence profile cannot change any of five existing products", context => {
+  const dir = candidate(context);
+  const before = productBytes(dir);
+  const doc = JSON.parse(fs.readFileSync(path.join(dir, profiles), "utf8"));
+  doc.records.at(-1).review_disposition.complete_entry_review = true;
+  fs.writeFileSync(path.join(dir, profiles), JSON.stringify(doc));
+  assert.throws(() => exportTaxonomy(dir), /complete snapshot validation failed/);
+  assert.deepEqual(productBytes(dir), before);
 });

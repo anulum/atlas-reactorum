@@ -22,6 +22,8 @@ fabricated: a large record count is not a count of unique reactor vessels.
 
 ## Open the atlas
 
+[Open Atlas Reactorum online](https://anulum.github.io/ATLAS-REACTORUM/04_interactive_presentation/).
+
 Open [`04_interactive_presentation/index.html`](04_interactive_presentation/index.html)
 in a modern browser. It is fully static, carries no runtime dependencies, and
 works from `file://` with no build server.
@@ -29,11 +31,24 @@ works from `file://` with no build server.
 Current integrated snapshot:
 
 - 135 indexed architectures, subtypes, operating modes and integration concepts;
+- an evidence profile for every entry, retaining 599 citations and 148 sources,
+  explicit entity categories, historical questions and a JSON download;
+- source-linked two/three-entry comparisons, version-bound share links and
+  JSON downloads preserving original claims, sources and missing-value reasons;
+- six source-linked learning paths, with overview/research reading depths,
+  cited answer feedback and downloads retaining the same original evidence;
+- retained claim histories with exact dated-revision links and locally prepared,
+  source-backed correction proposals awaiting curator review;
 - 13,459 facility and project records, of which 13,357 carry coordinates;
 - 98 evidence-screened fusion companies, programmes and adjacent organisations;
 - 30 public ANULUM reactor-related repositories;
 - domain, layer, source-dataset, country, status and text filters over the full
   dataset, with filtered CSV and JSON export.
+
+The [evidence profile contract](metadata/evidence_profiles/README.md) separates
+source support, provisional entity mapping, classification review and source
+rights. Unknown retrieval dates and complete-entry flags remain unchanged;
+a citation count does not establish scientific acceptance.
 
 The default fusion input is the pinned
 [IAEA FFDB catalogue](05_global_reactor_map/imports/fusion/ffdb/README.md):
@@ -47,6 +62,23 @@ industrial-site record usually establishes a regulated facility or activity,
 not the number or design of reactors inside it. Company and speculative-
 technology records document claims and evidence boundaries; inclusion is not
 technical validation.
+
+The [comparison guide](04_interactive_presentation/README.md#compare-cite-and-share)
+explains stable IDs, snapshot-bound links and source-preserving exports. An
+unavailable linked version is refused rather than replaced with current data.
+Parameter compatibility does not establish scientific acceptance.
+
+Start with [a source-linked learning path](04_interactive_presentation/README.md#source-linked-learning)
+to read a principle, inspect its source, check its stated limit and compare its
+examples. Each link binds both the complete profile snapshot and the authored
+question catalogue. An answer check establishes agreement with the cited
+statement; human comprehension remains unmeasured.
+
+The [history and correction guide](metadata/evidence_history/README.md) explains
+original snapshots, separate source/review/observation dates and the manual
+curator workflow. The journal starts with its first actual Atlas observation;
+earlier changes are not reconstructed. A proposal or curator decision does not
+rewrite accepted data.
 
 ## The map
 
@@ -82,6 +114,7 @@ These citations preserve producer revisions and do not certify their claims.
 
 ```bash
 node 04_interactive_presentation/scripts/export_taxonomy.cjs
+node 04_interactive_presentation/scripts/evidence_history.cjs --build .
 python3 04_interactive_presentation/scripts/build_datasets.py
 python3 metadata/coverage_audit/build_coverage.py
 (cd 04_interactive_presentation && ./validate.sh)
@@ -112,7 +145,7 @@ temperature options retain process-specific benefits and coupled-stage limits.
 The [citation contract](metadata/taxonomy_audit/README.md) documents the authored
 metadata, catalogue-only source custody and schema 1.3.0 audit exports.
 
-`python3 tools/preflight.py --check reproducibility` rebuilds the 18 offline
+`python3 tools/preflight.py --check reproducibility` rebuilds the 20 offline
 release products in a fresh external temporary tree and requires identical
 bytes, including both JSON and JavaScript exports and the inventory receipts.
 It preserves accepted files. Use `--workspace /absolute/external/workspace`
@@ -129,6 +162,12 @@ The map engine's tests can also be run directly:
 The browser integration check is documented in the presentation README.
 Dataset-specific import directories carry their own builders, source
 registries, rights notes and validators.
+
+`make build VENV=/absolute/development/environment` carries that environment's
+Python into taxonomy validation as well as the Python builders. Running
+`tools/preflight.py` with a selected Python carries the same interpreter into
+its taxonomy child. An explicit `ATLAS_PYTHON` setting selects that child
+interpreter instead; an unavailable explicit interpreter fails the build.
 
 Third-party document bodies are retained in separate owner-controlled local
 custody. [The document manifest](metadata/document_custody.json) preserves
@@ -160,3 +199,7 @@ records the original cell, source identifier, capture date, licence and hash;
 unknown reactor composition and current physical operation remain unknown.
 The facility dataset uses schema 1.1.0. Search, facility details and filtered
 CSV/JSON retain these fields, and CSV carries the assertion array as JSON.
+
+The [research notebook and CLI](examples/research/README.md) restore a downloaded
+comparison against explicit original-file and whole-profile hashes, retaining
+source locators, original claims and missing parameter reasons.

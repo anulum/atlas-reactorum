@@ -317,3 +317,9 @@ path = ["04_interactive_presentation/data/global_reactors.sample.json", "04_inte
 precedence = "override"
 SPDX-FileCopyrightText = ["Source publishers and individual field origins in source_rights.json", "2026 Miroslav \u0160otek, normalization and editorial contributions"]
 SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0 AND CC0-1.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND etalab-2.0 AND LicenseRef-US-Public-Domain AND LicenseRef-opendata-swiss-terms-by AND LicenseRef-IAEA-FFDB-Reuse"
+
+[[annotations]]
+path = ".nojekyll"
+precedence = "override"
+SPDX-FileCopyrightText = ["1996-2026 Miroslav Šotek <protoscience@anulum.li> (concepts)", "2020-2026 Miroslav Šotek <protoscience@anulum.li> (code)"]
+SPDX-License-Identifier = "AGPL-3.0-or-later"

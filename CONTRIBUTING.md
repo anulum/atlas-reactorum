@@ -27,6 +27,21 @@ would omit acquisition, provenance, browser and repository tools. Focused
 verification selects the dedicated tests and the complete owning source scope;
 it does not replace the complete repository gate. Coverage is 100 per cent,
 statement and branch, without excluded entry points or a lowered threshold.
+Comparison changes must preserve stable identities, ordering, complete-profile
+snapshot hashes, original claims/source locators and explicit rights. Run the
+dedicated `tests/taxonomy_comparison.test.cjs` native contract suite and
+`tests/test_taxonomy_comparison_browser.py` real navigation/download cases.
+Malformed or stale shared states must refuse visibly; new input values must not
+be inferred or numerically merged across incompatible declared contexts.
+
+Learning paths must name an explicit goal and question, bind their answer to an
+unchanged original claim and keep the same profiles, citations, rights and
+missing values in both reading depths. Run `tests/learning_paths.test.cjs` and
+`tests/test_learning_paths_browser.py` against the complete actual presentation.
+Version links bind both data and authored learning content; stale versions must
+refuse. Native keyboard, mobile, assessment and file-download checks do not
+substitute for a human comprehension study.
+
 The locked development environment and native Node, Chrome and shell tools
 are required; see [Validation](VALIDATION.md) for commands and current scope.
 
@@ -43,7 +58,7 @@ whose retrieval date is unknown; an inspection date must not fill that gap.
 
 Preflight requires Python, Node and the shell inventory tools used by `make
 build`. Run `python tools/preflight.py --check reproducibility --workspace
-/absolute/external/workspace` to rebuild all 18 release products in a newly
+/absolute/external/workspace` to rebuild all 22 release products in a newly
 owned temporary tree. The workspace must already exist outside the candidate;
 the default is the operating system temporary directory. `--timeout` bounds
 each builder (1,800 seconds by default). `--root` selects another complete
@@ -85,8 +100,39 @@ choice to the existing file; do not run an editor formatter on captured data.
 Regenerate derived products through their owning builder after a reviewed
 source change, then rebuild the inventory and checksums.
 
+Use `make build VENV=/absolute/development/environment` to carry the selected
+Python into every Python build step, including taxonomy validation. Preflight
+passes its own interpreter to the taxonomy child. Keep explicit `ATLAS_PYTHON`
+selection/refusal and the real configured-environment regressions in
+`tests/test_release_rebuild.py`; packages on an unrelated ambient PATH must not
+be required by a selected development environment.
+
 The `.nojekyll` file is an empty presence marker. Its attribution is recorded
 in `REUSE.toml`; it has no text to format.
+
+## Evidence corrections
+
+Use the history workspace in the taxonomy section to inspect an exact original
+revision, then supply proposed wording, an anonymous HTTPS source, a page or
+section locator, a reason and your contributor name. The form prepares a local
+pending-proposal download. Provide that unchanged JSON to a curator with your
+contribution; the form does not submit it. Keep the original proposal alongside
+any decision so its hash and source-bound original revision remain reviewable.
+
+Follow the [curator commands](metadata/evidence_history/README.md) to record an
+explicit `accepted-for-editing` or `rejected` decision with the review source,
+locator, reviewer and date. These are recorded identities, not authenticated
+signatures. Acceptance authorises consideration of a source edit; it applies no
+data changes. A curator must separately review and edit the original catalogue
+inputs, regenerate the evidence profiles, explicitly import the successor into
+a new journal file, retain the old journal, and rebuild all generated products.
+Imports validate complete original profiles and preserve prior snapshots.
+
+Run the dedicated native history, correction, renderer and CLI suites in
+`validate.sh`, and `tests/test_evidence_history_browser.py` against the actual
+page. Preserve exact linked revisions, disabled exports on refusal, pending
+proposal custody and real native controller coverage. Date fields retain their
+own meanings; unknown source publication or event dates remain unknown.
 
 ## Adding a data layer
 
@@ -115,3 +161,15 @@ active. Keep the two browser modes distinct in verification records.
 
 Checksum the generated datasets first, and compare after. Two separate defects
 were caught only by that guard; nothing else would have found them.
+
+## Research imports
+
+Preserve the original browser comparison contract when adding research consumers.
+The reader must validate the whole original source snapshot and refuse changed
+claims, sources, rights, order or compatibility results. Run
+`tests/test_research_comparison.py` for the actual Python API/CLI and Chrome
+download path, and `tests/research_comparison.test.cjs` for the original native
+contract. Execute the real `examples/research/comparison.ipynb` with Jupyter;
+retain execution evidence outside public source. Do not replace expected hashes
+with hashes computed from an untrusted import or promote metadata compatibility
+to a scientific result.
