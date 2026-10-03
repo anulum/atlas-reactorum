@@ -152,19 +152,22 @@ def main() -> None:
             command,
             check=True,
             timeout=30,
+            capture_output=True,
         )
         _, summary = read(report_here / "gap_report_summary.tsv")
         expected = {
-            "coordinates": ("141", "141"),
+            "coordinates": {"public": ("155", "155"), "frozen": ("141", "141")}[
+                args.base_selection
+            ],
             "configuration": ("0", "0"),
             "device_subtype": ("0", "0"),
             "status": ("0", "0"),
             "organization": ("1", "1"),
-            "first_operation_date": ("128", "117"),
+            "first_operation_date": {"public": ("131", "120"), "frozen": ("128", "117")}[
+                args.base_selection
+            ],
             "last_operation_date": ("146", "143"),
         }
-        if args.base_selection == "public":
-            expected.update(coordinates=("155", "155"), first_operation_date=("131", "120"))
         for row in summary:
             pair = (row["missing_before_round3"], row["missing_after_round3"])
             if pair != expected[row["field"]]:
@@ -185,8 +188,8 @@ def main() -> None:
         ValueError,
         KeyError,
         subprocess.SubprocessError,
-    ) as read_error:
-        print(f"FAIL: {read_error}")
+    ):
+        print("FAIL: source inputs or report outputs are invalid or unavailable")
         raise SystemExit(1) from None
 
 

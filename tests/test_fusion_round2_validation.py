@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import sys
 from pathlib import Path
 
@@ -20,6 +21,56 @@ from ._fusion_layers import DIRECTORY, copy_fusion_layers
 from .conftest import load_module
 
 SCRIPT = DIRECTORY / "enrichment_round2/validate_enrichment_round2.py"
+
+
+@pytest.mark.parametrize("optimize", [False, True])
+def test_public_validation_writes_separate_reports_and_preserves_every_input(
+    tmp_path: Path, optimize: bool
+) -> None:
+    """The original validator and child generator honour an explicit report directory."""
+    source = tmp_path / "inputs"
+    source.mkdir()
+    copy_fusion_layers(source)
+    before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in source.rglob("*.tsv")}
+    reports = tmp_path / "reports"
+    result = run_cli(
+        SCRIPT,
+        "--fusion-root",
+        str(source),
+        "--base-selection",
+        "public",
+        "--report-root",
+        str(reports),
+        optimize=optimize,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "157 effective records" in result.stdout
+    assert {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in before} == before
+    for name in ("gap_report_summary.tsv", "gap_report_by_country.tsv", "GAP_REPORT.md"):
+        assert (reports / name).read_bytes() == (SCRIPT.parent / name).read_bytes()
+
+
+@pytest.mark.parametrize("optimize", [False, True])
+def test_child_report_failure_has_fixed_output_without_interpreter_details(
+    tmp_path: Path, optimize: bool
+) -> None:
+    """Actual child I/O failure cannot forward exception text through the validator."""
+    source = tmp_path / "inputs"
+    source.mkdir()
+    copy_fusion_layers(source)
+    reports = tmp_path / "CALLER_REPORT_SENTINEL"
+    reports.write_text("preserve")
+    result = run_cli(
+        SCRIPT,
+        "--fusion-root",
+        str(source),
+        "--report-root",
+        str(reports),
+        optimize=optimize,
+    )
+    assert result.returncode == 1
+    assert result.stdout == "FAIL: source inputs or report outputs are invalid or unavailable\n"
+    assert not result.stderr and reports.read_text() == "preserve"
 
 
 def test_actual_round2_validation(tmp_path: Path) -> None:

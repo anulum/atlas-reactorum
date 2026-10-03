@@ -45,9 +45,23 @@ python 04_interactive_presentation/scripts/build_datasets.py --fusion-source his
 This option uses the selected source root and preserves the existing partial-tree
 build API. It does not grant rights to caller-supplied replacement data. To verify
 and snapshot all nine checked-in public input hashes, sizes, schemas and row
-counts, use historical_inputs.py with --selection public. The complete original
-route below always performs that verification and captures an owned snapshot
-before dataset export. Neither route downloads or automatically selects a source.
+counts, use `historical_inputs.py` with `--selection public`. Pass that bundle
+to the integrated builder to verify it again and use an owned snapshot:
+
+```bash
+python 05_global_reactor_map/imports/fusion/historical_inputs.py \
+  --source-root 05_global_reactor_map/imports/fusion \
+  --destination /path/to/new-public-snapshot --selection public
+python 04_interactive_presentation/scripts/build_datasets.py \
+  --fusion-source historical --historical-bundle /path/to/new-public-snapshot
+```
+
+Every source and registry must match the public manifest before export starts.
+The inventory records all nine verified source hashes under their original
+relative names. A missing or changed bundle refuses without falling back to
+the checked-in source. `historical-full` below instead requires the complete
+original hashes; the public subset cannot satisfy that selection. Neither
+route downloads or automatically selects a source.
 
 The selected public base has no coordinates or operation dates; subsequent
 attributed overlays supply their own values. Reports therefore describe this

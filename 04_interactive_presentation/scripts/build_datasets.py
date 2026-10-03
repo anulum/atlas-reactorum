@@ -1241,7 +1241,8 @@ def main(argv: list[str] | None = None) -> None:
         Command-line arguments. ``--source-root`` and ``--data-dir`` let a
         caller build from a different tree, which is how the tests exercise
         this script as a real process. ``--fusion-source`` selects pinned FFDB
-        by default; ``historical`` selects the attributed subset and
+        by default; ``historical`` selects the attributed subset, optionally
+        from an explicit verified bundle, and
         ``historical-full`` requires an explicit immutable historical bundle.
     """
     parser = argparse.ArgumentParser(description="Build the integrated atlas datasets.")
@@ -1254,20 +1255,27 @@ def main(argv: list[str] | None = None) -> None:
     arguments = parser.parse_args(argv)
     if arguments.fusion_source == "historical-full" and arguments.historical_bundle is None:
         parser.error("historical-full requires --historical-bundle with exact frozen inputs")
-    if arguments.historical_bundle is not None and arguments.fusion_source != "historical-full":
-        parser.error("--historical-bundle requires --fusion-source historical-full")
+    if arguments.historical_bundle is not None and arguments.fusion_source == "ffdb":
+        parser.error("--historical-bundle requires --fusion-source historical or historical-full")
     configure_roots(arguments.source_root, arguments.data_dir)
     with tempfile.TemporaryDirectory(prefix="atlas-historical-") as workspace:
-        if arguments.fusion_source == "historical-full":
+        if arguments.historical_bundle is not None:
             source = arguments.historical_bundle
             try:
                 HISTORICAL_INPUTS.materialize(
                     source,
                     Path(workspace),
-                    selection="frozen",
+                    selection="frozen"
+                    if arguments.fusion_source == "historical-full"
+                    else "public",
                 )
-            except (OSError, UnicodeError, csv.Error, ValueError) as error:
+            except HISTORICAL_INPUTS.HistoricalInputRefusal as error:
                 parser.exit(2, f"Historical inputs refused: {error}\n")
+            except (OSError, UnicodeError, csv.Error, ValueError):
+                parser.exit(
+                    2,
+                    "Historical inputs refused: source inputs or snapshot output are invalid or unavailable\n",
+                )
             configure_historical_snapshot(Path(workspace))
         if arguments.fusion_source == "ffdb":
             fusion_facilities = FFDB_INTEGRATION.build_facilities(LIBRARY, normalize_status)

@@ -143,22 +143,28 @@ def test_existing_owned_content_is_not_overwritten(source: Path, tmp_path: Path,
 
 
 @pytest.mark.parametrize("selection", ["missing", "public_as_frozen"])
+@pytest.mark.parametrize("optimize", [False, True])
 def test_frozen_selection_cannot_fall_back_to_partial_or_public_inputs(
-    source: Path, tmp_path: Path, selection: str
+    source: Path, tmp_path: Path, selection: str, optimize: bool
 ) -> None:
     """Missing full inputs and the permitted subset cannot impersonate originals."""
     root = tmp_path / "missing" if selection == "missing" else source
     destination = tmp_path / "uncreated"
     result = run_cli(
-        SCRIPT, "--source-root", str(root), "--destination", str(destination), optimize=True
+        SCRIPT, "--source-root", str(root), "--destination", str(destination), optimize=optimize
     )
     assert result.returncode == 2 and "Historical inputs refused" in result.stderr
     assert not destination.exists() and not result.stdout and "Traceback" not in result.stderr
+    if selection == "missing":
+        assert result.stderr == (
+            "Historical inputs refused: source inputs or snapshot output are invalid or unavailable\n"
+        )
 
 
 @pytest.mark.parametrize("kind", ["escape", "fifo"])
+@pytest.mark.parametrize("optimize", [False, True])
 def test_nonlocal_or_nonregular_inputs_refuse_without_waiting(
-    source: Path, tmp_path: Path, kind: str
+    source: Path, tmp_path: Path, kind: str, optimize: bool
 ) -> None:
     """An escaped symlink or named pipe cannot substitute for immutable input."""
     path = source / "fusion_facilities.tsv"
@@ -178,20 +184,21 @@ def test_nonlocal_or_nonregular_inputs_refuse_without_waiting(
         str(destination),
         "--selection",
         "public",
-        optimize=True,
+        optimize=optimize,
     )
     assert result.returncode == 2 and "Historical inputs refused" in result.stderr
     assert not destination.exists() and "Traceback" not in result.stderr
 
 
 @pytest.mark.parametrize("corruption", ["members", "schema", "rows", "truncated_row", "extra_cell"])
+@pytest.mark.parametrize("optimize", [False, True])
 def test_native_consumer_rejects_inconsistent_declared_schema(
-    source: Path, tmp_path: Path, corruption: str
+    source: Path, tmp_path: Path, corruption: str, optimize: bool
 ) -> None:
-    """Real copied CLI rejects an inconsistent manifest against unchanged data."""
+    """The original CLI rejects a caller-owned manifest against actual source bytes."""
     program = tmp_path / "program"
     program.mkdir()
-    shutil.copy2(SCRIPT, program / SCRIPT.name)
+    (program / SCRIPT.name).symlink_to(SCRIPT)
     manifest = json.loads((DIRECTORY / "frozen_input_manifest.json").read_text())
     public = manifest["selections"]["public"]
     if corruption == "members":
@@ -222,7 +229,7 @@ def test_native_consumer_rejects_inconsistent_declared_schema(
         str(destination),
         "--selection",
         "public",
-        optimize=True,
+        optimize=optimize,
     )
     assert result.returncode == 2 and "Historical inputs refused" in result.stderr
     assert not destination.exists() and "Traceback" not in result.stderr

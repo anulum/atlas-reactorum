@@ -150,6 +150,11 @@ before the map builder creates outputs. Missing or altered required FFDB
 inputs fail; they never select the historical import implicitly. Historical
 selection is explicit and does not establish its acquisition or publication
 rights.
+For an immutable public historical replay, use `--fusion-source historical
+--historical-bundle /absolute/public-snapshot`. The builder verifies all nine
+source and registry files before creating outputs and records their hashes.
+Run `tests/test_historical_fusion_build.py` and the historical input/round-2/
+round-3 owning suites; preserve source bytes when writing reports separately.
 
 The browser tests load the full real presentation in an isolated native Chrome
 profile over loopback. The normal sandbox is the default. On a host explicitly

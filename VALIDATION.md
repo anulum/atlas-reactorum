@@ -91,6 +91,14 @@ complete field provenance. All four input hashes are recorded. Missing or
 altered required inputs refuse the build without an implicit historical
 fallback. `--fusion-source historical` explicitly selects the retained
 earlier route and its documented limitations.
+An explicit `--historical-bundle /path/to/public-snapshot` with that selection
+checks all nine public input hashes, sizes, schemas and row counts before
+export. The inventory binds each source and registry under its original
+relative name. `historical-full` verifies distinct complete-original hashes;
+the public subset cannot stand in for them. Run the dedicated native replay
+suite in `tests/test_historical_fusion_build.py` for output parity, nine-file
+binding and refusal before output. Historical input and round-2/round-3 owning
+suites also check normal/optimised processes and separate report destinations.
 
 The current default snapshot contains 13,459 records, including 13,357
 coordinate pairs, 98 companies and 135 taxonomy entries. Its 180 fusion records
@@ -148,11 +156,13 @@ native CDP regions are not relabelled as AST branches. The six machine answer
 checks verify agreement with their cited statement. They do not measure human
 learning outcomes, scientific acceptance or operating-device performance.
 
-## Current focused checkpoint: 2 October 2026
+## Historical focused checkpoint: 2 October 2026
 
 These measurements belong to the specified complete owning source scopes and
 their pinned inputs. They do not constitute an aggregate repository coverage
 measurement or a fresh run of every earlier check.
+The counts below describe that source revision; they are not coverage results
+for subsequent changes to the historical replay contract.
 
 | Owning source | Native evidence | Statements | Branches |
 | --- | --- | --- | --- |
@@ -165,7 +175,7 @@ measurement or a fresh run of every earlier check.
 | Historical third-pass gap generator and validator | Focused cases and actual frozen CLI with external report output | 213/213 | 84/84 |
 | Historical live-acquisition refusal | 11 public CLI cases on each pinned Python version | 14/14 | 2/2 |
 
-The seven current historical consumer modules collectively cover all 997
+The seven historical consumer modules at that checkpoint collectively covered all 997
 statements and 418 branches on both pinned Python versions, with no missing or
 excluded paths. The 233-case focused cohort passed but initially measured
 98.30 % coverage; that result remains separate from the completed measurement.

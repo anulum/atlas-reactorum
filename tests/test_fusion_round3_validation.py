@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import sys
 from pathlib import Path
 
@@ -20,6 +21,79 @@ from ._fusion_layers import DIRECTORY, copy_fusion_layers
 from .conftest import load_module
 
 SCRIPT = DIRECTORY / "enrichment_round3/validate_enrichment_round3.py"
+
+
+@pytest.mark.parametrize("optimize", [False, True])
+def test_public_validation_writes_separate_reports_and_preserves_every_input(
+    tmp_path: Path, optimize: bool
+) -> None:
+    """The original validator and child generator honour an explicit report directory."""
+    source = tmp_path / "inputs"
+    source.mkdir()
+    copy_fusion_layers(source)
+    before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in source.rglob("*.tsv")}
+    reports = tmp_path / "reports"
+    result = run_cli(
+        SCRIPT,
+        "--fusion-root",
+        str(source),
+        "--base-selection",
+        "public",
+        "--report-root",
+        str(reports),
+        optimize=optimize,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "157 effective records" in result.stdout
+    assert {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in before} == before
+    for name in ("gap_report_summary.tsv", "gap_report_by_country.tsv", "GAP_REPORT.md"):
+        assert (reports / name).read_bytes() == (SCRIPT.parent / name).read_bytes()
+
+
+@pytest.mark.parametrize("optimize", [False, True])
+def test_child_report_failure_has_fixed_output_without_interpreter_details(
+    tmp_path: Path, optimize: bool
+) -> None:
+    """Actual child I/O failure cannot forward exception text through the validator."""
+    source = tmp_path / "inputs"
+    source.mkdir()
+    copy_fusion_layers(source)
+    reports = tmp_path / "CALLER_REPORT_SENTINEL"
+    reports.write_text("preserve")
+    result = run_cli(
+        SCRIPT,
+        "--fusion-root",
+        str(source),
+        "--report-root",
+        str(reports),
+        optimize=optimize,
+    )
+    assert result.returncode == 1
+    assert result.stdout == "FAIL: source inputs or report outputs are invalid or unavailable\n"
+    assert not result.stderr and reports.read_text() == "preserve"
+
+
+@pytest.mark.parametrize("optimize", [False, True])
+def test_registry_observation_date_refuses_with_its_specific_failure(
+    tmp_path: Path, optimize: bool
+) -> None:
+    """An altered registry date reaches the date guard before any report is written."""
+    copy_fusion_layers(tmp_path)
+    path = tmp_path / "enrichment_round3/source_registry.tsv"
+    fields, rows = read_table(path)
+    rows[0]["retrieved_date"] = "2000-01-01"
+    write_table(path, fields, rows)
+    result = run_cli(
+        SCRIPT,
+        "--fusion-root",
+        str(tmp_path),
+        "--base-selection",
+        "public",
+        optimize=optimize,
+    )
+    assert result.returncode == 1
+    assert "wrong source-registry retrieval date" in result.stdout
+    assert not result.stderr and not (tmp_path / "enrichment_round3/GAP_REPORT.md").exists()
 
 
 def test_actual_round3_validation(tmp_path: Path) -> None:

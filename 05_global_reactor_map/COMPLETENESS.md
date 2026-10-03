@@ -58,6 +58,10 @@ FusDIS, national regulators or operator records.
   devices (32 base records and two additions). The public base omits 51 separately
   enriched Wikidata values and 14 coordinate-precision notes. It does not claim
   independent device location or present operation. The explicit
+  public route can accept `--historical-bundle /path/to/public-snapshot`,
+  verifying and capturing all nine public input files before output. Its
+  inventory records all nine hashes; this does not restore omitted fields.
+  The distinct
   `--fusion-source historical-full --historical-bundle /path/to/bundle` route
   validates all nine original frozen inputs, including exact sizes, hashes,
   table schemas and counts, before output. It permits offline reproduction from

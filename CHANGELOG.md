@@ -19,6 +19,13 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 First public release of the source-linked atlas, static presentation and offline research library.
 
+- Accept an explicitly verified public historical input bundle for offline
+  presentation builds, recording all nine source hashes. Preserve distinct
+  original-input requirements for complete historical reconstruction.
+- Verify separate historical report destinations and specific integrity
+  refusals through the original command-line tools in both Python modes.
+  Keep unexpected interpreter and filesystem exception details out of refusals.
+
 - Reproduce the existing round-4 and round-5 research reports with their
   original provenance headers, retaining all report values and source inputs.
 

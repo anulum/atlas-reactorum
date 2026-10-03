@@ -44,6 +44,9 @@ the projection; its digest is distinct from the privately retained original.
 The offline build makes no upstream request and has no implicit fallback.
 `--fusion-source historical` explicitly selects the retained earlier route;
 its original-source and rights limitations remain separate.
+Adding `--historical-bundle /path/to/public-snapshot` verifies all nine public
+input files before using an owned snapshot and recording their source hashes.
+`historical-full` keeps the distinct complete-original input contract.
 
 FFDB source identities retain their exact publisher name, country and
 organisation. Presentation identifiers derive deterministically from those

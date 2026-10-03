@@ -177,6 +177,7 @@ def main() -> None:
             command,
             check=True,
             timeout=30,
+            capture_output=True,
         )
         _, summary = read(report_here / "gap_report_summary.tsv")
         summary_by_field = {row["field"]: row for row in summary}
@@ -204,8 +205,8 @@ def main() -> None:
         ValueError,
         KeyError,
         subprocess.SubprocessError,
-    ) as read_error:
-        print(f"FAIL: {read_error}")
+    ):
+        print("FAIL: source inputs or report outputs are invalid or unavailable")
         raise SystemExit(1) from None
 
 

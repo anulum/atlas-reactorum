@@ -46,8 +46,11 @@ python 04_interactive_presentation/scripts/build_datasets.py --fusion-source his
 ```
 
 The second command selects the attributed six-field historical compilation and its
-separate overlays. The complete original route is --fusion-source historical-full
-with an explicit --historical-bundle; all nine frozen input hashes and schemas must
+separate overlays. The public selection also accepts
+`--historical-bundle /path/to/public-snapshot` to verify and snapshot all nine
+public input files before export. The complete original route uses
+`--fusion-source historical-full` with an explicit `--historical-bundle`;
+all nine distinct frozen input hashes and schemas must
 pass. See the [historical input contract](../README.md).
 There is no automatic fallback when a pinned FFDB input is missing or changed.
 Historical overlay values and supplemental coordinates do not fill FFDB fields.

@@ -78,6 +78,9 @@ it does not perform fresh research or upgrade the evidence quality of the inputs
   The explicit `--fusion-source historical` route retains 146 base identities
   with the six attributed compilation fields, three separate overlay passes and
   eleven additions. The complete original 18-column route requires
+  its distinct frozen inputs; the public route also accepts
+  `--historical-bundle /path/to/public-snapshot` and records all nine verified
+  source and registry hashes. The complete original route uses
   `--fusion-source historical-full --historical-bundle /path/to/complete-inputs`.
   For the full route, all nine hashes and schemas are checked before capture and export;
   external source possession is not a redistribution grant. See the
