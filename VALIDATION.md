@@ -35,7 +35,9 @@ scope. They provide evidence for that scope, not a whole-candidate verdict.
 | Per-layer | Each import's own builder and validator | Source schema, provenance, earlier-layer immutability and declared failure behaviour |
 
 The locked development environment supplies Python tooling. Native Node,
-Chrome or Chromium and the shell inventory tools are also required. A missing
+Chrome or Chromium, Poppler `pdftotext` and the shell inventory tools are also
+required. The CI test runners install `poppler-utils`; Debian and Ubuntu
+development hosts can install the same package. A missing
 tool or a failed check is a failure, not a pass. Ruff security rules and a
 Bandit result are separate evidence; a clean Ruff run does not dispose of
 Bandit findings.
@@ -68,7 +70,7 @@ outputs fail. The accepted candidate is never deleted or overwritten.
 A builder that does nothing cannot pass.
 
 The reproducibility runner supplies its own Python interpreter to the Node
-taxonomy validator. `make build` supplies the configured `VENV` interpreter.
+taxonomy validator. `make build` and `make test` supply the configured `VENV` interpreter.
 An explicit `ATLAS_PYTHON` setting retains its selector semantics; an unavailable
 interpreter fails without replacing accepted products. Dedicated real-environment
 regressions put a dependency-free Python on PATH and exercise both public

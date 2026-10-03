@@ -41,7 +41,7 @@ test:  ## Python tests at the 100 per cent coverage floor
 	  test "$${#source_dirs[@]}" -gt 0 || exit 1; \
 	  coverage_args=(); \
 	  for directory in "$${source_dirs[@]}"; do coverage_args+=("--cov=$$directory"); done; \
-	  $(VENV)/bin/python -m pytest tests/ "$${coverage_args[@]}"
+	  ATLAS_PYTHON="$(ATLAS_PYTHON)" $(VENV)/bin/python -m pytest tests/ "$${coverage_args[@]}"
 
 validate:  ## Presentation checks, including the map engine tests
 	PATH="$(abspath $(VENV))/bin:$$PATH" bash 04_interactive_presentation/validate.sh

@@ -42,8 +42,8 @@ Version links bind both data and authored learning content; stale versions must
 refuse. Native keyboard, mobile, assessment and file-download checks do not
 substitute for a human comprehension study.
 
-The locked development environment and native Node, Chrome and shell tools
-are required; see [Validation](VALIDATION.md) for commands and current scope.
+The locked development environment and native Node, Chrome, Poppler
+`pdftotext` and shell tools are required; see [Validation](VALIDATION.md) for commands and current scope.
 
 `validate.sh` also runs the native taxonomy citation, exporter and detail
 serializer tests at 100 per cent line, branch and function coverage. The
@@ -100,8 +100,9 @@ choice to the existing file; do not run an editor formatter on captured data.
 Regenerate derived products through their owning builder after a reviewed
 source change, then rebuild the inventory and checksums.
 
-Use `make build VENV=/absolute/development/environment` to carry the selected
-Python into every Python build step, including taxonomy validation. Preflight
+Use `make build VENV=/absolute/development/environment` and
+`make test VENV=/absolute/development/environment` to carry the selected Python
+into child processes, including taxonomy validation. Preflight
 passes its own interpreter to the taxonomy child. Keep explicit `ATLAS_PYTHON`
 selection/refusal and the real configured-environment regressions in
 `tests/test_release_rebuild.py`; packages on an unrelated ambient PATH must not
