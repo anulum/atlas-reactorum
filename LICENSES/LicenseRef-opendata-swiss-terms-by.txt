@@ -1,0 +1,8 @@
+opendata.swiss: Open use, source attribution required (terms_by)
+
+Authoritative terms: https://opendata.swiss/en/terms-of-use/#terms_by
+Dataset-specific evidence: https://opendata.swiss/en/dataset/schadstofffreisetzungs-und-transferregister-der-schweiz-swissprtr/resource/fd565aa7-008a-486b-a8ea-511463010772
+
+Under this usage category, commercial and non-commercial use are permitted. The source author, dataset title and dataset link must be acknowledged.
+
+This record identifies the official usage conditions rather than a Creative Commons licence. The linked official conditions remain authoritative. The compilation adds no government endorsement or additional rights to unrelated material.

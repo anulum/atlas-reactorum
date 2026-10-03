@@ -1,0 +1,8 @@
+evidence_tier	records	complete_records	records_with_gaps	high_priority	medium_priority	low_priority	missing_fuel_cycle	missing_official_url
+A	1	0	1	0	1	0	1	0
+A/B	5	1	4	0	2	3	4	0
+B	17	1	16	1	10	6	14	1
+B/C	16	3	13	0	11	5	13	0
+C	45	3	42	7	33	5	37	2
+C-H	6	0	6	1	4	1	5	5
+D	8	1	7	0	2	6	7	0

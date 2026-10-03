@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Typed fission-to-desalination thermal and material coupling records.",
+  "category": "hybrid_composition",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "H5",
+  "project_id": "SCPN-NUCLEAR-DESALINATION-CORE",
+  "proposed_configuration_id": null,
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}

@@ -1,0 +1,5 @@
+source_id	title	url	role	retrieved
+candidate-register	Fusion company discovery candidates	../discovery_audit/fusion_companies_candidates.tsv	input identity register	2026-09-26
+fia-2025	The Global Fusion Industry in 2025	https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf	sector/company discovery context	2026-09-26
+doe-milestone	DOE Milestone-Based Fusion Development Program	https://www.energy.gov/articles/us-department-energy-announces-selectees-107-million-fusion-innovation-research-engine	government program evidence	2026-09-26
+ukaea-guide	UKAEA Global Fusion Guide for SMEs	https://www.ukaea.org/about-ukaea/publications/global-fusion-guide-for-smes/	ecosystem and identity context	2026-09-26

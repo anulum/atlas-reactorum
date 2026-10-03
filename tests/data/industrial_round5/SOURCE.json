@@ -1,0 +1,69 @@
+{
+  "source_selection": "Actual source bytes reproduce all393 historical facility records; current ADEME auto-import row IDs differ, all other snapshot cells exact.",
+  "counts": {
+    "original_repd": 14657,
+    "original_ademe": 89,
+    "selected_uk": 362,
+    "selected_fr": 31
+  },
+  "repd_original_sha256": "84c1b5f958a934d8b4b86ec88f50bdcf43830ded7ff2efc27bffca0c98695035",
+  "ademe_current_sha256": "54e7d643c80601817a3e7dbb2cc0d5e4ad4d555561de8d0841043df02975d4f9",
+  "ademe_historical_sha256": "c818ce60aed135fadbb0e82c6200c295da860523862e9bce83bfb36e3b1f20d0",
+  "ademe_current_bytes": 51927,
+  "ademe_raw_hash_changed_only_selected_row_ids_differ": true,
+  "changes": "All qualifying genuine raw records, first actual exclusions, only required fields, original scalar/string values. CSV/JSON reserialized; no backderivation. Unused addresses and search/ranking fields omitted.",
+  "source_licences": {
+    "repd": "OGL v3.0, official CKAN dataset metadata uk-ogl",
+    "ademe": "Licence Ouverte / Open Licence version2.0, official data-fair metadata license object"
+  },
+  "candidate_coordinate_change_fields": [
+    "lat",
+    "lon"
+  ],
+  "candidate_affected_uk": 362,
+  "candidate_fr_records_byte_cell_unchanged": 31,
+  "current_snapshot_field_differences": {
+    "source_row_id": 31
+  },
+  "capture_utc": "2026-09-30",
+  "source_urls": {
+    "repd": "https://assets.publishing.service.gov.uk/media/6a6cbdc00c36759b5ccaa305/REPD_Publication_Q2_2026.csv",
+    "ademe": "https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-sites-de-production-et-de-distribution-dhydrogene-finances-par-lademe/lines?size=1000&sort=_id"
+  },
+  "licence_urls": {
+    "repd": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "ademe": "https://www.etalab.gouv.fr/licence-ouverte-open-licence"
+  },
+  "attribution": [
+    "Contains public sector information licensed under the Open Government Licence v3.0. Department for Energy Security and Net Zero, Renewable Energy Planning Database quarterly extract, https://www.gov.uk/government/publications/renewable-energy-planning-database-quarterly-extract",
+    "Source: ADEME, Liste des sites de production et de distribution d’hydrogène financés par l’ADEME, https://data.ademe.fr/datasets/liste-des-sites-de-production-et-de-distribution-dhydrogene-finances-par-lademe, data updated 2026-09-30T07:00:07.013Z"
+  ],
+  "metadata_fixture_changes": "Only original dataUpdatedAt retained; description-edit timestamp and creator identifiers omitted.",
+  "refresh_metadata_expected_difference": "Current actual source row IDs and actual dataset update date differ from historical snapshot; all facility facts unchanged.",
+  "projection_reference": {
+    "primary_url": "https://www.ordnancesurvey.co.uk/documents/resources/guide-coordinate-systems-great-britain.pdf",
+    "table": 4,
+    "independent_verification": "PROJ9.8.1 explicit pipeline, no automatic datum choice/network grids, all362points",
+    "fault": "Original code negated already-inverse Helmert parameters; corrected source-derived points only.",
+    "max_candidate_difference_metres": 0.000842215629975881
+  },
+  "canonical_coordinate_correction": "Integrated 2026-09-30: only latitude/longitude of 362 UK records changed; all other snapshot/output cells and all 31 French records preserved. Historical source manifest was not refreshed.",
+  "fixture_artifacts": {
+    "repd.csv": {
+      "bytes": 52399,
+      "sha256": "7328f78bbaa63262f50106be0e968af8c3ff9fe364c8035d118188284a3a1769"
+    },
+    "ademe.json": {
+      "bytes": 10420,
+      "sha256": "97ad8bc02bc4e3ee393b90adb91e60cac5d60c9b88b35b51327713c892878e05"
+    },
+    "ademe-metadata.json": {
+      "bytes": 50,
+      "sha256": "627efcbb89ddc800cdd56ce3891c304ff8d5469fa2998dcbfae115a6059d0a15"
+    },
+    "projection_reference.json": {
+      "bytes": 104241,
+      "sha256": "6430c998bffa406eb765346a79ab5f9ebbd740a299e0cd3dc45a06c021005d04"
+    }
+  }
+}

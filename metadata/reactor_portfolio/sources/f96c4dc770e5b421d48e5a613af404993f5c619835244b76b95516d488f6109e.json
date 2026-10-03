@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Liquid-fuel molten-salt design with chemistry and depletion interfaces; thermal and fast variants remain facets.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F7",
+  "project_id": "SCPN-MSR-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:molten_salt_reactor",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "B"
+}

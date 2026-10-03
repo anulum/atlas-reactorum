@@ -1,0 +1,319 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — REUSE.toml
+
+version = 1
+SPDX-PackageName = "Atlas Reactorum"
+SPDX-PackageSupplier = "Miroslav Šotek <protoscience@anulum.li>"
+SPDX-PackageDownloadLocation = "https://www.anulum.li"
+
+[[annotations]]
+path = "tests/data/industrial_base/EEA.json"
+precedence = "override"
+SPDX-FileCopyrightText = "European Environment Agency and national industrial-reporting contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["tests/data/industrial_base/Mixed.json", "tests/data/industrial_base/Cattle.json", "tests/data/industrial_base/Poultry.json", "tests/data/industrial_base/Swine.json", "tests/data/industrial_base/Dairy.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "U.S. Environmental Protection Agency, AgSTAR map compilation"
+SPDX-License-Identifier = "LicenseRef-US-Public-Domain"
+
+[[annotations]]
+path = "tests/data/industrial_base/SOURCE.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020–2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Complete native round-seven sources, with only layer schema metadata minimised.
+# SOURCE.json records exact publisher grants, adaptations and original hashes.
+[[annotations]]
+path = "tests/data/industrial_round7/SFOE_ORIGINAL.csv.zip"
+precedence = "override"
+SPDX-FileCopyrightText = "Swiss Federal Office of Energy, Biogasanlagen"
+SPDX-License-Identifier = "LicenseRef-opendata-swiss-terms-by"
+
+[[annotations]]
+path = ["tests/data/industrial_round7/ARPAE_LAYER.json", "tests/data/industrial_round7/ARPAE_COUNT.json", "tests/data/industrial_round7/ARPAE_IDS.json", "tests/data/industrial_round7/ARPAE_COMPLETE.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "Arpae Emilia-Romagna - Direzione Tecnica, Impianti a bioenergia, aggiornamento 2025"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["tests/data/industrial_round7/SOURCE.json", "tests/data/industrial_round7/README.md"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Complete source-bound Swiss and Italian round-seven data and provenance.
+[[annotations]]
+path = ["tests/data/anulum_github/repositories.json", "tests/data/anulum_github/SOURCE.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020–2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Generated datasets carry no inline header; their provenance is per record.
+[[annotations]]
+path = "04_interactive_presentation/data/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020-2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Source catalogues describe third-party works; the rows are factual citations.
+# The catalogued works remain under their own publishers' terms.
+[[annotations]]
+path = ["01_nuclear/SHA256SUMS", "01_nuclear/**/*.md", "01_nuclear/**/*.tsv", "02_chemical_biochemical/SHA256SUMS", "02_chemical_biochemical/**/*.md", "02_chemical_biochemical/**/*.tsv", "03_hybrid_emerging/SHA256SUMS", "03_hybrid_emerging/**/*.md", "03_hybrid_emerging/**/*.tsv", "05_global_reactor_map/**", "metadata/**", "00_index/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020-2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Original presentation files, repository metadata and owner branding only.
+# Third-party downloaded works are excluded from Git; this does not license them.
+[[annotations]]
+path = [".gitignore", ".zenodo.json", "docs/assets/**", "docs/internal/*.md", "04_interactive_presentation/.nojekyll", "04_interactive_presentation/*.md", "04_interactive_presentation/SHA256SUMS", "04_interactive_presentation/SOURCES.tsv", "04_interactive_presentation/index.html", "04_interactive_presentation/styles.css", "04_interactive_presentation/map/README.md"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020-2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Exact upstream data scopes override the editorial/code annotation above.
+# Attribution, source revisions and adaptation notes remain in their registries.
+[[annotations]]
+path = ["05_global_reactor_map/data/reactors.tsv", "05_global_reactor_map/data/reactors.geojson"]
+precedence = "override"
+SPDX-FileCopyrightText = ["World Resources Institute and Global Power Plant Database contributors", "© 2020-2026 Miroslav Šotek, adaptation"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/power_units/source_data/gnpt_map_2026-08.geojson"
+precedence = "override"
+SPDX-FileCopyrightText = "Global Energy Monitor, Global Nuclear Power Tracker, August 2026"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/power_units/power_reactor_units.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Global Energy Monitor, Global Nuclear Power Tracker, August 2026", "© 2020-2026 Miroslav Šotek, adaptation"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
+
+# Unmodified source cells selected from the pinned upstream WRI release.
+[[annotations]]
+path = "tests/data/wri_gppd/nuclear_and_filter_control.csv"
+precedence = "override"
+SPDX-FileCopyrightText = "World Resources Institute and Global Power Plant Database contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "tests/data/wri_gppd/SOURCE.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020-2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = "tests/data/wikidata/bindings.json"
+precedence = "override"
+SPDX-FileCopyrightText = "Wikidata contributors"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "tests/data/wikidata/SOURCE.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020-2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Field-minimised original source cells and genuine selection controls.
+[[annotations]]
+path = "tests/data/industrial_round2/canada.csv"
+precedence = "override"
+SPDX-FileCopyrightText = "Environment and Climate Change Canada"
+SPDX-License-Identifier = "OGL-Canada-2.0"
+
+[[annotations]]
+path = "tests/data/industrial_round2/australia.csv"
+precedence = "override"
+SPDX-FileCopyrightText = "Commonwealth of Australia, Department of Climate Change, Energy, the Environment and Water"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "tests/data/industrial_round2/SOURCE.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020–2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = "tests/data/industrial_round3/uk_prtr.csv"
+precedence = "override"
+SPDX-FileCopyrightText = "Crown copyright, Department for Environment, Food & Rural Affairs"
+SPDX-License-Identifier = "OGL-UK-3.0"
+
+[[annotations]]
+path = "tests/data/industrial_round3/SOURCE.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2020–2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["tests/data/industrial_round4/swiss_prtr.xlsx"]
+precedence = "override"
+SPDX-FileCopyrightText = "Federal Office for the Environment FOEN, Swiss Pollutant Release and Transfer Register (SwissPRTR)"
+SPDX-License-Identifier = "LicenseRef-opendata-swiss-terms-by"
+
+[[annotations]]
+path = ["tests/data/industrial_round4/SOURCE.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["tests/data/industrial_round5/repd.csv", "tests/data/industrial_round5/projection_reference.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "Department for Energy Security and Net Zero, Renewable Energy Planning Database"
+SPDX-License-Identifier = "OGL-UK-3.0"
+
+[[annotations]]
+path = ["tests/data/industrial_round5/ademe.json", "tests/data/industrial_round5/ademe-metadata.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "ADEME, Liste des sites de production et de distribution d’hydrogène financés par l’ADEME"
+SPDX-License-Identifier = "etalab-2.0"
+
+[[annotations]]
+path = ["tests/data/industrial_round5/SOURCE.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["tests/data/industrial_round6/br-epe-biodiesel-count.json", "tests/data/industrial_round6/br-epe-biodiesel.json", "tests/data/industrial_round6/br-epe-biomethane-count.json", "tests/data/industrial_round6/br-epe-biomethane.json", "tests/data/industrial_round6/br-epe-ethanol-count.json", "tests/data/industrial_round6/br-epe-ethanol.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "Empresa de Pesquisa Energ\u00e9tica, WEBMAP EPE"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["tests/data/industrial_round6/us-epa-lmop-count.json", "tests/data/industrial_round6/us-epa-lmop.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "U.S. Environmental Protection Agency, Landfill Methane Outreach Program"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["tests/data/industrial_round6/SOURCE.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Miroslav \u0160otek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["tests/data/research_reactors_wikidata/cache.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "Wikidata contributors"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["tests/data/research_reactors_wikidata/SOURCE.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Miroslav Šotek"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+[[annotations]]
+path = "metadata/facility_fields/observations.json"
+precedence = "override"
+SPDX-FileCopyrightText = ["World Resources Institute and Global Power Plant Database contributors", "U.S. Environmental Protection Agency, AgSTAR and LMOP", "Empresa de Pesquisa Energética", "Swiss Federal Office of Energy, Biogasanlagen", "Arpae Emilia-Romagna - Direzione Tecnica", "2026 Miroslav Šotek, adaptation"]
+SPDX-License-Identifier = "CC-BY-4.0 AND CC0-1.0 AND LicenseRef-US-Public-Domain AND LicenseRef-opendata-swiss-terms-by"
+
+[[annotations]]
+path = ["05_global_reactor_map/imports/industrial_facilities/expansion_round7/selected_source_snapshot.tsv", "05_global_reactor_map/imports/industrial_facilities/expansion_round7/industrial_facilities_round7.tsv", "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_manifest.json", "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_registry.tsv", "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_snapshot_manifest.tsv", "05_global_reactor_map/imports/industrial_facilities/expansion_round7/bundle_manifest.json"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Swiss Federal Office of Energy, Biogasanlagen", "Arpae Emilia-Romagna - Direzione Tecnica, Impianti a bioenergia, aggiornamento 2025", "2026 Miroslav Šotek, adaptation"]
+SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by"
+
+# Field-minimised factual metadata for the owner's public repositories.
+# Observed SPDX cells do not relicense any referenced repository or hardware.
+
+[[annotations]]
+path = ["05_global_reactor_map/imports/fusion/ffdb/visible_data.frames", "tests/data/fusion_ffdb/visible_data.frames", "05_global_reactor_map/imports/fusion/ffdb/fusion_facilities.tsv", "05_global_reactor_map/imports/fusion/ffdb/field_provenance.json"]
+precedence = "override"
+SPDX-FileCopyrightText = ["International Atomic Energy Agency, Fusion Facility Database (2025)", "2026 Miroslav Šotek, data selection and adaptation"]
+SPDX-License-Identifier = "LicenseRef-IAEA-FFDB-Reuse"
+
+# Bounded historical publisher compilation selection; no original Wikidata cells.
+[[annotations]]
+path = "05_global_reactor_map/imports/fusion/fusion_facilities.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Hadamard LLC, FusionBenchmark historical compilation", "2026 Miroslav Šotek, normalisation and field selection"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Mixed data contributions retain their respective source terms.
+# The rights map distinguishes source cells from original editorial notes.
+
+[[annotations]]
+path = "05_global_reactor_map/imports/research_reactors/research_reactors.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC0-1.0 AND OGL-Canada-2.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/industrial_facilities.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0 AND LicenseRef-US-Public-Domain"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/expansion_round2/industrial_facilities_round2.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0 AND OGL-Canada-2.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/expansion_round3/industrial_facilities_round3.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND OGL-UK-3.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/expansion_round4/industrial_facilities_round4.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND LicenseRef-opendata-swiss-terms-by"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/expansion_round5/industrial_facilities_round5.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND OGL-UK-3.0 AND etalab-2.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/industrial_facilities/expansion_round6/industrial_facilities_round6.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0 AND CC0-1.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/research_reactors/enrichment/research_reactor_enrichment.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND LicenseRef-US-Public-Domain AND OGL-Canada-2.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/research_reactors/enrichment_round2/research_reactor_enrichment_round2.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND OGL-UK-3.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/research_reactors/enrichment_round3/research_reactor_enrichment_round3.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC0-1.0"
+
+[[annotations]]
+path = "05_global_reactor_map/imports/research_reactors/enrichment_round4/research_reactor_enrichment_round4.tsv"
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers identified in each record and source_registry.tsv", "2026 Miroslav Šotek, selection and adaptation"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0"
+
+[[annotations]]
+path = ["04_interactive_presentation/data/global_reactors.sample.json", "04_interactive_presentation/data/global_reactors.sample.js"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers and individual field origins in source_rights.json", "2026 Miroslav \u0160otek, normalization and editorial contributions"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC-BY-4.0 AND CC0-1.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND etalab-2.0 AND LicenseRef-US-Public-Domain AND LicenseRef-opendata-swiss-terms-by AND LicenseRef-IAEA-FFDB-Reuse"

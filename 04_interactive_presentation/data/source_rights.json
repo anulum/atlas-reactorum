@@ -1,0 +1,696 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "Rights and attribution for the exact distributed facility/company data, separate from the presentation software.",
+  "owner_contributions": {
+    "license_id": "AGPL-3.0-or-later",
+    "scope": "Atlas original editorial summaries, selection, normalization and software; no exclusive rights asserted over unprotected facts or foreign source expression."
+  },
+  "file_expression_semantics": "AND identifies the respective contributions present in a mixed file. Each source's terms apply to its source cells; no source is relicensed wholesale under another source's terms or under AGPL.",
+  "facility_products": {
+    "files": [
+      "04_interactive_presentation/data/global_reactors.sample.json",
+      "04_interactive_presentation/data/global_reactors.sample.js"
+    ],
+    "record_count": 13459,
+    "file_license_expression": "AGPL-3.0-or-later AND CC-BY-4.0 AND CC0-1.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND etalab-2.0 AND LicenseRef-US-Public-Domain AND LicenseRef-opendata-swiss-terms-by AND LicenseRef-IAEA-FFDB-Reuse",
+    "source_components": [
+      {
+        "source_file": "05_global_reactor_map/data/reactors.tsv",
+        "sha256": "696463c8cf1536fe5b9ad9d3db126ba943e334c0ee7789c97204e21f8ae920d1",
+        "source_rows": 195,
+        "default_output_records": 195,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC BY 4.0",
+            "rows": 195,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/data/source_registry.tsv"
+      },
+      {
+        "source_file": "04_interactive_presentation/data/facilities-supplemental.json",
+        "sha256": "b7a67c4b4ebe6aed26ee4f1756030c3d84cf81127c5f715abfdd48d3e10832eb",
+        "source_rows": 10,
+        "default_output_records": 9,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 10,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_contract": "04_interactive_presentation/data/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/fusion/ffdb/fusion_facilities.tsv",
+        "sha256": "e3acceca763ad78a9e97f432ed7504d83524be2289a322422cb4c8b5efa8845a",
+        "source_rows": 174,
+        "default_output_records": 174,
+        "source_field_terms": [
+          {
+            "source_declaration": "IAEA FFDB source-specific reuse permission",
+            "rows": 174,
+            "license_id": "LicenseRef-IAEA-FFDB-Reuse",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_contract": "05_global_reactor_map/imports/fusion/ffdb/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/research_reactors.tsv",
+        "sha256": "808d2e4a6e060a8fad855632fdcd9049f1d2aecba42039890a4bce148bea63a1",
+        "source_rows": 172,
+        "default_output_records": 172,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC0 1.0",
+            "rows": 161,
+            "license_id": "CC0-1.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Open Government Licence - Canada 2.0",
+            "rows": 11,
+            "license_id": "OGL-Canada-2.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/research_reactors/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/power_units/power_reactor_units.tsv",
+        "sha256": "42d46f0426f47886aba872a3711c242dc2c32b3b0f4b535d727d151ed1b77f3b",
+        "source_rows": 1823,
+        "default_output_records": 1823,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC BY 4.0 (Global Energy Monitor GNPT)",
+            "rows": 1823,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/power_units/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/power_units/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/industrial_facilities.tsv",
+        "sha256": "68b24b408a799bd731c90579387c188cf3cd2ef41838bfe4e9d086390c6a5512",
+        "source_rows": 6550,
+        "default_output_records": 6550,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC BY 4.0 (EEA, unless item-specific terms state otherwise)",
+            "rows": 6150,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "U.S. Public Domain (EPA-produced data; 17 U.S.C. 105)",
+            "rows": 400,
+            "license_id": "LicenseRef-US-Public-Domain",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round2/industrial_facilities_round2.tsv",
+        "sha256": "85c2802ba3739b7cceca5998bb6a2961a7aaca664913ae95753288d98117e892",
+        "source_rows": 1776,
+        "default_output_records": 1776,
+        "source_field_terms": [
+          {
+            "source_declaration": "Creative Commons Attribution 4.0 International",
+            "rows": 868,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Open Government Licence — Canada",
+            "rows": 908,
+            "license_id": "OGL-Canada-2.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round2/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round2/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round3/industrial_facilities_round3.tsv",
+        "sha256": "fdc53c72b00d28cc6b3b11134045a9c39d82c550680425349a32a954d6377bd7",
+        "source_rows": 722,
+        "default_output_records": 722,
+        "source_field_terms": [
+          {
+            "source_declaration": "Open Government Licence v3.0",
+            "rows": 722,
+            "license_id": "OGL-UK-3.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round3/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round3/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round4/industrial_facilities_round4.tsv",
+        "sha256": "5898dd6714ece3794e8f24cbaa7553cbff0d166035eb1f067706991e901dcf27",
+        "source_rows": 93,
+        "default_output_records": 93,
+        "source_field_terms": [
+          {
+            "source_declaration": "Open use; source attribution required (opendata.swiss terms_by)",
+            "rows": 93,
+            "license_id": "LicenseRef-opendata-swiss-terms-by",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round4/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round4/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round5/industrial_facilities_round5.tsv",
+        "sha256": "4baa015e69de21434475a8d2d6c16189c649ac5159aa4ebafa73d7ff654780f5",
+        "source_rows": 393,
+        "default_output_records": 393,
+        "source_field_terms": [
+          {
+            "source_declaration": "Licence Ouverte / Open Licence 2.0",
+            "rows": 31,
+            "license_id": "etalab-2.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Open Government Licence v3.0",
+            "rows": 362,
+            "license_id": "OGL-UK-3.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round5/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round5/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round6/industrial_facilities_round6.tsv",
+        "sha256": "7fc19ce251a78bbb592e425aca096d23e4a8ae266a8c2840ddf70edda9cf6e48",
+        "source_rows": 1131,
+        "default_output_records": 1131,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC0 1.0 / U.S. EPA public-use data",
+            "rows": 542,
+            "license_id": "CC0-1.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Creative Commons Attribution 4.0 International",
+            "rows": 589,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round6/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round6/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/industrial_facilities/expansion_round7/industrial_facilities_round7.tsv",
+        "sha256": "cfaba7a97ccfc4e0235ee04a404296d7bc19f13d95d3ad12af9f959cb38ab80f",
+        "source_rows": 421,
+        "default_output_records": 421,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC-BY-4.0",
+            "rows": 268,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "LicenseRef-opendata-swiss-terms-by",
+            "rows": 153,
+            "license_id": "LicenseRef-opendata-swiss-terms-by",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/industrial_facilities/expansion_round7/README.md"
+      }
+    ],
+    "ordered_overlay_inputs": [
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/enrichment/research_reactor_enrichment.tsv",
+        "sha256": "44c311fb69b785dfbcafc3bd06aac1e7dc24ac3ee37798c5fe2d43415816b4c7",
+        "rows": 10,
+        "source_field_terms": [
+          {
+            "source_declaration": "Open Government Licence - Canada 2.0",
+            "rows": 4,
+            "license_id": "OGL-Canada-2.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "U.S. Government work; public domain",
+            "rows": 6,
+            "license_id": "LicenseRef-US-Public-Domain",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/enrichment_round2/research_reactor_enrichment_round2.tsv",
+        "sha256": "db7b8857dd31ed46f9ae99771efdba48e084bec6215ab2c53a39baf31c8f3f29",
+        "rows": 12,
+        "source_field_terms": [
+          {
+            "source_declaration": "Individual factual assertions; ANSTO source copyright retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; ARPANSA source copyright retained",
+            "rows": 2,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; JAEA source copyright retained",
+            "rows": 2,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; KAERI source copyright retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; Kyoto University source copyright retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; NCBJ source copyright retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; Research Centre Rez source copyright retained",
+            "rows": 2,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Individual factual assertions; TU Wien source copyright retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "Open Government Licence v3.0",
+            "rows": 1,
+            "license_id": "OGL-UK-3.0",
+            "basis": "source-specific data terms"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment_round2/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/enrichment_round3/research_reactor_enrichment_round3.tsv",
+        "sha256": "cb81dd6b0b1d149ad679593aa6d24991f14048924b2430df8460a96fbb14d715",
+        "rows": 10,
+        "source_field_terms": [
+          {
+            "source_declaration": "CC0 1.0",
+            "rows": 1,
+            "license_id": "CC0-1.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Individual factual assertions; source copyright retained",
+            "rows": 9,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment_round3/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/enrichment_round4/research_reactor_enrichment_round4.tsv",
+        "sha256": "6e42fcb82792de59b42f23cc10ff1560b2d387691b6a4616c7f9a0dc8ce24263",
+        "rows": 14,
+        "source_field_terms": [
+          {
+            "source_declaration": "Creative Commons Attribution 4.0 International",
+            "rows": 1,
+            "license_id": "CC-BY-4.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Individual factual assertions; source copyright retained",
+            "rows": 13,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment_round4/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv",
+        "sha256": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919",
+        "rows": 8,
+        "source_field_terms": [
+          {
+            "source_declaration": "Individual factual assertions; source copyright retained",
+            "rows": 8,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment_round5/README.md"
+      }
+    ]
+  },
+  "company_products": {
+    "files": [
+      "04_interactive_presentation/data/fusion_companies.sample.json",
+      "04_interactive_presentation/data/fusion_companies.sample.js"
+    ],
+    "record_count": 98,
+    "license_id": "AGPL-3.0-or-later",
+    "scope": "Atlas-authored factual selections, analysis and claims/evidence distinctions. Linked publisher works, logos, photos, papers, survey tables and code are not embedded or licensed by these records.",
+    "source_components": [
+      {
+        "source_file": "metadata/company_audit/audited_companies.tsv",
+        "sha256": "8ca607de6d3ee1c8751c9a8149cdbdecbbd6b6cc92882e5005f729ac1960a3ff",
+        "source_rows": 51,
+        "default_output_records": 51,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 51,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "metadata/company_audit/source_registry.tsv",
+        "source_contract": "metadata/company_audit/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/expansion_candidates.tsv",
+        "sha256": "be35e7580c42472f55412304c40dde7d616f5311cdf1824db8e713d9677d8da3",
+        "source_rows": 18,
+        "default_output_records": 18,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 18,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "metadata/company_audit/source_registry.tsv",
+        "source_contract": "metadata/company_audit/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/expansion_round2/candidates.tsv",
+        "sha256": "3737618d47f79985078c5fe3f03c8fc9d1f19f8b44273bcbb57f3b11d457459a",
+        "source_rows": 15,
+        "default_output_records": 15,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 15,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "metadata/company_audit/expansion_round2/source_registry.tsv",
+        "source_contract": "metadata/company_audit/expansion_round2/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/expansion_round3/candidates.tsv",
+        "sha256": "699ce014ea699a97dd2180bdfc85d5b3562e84cc812b792676424240995a591a",
+        "source_rows": 14,
+        "default_output_records": 14,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 14,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "provenance": "Retain source URLs, publisher, capture dates, original declarations and per-field overlay origins; a citation URL does not license the linked work.",
+        "source_registry": "metadata/company_audit/expansion_round3/source_registry.tsv",
+        "source_contract": "metadata/company_audit/expansion_round3/README.md"
+      }
+    ],
+    "ordered_overlay_inputs": [
+      {
+        "source_file": "metadata/company_audit/depth_round4/enrichment_overlays.tsv",
+        "sha256": "72bb12bc80e4c6af05d5bf602625ac4191777dd8b5e28f03e70a6e035743b5b6",
+        "rows": 3,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 3,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "metadata/company_audit/depth_round4/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/depth_round5/enrichment_overlays.tsv",
+        "sha256": "51c664263ab9f077cf152e58df5a3cc4ec00629a069573bbc95a9b543eeb5f0f",
+        "rows": 6,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 6,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "metadata/company_audit/depth_round5/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/depth_round6/enrichment_overlays.tsv",
+        "sha256": "a14a8a67f4aab60418a531ee99b93c58c6502405473c07094cad5f8f698183f6",
+        "rows": 10,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 10,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "metadata/company_audit/depth_round6/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/depth_round7/enrichment_overlays.tsv",
+        "sha256": "eeaedc8dfd358c9959d8853962e3b70d7adc5376a99252937ae001fe8c663efd",
+        "rows": 10,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 10,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "metadata/company_audit/depth_round7/README.md"
+      },
+      {
+        "source_file": "metadata/company_audit/depth_round8/enrichment_overlays.tsv",
+        "sha256": "4021a756be90b54bd3f3e1dac32525430bfcce93fb49a99bb21dbee9a24df53d",
+        "rows": 10,
+        "source_field_terms": [
+          {
+            "source_declaration": "",
+            "rows": 10,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
+        "source_contract": "metadata/company_audit/depth_round8/README.md"
+      }
+    ]
+  },
+  "default_input_sha256": {
+    "05_global_reactor_map/data/reactors.tsv": "696463c8cf1536fe5b9ad9d3db126ba943e334c0ee7789c97204e21f8ae920d1",
+    "metadata/discovery_audit/fusion_companies_candidates.tsv": "54816c334650055110e10e40f8a7c86ef7e1dd3543565c860d63de691a807c1d",
+    "04_interactive_presentation/data/facilities-supplemental.json": "b7a67c4b4ebe6aed26ee4f1756030c3d84cf81127c5f715abfdd48d3e10832eb",
+    "metadata/facility_fields/observations.json": "fd31dee17ceea086454c50450b5036df4eac185b705e4c59b8f6519d2f66051d",
+    "metadata/facility_fields/observations.sha256": "1ac8c2109c86752da67f0d6196c0b002bd6bc466a0abfaed12f7a2349bd34585",
+    "metadata/facility_fields/source_pins.json": "6dff144b35c49726c9833b43870961ffbab1e46db97eb9ce3000d46cd134d9ee",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/selected_source_snapshot.tsv": "6c7084071a309e204b714091894d2744acb0ff7c2ff046a69f41fd4800da0d54",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_manifest.json": "8b122fdfa6bfc809ccbfd0b08047624ed43d5fa8ea91ee37f6b9fd502883922a",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_registry.tsv": "071ce508f511fc9a3ea81998844ead0b3c09d4f6b9dd8cf15bbb0f8df82ff490",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/source_snapshot_manifest.tsv": "20caabeb61a106cfa70c39c0528e8c5b48aaac3c9f84fcc457e8bc6391195801",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/RIGHTS.md": "d7fcbc6e2a3bbdc6d44dfffa71a72ee0775d02586f1918425041a8aedb834d6d",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/bundle_manifest.json": "2f0cef79914c7ed13d805a8f485ae3583dc9db86b69986a5e9dcddb508c4d1a2",
+    "metadata/company_audit/audited_companies.tsv": "8ca607de6d3ee1c8751c9a8149cdbdecbbd6b6cc92882e5005f729ac1960a3ff",
+    "metadata/company_audit/expansion_candidates.tsv": "be35e7580c42472f55412304c40dde7d616f5311cdf1824db8e713d9677d8da3",
+    "metadata/company_audit/expansion_round2/candidates.tsv": "3737618d47f79985078c5fe3f03c8fc9d1f19f8b44273bcbb57f3b11d457459a",
+    "metadata/company_audit/expansion_round3/candidates.tsv": "699ce014ea699a97dd2180bdfc85d5b3562e84cc812b792676424240995a591a",
+    "metadata/company_audit/depth_round4/enrichment_overlays.tsv": "72bb12bc80e4c6af05d5bf602625ac4191777dd8b5e28f03e70a6e035743b5b6",
+    "metadata/company_audit/depth_round4/gap_matrix.tsv": "4a81b299499dedccaf078c1ec72f0fb7a33ea8a356a908b48ad278f7ead51cc5",
+    "metadata/company_audit/depth_round5/enrichment_overlays.tsv": "51c664263ab9f077cf152e58df5a3cc4ec00629a069573bbc95a9b543eeb5f0f",
+    "metadata/company_audit/depth_round6/enrichment_overlays.tsv": "a14a8a67f4aab60418a531ee99b93c58c6502405473c07094cad5f8f698183f6",
+    "metadata/company_audit/depth_round7/enrichment_overlays.tsv": "eeaedc8dfd358c9959d8853962e3b70d7adc5376a99252937ae001fe8c663efd",
+    "metadata/company_audit/depth_round8/enrichment_overlays.tsv": "4021a756be90b54bd3f3e1dac32525430bfcce93fb49a99bb21dbee9a24df53d",
+    "05_global_reactor_map/imports/research_reactors/research_reactors.tsv": "808d2e4a6e060a8fad855632fdcd9049f1d2aecba42039890a4bce148bea63a1",
+    "05_global_reactor_map/imports/power_units/power_reactor_units.tsv": "42d46f0426f47886aba872a3711c242dc2c32b3b0f4b535d727d151ed1b77f3b",
+    "05_global_reactor_map/imports/industrial_facilities/industrial_facilities.tsv": "68b24b408a799bd731c90579387c188cf3cd2ef41838bfe4e9d086390c6a5512",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round2/industrial_facilities_round2.tsv": "85c2802ba3739b7cceca5998bb6a2961a7aaca664913ae95753288d98117e892",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round3/industrial_facilities_round3.tsv": "fdc53c72b00d28cc6b3b11134045a9c39d82c550680425349a32a954d6377bd7",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round4/industrial_facilities_round4.tsv": "5898dd6714ece3794e8f24cbaa7553cbff0d166035eb1f067706991e901dcf27",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round5/industrial_facilities_round5.tsv": "4baa015e69de21434475a8d2d6c16189c649ac5159aa4ebafa73d7ff654780f5",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round6/industrial_facilities_round6.tsv": "7fc19ce251a78bbb592e425aca096d23e4a8ae266a8c2840ddf70edda9cf6e48",
+    "05_global_reactor_map/imports/industrial_facilities/expansion_round7/industrial_facilities_round7.tsv": "cfaba7a97ccfc4e0235ee04a404296d7bc19f13d95d3ad12af9f959cb38ab80f",
+    "05_global_reactor_map/imports/fusion/ffdb/source_manifest.json": "f2f577fe4a75b1d7655964618a3062375331dee1877367120c0cb207bfd6ee81",
+    "05_global_reactor_map/imports/fusion/ffdb/fusion_facilities.tsv": "e3acceca763ad78a9e97f432ed7504d83524be2289a322422cb4c8b5efa8845a",
+    "05_global_reactor_map/imports/fusion/ffdb/field_provenance.json": "8e2c2041b4b2448028e1e88704496831b659fcc821b32f7d83294c1c14f32517",
+    "05_global_reactor_map/imports/fusion/ffdb/visible_data.frames": "640bae831a78d72503f6de9c7107c7c3b511cf117f83d2fe39a778d6cf045d06",
+    "05_global_reactor_map/imports/research_reactors/enrichment/research_reactor_enrichment.tsv": "44c311fb69b785dfbcafc3bd06aac1e7dc24ac3ee37798c5fe2d43415816b4c7",
+    "05_global_reactor_map/imports/research_reactors/enrichment_round2/research_reactor_enrichment_round2.tsv": "db7b8857dd31ed46f9ae99771efdba48e084bec6215ab2c53a39baf31c8f3f29",
+    "05_global_reactor_map/imports/research_reactors/enrichment_round3/research_reactor_enrichment_round3.tsv": "cb81dd6b0b1d149ad679593aa6d24991f14048924b2430df8460a96fbb14d715",
+    "05_global_reactor_map/imports/research_reactors/enrichment_round4/research_reactor_enrichment_round4.tsv": "6e42fcb82792de59b42f23cc10ff1560b2d387691b6a4616c7f9a0dc8ce24263",
+    "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919"
+  },
+  "historical_option": {
+    "public_base": "05_global_reactor_map/imports/fusion/fusion_facilities.tsv",
+    "base_scope": "Only six compilation/classification fields under CC BY4.0 with Hadamard LLC attribution. Separate original Wikidata cells are not in this table.",
+    "field_contract": "05_global_reactor_map/imports/fusion/source_rights.json",
+    "additional_layers": [
+      {
+        "source_file": "05_global_reactor_map/imports/fusion/enrichment/new_facilities.tsv",
+        "sha256": "49738d60e14b11b8aa2afa055986fb36a5361e2ab623eeffe3c8cb31f40a6d7c",
+        "rows": 11,
+        "source_field_terms": [
+          {
+            "source_declaration": "Source copyright retained; factual metadata only",
+            "rows": 11,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "source_registry": "05_global_reactor_map/imports/fusion/enrichment/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/fusion/enrichment/README.md",
+        "included_in_default_ffdb_output": false
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/fusion/enrichment/enrichment.tsv",
+        "sha256": "d9d9e9a2a9f62f28902895f8bf04bbf218fa1b7717b4b5279d27f35894237857",
+        "rows": 11,
+        "source_field_terms": [
+          {
+            "source_declaration": "Source copyright retained; factual metadata only",
+            "rows": 11,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "source_registry": "05_global_reactor_map/imports/fusion/enrichment/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/fusion/enrichment/README.md",
+        "included_in_default_ffdb_output": false
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/fusion/enrichment_round2/enrichment_round2.tsv",
+        "sha256": "7a466dfae388bb1effa0720fb279ebf91433fcb3d342bf15f96ff44d5827b19f",
+        "rows": 15,
+        "source_field_terms": [
+          {
+            "source_declaration": "Open Government Licence v3.0",
+            "rows": 4,
+            "license_id": "OGL-UK-3.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Source copyright retained; factual metadata only",
+            "rows": 11,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "source_registry": "05_global_reactor_map/imports/fusion/enrichment_round2/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/fusion/enrichment_round2/README.md",
+        "included_in_default_ffdb_output": false
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/fusion/enrichment_round3/enrichment_round3.tsv",
+        "sha256": "12f9daded3b2d6f9b2515b283f2f8a967bdb60912a4fb8c8e3d76e64b3d66193",
+        "rows": 14,
+        "source_field_terms": [
+          {
+            "source_declaration": "Open Government Licence v3.0",
+            "rows": 1,
+            "license_id": "OGL-UK-3.0",
+            "basis": "source-specific data terms"
+          },
+          {
+            "source_declaration": "Source copyright retained; factual metadata only",
+            "rows": 12,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          },
+          {
+            "source_declaration": "U.S. federal laboratory factual metadata; page terms retained",
+            "rows": 1,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; source expression remains reserved"
+          }
+        ],
+        "source_registry": "05_global_reactor_map/imports/fusion/enrichment_round3/source_registry.tsv",
+        "source_contract": "05_global_reactor_map/imports/fusion/enrichment_round3/README.md",
+        "included_in_default_ffdb_output": false
+      }
+    ],
+    "frozen_contract": "05_global_reactor_map/imports/fusion/frozen_input_manifest.json",
+    "frozen_scope": "Explicit caller-supplied original9 bundle; custody hashes do not grant redistribution of external inputs."
+  },
+  "reuse_instructions": [
+    "Retain the source author/publisher, source URL, original terms, source date and indications of Atlas modifications for each reused layer.",
+    "For Canadian information retain: Contains information licensed under the Open Government Licence – Canada.",
+    "For UK information retain attribution to the supplying authority and the Open Government Licence v3.0.",
+    "Acknowledge IAEA for the FFDB subset; no endorsement by IAEA is implied.",
+    "Preserve source and attribution notices for Swiss terms_by data and the source/update date for Etalab data.",
+    "Follow the row's source contract and all earlier field origins when overlays retain earlier cells; a final record label alone cannot supersede these origins."
+  ]
+}

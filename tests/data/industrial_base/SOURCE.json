@@ -1,0 +1,422 @@
+{
+  "captured_at": "2026-09-30",
+  "historical_output_date": "2026-09-27",
+  "exact_historical_output_reproduction": true,
+  "source_rows": 6550,
+  "sources": [
+    {
+      "source": "EEA",
+      "fixture": "EEA.json",
+      "fixture_sha256": "0f41e1a01350bc0094c8181adffa87619a5f3cee0e6afb33cabda8a845b7db9f",
+      "record_count": 6150,
+      "original_responses": [
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0?f=pjson",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:46.850932+00:00",
+          "sha256": "f943ab5bde4fa0d9dd3f7b4e34cab5d3637523818dc4207cffc6b7ae4f997304",
+          "bytes": 10535
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&returnCountOnly=true",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.987692+00:00",
+          "sha256": "4b57c6826648ec5298eef9fb807d761b06714cb8b27446c2754f5d2d732737aa",
+          "bytes": 14
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:49.540504+00:00",
+          "sha256": "3babd97fe4e1732af071ff24dd2652f6ac6bd0e8881e5a9fb3d66de8ab8eeeab",
+          "bytes": 542905
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=1000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=1000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:51.159760+00:00",
+          "sha256": "a4321cf16be5fa25d8ec5f366ab96c5ab37fcaab4ae7a0fc0917a43693f0335c",
+          "bytes": 558767
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=2000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=2000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:54.109976+00:00",
+          "sha256": "a193a838e81f9687c2dc24bb5e05e381e6b3fee9fc099d06e9c1932b399f9425",
+          "bytes": 521358
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=3000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=3000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:55.936380+00:00",
+          "sha256": "385afb4f313b4326609ace2a45e6f42aa53bb1fcfef995dba7ce5a164b1b557a",
+          "bytes": 467236
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=4000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=4000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:58.013026+00:00",
+          "sha256": "1700e4c213951c6a78d5548e351c6842b1bd7c70155c520a5eaf2d05f90424ae",
+          "bytes": 501664
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=5000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=5000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:01:01.619859+00:00",
+          "sha256": "2325fe51200d21765c35947da1062f518f67a6f6ca1ea2dc3353d941e2edf3eb",
+          "bytes": 512070
+        },
+        {
+          "url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=6000&resultRecordCount=1000",
+          "final_url": "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/IED_SiteMap/MapServer/0/query?f=json&where=Site_reporting_year%3D2024+AND+eprtr_sectors+IN+%28%27CHEMICALS%27%2C%27FOOD+AND+BEVERAGE%27%29&outFields=OBJECTID%2Cx_4258%2Cy_4258%2Cpollutants%2Ceprtr_sectors%2Ceea_activities%2Cactivity_details%2CSite_reporting_year%2CsiteName%2CInspireSiteId%2CcountryCode%2CfacilityNames&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=6000&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:01:03.273202+00:00",
+          "sha256": "278c379b8a2cfe1a5332e22e6467517385f130d568b9d8f63f11e5a582772280",
+          "bytes": 87738
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "x_4258",
+        "y_4258",
+        "pollutants",
+        "eprtr_sectors",
+        "eea_activities",
+        "activity_details",
+        "Site_reporting_year",
+        "siteName",
+        "InspireSiteId",
+        "countryCode",
+        "facilityNames"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "displayFieldName",
+        "exceededTransferLimit",
+        "fieldAliases",
+        "fields"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    },
+    {
+      "source": "Mixed",
+      "fixture": "Mixed.json",
+      "fixture_sha256": "b25b8c57feb69a22179a7403adf80a88190d1fff7c5d125b7500558a3f1f302a",
+      "record_count": 9,
+      "original_responses": [
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0?f=pjson",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.087194+00:00",
+          "sha256": "1e1c4e7b001cfb9c91e90e009182e9fe84634add572b65f5d8fa8f510eb9f5ee",
+          "bytes": 15860
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.113371+00:00",
+          "sha256": "77225c1b889e1a23d33f5e7724a89deba869a0b481aff9fe90736b56532d0542",
+          "bytes": 11
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Mixed/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.539583+00:00",
+          "sha256": "93c251f96aff8fda4cb8f8029bf3ae7bbe292f1bacbc261452de2d2c9d88eed8",
+          "bytes": 6181
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "Project_Na",
+        "Project_Ty",
+        "City",
+        "State",
+        "Digester_T",
+        "Year_Opera",
+        "Animal_T_1",
+        "Population",
+        "Co_Digesti",
+        "Biogas_Gen",
+        "Electricit",
+        "Biogas_End",
+        "Total_Emis",
+        "LATITUDE__",
+        "LONGITUDE_"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "fields",
+        "geometryType",
+        "globalIdFieldName",
+        "objectIdFieldName",
+        "spatialReference",
+        "uniqueIdField"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    },
+    {
+      "source": "Cattle",
+      "fixture": "Cattle.json",
+      "fixture_sha256": "d5f47a00077e73ec1bc2dbd08666ce63352939d4bca1d209221b4d561cd6ea1c",
+      "record_count": 4,
+      "original_responses": [
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0?f=pjson",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.133743+00:00",
+          "sha256": "796cc341fa8f9445cdd68c17a4e6f06fff8f9c820930973b5c78de534a16f13d",
+          "bytes": 15864
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.210869+00:00",
+          "sha256": "a5fb8eb97856970b61d9f466deb64f7659e835ee8ec5497003b78438fe888cad",
+          "bytes": 11
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Cattle/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.610496+00:00",
+          "sha256": "ce3e320d4aa575513d469be1337203c9e8bf163e1c74c14f08fd42bfb6d69c68",
+          "bytes": 4032
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "Project_Na",
+        "Project_Ty",
+        "City",
+        "State",
+        "Digester_T",
+        "Year_Opera",
+        "Animal_T_1",
+        "Population",
+        "Co_Digesti",
+        "Biogas_Gen",
+        "Electricit",
+        "Biogas_End",
+        "Total_Emis",
+        "LATITUDE__",
+        "LONGITUDE_"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "fields",
+        "geometryType",
+        "globalIdFieldName",
+        "objectIdFieldName",
+        "spatialReference",
+        "uniqueIdField"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    },
+    {
+      "source": "Poultry",
+      "fixture": "Poultry.json",
+      "fixture_sha256": "654d0d3ecf3759bcfff967873ddbaed4d77dce3b224a2358a8558f6769d9f38f",
+      "record_count": 7,
+      "original_responses": [
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0?f=pjson",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.025633+00:00",
+          "sha256": "849b0aec2e356c4b8210df7e65a44d15ca2f220fd2b402aca7b2fa7d315ec743",
+          "bytes": 15866
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.218194+00:00",
+          "sha256": "b0beaf5a3dbe82ae841ac88bdc3b1174d7e4dec57454b6539e556e58eaadc600",
+          "bytes": 11
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Poultry/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.550196+00:00",
+          "sha256": "ce2393bd93e3d6eb15352c844bda4b555fb430a6283391c1c182988bf4c64344",
+          "bytes": 5323
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "Project_Na",
+        "Project_Ty",
+        "City",
+        "State",
+        "Digester_T",
+        "Year_Opera",
+        "Animal_T_1",
+        "Population",
+        "Co_Digesti",
+        "Biogas_Gen",
+        "Electricit",
+        "Biogas_End",
+        "Total_Emis",
+        "LATITUDE__",
+        "LONGITUDE_"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "fields",
+        "geometryType",
+        "globalIdFieldName",
+        "objectIdFieldName",
+        "spatialReference",
+        "uniqueIdField"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    },
+    {
+      "source": "Swine",
+      "fixture": "Swine.json",
+      "fixture_sha256": "10be065582d42a3e6309e1207756be27fb57aad33585b559c6b00e90b2acc35a",
+      "record_count": 43,
+      "original_responses": [
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0?f=pjson",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.049945+00:00",
+          "sha256": "9d5c8695b520b653e1c16bb552abfcd97d8342f5187db736ead5917f89e6a76f",
+          "bytes": 15856
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.293710+00:00",
+          "sha256": "f72ead787aa237120c8b5149fa33647c46d3297f90daab36bcce8e91bc796571",
+          "bytes": 12
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Swine/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.963097+00:00",
+          "sha256": "bef08b1396dbd0fbb1b880bfd782dca11186e3b4fa0d854f00cc28eda4a31bcb",
+          "bytes": 18939
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "Project_Na",
+        "Project_Ty",
+        "City",
+        "State",
+        "Digester_T",
+        "Year_Opera",
+        "Animal_T_1",
+        "Population",
+        "Co_Digesti",
+        "Biogas_Gen",
+        "Electricit",
+        "Biogas_End",
+        "Total_Emis",
+        "LATITUDE__",
+        "LONGITUDE_"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "fields",
+        "geometryType",
+        "globalIdFieldName",
+        "objectIdFieldName",
+        "spatialReference",
+        "uniqueIdField"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    },
+    {
+      "source": "Dairy",
+      "fixture": "Dairy.json",
+      "fixture_sha256": "38350fa3b46d01525c9374acd92a37cbece675baf4cb7bde45a63192bb814113",
+      "record_count": 337,
+      "original_responses": [
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0?f=pjson",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0?f=pjson",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.007590+00:00",
+          "sha256": "06f523e33e9ef73a21a08dbebc3f9a64897ccd60493f150c57ace85cbceb55ca",
+          "bytes": 15860
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0/query?f=json&where=1%3D1&returnCountOnly=true",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:47.758504+00:00",
+          "sha256": "65f9014be0d48c1aff276ba26b7a2a3fa21066ef5f27b7f87965a65df090e230",
+          "bytes": 13
+        },
+        {
+          "url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "final_url": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Dairy/FeatureServer/0/query?f=json&where=1%3D1&outFields=OBJECTID%2CProject_Na%2CProject_Ty%2CCity%2CState%2CDigester_T%2CYear_Opera%2CAnimal_T_1%2CPopulation%2CCo_Digesti%2CBiogas_Gen%2CElectricit%2CBiogas_End%2CTotal_Emis%2CLATITUDE__%2CLONGITUDE_&returnGeometry=false&orderByFields=OBJECTID+ASC&resultOffset=0&resultRecordCount=1000",
+          "status": 200,
+          "captured_at": "2026-09-30T14:00:48.557537+00:00",
+          "sha256": "33364a9f0f5a2bb17a6896c6a46a148ea0426ac8548e4da4ddbd2d07bacb46ad",
+          "bytes": 129602
+        }
+      ],
+      "retained_attribute_fields": [
+        "OBJECTID",
+        "Project_Na",
+        "Project_Ty",
+        "City",
+        "State",
+        "Digester_T",
+        "Year_Opera",
+        "Animal_T_1",
+        "Population",
+        "Co_Digesti",
+        "Biogas_Gen",
+        "Electricit",
+        "Biogas_End",
+        "Total_Emis",
+        "LATITUDE__",
+        "LONGITUDE_"
+      ],
+      "omitted_attributes": [],
+      "omitted_envelope_fields": [
+        "fields",
+        "geometryType",
+        "globalIdFieldName",
+        "objectIdFieldName",
+        "spatialReference",
+        "uniqueIdField"
+      ],
+      "preservation": "Original source attribute values, order and independent source count retained; response JSON reserialized. No geometry was requested; coordinates remain source-published fields."
+    }
+  ],
+  "rights_sources": {
+    "EEA": [
+      "https://www.eea.europa.eu/en/legal-notice",
+      "https://www.eea.europa.eu/en/datahub/datahubitem-view/9405f714-8015-4b5b-a63c-280b82861b3d"
+    ],
+    "EPA": [
+      "https://www.epa.gov/agstar/livestock-anaerobic-digester-database",
+      "https://edg.epa.gov/EPA_Data_License.html",
+      "https://www.epa.gov/web-policies-and-procedures/epa-disclaimers"
+    ]
+  },
+  "rights_scope": "EEA source compilation uses the EEA CC-BY4 reuse policy with its third-party exception retained. EPA-produced map data follows its public-domain default; no CC0 dedication is claimed. Layer-specific metadata requires checking source dates and acknowledges voluntary sources and approximate coordinates. No grant for unrelated publications, operator material or branding."
+}

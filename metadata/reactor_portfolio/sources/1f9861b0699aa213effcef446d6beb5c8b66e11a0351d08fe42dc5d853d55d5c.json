@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Fast-spectrum lead or lead-bismuth cooled system design and corrosion boundary.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F6",
+  "project_id": "SCPN-LFR-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:lead_cooled_fast_reactor",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}

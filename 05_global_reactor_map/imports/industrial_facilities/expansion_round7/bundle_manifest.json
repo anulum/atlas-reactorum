@@ -1,0 +1,39 @@
+{
+  "files": {
+    "RIGHTS.md": {
+      "bytes": 2119,
+      "license": "AGPL-3.0-or-later",
+      "sha256": "d7fcbc6e2a3bbdc6d44dfffa71a72ee0775d02586f1918425041a8aedb834d6d"
+    },
+    "industrial_facilities_round7.tsv": {
+      "bytes": 430947,
+      "license": "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by",
+      "sha256": "cfaba7a97ccfc4e0235ee04a404296d7bc19f13d95d3ad12af9f959cb38ab80f"
+    },
+    "selected_source_snapshot.tsv": {
+      "bytes": 204263,
+      "license": "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by",
+      "sha256": "6c7084071a309e204b714091894d2744acb0ff7c2ff046a69f41fd4800da0d54"
+    },
+    "source_manifest.json": {
+      "bytes": 4200,
+      "license": "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by",
+      "sha256": "8b122fdfa6bfc809ccbfd0b08047624ed43d5fa8ea91ee37f6b9fd502883922a"
+    },
+    "source_registry.tsv": {
+      "bytes": 1589,
+      "license": "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by",
+      "sha256": "071ce508f511fc9a3ea81998844ead0b3c09d4f6b9dd8cf15bbb0f8df82ff490"
+    },
+    "source_snapshot_manifest.tsv": {
+      "bytes": 2019,
+      "license": "CC-BY-4.0 AND LicenseRef-opendata-swiss-terms-by",
+      "sha256": "20caabeb61a106cfa70c39c0528e8c5b48aaac3c9f84fcc457e8bc6391195801"
+    }
+  },
+  "schema_version": 2,
+  "selected_counts": {
+    "ch-sfoe-biogas": 153,
+    "it-arpae-biogas": 268
+  }
+}

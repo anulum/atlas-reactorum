@@ -1,0 +1,50 @@
+{
+  "entries": 123,
+  "domains": {
+    "fission": 22,
+    "fusion": 31,
+    "chemical": 48,
+    "hybrid": 22
+  },
+  "kinds": {
+    "architecture": 90,
+    "subtype": 12,
+    "development class": 1,
+    "ignition scheme": 2,
+    "operating mode": 5,
+    "configuration": 1,
+    "process class": 5,
+    "application architecture": 4,
+    "system integration": 3
+  },
+  "original_unique_sources": 56,
+  "checked_sources_including_replacements": 68,
+  "source_access": {
+    "html-response-not-fulltext-verified": 36,
+    "http-error-or-access-barrier": 9,
+    "request-failed": 4,
+    "pdf-extracted": 14,
+    "pdf-response-text-unavailable": 5
+  },
+  "misassigned_source_entries": 24,
+  "classification_flags": {
+    "plausible-provisional": 76,
+    "source-scope-review": 5,
+    "historical-maturity-facet": 3,
+    "maturity-correction": 2,
+    "overlap-facet": 2,
+    "subtype-source-review": 1,
+    "source-bias-review": 1,
+    "evidence-scope-review": 2,
+    "cross-cutting-facet": 17,
+    "source-directness-review": 1,
+    "model-geometry-conflation": 1,
+    "parent-correction": 1,
+    "maturity-review": 2,
+    "domain-facet": 2,
+    "claim-class-not-established-reactor": 2,
+    "classification-supported-claim-contested": 1,
+    "domain-correction": 3,
+    "single-study-system": 1
+  }
+}

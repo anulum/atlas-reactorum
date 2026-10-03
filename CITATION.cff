@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — CITATION.cff
+
+cff-version: 1.2.0
+title: "Atlas Reactorum"
+message: "If you use this atlas, please cite it, and cite the underlying sources it catalogues."
+type: dataset
+authors:
+  - family-names: "Šotek"
+    given-names: "Miroslav"
+    orcid: "https://orcid.org/0009-0009-3560-0851"
+    email: "protoscience@anulum.li"
+    affiliation: "ANULUM / Fortis Studio"
+abstract: >-
+  An English-first, source-aware atlas and research library of reactor
+  technology, covering nuclear fission, plasma and alternative fusion,
+  chemical and biochemical reactors, hybrid systems and explicitly labelled
+  speculative technologies. Physical principle, technology maturity and
+  strength of evidence are recorded as separate fields. Records are publisher
+  rows, not verified reactor vessels.
+keywords:
+  - reactors
+  - nuclear fission
+  - nuclear fusion
+  - chemical engineering
+  - research data
+license: AGPL-3.0-or-later
+repository-code: "https://www.anulum.li"

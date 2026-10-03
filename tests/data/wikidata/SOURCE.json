@@ -1,0 +1,11 @@
+{
+  "query": "SELECT DISTINCT ?class ?item ?itemLabel ?coord ?country ?countryLabel ?countryCode ?statusLabel ?inception ?dissolved WHERE {\n      VALUES ?class { wd:Q134447 wd:Q1438105 wd:Q188589 wd:Q1360597 wd:Q11536219 wd:Q5446866 wd:Q3966636 }\n      ?item wdt:P31 ?class; wdt:P625 ?coord.\n      OPTIONAL { ?item wdt:P17 ?country. OPTIONAL { ?country wdt:P297 ?countryCode. } }\n      OPTIONAL { ?item wdt:P5817 ?status. } OPTIONAL { ?item wdt:P571 ?inception. } OPTIONAL { ?item wdt:P576 ?dissolved. }\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }\n    }",
+  "request_url": "https://query.wikidata.org/sparql?query=SELECT+DISTINCT+%3Fclass+%3Fitem+%3FitemLabel+%3Fcoord+%3Fcountry+%3FcountryLabel+%3FcountryCode+%3FstatusLabel+%3Finception+%3Fdissolved+WHERE+%7B%0A++++++VALUES+%3Fclass+%7B+wd%3AQ134447+wd%3AQ1438105+wd%3AQ188589+wd%3AQ1360597+wd%3AQ11536219+wd%3AQ5446866+wd%3AQ3966636+%7D%0A++++++%3Fitem+wdt%3AP31+%3Fclass%3B+wdt%3AP625+%3Fcoord.%0A++++++OPTIONAL+%7B+%3Fitem+wdt%3AP17+%3Fcountry.+OPTIONAL+%7B+%3Fcountry+wdt%3AP297+%3FcountryCode.+%7D+%7D%0A++++++OPTIONAL+%7B+%3Fitem+wdt%3AP5817+%3Fstatus.+%7D+OPTIONAL+%7B+%3Fitem+wdt%3AP571+%3Finception.+%7D+OPTIONAL+%7B+%3Fitem+wdt%3AP576+%3Fdissolved.+%7D%0A++++++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D%0A++++%7D&format=json",
+  "status": 200,
+  "retrieved_at_utc": "2026-09-29T21:49:53.203981+00:00",
+  "body_sha256": "35120de8691d30d636f2a895fcf148e41b40f6d63ee36674902dd6cbeff211de",
+  "source_declared_licence": "CC0-1.0",
+  "selection": "Complete unmodified primary SPARQL response; all 498 bindings retained",
+  "fixture_sha256": "35120de8691d30d636f2a895fcf148e41b40f6d63ee36674902dd6cbeff211de",
+  "fixture_bytes": 475279
+}

@@ -1,0 +1,29 @@
+{
+  "audit_date": "2026-09-26",
+  "input_records": 51,
+  "output_records": 51,
+  "unique_companies": 51,
+  "identity_classes": {
+    "fusion reactor/device developer": 36,
+    "power-plant engineering consortium/developer": 1,
+    "commercial fusion-neutron/isotope company; power aspirant": 1,
+    "inertial-fusion enabling-technology developer": 1,
+    "fusion-plant technology integrator/supplier": 1,
+    "state-controlled fusion developer": 1,
+    "fusion-neutron/isotope platform developer; not a power developer": 1,
+    "speculative non-mainstream nuclear claim": 4,
+    "historical/inactive fusion developer": 5
+  },
+  "evidence_tiers": {
+    "C — public program/company evidence; claimed performance not independently verified": 27,
+    "B — independent/government or peer-reviewed support for a bounded milestone": 10,
+    "C — limited current independent technical evidence": 5,
+    "D — claim-led; no broadly accepted independent validation": 4,
+    "C-H — historical technical evidence; current activity absent/unclear": 5
+  },
+  "confidence": {
+    "medium": 27,
+    "high": 10,
+    "low": 14
+  }
+}

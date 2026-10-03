@@ -1,0 +1,381 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "Exact existing historical inputs; hashes and schemas are custody constraints, not source licences.",
+  "conditions": "Public six-field compilation selection: CC BY 4.0 with FusionBenchmark / Hadamard LLC attribution and original normalisation indicated. Separate overlays/additions retain their own source rights. Frozen inputs require explicit user-supplied lawful access and usage; file possession or licence declarations alone do not grant redistribution. No download fallback.",
+  "selections": {
+    "public": {
+      "fusion_facilities.tsv": {
+        "bytes": 120401,
+        "sha256": "6ce4b68d1904d0785a67a15891963496002c6671e52c95e2ffd6247827cbaab3",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 146
+      },
+      "source_registry.tsv": {
+        "bytes": 1892,
+        "sha256": "90e4aef93d040f150831748e10daea6661ec63a5508b0612799fdd5efbb274af",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 4
+      },
+      "enrichment/enrichment.tsv": {
+        "bytes": 5447,
+        "sha256": "d9d9e9a2a9f62f28902895f8bf04bbf218fa1b7717b4b5279d27f35894237857",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 11
+      },
+      "enrichment/new_facilities.tsv": {
+        "bytes": 5837,
+        "sha256": "49738d60e14b11b8aa2afa055986fb36a5361e2ab623eeffe3c8cb31f40a6d7c",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 11
+      },
+      "enrichment/source_registry.tsv": {
+        "bytes": 4869,
+        "sha256": "8ff52dcb2b6565ddaaf8e811bddf3f7caa1b4b45e456eb9b6ce70fc958824ccd",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 14
+      },
+      "enrichment_round2/enrichment_round2.tsv": {
+        "bytes": 6203,
+        "sha256": "7a466dfae388bb1effa0720fb279ebf91433fcb3d342bf15f96ff44d5827b19f",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 15
+      },
+      "enrichment_round2/source_registry.tsv": {
+        "bytes": 5168,
+        "sha256": "94b38d5bc86e4f621fac0da21ee27932775f89fa9ef258eda0778ff73013be2f",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 15
+      },
+      "enrichment_round3/enrichment_round3.tsv": {
+        "bytes": 5019,
+        "sha256": "12f9daded3b2d6f9b2515b283f2f8a967bdb60912a4fb8c8e3d76e64b3d66193",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 14
+      },
+      "enrichment_round3/source_registry.tsv": {
+        "bytes": 4461,
+        "sha256": "627da8bb4f5e80ab381b74cd3df72c5d167600c4c8fa29cce7dcf84094a6f978",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 14
+      }
+    },
+    "frozen": {
+      "fusion_facilities.tsv": {
+        "bytes": 88771,
+        "sha256": "5ad43c86982c9aa0514c5bb0e6c7ece2b5f5e35a064ac2282899bba003bd7c16",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 146
+      },
+      "source_registry.tsv": {
+        "bytes": 1579,
+        "sha256": "239dae2ba4fd35523621ef1be5af8215d4caa3a312570aab0a3516e57c5fd204",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 4
+      },
+      "enrichment/enrichment.tsv": {
+        "bytes": 5447,
+        "sha256": "d9d9e9a2a9f62f28902895f8bf04bbf218fa1b7717b4b5279d27f35894237857",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 11
+      },
+      "enrichment/new_facilities.tsv": {
+        "bytes": 5837,
+        "sha256": "49738d60e14b11b8aa2afa055986fb36a5361e2ab623eeffe3c8cb31f40a6d7c",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 11
+      },
+      "enrichment/source_registry.tsv": {
+        "bytes": 4741,
+        "sha256": "28f8feccc025974fbacbcb5aed03241e1acc2e27427c71089a93c4d86f551f81",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 14
+      },
+      "enrichment_round2/enrichment_round2.tsv": {
+        "bytes": 6203,
+        "sha256": "7a466dfae388bb1effa0720fb279ebf91433fcb3d342bf15f96ff44d5827b19f",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 15
+      },
+      "enrichment_round2/source_registry.tsv": {
+        "bytes": 5168,
+        "sha256": "94b38d5bc86e4f621fac0da21ee27932775f89fa9ef258eda0778ff73013be2f",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 15
+      },
+      "enrichment_round3/enrichment_round3.tsv": {
+        "bytes": 5019,
+        "sha256": "12f9daded3b2d6f9b2515b283f2f8a967bdb60912a4fb8c8e3d76e64b3d66193",
+        "fields": [
+          "stable_id",
+          "name",
+          "aliases",
+          "country",
+          "latitude",
+          "longitude",
+          "coordinate_precision",
+          "configuration",
+          "device_subtype",
+          "status",
+          "organization",
+          "first_operation_date",
+          "last_operation_date",
+          "source_url",
+          "source_role",
+          "retrieved_date",
+          "license",
+          "verification_evidence_notes"
+        ],
+        "rows": 14
+      },
+      "enrichment_round3/source_registry.tsv": {
+        "bytes": 4461,
+        "sha256": "627da8bb4f5e80ab381b74cd3df72c5d167600c4c8fa29cce7dcf84094a6f978",
+        "fields": [
+          "source_id",
+          "title",
+          "url",
+          "publisher",
+          "role",
+          "license_or_terms",
+          "retrieved_date",
+          "notes"
+        ],
+        "rows": 14
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .github/ISSUE_TEMPLATE/bug_report.yml
+
+name: Bug report
+description: Something behaves incorrectly, or a record is wrong.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Observed behaviour, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: The smallest sequence that shows it.
+    validations:
+      required: true
+  - type: input
+    id: record
+    attributes:
+      label: Affected record identifier
+      description: For a data problem, the record id and the source it cites.
+  - type: textarea
+    id: source
+    attributes:
+      label: Contradicting source
+      description: >-
+        For a data correction, the retrievable source that contradicts the
+        record. A correction without a source cannot be accepted.

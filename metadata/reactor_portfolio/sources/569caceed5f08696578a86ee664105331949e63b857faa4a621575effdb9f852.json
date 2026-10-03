@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Hydrogen production process designs for thermal and electrical feed interfaces.",
+  "category": "chemical_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "C4",
+  "project_id": "SCPN-HYDROGEN-PROCESS-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:nuclear_hydrogen_process",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "B"
+}

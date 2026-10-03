@@ -1,0 +1,39 @@
+{
+  "recorded_at_utc": "2026-09-30T08:39:02.330036+00:00",
+  "historical_raw_manifest_date": "2026-09-27",
+  "actual_complete_selection_equals_historical_snapshot": true,
+  "provenance": [
+    {
+      "source": "canada",
+      "file": "canada.csv",
+      "selection": "All actual rows selected by historical year/industry criteria, plus first actual excluded-year and excluded-industry controls; no source cell changed. Required source columns only; omitted full raw street addresses/business IDs/unused observations. CSV reserialized, not byte-identical raw response.",
+      "selected_rows": 908,
+      "controls": 2,
+      "raw_sha256": "2dcb73082aac50a95446600e1e86b28aec2c48da502265002c05176af4be8781",
+      "fixture_sha256": "9545d85a42b933c77b87911ff26f687c13f957208cac936032f2779f39d2c885",
+      "fixture_bytes": 135734,
+      "encoding": "windows-1252",
+      "licence": "OGL-Canada-2.0",
+      "attribution": "Environment and Climate Change Canada",
+      "source_url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_GeolocationsGeolocalisation_1993-present.csv",
+      "licence_url": "https://open.canada.ca/en/open-government-licence-canada",
+      "licence_notice": "Contains information licensed under the Open Government Licence \u2013 Canada."
+    },
+    {
+      "source": "australia",
+      "file": "australia.csv",
+      "selection": "All actual rows selected by historical year/industry criteria, plus first actual excluded-year and excluded-industry controls; no source cell changed. Required source columns only; omitted full raw street addresses/business IDs/unused observations. CSV reserialized, not byte-identical raw response.",
+      "selected_rows": 868,
+      "controls": 2,
+      "raw_sha256": "a0be4c37d588b391ea81baf240f675b2c9f3d9ee0210f9c451c7371eac11d6c7",
+      "fixture_sha256": "a1bf7d92ae4850e6c723c0bb914a67b78a355621bc75ae9a5041514e2f159f24",
+      "fixture_bytes": 265542,
+      "encoding": "utf-8-sig",
+      "licence": "CC-BY-4.0",
+      "attribution": "Commonwealth of Australia, Department of Climate Change, Energy, the Environment and Water",
+      "source_url": "https://data.gov.au/data/dataset/043f58e0-a188-4458-b61c-04e5b540aea4/resource/f83cdee9-ebcb-4f24-941b-34bb2f0996cf/download/facilities.csv",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0",
+      "licence_notice": "Contains Commonwealth of Australia NPI source observations licensed under CC BY 4.0; field and row selection modified."
+    }
+  ]
+}

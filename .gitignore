@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .gitignore
+
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# docs/internal is private operational content in every repository and is
+# never tracked, force-added, or re-included via negation.
+docs/internal/
+docs/internal/**
+
+# Reproducible build trees and local artefacts.
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+node_modules/
+BACKUP/
+ARCHIVE/
+MODELS/
+
+# Local test environment.
+.venv/
+.pytest-scratch/
+
+# Tier-0 scaffold profile: these trees are never repository-owned
+# content. Coordination records and Arcane continuity live in the
+# monorepo; backups and archives are custody artefacts.
+/BACKUP/
+/ARCHIVE/
+/.coordination/
+/04_ARCANE_SAPIENCE/
+
+# Third-party document custody stays local until source-specific rights and
+# owner-controlled artifact hosting have been reconciled. Catalogues retain
+# source URLs and provenance; downloaded works are not our AGPL source code.
+*.pdf
+*.zip
+# Native SFOE test corpus has its own source-specific grant and attribution.
+!tests/data/industrial_round7/SFOE_ORIGINAL.csv.zip
+/02_chemical_biochemical/03_membrane_microflow/PMC_Microreactor_Technology_landing_page.html

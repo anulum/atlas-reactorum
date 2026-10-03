@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .gitattributes
+
+* text=auto eol=lf
+
+# Source catalogues and generated datasets are byte-exact evidence. Never let
+# a checkout rewrite their line endings: the checksums would stop matching.
+# Empty final TSV fields and publisher CRLF are meaningful source bytes.
+# Check other whitespace normally; never trim evidence to satisfy a diff.
+*.tsv   -text whitespace=-blank-at-eol,cr-at-eol
+*.json  -text
+*.ndjson -text
+*.csv   -text whitespace=cr-at-eol
+# Quoted multiline publisher text retains its original terminal spaces.
+tests/data/industrial_round2/australia.csv whitespace=-blank-at-eol,cr-at-eol
+*.geojson -text whitespace=cr-at-eol
+*.frames -text
+
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.zip   binary
+
+# Generated artefacts: keep them out of diffs and language statistics.
+04_interactive_presentation/data/*.js   linguist-generated=true -diff
+04_interactive_presentation/data/*.json linguist-generated=true -diff

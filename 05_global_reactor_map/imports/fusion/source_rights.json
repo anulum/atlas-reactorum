@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "publisher": "Hadamard LLC / FusionBenchmark",
+  "source_url": "https://fusionbenchmark.com/api/",
+  "original_retrieved_date": "2026-09-26",
+  "publication_selection": {
+    "rows": 146,
+    "sha256": "6ce4b68d1904d0785a67a15891963496002c6671e52c95e2ffd6247827cbaab3",
+    "licensed_fields": [
+      "name",
+      "country",
+      "configuration",
+      "device_subtype",
+      "status",
+      "organization"
+    ],
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "reference_fields": [
+      "stable_id",
+      "source_url",
+      "source_role",
+      "retrieved_date"
+    ],
+    "omitted_value_fields": [
+      "aliases",
+      "latitude",
+      "longitude",
+      "coordinate_precision",
+      "first_operation_date",
+      "last_operation_date"
+    ],
+    "modifications": "Original importer normalisation retained; public field selection omits the separate Wikidata aliases, positions, precision metadata and dates, replaces licence description and attributes original-import notes.",
+    "factual_boundary": "Historical source-reported compilation and classification; reference fields do not license linked works. No independent current status or physical verification is asserted."
+  },
+  "historical_permission_evidence": {
+    "kind": "Dated original native rendered publisher permission",
+    "observed_at": "2026-09-26T17:53:29.313Z",
+    "rendered_record_sha256": "6788ced7a37431d4a3f4d7477307df214980bf1a99572e342794045c62f3ef4e",
+    "scope": "Publisher compilation, classifications and provenance annotations. Embedded earlier date/count is not an express restriction on the general permission. No grant over linked third-party works or permission for new restricted collection is inferred."
+  },
+  "frozen_inputs": {
+    "manifest": "frozen_input_manifest.json",
+    "original_base_sha256": "5ad43c86982c9aa0514c5bb0e6c7ece2b5f5e35a064ac2282899bba003bd7c16",
+    "rows": 146,
+    "columns": 18,
+    "public_bulk_redistribution": false,
+    "conditions": "Public six-field compilation selection: CC BY 4.0 with FusionBenchmark / Hadamard LLC attribution and original normalisation indicated. Separate overlays/additions retain their own source rights. Frozen inputs require explicit user-supplied lawful access and usage; file possession or licence declarations alone do not grant redistribution. No download fallback."
+  },
+  "separate_layers": "The eleven primary-source additions and all enrichment overlays retain their own exact source scope. This publisher grant does not grant their redistribution or factual verification.",
+  "acquisition": "Live historical collection is disabled. Inputs are offline and no download fallback exists."
+}

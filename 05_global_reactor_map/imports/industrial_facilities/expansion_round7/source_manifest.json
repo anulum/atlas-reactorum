@@ -1,0 +1,103 @@
+{
+  "captures": [
+    {
+      "bytes": 238530,
+      "http_status": 200,
+      "name": "ARPAE_COMPLETE.json",
+      "origin_url": "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=1000&f=json",
+      "retrieved_utc": "2026-09-30T21:16:07.398934+00:00",
+      "sha256": "f4467b989f3b4cbf566e4d63ee8a6071c89fedcb0ee8828a8dd661029041a92d",
+      "tls_verified": true
+    },
+    {
+      "bytes": 13,
+      "http_status": 200,
+      "name": "ARPAE_COUNT.json",
+      "origin_url": "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json",
+      "retrieved_utc": "2026-09-30T21:16:07.380796+00:00",
+      "sha256": "7673cd5fb13bd74e117af35d4bdaa23c99bb98098157cabe20a272928c1196b4",
+      "tls_verified": true
+    },
+    {
+      "bytes": 1258,
+      "http_status": 200,
+      "name": "ARPAE_IDS.json",
+      "origin_url": "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer/0/query?where=1%3D1&returnIdsOnly=true&f=json",
+      "retrieved_utc": "2026-09-30T21:16:07.387175+00:00",
+      "sha256": "2c13d4db6f7a3fc52850f34f5e490425796e0400902381f16656d3e4ff8d4691",
+      "tls_verified": true
+    },
+    {
+      "bytes": 7388,
+      "http_status": 200,
+      "name": "ARPAE_LAYER.json",
+      "origin_url": "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer/0?f=pjson",
+      "retrieved_utc": "2026-09-30T21:13:51.924363+00:00",
+      "sha256": "0c2f5fce62a9d5da12fbcd32565d5dd6ffd86a685eaa1128e5f5138505f5669e",
+      "tls_verified": true
+    },
+    {
+      "bytes": 4804,
+      "http_status": 200,
+      "name": "ARPAE_METADATA.json",
+      "origin_url": "https://dati.arpae.it/api/3/action/package_show?id=arpa_ene_impianti_biomasse_biogas",
+      "retrieved_utc": "2026-09-30T21:13:51.919873+00:00",
+      "sha256": "cb2e146d95931b899e6c8cb497ab9d3aac39b4e909e5e73717153ff6f00a6267",
+      "tls_verified": true
+    },
+    {
+      "bytes": 21609,
+      "http_status": 200,
+      "name": "SFOE_METADATA.json",
+      "origin_url": "https://ckan.opendata.swiss/api/3/action/package_show?id=biogasanlagen",
+      "retrieved_utc": "2026-09-30T21:13:51.911637+00:00",
+      "sha256": "756d5bfae3c9837001db12528deab1b5b8972fcfb000da43f013355fb63e59a7",
+      "tls_verified": true
+    },
+    {
+      "bytes": 19723,
+      "http_status": 200,
+      "name": "SFOE_ORIGINAL.csv.zip",
+      "origin_url": "https://data.geo.admin.ch/ch.bfe.biogasanlagen/biogasanlagen/biogasanlagen_2056.csv.zip",
+      "retrieved_utc": "2026-09-30T21:13:51.915671+00:00",
+      "sha256": "4b29b8970e9a7e8adf8d8be7e08596ffc55889d19c30a4e5ea5382181f7e5dab",
+      "tls_verified": true
+    },
+    {
+      "bytes": 24706,
+      "http_status": 200,
+      "name": "SFOE_TERMS.html",
+      "origin_url": "https://opendata.swiss/en/terms-of-use",
+      "retrieved_utc": "2026-09-30T21:13:51.926386+00:00",
+      "sha256": "da4b7868e59693e5ac09ba5e3eed66acfb21a022ffc45fc3f38d29fdfa3ddf15",
+      "tls_verified": true
+    }
+  ],
+  "grants": {
+    "ch-sfoe-biogas": {
+      "license": "LicenseRef-opendata-swiss-terms-by",
+      "resource_id": "6a31d549-be3e-4727-a4f8-05d7d2ab5c54",
+      "resource_url": "https://data.geo.admin.ch/ch.bfe.biogasanlagen/biogasanlagen/biogasanlagen_2056.csv.zip",
+      "terms_url": "https://opendata.swiss/terms-of-use#terms_by"
+    },
+    "it-arpae-biogas": {
+      "license": "CC-BY-4.0",
+      "resource_id": "1af54eda-b778-4b21-a8dc-e4710600d25d",
+      "resource_url": "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "page_size": 1000,
+  "raw_counts": {
+    "ch-sfoe-biogas": 153,
+    "it-arpae-biogas": 330
+  },
+  "schema_version": 1,
+  "selected_counts": {
+    "ch-sfoe-biogas": 153,
+    "it-arpae-biogas": 268
+  },
+  "snapshot_sha256": "6c7084071a309e204b714091894d2744acb0ff7c2ff046a69f41fd4800da0d54",
+  "swiss_annual_rows": 974,
+  "swiss_reference_date": "2020-12-31"
+}

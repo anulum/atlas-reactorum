@@ -1,0 +1,4 @@
+source_id	title	url	role	retrieved	license
+gem-gnpt-2026-08	Global Nuclear Power Tracker, August 2026 release	https://globalenergymonitor.org/projects/global-nuclear-power-tracker/	unit-level tracker, definitions, methodology and recommended citation	2026-09-27	CC BY 4.0
+gem-gnpt-map	GNPT public map GeoJSON, August 2026	https://publicgemdata.nyc3.cdn.digitaloceanspaces.com/Current_maps/gnpt/gnpt_map_2026-08.geojson	frozen machine-readable source; SHA-256 pinned in builder	2026-09-27	CC BY 4.0
+gem-license	Global Energy Monitor Creative Commons License	https://globalenergymonitor.org/creative-commons-license/	license terms	2026-09-27	CC BY 4.0

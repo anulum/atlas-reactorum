@@ -1,0 +1,33 @@
+identity_class	records	complete_records	records_with_gaps	high_priority	medium_priority	low_priority	missing_fuel_cycle	missing_official_url
+applied plasma/neutron systems company; fusion is long-term	1	0	1	0	0	1	1	0
+commercial fusion-neutron/isotope company; power aspirant	1	0	1	0	0	1	0	0
+fusion R&D organization; pre-hardware	1	0	1	0	0	1	1	0
+fusion advisory and ecosystem consultancy; not a reactor developer	1	0	1	0	1	0	1	0
+fusion cryogenic-system supplier; not a reactor developer	1	0	1	0	1	0	1	0
+fusion engineering platform/supplier; not a reactor developer	1	0	1	0	1	0	1	0
+fusion magnet supplier/integrator; not a reactor developer	1	0	1	0	1	0	1	0
+fusion materials supplier/integrator; not a reactor developer	1	0	1	0	1	0	1	0
+fusion materials supplier; not a reactor developer	1	0	1	0	1	0	1	0
+fusion project company/developer	1	1	0	0	0	1	0	0
+fusion propulsion/device developer	2	0	2	0	2	0	2	0
+fusion reactor/device developer	55	6	49	6	43	6	44	2
+fusion reactor/device developer and magnet supplier	1	0	1	0	1	0	1	0
+fusion-neutron/isotope platform developer; not a power developer	1	0	1	1	0	0	0	0
+fusion-plant technology integrator/supplier	1	0	1	0	0	1	1	0
+government fusion research laboratory; not a company	1	0	1	0	0	1	1	0
+historical state-backed speculative fusion claim; terminated	1	0	1	0	0	1	1	0
+historical/dormant fusion developer	1	0	1	0	0	1	1	0
+historical/inactive fusion developer	5	0	5	1	4	0	4	5
+inertial-fusion enabling-technology developer	1	0	1	0	1	0	1	0
+national laboratory research programme; not a company	1	0	1	0	0	1	1	0
+national public fusion research programme; not a company	3	1	2	0	0	3	2	0
+power-plant engineering consortium/developer	1	0	1	0	1	0	1	0
+public academic fusion laboratory; not a company	1	0	1	0	0	1	1	0
+public academic research programme; not a company	1	0	1	0	0	1	1	0
+public-program operator and fusion technology supplier; not a standalone private power-plant developer	1	0	1	0	1	0	1	0
+regional fusion coordination network; not a reactor developer	1	0	1	0	1	0	1	0
+regional public-academic fusion initiative; planned device	1	0	1	0	0	1	1	0
+speculative fusion reactor/device developer; pre-hardware	1	1	0	0	0	1	0	0
+speculative non-mainstream nuclear claim	6	0	6	0	2	4	6	0
+state research operator; not a private commercial reactor developer	1	0	1	0	1	0	1	0
+state-controlled fusion developer	1	0	1	1	0	0	1	1

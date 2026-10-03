@@ -1,0 +1,208 @@
+{
+  "id": 0,
+  "name": "Impianti a Bioenergie",
+  "geometryType": "esriGeometryPoint",
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "TIPO",
+      "type": "esriFieldTypeString",
+      "alias": "TIPO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "COD_OE",
+      "type": "esriFieldTypeString",
+      "alias": "COD. OE",
+      "length": 10,
+      "domain": null
+    },
+    {
+      "name": "ID_GSE",
+      "type": "esriFieldTypeInteger",
+      "alias": "ID GSE",
+      "domain": null
+    },
+    {
+      "name": "IMPIANTO",
+      "type": "esriFieldTypeString",
+      "alias": "IMPIANTO",
+      "length": 150,
+      "domain": null
+    },
+    {
+      "name": "GESTORE",
+      "type": "esriFieldTypeString",
+      "alias": "GESTORE",
+      "length": 100,
+      "domain": null
+    },
+    {
+      "name": "INDIRIZZO",
+      "type": "esriFieldTypeString",
+      "alias": "INDIRIZZO",
+      "length": 100,
+      "domain": null
+    },
+    {
+      "name": "COMUNE",
+      "type": "esriFieldTypeString",
+      "alias": "COMUNE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "LOCALITA",
+      "type": "esriFieldTypeString",
+      "alias": "LOCALITA'",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "PROVINCIA",
+      "type": "esriFieldTypeString",
+      "alias": "PROVINCIA",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SIGLA",
+      "type": "esriFieldTypeString",
+      "alias": "SIGLA",
+      "length": 2,
+      "domain": null
+    },
+    {
+      "name": "COD_COM",
+      "type": "esriFieldTypeString",
+      "alias": "CODICE COMUNE",
+      "length": 6,
+      "domain": null
+    },
+    {
+      "name": "TIPO_DITTA",
+      "type": "esriFieldTypeString",
+      "alias": "TIPO DITTA",
+      "length": 100,
+      "domain": null
+    },
+    {
+      "name": "TIPO_COMB",
+      "type": "esriFieldTypeString",
+      "alias": "TIPO COMBUSTIBILE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "STATO",
+      "type": "esriFieldTypeString",
+      "alias": "STATO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "NUM_IMP",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "NUMERO SEZIONI PRODUTTIVE",
+      "domain": null
+    },
+    {
+      "name": "P_MW_EL",
+      "type": "esriFieldTypeDouble",
+      "alias": "POTENZA ELETTRICA (MW)",
+      "domain": null
+    },
+    {
+      "name": "P_MW_T",
+      "type": "esriFieldTypeDouble",
+      "alias": "POTENZA TERMICA (MW)",
+      "domain": null
+    },
+    {
+      "name": "COGENERAZ",
+      "type": "esriFieldTypeString",
+      "alias": "COGENERAZIONE",
+      "length": 5,
+      "domain": null
+    },
+    {
+      "name": "TELERISCAL",
+      "type": "esriFieldTypeString",
+      "alias": "TELERISCALDAMENTO",
+      "length": 5,
+      "domain": null
+    },
+    {
+      "name": "TIPO_AUTOR",
+      "type": "esriFieldTypeString",
+      "alias": "TIPO AUTORIZZAZIONE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "FONTE",
+      "type": "esriFieldTypeString",
+      "alias": "FONTE DATI",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "AGG_DATI",
+      "type": "esriFieldTypeString",
+      "alias": "AGG. DATI",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "NOTE",
+      "type": "esriFieldTypeString",
+      "alias": "NOTE AUTORIZZ.",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "NOTE_BIOM",
+      "type": "esriFieldTypeString",
+      "alias": "NOTE",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "LONG_WGS84",
+      "type": "esriFieldTypeDouble",
+      "alias": "LONG( WGS84)",
+      "domain": null
+    },
+    {
+      "name": "LAT_WGS84",
+      "type": "esriFieldTypeDouble",
+      "alias": "LAT (WGS84)",
+      "domain": null
+    },
+    {
+      "name": "X_E32",
+      "type": "esriFieldTypeInteger",
+      "alias": "X (ETRS89 UTM 32)",
+      "domain": null
+    },
+    {
+      "name": "Y_E32",
+      "type": "esriFieldTypeInteger",
+      "alias": "Y (ETRS89 UTM 32)",
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "maxRecordCount": 1000
+}

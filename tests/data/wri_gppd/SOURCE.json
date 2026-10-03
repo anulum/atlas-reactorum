@@ -1,0 +1,13 @@
+{
+  "url": "https://raw.githubusercontent.com/wri/global-power-plant-database/7a91cfbb2a4e272597acbc00506d61fc1ec73b3d/output_database/global_power_plant_database.csv",
+  "git_commit": "7a91cfbb2a4e272597acbc00506d61fc1ec73b3d",
+  "retrieved_at_utc": "2026-09-29T21:47:18.648874+00:00",
+  "sha256": "4b1f93e0fd93664f18684d9b05d0a52ed9658c6a8cf0d21ff2520791379ba7fc",
+  "bytes": 11973385,
+  "source_declared_licence": "CC-BY-4.0",
+  "fixture_sha256": "7938c0ab96ce1bb3f9da23b4c3f284ee1c2570e367135b502cb27ac37862eb24",
+  "fixture_bytes": 69485,
+  "selection": "All 195 primary_fuel=Nuclear rows in original order, plus the first actual non-Nuclear row to exercise fuel filtering; every selected cell unchanged",
+  "retained_row_count": 196,
+  "licence_url": "https://creativecommons.org/licenses/by/4.0/"
+}

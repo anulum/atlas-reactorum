@@ -1,0 +1,17 @@
+stage	field	records	known	unknown_or_unpopulated	complete_percent
+before_round5	unknown_coordinates	172	107	65	62.2
+before_round5	unknown_status	172	87	85	50.6
+before_round5	unknown_or_generic_reactor_type	172	60	112	34.9
+before_round5	unknown_thermal_power_mw	172	36	136	20.9
+before_round5	unknown_operator	172	68	104	39.5
+before_round5	unknown_purpose	172	47	125	27.3
+before_round5	unknown_first_criticality	172	20	152	11.6
+before_round5	unpopulated_shutdown_date	172	41	131	23.8
+after_round5	unknown_coordinates	172	107	65	62.2
+after_round5	unknown_status	172	94	78	54.7
+after_round5	unknown_or_generic_reactor_type	172	67	105	39.0
+after_round5	unknown_thermal_power_mw	172	42	130	24.4
+after_round5	unknown_operator	172	76	96	44.2
+after_round5	unknown_purpose	172	55	117	32.0
+after_round5	unknown_first_criticality	172	27	145	15.7
+after_round5	unpopulated_shutdown_date	172	44	128	25.6

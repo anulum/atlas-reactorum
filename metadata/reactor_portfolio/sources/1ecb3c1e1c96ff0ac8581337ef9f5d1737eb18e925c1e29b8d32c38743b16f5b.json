@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Typed composition of chemical process families and carbon-capture interfaces.",
+  "category": "hybrid_composition",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "H4",
+  "project_id": "SCPN-CHEM-PROCESS-HYBRID-CORE",
+  "proposed_configuration_id": null,
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}

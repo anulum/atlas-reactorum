@@ -1,0 +1,14 @@
+{
+  "audit_date": "2026-09-28",
+  "valid": true,
+  "overlay_count": 10,
+  "source_count": 30,
+  "gap_closure_count": 10,
+  "gap_instances_before": 24,
+  "gap_instances_resolved": 24,
+  "project_bounded_fuel_before": "0/10",
+  "project_bounded_fuel_after": "10/10",
+  "record_specific_dates_before": "0/10",
+  "record_specific_dates_after": "10/10",
+  "errors": []
+}

@@ -1,0 +1,17 @@
+Reactor Research Library validation
+Generated (UTC): 2026-10-02T12:00:00Z
+Catalog entries: 249
+Repository PDFs: 0
+Repository ZIPs: 1
+
+PDF validation failures:
+none
+
+ZIP validation failures:
+none
+
+Empty files:
+04_interactive_presentation/.nojekyll
+
+Missing catalog local_file references:
+none

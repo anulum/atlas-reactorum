@@ -1,0 +1,12 @@
+{
+  "audit_date": "2026-09-30",
+  "valid": true,
+  "overlay_count": 10,
+  "source_count": 33,
+  "field_association_count": 60,
+  "gap_review_count": 10,
+  "metadata_gap_fields_reviewed": 21,
+  "physical_gap_closure": "not established by structural validation",
+  "evidence_acceptance": "source attribution and limitations preserved; no independent replication inferred",
+  "errors": []
+}

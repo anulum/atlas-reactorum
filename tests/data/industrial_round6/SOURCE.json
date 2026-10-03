@@ -1,0 +1,65 @@
+{
+  "capture_utc": "2026-09-30",
+  "source_artifacts": {
+    "br-epe-ethanol": {
+      "raw_sha256": "96fbbbad06fbfa38cd513ab25f5e4efc6c2c09d13f1699aa9080104ae3efb5a7",
+      "raw_bytes": 159117,
+      "fixture_sha256": "3df39a7984203957a404e304ae126efd3f88cced93e0a797f190a6c3c1ee43ea",
+      "fixture_bytes": 150682,
+      "all_original_features": 431,
+      "geometry_and_scalar_values_preserved": true,
+      "count_response_sha256": "e8b79a40253142a440fe3dcbacfc1f13f480b804761dc69c2873721a421a7804",
+      "licence": "CC-BY-4.0"
+    },
+    "br-epe-biodiesel": {
+      "raw_sha256": "4051d92daae8b8863cfbd3471c54b449d74e8a980ff0946ee3cf6bf1318544f1",
+      "raw_bytes": 32079,
+      "fixture_sha256": "c5d9b476fa372c062475108a5d55dda9db5968355d2224df039dda06be5baf4b",
+      "fixture_bytes": 25666,
+      "all_original_features": 88,
+      "geometry_and_scalar_values_preserved": true,
+      "count_response_sha256": "31148bc4ce5218af7ea7c2ec564bb291a8749749e260ab390b881919292f3757",
+      "licence": "CC-BY-4.0"
+    },
+    "br-epe-biomethane": {
+      "raw_sha256": "152c6e56bbcb6ca6a5f40b364107be6f6d51ce416018d3767692d6333c982d7f",
+      "raw_bytes": 29489,
+      "fixture_sha256": "4b25f3fccb459a1c81aa0ed03693258808460dbcf14856a8e991de6f2a87914b",
+      "fixture_bytes": 24719,
+      "all_original_features": 70,
+      "geometry_and_scalar_values_preserved": true,
+      "count_response_sha256": "76cebbb8f2bba9a9d0235e5ddffde239668d876c5be0c74a8bca3c22860fcd9d",
+      "licence": "CC-BY-4.0"
+    },
+    "us-epa-lmop": {
+      "raw_sha256": "4cabb678e3bc3e77d625ba0d93ed04cfeb1efdea99d2f5f6bcdb19bd0f9865f8",
+      "raw_bytes": 344140,
+      "fixture_sha256": "6f73f3d89f67e2c86513a847d0ceed31adc549e4581562e22e3e0cf98de8cc62",
+      "fixture_bytes": 306067,
+      "all_original_features": 542,
+      "geometry_and_scalar_values_preserved": true,
+      "count_response_sha256": "b2bb54f1a3e1913121d5f1b6bb0d9049d2a0197ec9b406d2570da09bd354e812",
+      "licence": "CC0-1.0"
+    }
+  },
+  "changes": "All1131original features retained; JSON reserialized and attributes limited to original source mapping fields. Unused business registrations, contact metadata and rendering fields omitted. All geometry/scalar values preserved, no backderivation. Independent count responses byte-identical.",
+  "source_urls": {
+    "br-epe-ethanol": "https://gisepeprd2.epe.gov.br/arcgis/rest/services/SMA/Webmap_EPE_Biocombustiveis/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID&f=json",
+    "br-epe-biodiesel": "https://gisepeprd2.epe.gov.br/arcgis/rest/services/SMA/Webmap_EPE_Biocombustiveis/MapServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID&f=json",
+    "br-epe-biomethane": "https://gisepeprd2.epe.gov.br/arcgis/rest/services/SMA/Webmap_EPE_Biocombustiveis/MapServer/2/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID&f=json",
+    "us-epa-lmop": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/LMOP_Projects/FeatureServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&orderByFields=OBJECTID&f=json"
+  },
+  "attribution": {
+    "epe": "Empresa de Pesquisa Energética, WEBMAP EPE biofuel layers, https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/webmap-epe, CC BY4.0. Field selection and JSON/schema normalization; no endorsement.",
+    "epa": "U.S. EPA Landfill Methane Outreach Program, official operational project map, September2024data release, https://www.epa.gov/lmop/lmop-national-map, CC0 via dataset-specific Data.gov catalogue. Field selection and JSON/schema normalization; no endorsement."
+  },
+  "rights_chain": {
+    "epe_footer": "https://www.epe.gov.br/pt/publicacoes-dados-abertos/dados-abertos",
+    "epe_download_and_service_host": "https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/webmap-epe",
+    "epa_catalogue": "https://catalog.data.gov/dataset/landfill-gas-energy-projects-and-landfills-in-lmop-database",
+    "catalogue_item": "cfb50984b19d463f89082489a1a61558",
+    "referenced_map": "d61bab8111cc4e4783c616357265ea08",
+    "referenced_layer": "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/LMOP_Projects/FeatureServer/0"
+  },
+  "limitations": "Records/projects are not vessel counts or independently verified current operation. EPA voluntarily supplied September2024release; no enhanced precision or blanket source licence claim."
+}

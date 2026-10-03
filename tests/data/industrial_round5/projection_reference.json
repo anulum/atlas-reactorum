@@ -1,0 +1,3265 @@
+{
+  "source": "UK REPD original source BNG points, independent explicit PROJ9.8.1 calculation",
+  "primary_parameters": "OS guideV3.6 table4 inverse",
+  "pipeline": "+proj=pipeline +step +inv +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +step +proj=cart +ellps=airy +step +proj=helmert +x=446.448 +y=-125.157 +z=542.060 +rx=0.1502 +ry=0.2470 +rz=0.8421 +s=-20.4894 +convention=position_vector +step +inv +proj=cart +ellps=WGS84 +step +proj=unitconvert +xy_in=rad +xy_out=deg",
+  "records": [
+    {
+      "source_record_id": "11020",
+      "easting": 467057.0,
+      "northing": 210862.0,
+      "latitude": 51.792400899327276,
+      "longitude": -1.0291240708028098,
+      "original_faulty_latitude": 51.792841758411285,
+      "original_faulty_longitude": -1.026094114588332
+    },
+    {
+      "source_record_id": "11062",
+      "easting": 360588.0,
+      "northing": 245801.0,
+      "latitude": 52.109122720025276,
+      "longitude": -2.5768963142996744,
+      "original_faulty_latitude": 52.10967817494942,
+      "original_faulty_longitude": -2.574201052199764
+    },
+    {
+      "source_record_id": "11108",
+      "easting": 561216.0,
+      "northing": 321368.0,
+      "latitude": 52.7658512130565,
+      "longitude": 0.3880198275028188,
+      "original_faulty_latitude": 52.76646136097264,
+      "original_faulty_longitude": 0.39146087417846215
+    },
+    {
+      "source_record_id": "11189",
+      "easting": 458028.0,
+      "northing": 233661.0,
+      "latitude": 51.99836894040454,
+      "longitude": -1.1561922350584755,
+      "original_faulty_latitude": 51.998859097758704,
+      "original_faulty_longitude": -1.153175333327735
+    },
+    {
+      "source_record_id": "11238",
+      "easting": 499948.0,
+      "northing": 391086.0,
+      "latitude": 53.40713548433429,
+      "longitude": -0.4979710091996147,
+      "original_faulty_latitude": 53.407915761237035,
+      "original_faulty_longitude": -0.4946810140243204
+    },
+    {
+      "source_record_id": "11239",
+      "easting": 608580.0,
+      "northing": 283304.0,
+      "latitude": 52.40796361570021,
+      "longitude": 1.0650942573088356,
+      "original_faulty_latitude": 52.408472005014005,
+      "original_faulty_longitude": 1.0686596518618772
+    },
+    {
+      "source_record_id": "11240",
+      "easting": 570546.0,
+      "northing": 284857.0,
+      "latitude": 52.43507992795414,
+      "longitude": 0.5073598899737043,
+      "original_faulty_latitude": 52.435613317448286,
+      "original_faulty_longitude": 0.5107987710943206
+    },
+    {
+      "source_record_id": "11242",
+      "easting": 443927.0,
+      "northing": 536653.0,
+      "latitude": 54.72296055094848,
+      "longitude": -1.3195296763088094,
+      "original_faulty_latitude": 54.72405626484457,
+      "original_faulty_longitude": -1.3163194203980157
+    },
+    {
+      "source_record_id": "11243",
+      "easting": 372217.0,
+      "northing": 367826.0,
+      "latitude": 53.20676958727277,
+      "longitude": -2.417425546074086,
+      "original_faulty_latitude": 53.20756328657749,
+      "original_faulty_longitude": -2.4146103946770063
+    },
+    {
+      "source_record_id": "11244",
+      "easting": 497008.0,
+      "northing": 426253.0,
+      "latitude": 53.723671989965645,
+      "longitude": -0.5312741474839706,
+      "original_faulty_latitude": 53.72452300864131,
+      "original_faulty_longitude": -0.5279635207619128
+    },
+    {
+      "source_record_id": "11245",
+      "easting": 284261.0,
+      "northing": 100126.0,
+      "latitude": 50.789114030322345,
+      "longitude": -3.6433497670534263,
+      "original_faulty_latitude": 50.78940487235282,
+      "original_faulty_longitude": -3.64098836427681
+    },
+    {
+      "source_record_id": "11246",
+      "easting": 465720.0,
+      "northing": 146745.0,
+      "latitude": 51.2161325839125,
+      "longitude": -1.060434073142098,
+      "original_faulty_latitude": 51.21644717432004,
+      "original_faulty_longitude": -1.0574558895531565
+    },
+    {
+      "source_record_id": "11247",
+      "easting": 412575.0,
+      "northing": 641855.0,
+      "latitude": 55.670039309358096,
+      "longitude": -1.8016428424557982,
+      "original_faulty_latitude": 55.671358039178585,
+      "original_faulty_longitude": -1.7984649036211198
+    },
+    {
+      "source_record_id": "11248",
+      "easting": 397085.0,
+      "northing": 831151.0,
+      "latitude": 57.37080903877158,
+      "longitude": -2.0501138814137536,
+      "original_faulty_latitude": 57.372508593166465,
+      "original_faulty_longitude": -2.0468323346990944
+    },
+    {
+      "source_record_id": "11249",
+      "easting": 339483.0,
+      "northing": 864097.0,
+      "latitude": 57.66267491753498,
+      "longitude": -3.0159510679937362,
+      "original_faulty_latitude": 57.66446664859385,
+      "original_faulty_longitude": -3.0128978791955707
+    },
+    {
+      "source_record_id": "11250",
+      "easting": 331224.0,
+      "northing": 371851.0,
+      "latitude": 53.2392125308505,
+      "longitude": -3.0319677101654645,
+      "original_faulty_latitude": 53.240030254320864,
+      "original_faulty_longitude": -3.0292972642767286
+    },
+    {
+      "source_record_id": "11251",
+      "easting": 318286.0,
+      "northing": 316391.0,
+      "latitude": 52.73894941634613,
+      "longitude": -3.2117456995949385,
+      "original_faulty_latitude": 52.739661250828924,
+      "original_faulty_longitude": -3.2091546131266417
+    },
+    {
+      "source_record_id": "11762",
+      "easting": 343145.0,
+      "northing": 358853.0,
+      "latitude": 53.123800664375935,
+      "longitude": -2.8510561567582724,
+      "original_faulty_latitude": 53.12458799111895,
+      "original_faulty_longitude": -2.8483510144693978
+    },
+    {
+      "source_record_id": "11802",
+      "easting": 525914.0,
+      "northing": 292082.0,
+      "latitude": 52.5120924457393,
+      "longitude": -0.14602590725462977,
+      "original_faulty_latitude": 52.51266432171036,
+      "original_faulty_longitude": -0.14273198148979946
+    },
+    {
+      "source_record_id": "12047",
+      "easting": 300396.0,
+      "northing": 112621.0,
+      "latitude": 50.9044408156412,
+      "longitude": -3.417926234899283,
+      "original_faulty_latitude": 50.904751590301366,
+      "original_faulty_longitude": -3.4155062943272543
+    },
+    {
+      "source_record_id": "12152",
+      "easting": 369333.0,
+      "northing": 424005.0,
+      "latitude": 53.71155700099238,
+      "longitude": -2.466103933376886,
+      "original_faulty_latitude": 53.712463550069856,
+      "original_faulty_longitude": -2.4632606968924966
+    },
+    {
+      "source_record_id": "12211",
+      "easting": 564187.0,
+      "northing": 246749.0,
+      "latitude": 52.09472533196744,
+      "longitude": 0.3953822178977548,
+      "original_faulty_latitude": 52.09518757818396,
+      "original_faulty_longitude": 0.39876504237433275
+    },
+    {
+      "source_record_id": "12228",
+      "easting": 360338.0,
+      "northing": 413507.0,
+      "latitude": 53.616596611765154,
+      "longitude": -2.6010324917954932,
+      "original_faulty_latitude": 53.61748596422566,
+      "original_faulty_longitude": -2.598229410315245
+    },
+    {
+      "source_record_id": "12268",
+      "easting": 477174.0,
+      "northing": 252950.0,
+      "latitude": 52.16942766030988,
+      "longitude": -0.8730099654920025,
+      "original_faulty_latitude": 52.16994694206002,
+      "original_faulty_longitude": -0.8699137709296659
+    },
+    {
+      "source_record_id": "12313",
+      "easting": 220047.0,
+      "northing": 599942.0,
+      "latitude": 55.2607016912343,
+      "longitude": -4.833402698458266,
+      "original_faulty_latitude": 55.26201181661446,
+      "original_faulty_longitude": -4.831027661040631
+    },
+    {
+      "source_record_id": "12372",
+      "easting": 426539.0,
+      "northing": 589584.0,
+      "latitude": 55.19981124596154,
+      "longitude": -1.5846026016550423,
+      "original_faulty_latitude": 55.20101999152218,
+      "original_faulty_longitude": -1.5814140949732856
+    },
+    {
+      "source_record_id": "12405",
+      "easting": 443480.0,
+      "northing": 209210.0,
+      "latitude": 51.77987345731686,
+      "longitude": -1.3711519913666725,
+      "original_faulty_latitude": 51.780321796218665,
+      "original_faulty_longitude": -1.3682017517754577
+    },
+    {
+      "source_record_id": "12484",
+      "easting": 356173.0,
+      "northing": 322726.0,
+      "latitude": 52.8003009976014,
+      "longitude": -2.651488707758322,
+      "original_faulty_latitude": 52.801011357016456,
+      "original_faulty_longitude": -2.648760264800125
+    },
+    {
+      "source_record_id": "12509",
+      "easting": 433825.0,
+      "northing": 247642.0,
+      "latitude": 52.126058796649765,
+      "longitude": -1.507326397375636,
+      "original_faulty_latitude": 52.12658760875661,
+      "original_faulty_longitude": -1.504380867593144
+    },
+    {
+      "source_record_id": "12604",
+      "easting": 299173.0,
+      "northing": 646826.0,
+      "latitude": 55.7043600125744,
+      "longitude": -3.606019071150498,
+      "original_faulty_latitude": 55.70573730823752,
+      "original_faulty_longitude": -3.603297127587055
+    },
+    {
+      "source_record_id": "12611",
+      "easting": 467101.0,
+      "northing": 210495.0,
+      "latitude": 51.789096403699546,
+      "longitude": -1.0285570687562475,
+      "original_faulty_latitude": 51.789536516290546,
+      "original_faulty_longitude": -1.0255272424203388
+    },
+    {
+      "source_record_id": "12617",
+      "easting": 539166.0,
+      "northing": 386893.0,
+      "latitude": 53.360598725644806,
+      "longitude": 0.08976050067402655,
+      "original_faulty_latitude": 53.36134962251522,
+      "original_faulty_longitude": 0.0931859537040885
+    },
+    {
+      "source_record_id": "12660",
+      "easting": 323564.0,
+      "northing": 857130.0,
+      "latitude": 57.59768697864077,
+      "longitude": -3.280487092301228,
+      "original_faulty_latitude": 57.599471843415635,
+      "original_faulty_longitude": -3.2775112153716393
+    },
+    {
+      "source_record_id": "12686",
+      "easting": 344454.0,
+      "northing": 864901.0,
+      "latitude": 57.67053736475326,
+      "longitude": -2.9328337579110055,
+      "original_faulty_latitude": 57.672328467023824,
+      "original_faulty_longitude": -2.929757477229391
+    },
+    {
+      "source_record_id": "12699",
+      "easting": 645232.0,
+      "northing": 288439.0,
+      "latitude": 52.43885478099071,
+      "longitude": 1.60663929372135,
+      "original_faulty_latitude": 52.43935088121246,
+      "original_faulty_longitude": 1.610332483360919
+    },
+    {
+      "source_record_id": "12957",
+      "easting": 608580.0,
+      "northing": 283304.0,
+      "latitude": 52.40796361570021,
+      "longitude": 1.0650942573088356,
+      "original_faulty_latitude": 52.408472005014005,
+      "original_faulty_longitude": 1.0686596518618772
+    },
+    {
+      "source_record_id": "12961",
+      "easting": 438480.0,
+      "northing": 144154.0,
+      "latitude": 51.1953159148053,
+      "longitude": -1.450694498139379,
+      "original_faulty_latitude": 51.1956374669602,
+      "original_faulty_longitude": -1.44780660089897
+    },
+    {
+      "source_record_id": "13017",
+      "easting": 440126.0,
+      "northing": 191732.0,
+      "latitude": 51.62298397832996,
+      "longitude": -1.42177158682655,
+      "original_faulty_latitude": 51.623399161584445,
+      "original_faulty_longitude": -1.418844990920294
+    },
+    {
+      "source_record_id": "13018",
+      "easting": 339979.0,
+      "northing": 435558.0,
+      "latitude": 53.81282613623902,
+      "longitude": -2.9130407230582813,
+      "original_faulty_latitude": 53.81376741994308,
+      "original_faulty_longitude": -2.9102979015688186
+    },
+    {
+      "source_record_id": "13029",
+      "easting": 494731.0,
+      "northing": 390426.0,
+      "latitude": 53.402165836096465,
+      "longitude": -0.5766197803150429,
+      "original_faulty_latitude": 53.40294752811094,
+      "original_faulty_longitude": -0.5733489626311711
+    },
+    {
+      "source_record_id": "13083",
+      "easting": 349858.0,
+      "northing": 529405.0,
+      "latitude": 54.657229028134054,
+      "longitude": -2.7787449463824374,
+      "original_faulty_latitude": 54.65835301447896,
+      "original_faulty_longitude": -2.7759014460154523
+    },
+    {
+      "source_record_id": "13129",
+      "easting": 371894.0,
+      "northing": 242619.0,
+      "latitude": 52.08120803100785,
+      "longitude": -2.4115516675048285,
+      "original_faulty_latitude": 52.08175276417729,
+      "original_faulty_longitude": -2.408819881758165
+    },
+    {
+      "source_record_id": "13137",
+      "easting": 479934.0,
+      "northing": 473676.0,
+      "latitude": 54.15269289417625,
+      "longitude": -0.7775759470143435,
+      "original_faulty_latitude": 54.15364617655858,
+      "original_faulty_longitude": -0.7742854924323299
+    },
+    {
+      "source_record_id": "13139",
+      "easting": 300420.0,
+      "northing": 531211.0,
+      "latitude": 54.66610363663034,
+      "longitude": -3.545442787876187,
+      "original_faulty_latitude": 54.66725028042662,
+      "original_faulty_longitude": -3.542789001893345
+    },
+    {
+      "source_record_id": "13286",
+      "easting": 474546.0,
+      "northing": 141537.0,
+      "latitude": 51.16822832690261,
+      "longitude": -0.9351691372791737,
+      "original_faulty_latitude": 51.16852856826101,
+      "original_faulty_longitude": -0.9321661716526342
+    },
+    {
+      "source_record_id": "13327",
+      "easting": 536296.0,
+      "northing": 350521.0,
+      "latitude": 53.03460986229669,
+      "longitude": 0.031155790905412612,
+      "original_faulty_latitude": 53.03529098163685,
+      "original_faulty_longitude": 0.03453754147024747
+    },
+    {
+      "source_record_id": "13342",
+      "easting": 502059.0,
+      "northing": 102510.0,
+      "latitude": 50.81315860919755,
+      "longitude": -0.5527277465714623,
+      "original_faulty_latitude": 50.813368810680984,
+      "original_faulty_longitude": -0.5496656636703344
+    },
+    {
+      "source_record_id": "13462",
+      "easting": 310169.0,
+      "northing": 581224.0,
+      "latitude": 55.11723518865283,
+      "longitude": -3.4099548627978225,
+      "original_faulty_latitude": 55.11847782156068,
+      "original_faulty_longitude": -3.4072313188988637
+    },
+    {
+      "source_record_id": "13506",
+      "easting": 493928.0,
+      "northing": 326536.0,
+      "latitude": 52.82817462329732,
+      "longitude": -0.607369775344153,
+      "original_faulty_latitude": 52.82883085948018,
+      "original_faulty_longitude": -0.6041564737824084
+    },
+    {
+      "source_record_id": "13758",
+      "easting": 220348.0,
+      "northing": 600522.0,
+      "latitude": 55.26601686376978,
+      "longitude": -4.829042603542421,
+      "original_faulty_latitude": 55.26732806016907,
+      "original_faulty_longitude": -4.8266660736503795
+    },
+    {
+      "source_record_id": "13870",
+      "easting": 403985.0,
+      "northing": 196141.0,
+      "latitude": 51.66403547980097,
+      "longitude": -1.9437824421565242,
+      "original_faulty_latitude": 51.66447484543993,
+      "original_faulty_longitude": -1.9409728322247457
+    },
+    {
+      "source_record_id": "14038",
+      "easting": 530215.0,
+      "northing": 165411.0,
+      "latitude": 51.37283359693028,
+      "longitude": -0.13061868970537674,
+      "original_faulty_latitude": 51.3731539796012,
+      "original_faulty_longitude": -0.12741702193732538
+    },
+    {
+      "source_record_id": "14108",
+      "easting": 338772.0,
+      "northing": 863355.0,
+      "latitude": 57.655914883941705,
+      "longitude": -3.0276770351710613,
+      "original_faulty_latitude": 57.65770546346782,
+      "original_faulty_longitude": -3.0246276583710423
+    },
+    {
+      "source_record_id": "14109",
+      "easting": 338838.0,
+      "northing": 863369.0,
+      "latitude": 57.65604959607612,
+      "longitude": -3.026574809320615,
+      "original_faulty_latitude": 57.657840174069655,
+      "original_faulty_longitude": -3.0235251233825284
+    },
+    {
+      "source_record_id": "14137",
+      "easting": 338692.0,
+      "northing": 863392.0,
+      "latitude": 57.65623627624952,
+      "longitude": -3.029026780424487,
+      "original_faulty_latitude": 57.658026964289824,
+      "original_faulty_longitude": -3.0259777344731607
+    },
+    {
+      "source_record_id": "14174",
+      "easting": 608580.0,
+      "northing": 283304.0,
+      "latitude": 52.40796361570021,
+      "longitude": 1.0650942573088356,
+      "original_faulty_latitude": 52.408472005014005,
+      "original_faulty_longitude": 1.0686596518618772
+    },
+    {
+      "source_record_id": "14511",
+      "easting": 459597.0,
+      "northing": 420626.0,
+      "latitude": 53.678708637511974,
+      "longitude": -1.0992350692214299,
+      "original_faulty_latitude": 53.679567622899164,
+      "original_faulty_longitude": -1.0960648792406222
+    },
+    {
+      "source_record_id": "14561",
+      "easting": 508365.0,
+      "northing": 411231.0,
+      "latitude": 53.58647452901375,
+      "longitude": -0.36445927930107835,
+      "original_faulty_latitude": 53.58728998640766,
+      "original_faulty_longitude": -0.3611212109037143
+    },
+    {
+      "source_record_id": "14688",
+      "easting": 387689.0,
+      "northing": 258323.0,
+      "latitude": 52.22297336455255,
+      "longitude": -2.181638909797444,
+      "original_faulty_latitude": 52.22354302581971,
+      "original_faulty_longitude": -2.178843040081932
+    },
+    {
+      "source_record_id": "15021",
+      "easting": 342126.0,
+      "northing": 376154.0,
+      "latitude": 53.27918919451317,
+      "longitude": -2.869423676411301,
+      "original_faulty_latitude": 53.28001137063685,
+      "original_faulty_longitude": -2.8667112345113805
+    },
+    {
+      "source_record_id": "15259",
+      "easting": 511312.0,
+      "northing": 284916.0,
+      "latitude": 52.45087079990437,
+      "longitude": -0.3634831406651505,
+      "original_faulty_latitude": 52.45143617133527,
+      "original_faulty_longitude": -0.3602451150404789
+    },
+    {
+      "source_record_id": "15260",
+      "easting": 561486.0,
+      "northing": 248131.0,
+      "latitude": 52.1079338794209,
+      "longitude": 0.35664397797762415,
+      "original_faulty_latitude": 52.10840031830284,
+      "original_faulty_longitude": 0.36001904515096667
+    },
+    {
+      "source_record_id": "15309",
+      "easting": 271458.0,
+      "northing": 869856.0,
+      "latitude": 57.700079461839316,
+      "longitude": -4.158469437003681,
+      "original_faulty_latitude": 57.70191024571425,
+      "original_faulty_longitude": -4.155720350355732
+    },
+    {
+      "source_record_id": "15369",
+      "easting": 364090.0,
+      "northing": 764986.0,
+      "latitude": 56.775058675777984,
+      "longitude": -2.5891945865705335,
+      "original_faulty_latitude": 56.77664345522599,
+      "original_faulty_longitude": -2.5861143581531376
+    },
+    {
+      "source_record_id": "15376",
+      "easting": 252951.0,
+      "northing": 675544.0,
+      "latitude": 55.9503560739371,
+      "longitude": -4.3565072440755275,
+      "original_faulty_latitude": 55.95180684525869,
+      "original_faulty_longitude": -4.353957971946773
+    },
+    {
+      "source_record_id": "15442",
+      "easting": 451300.0,
+      "northing": 451300.0,
+      "latitude": 53.955257328816984,
+      "longitude": -1.219727501612807,
+      "original_faulty_latitude": 53.956180947613014,
+      "original_faulty_longitude": -1.2165620505356027
+    },
+    {
+      "source_record_id": "15666",
+      "easting": 527621.0,
+      "northing": 330694.0,
+      "latitude": 52.85861576417291,
+      "longitude": -0.10593386185626388,
+      "original_faulty_latitude": 52.859262636040064,
+      "original_faulty_longitude": -0.10260012249010617
+    },
+    {
+      "source_record_id": "16263",
+      "easting": 434668.0,
+      "northing": 531104.0,
+      "latitude": 54.673817281332795,
+      "longitude": -1.4639303497966898,
+      "original_faulty_latitude": 54.67490660555041,
+      "original_faulty_longitude": -1.4607602148010859
+    },
+    {
+      "source_record_id": "16406",
+      "easting": 489933.0,
+      "northing": 321697.0,
+      "latitude": 52.78536695613154,
+      "longitude": -0.6679750549347886,
+      "original_faulty_latitude": 52.78601566665349,
+      "original_faulty_longitude": -0.6647796640007921
+    },
+    {
+      "source_record_id": "16413",
+      "easting": 271605.0,
+      "northing": 847495.0,
+      "latitude": 57.49940846751778,
+      "longitude": -4.144152467253484,
+      "original_faulty_latitude": 57.50119481282827,
+      "original_faulty_longitude": -4.141417467839219
+    },
+    {
+      "source_record_id": "16696",
+      "easting": 417867.0,
+      "northing": 432741.0,
+      "latitude": 53.79068126677943,
+      "longitude": -1.7302749522013403,
+      "original_faulty_latitude": 53.79158402607292,
+      "original_faulty_longitude": -1.7272472365694214
+    },
+    {
+      "source_record_id": "16799",
+      "easting": 286130.0,
+      "northing": 875722.0,
+      "latitude": 57.756696594137395,
+      "longitude": -3.9152368079755795,
+      "original_faulty_latitude": 57.75853347012272,
+      "original_faulty_longitude": -3.9124168808176765
+    },
+    {
+      "source_record_id": "16865",
+      "easting": 364388.0,
+      "northing": 185275.0,
+      "latitude": 51.565217676043254,
+      "longitude": -2.5151615817636634,
+      "original_faulty_latitude": 51.56565110112757,
+      "original_faulty_longitude": -2.5124907112710173
+    },
+    {
+      "source_record_id": "16910",
+      "easting": 271493.0,
+      "northing": 124561.0,
+      "latitude": 51.00603910084527,
+      "longitude": -3.833000557090451,
+      "original_faulty_latitude": 51.006382728610724,
+      "original_faulty_longitude": -3.8306690688773988
+    },
+    {
+      "source_record_id": "16934",
+      "easting": 526602.0,
+      "northing": 321994.0,
+      "latitude": 52.78068999517163,
+      "longitude": -0.12442871307733812,
+      "original_faulty_latitude": 52.78132031352981,
+      "original_faulty_longitude": -0.12110621446561419
+    },
+    {
+      "source_record_id": "16943",
+      "easting": 464588.0,
+      "northing": 436292.0,
+      "latitude": 53.818902731383076,
+      "longitude": -1.0204189147578244,
+      "original_faulty_latitude": 53.81979015611263,
+      "original_faulty_longitude": -1.0172173866180778
+    },
+    {
+      "source_record_id": "17097",
+      "easting": 417867.0,
+      "northing": 432741.0,
+      "latitude": 53.79068126677943,
+      "longitude": -1.7302749522013403,
+      "original_faulty_latitude": 53.79158402607292,
+      "original_faulty_longitude": -1.7272472365694214
+    },
+    {
+      "source_record_id": "17375",
+      "easting": 355399.0,
+      "northing": 487811.0,
+      "latitude": 54.28397500891922,
+      "longitude": -2.6865743449297668,
+      "original_faulty_latitude": 54.285014080563414,
+      "original_faulty_longitude": -2.6837387104464923
+    },
+    {
+      "source_record_id": "17758",
+      "easting": 220046.0,
+      "northing": 599943.0,
+      "latitude": 55.26071030096127,
+      "longitude": -4.8334190528195125,
+      "original_faulty_latitude": 55.26202042863129,
+      "original_faulty_longitude": -4.831044018925059
+    },
+    {
+      "source_record_id": "17860",
+      "easting": 124546.0,
+      "northing": 664568.0,
+      "latitude": 55.79564427641395,
+      "longitude": -6.396477719130444,
+      "original_faulty_latitude": 55.797107218286605,
+      "original_faulty_longitude": -6.394466154806661
+    },
+    {
+      "source_record_id": "17891",
+      "easting": 648378.0,
+      "northing": 277193.0,
+      "latitude": 52.33653798397631,
+      "longitude": 1.644495269390591,
+      "original_faulty_latitude": 52.33701027346585,
+      "original_faulty_longitude": 1.648187391063863
+    },
+    {
+      "source_record_id": "18436",
+      "easting": 359598.0,
+      "northing": 199585.0,
+      "latitude": 51.69355212542586,
+      "longitude": -2.58591817640153,
+      "original_faulty_latitude": 51.694015876881714,
+      "original_faulty_longitude": -2.5832546139081756
+    },
+    {
+      "source_record_id": "18527",
+      "easting": 343146.0,
+      "northing": 358857.0,
+      "latitude": 53.1238367231427,
+      "longitude": -2.8510419256423365,
+      "original_faulty_latitude": 53.124624057471486,
+      "original_faulty_longitude": -2.848336777247275
+    },
+    {
+      "source_record_id": "18571",
+      "easting": 438480.0,
+      "northing": 144154.0,
+      "latitude": 51.1953159148053,
+      "longitude": -1.450694498139379,
+      "original_faulty_latitude": 51.1956374669602,
+      "original_faulty_longitude": -1.44780660089897
+    },
+    {
+      "source_record_id": "18716",
+      "easting": 437662.0,
+      "northing": 481151.0,
+      "latitude": 54.22469962287596,
+      "longitude": -1.423840036552525,
+      "original_faulty_latitude": 54.22568883247476,
+      "original_faulty_longitude": -1.4207003495536614
+    },
+    {
+      "source_record_id": "19150",
+      "easting": 543933.0,
+      "northing": 244544.0,
+      "latitude": 52.08054891035121,
+      "longitude": 0.09901489373314648,
+      "original_faulty_latitude": 52.08101779553236,
+      "original_faulty_longitude": 0.10232827336092469
+    },
+    {
+      "source_record_id": "19286",
+      "easting": 339886.0,
+      "northing": 545627.0,
+      "latitude": 54.80189711812802,
+      "longitude": -2.9366519208359905,
+      "original_faulty_latitude": 54.80305738045606,
+      "original_faulty_longitude": -2.9338357169235136
+    },
+    {
+      "source_record_id": "19373",
+      "easting": 405118.0,
+      "northing": 183986.0,
+      "latitude": 51.5547374300941,
+      "longitude": -1.9275748845282605,
+      "original_faulty_latitude": 51.55515217149022,
+      "original_faulty_longitude": -1.9247695626078376
+    },
+    {
+      "source_record_id": "19414",
+      "easting": 271576.0,
+      "northing": 672294.0,
+      "latitude": 55.92651585632332,
+      "longitude": -4.056919708908339,
+      "original_faulty_latitude": 55.92795382258249,
+      "original_faulty_longitude": -4.054295183714833
+    },
+    {
+      "source_record_id": "19430",
+      "easting": 361344.0,
+      "northing": 393060.0,
+      "latitude": 53.43289646245183,
+      "longitude": -2.5832946094450016,
+      "original_faulty_latitude": 53.433744745388594,
+      "original_faulty_longitude": -2.5805016318544625
+    },
+    {
+      "source_record_id": "19497",
+      "easting": 525238.0,
+      "northing": 425143.0,
+      "latitude": 53.70769586331969,
+      "longitude": -0.10411178331010536,
+      "original_faulty_latitude": 53.70852949791822,
+      "original_faulty_longitude": -0.10070023838202694
+    },
+    {
+      "source_record_id": "195",
+      "easting": 521100.0,
+      "northing": 414050.0,
+      "latitude": 53.609016337211095,
+      "longitude": -0.1710865827451972,
+      "original_faulty_latitude": 53.60983046511098,
+      "original_faulty_longitude": -0.16770023173187604
+    },
+    {
+      "source_record_id": "19529",
+      "easting": 195458.0,
+      "northing": 48965.0,
+      "latitude": 50.305074938255665,
+      "longitude": -4.873762265788196,
+      "original_faulty_latitude": 50.30528722362624,
+      "original_faulty_longitude": -4.871708046240603
+    },
+    {
+      "source_record_id": "19721",
+      "easting": 545857.0,
+      "northing": 308525.0,
+      "latitude": 52.65484156020137,
+      "longitude": 0.15486849420886725,
+      "original_faulty_latitude": 52.65543503508183,
+      "original_faulty_longitude": 0.15824511248476344
+    },
+    {
+      "source_record_id": "19725",
+      "easting": 383447.0,
+      "northing": 123319.0,
+      "latitude": 51.0090125203993,
+      "longitude": -2.2373133314079374,
+      "original_faulty_latitude": 51.0093152394255,
+      "original_faulty_longitude": -2.2346176939478033
+    },
+    {
+      "source_record_id": "19954",
+      "easting": 581540.0,
+      "northing": 279662.0,
+      "latitude": 52.38488993060078,
+      "longitude": 0.6660845364287074,
+      "original_faulty_latitude": 52.38540692661849,
+      "original_faulty_longitude": 0.6695556274206769
+    },
+    {
+      "source_record_id": "20364",
+      "easting": 526362.0,
+      "northing": 322586.0,
+      "latitude": 52.7860651021746,
+      "longitude": -0.12775658666501946,
+      "original_faulty_latitude": 52.78669671198777,
+      "original_faulty_longitude": -0.12443439283835159
+    },
+    {
+      "source_record_id": "20579",
+      "easting": 315010.0,
+      "northing": 484544.0,
+      "latitude": 54.24949357960082,
+      "longitude": -3.305885933296416,
+      "original_faulty_latitude": 54.25054189218994,
+      "original_faulty_longitude": -3.3032052732366375
+    },
+    {
+      "source_record_id": "20585",
+      "easting": 500814.0,
+      "northing": 390464.0,
+      "latitude": 53.401382059562245,
+      "longitude": -0.4851474943754033,
+      "original_faulty_latitude": 53.402160659518636,
+      "original_faulty_longitude": -0.4818549609390395
+    },
+    {
+      "source_record_id": "20750",
+      "easting": 428573.0,
+      "northing": 297581.0,
+      "latitude": 52.575301597711025,
+      "longitude": -1.5798080493974958,
+      "original_faulty_latitude": 52.57593173961592,
+      "original_faulty_longitude": -1.5768441170480227
+    },
+    {
+      "source_record_id": "209",
+      "easting": 234450.0,
+      "northing": 105800.0,
+      "latitude": 50.82800336053374,
+      "longitude": -4.352036351420594,
+      "original_faulty_latitude": 50.82831990253291,
+      "original_faulty_longitude": -4.349834161768714
+    },
+    {
+      "source_record_id": "210",
+      "easting": 277924.0,
+      "northing": 676998.0,
+      "latitude": 55.97040954778583,
+      "longitude": -3.9575231901818015,
+      "original_faulty_latitude": 55.97185464247458,
+      "original_faulty_longitude": -3.954869505188696
+    },
+    {
+      "source_record_id": "211",
+      "easting": 277924.0,
+      "northing": 676998.0,
+      "latitude": 55.97040954778583,
+      "longitude": -3.9575231901818015,
+      "original_faulty_latitude": 55.97185464247458,
+      "original_faulty_longitude": -3.954869505188696
+    },
+    {
+      "source_record_id": "212",
+      "easting": 338850.0,
+      "northing": 428420.0,
+      "latitude": 53.7485466125928,
+      "longitude": -2.928766734987466,
+      "original_faulty_latitude": 53.74947412375281,
+      "original_faulty_longitude": -2.9260327192950473
+    },
+    {
+      "source_record_id": "213",
+      "easting": 464588.0,
+      "northing": 342496.0,
+      "latitude": 52.975932491694394,
+      "longitude": -1.0395842756713787,
+      "original_faulty_latitude": 52.97663475192227,
+      "original_faulty_longitude": -1.036460274754295
+    },
+    {
+      "source_record_id": "214",
+      "easting": 387275.0,
+      "northing": 123550.0,
+      "latitude": 51.01118791142969,
+      "longitude": -2.1827593014240936,
+      "original_faulty_latitude": 51.01148960205178,
+      "original_faulty_longitude": -2.1800511107605094
+    },
+    {
+      "source_record_id": "216",
+      "easting": 614994.0,
+      "northing": 337994.0,
+      "latitude": 52.896373622619926,
+      "longitude": 1.194852026999788,
+      "original_faulty_latitude": 52.896984761772956,
+      "original_faulty_longitude": 1.1984936451221255
+    },
+    {
+      "source_record_id": "217",
+      "easting": 383732.0,
+      "northing": 388642.0,
+      "latitude": 53.39435634792926,
+      "longitude": -2.2460991990773356,
+      "original_faulty_latitude": 53.395186637823784,
+      "original_faulty_longitude": -2.2432282430769654
+    },
+    {
+      "source_record_id": "218",
+      "easting": 388115.0,
+      "northing": 400842.0,
+      "latitude": 53.5041330809431,
+      "longitude": -2.1806544197944646,
+      "original_faulty_latitude": 53.5049857392596,
+      "original_faulty_longitude": -2.17775894875802
+    },
+    {
+      "source_record_id": "219",
+      "easting": 594993.0,
+      "northing": 147457.0,
+      "latitude": 51.19305806262094,
+      "longitude": 0.7892503416807547,
+      "original_faulty_latitude": 51.19330873300462,
+      "original_faulty_longitude": 0.7926449263167565
+    },
+    {
+      "source_record_id": "220",
+      "easting": 539857.0,
+      "northing": 298688.0,
+      "latitude": 52.56804576217085,
+      "longitude": 0.062073480748031144,
+      "original_faulty_latitude": 52.56862318431345,
+      "original_faulty_longitude": 0.06542076849509548
+    },
+    {
+      "source_record_id": "221",
+      "easting": 554858.0,
+      "northing": 367352.0,
+      "latitude": 53.180734620915764,
+      "longitude": 0.31585261284918775,
+      "original_faulty_latitude": 53.18143842723008,
+      "original_faulty_longitude": 0.31931487024366073
+    },
+    {
+      "source_record_id": "222",
+      "easting": 544727.0,
+      "northing": 350655.0,
+      "latitude": 53.03360131247496,
+      "longitude": 0.15685436073215098,
+      "original_faulty_latitude": 53.03427805923449,
+      "original_faulty_longitude": 0.16026560901346573
+    },
+    {
+      "source_record_id": "223",
+      "easting": 333392.0,
+      "northing": 444767.0,
+      "latitude": 53.89477913722597,
+      "longitude": -3.0150644836832856,
+      "original_faulty_latitude": 53.89574129466697,
+      "original_faulty_longitude": -3.0123401240317063
+    },
+    {
+      "source_record_id": "224",
+      "easting": 351423.0,
+      "northing": 423205.0,
+      "latitude": 53.70300377294252,
+      "longitude": -2.7373068901433832,
+      "original_faulty_latitude": 53.70391598277,
+      "original_faulty_longitude": -2.7345299964009024
+    },
+    {
+      "source_record_id": "225",
+      "easting": 334315.0,
+      "northing": 443459.0,
+      "latitude": 53.8831428123956,
+      "longitude": -3.0007405899940425,
+      "original_faulty_latitude": 53.884102011508055,
+      "original_faulty_longitude": -2.998013643828228
+    },
+    {
+      "source_record_id": "226",
+      "easting": 484016.0,
+      "northing": 280041.0,
+      "latitude": 52.41192855852137,
+      "longitude": -0.766247244221628,
+      "original_faulty_latitude": 52.41249802043653,
+      "original_faulty_longitude": -0.7631063019564381
+    },
+    {
+      "source_record_id": "227",
+      "easting": 489102.0,
+      "northing": 99582.0,
+      "latitude": 50.78897054945501,
+      "longitude": -0.7372996528150306,
+      "original_faulty_latitude": 50.78918107033554,
+      "original_faulty_longitude": -0.7342808926957162
+    },
+    {
+      "source_record_id": "228",
+      "easting": 384502.0,
+      "northing": 319762.0,
+      "latitude": 52.77522003180488,
+      "longitude": -2.2311750650184465,
+      "original_faulty_latitude": 52.77591314250642,
+      "original_faulty_longitude": -2.2283489938234644
+    },
+    {
+      "source_record_id": "229",
+      "easting": 446279.0,
+      "northing": 211425.0,
+      "latitude": 51.799563299362205,
+      "longitude": -1.3302881338871557,
+      "original_faulty_latitude": 51.80001477436308,
+      "original_faulty_longitude": -1.3273269609744032
+    },
+    {
+      "source_record_id": "231",
+      "easting": 277889.0,
+      "northing": 676918.0,
+      "latitude": 55.96968228556314,
+      "longitude": -3.958047306584117,
+      "original_faulty_latitude": 55.971127233453174,
+      "original_faulty_longitude": -3.955393816067411
+    },
+    {
+      "source_record_id": "232",
+      "easting": 353600.0,
+      "northing": 179530.0,
+      "latitude": 51.51277892098347,
+      "longitude": -2.670028524119315,
+      "original_faulty_latitude": 51.51320493847623,
+      "original_faulty_longitude": -2.667396982960546
+    },
+    {
+      "source_record_id": "233",
+      "easting": 451758.0,
+      "northing": 298963.0,
+      "latitude": 52.5860171693875,
+      "longitude": -1.2374994093382183,
+      "original_faulty_latitude": 52.58663946040271,
+      "original_faulty_longitude": -1.234454304497406
+    },
+    {
+      "source_record_id": "234",
+      "easting": 467916.0,
+      "northing": 176874.0,
+      "latitude": 51.48674760862415,
+      "longitude": -1.0232562937858642,
+      "original_faulty_latitude": 51.487120824573424,
+      "original_faulty_longitude": -1.0202488674810728
+    },
+    {
+      "source_record_id": "235",
+      "easting": 378836.0,
+      "northing": 109350.0,
+      "latitude": 50.883248439257386,
+      "longitude": -2.3022192527380154,
+      "original_faulty_latitude": 50.88352511498879,
+      "original_faulty_longitude": -2.2995470303780325
+    },
+    {
+      "source_record_id": "236",
+      "easting": 334777.0,
+      "northing": 149380.0,
+      "latitude": 51.23985363857782,
+      "longitude": -2.9356948559242664,
+      "original_faulty_latitude": 51.240226300395534,
+      "original_faulty_longitude": -2.9331429063769003
+    },
+    {
+      "source_record_id": "237",
+      "easting": 580088.0,
+      "northing": 265389.0,
+      "latitude": 52.25718819489525,
+      "longitude": 0.6371382315941195,
+      "original_faulty_latitude": 52.257678085541926,
+      "original_faulty_longitude": 0.6405911342697409
+    },
+    {
+      "source_record_id": "238",
+      "easting": 534209.0,
+      "northing": 229393.0,
+      "latitude": 51.94685097612499,
+      "longitude": -0.04872836922767738,
+      "original_faulty_latitude": 51.94729521166511,
+      "original_faulty_longitude": -0.045460376359360705
+    },
+    {
+      "source_record_id": "239",
+      "easting": 615969.0,
+      "northing": 316308.0,
+      "latitude": 52.70134214846573,
+      "longitude": 1.1950132677025715,
+      "original_faulty_latitude": 52.70191045407179,
+      "original_faulty_longitude": 1.1986362847796532
+    },
+    {
+      "source_record_id": "240",
+      "easting": 498750.0,
+      "northing": 225450.0,
+      "latitude": 51.91882918508015,
+      "longitude": -0.5655650035314006,
+      "original_faulty_latitude": 51.91928366730117,
+      "original_faulty_longitude": -0.5624182139096086
+    },
+    {
+      "source_record_id": "241",
+      "easting": 625751.0,
+      "northing": 167136.0,
+      "latitude": 51.3584143105269,
+      "longitude": 1.2411602499632248,
+      "original_faulty_latitude": 51.3586859444786,
+      "original_faulty_longitude": 1.2446709083348038
+    },
+    {
+      "source_record_id": "242",
+      "easting": 457265.0,
+      "northing": 404820.0,
+      "latitude": 53.536916850990416,
+      "longitude": -1.137433598427227,
+      "original_faulty_latitude": 53.53774577127317,
+      "original_faulty_longitude": -1.1342849283685925
+    },
+    {
+      "source_record_id": "244",
+      "easting": 571785.0,
+      "northing": 186629.0,
+      "latitude": 51.55239521220157,
+      "longitude": 0.4763833596774643,
+      "original_faulty_latitude": 51.55273540510347,
+      "original_faulty_longitude": 0.47973782472684745
+    },
+    {
+      "source_record_id": "245",
+      "easting": 498538.0,
+      "northing": 456147.0,
+      "latitude": 53.99197716769891,
+      "longitude": -0.4985100673558372,
+      "original_faulty_latitude": 53.99288617084478,
+      "original_faulty_longitude": -0.49516688841046785
+    },
+    {
+      "source_record_id": "246",
+      "easting": 466125.0,
+      "northing": 284563.0,
+      "latitude": 52.45502686778023,
+      "longitude": -1.0283355830341363,
+      "original_faulty_latitude": 52.45561390853419,
+      "original_faulty_longitude": -1.025252226013164
+    },
+    {
+      "source_record_id": "247",
+      "easting": 337451.0,
+      "northing": 327233.0,
+      "latitude": 52.83896140398578,
+      "longitude": -2.930006584386113,
+      "original_faulty_latitude": 52.83968787613746,
+      "original_faulty_longitude": -2.927341376557553
+    },
+    {
+      "source_record_id": "248",
+      "easting": 614742.0,
+      "northing": 326962.0,
+      "latitude": 52.79745675701178,
+      "longitude": 1.1838532517954463,
+      "original_faulty_latitude": 52.79804656152867,
+      "original_faulty_longitude": 1.187482829774089
+    },
+    {
+      "source_record_id": "249",
+      "easting": 399422.0,
+      "northing": 309599.0,
+      "latitude": 52.68408424170176,
+      "longitude": -2.0099866486311577,
+      "original_faulty_latitude": 52.684750920125744,
+      "original_faulty_longitude": -2.00711538297652
+    },
+    {
+      "source_record_id": "250",
+      "easting": 444005.0,
+      "northing": 426240.0,
+      "latitude": 53.73070643588857,
+      "longitude": -1.3344670084941685,
+      "original_faulty_latitude": 53.731584088159366,
+      "original_faulty_longitude": -1.3313489029854382
+    },
+    {
+      "source_record_id": "251",
+      "easting": 616498.0,
+      "northing": 316273.0,
+      "latitude": 52.700816923383,
+      "longitude": 1.2028064161022507,
+      "original_faulty_latitude": 52.701384840316045,
+      "original_faulty_longitude": 1.2064311932407084
+    },
+    {
+      "source_record_id": "252",
+      "easting": 269721.0,
+      "northing": 208068.0,
+      "latitude": 51.756103842290216,
+      "longitude": -3.888897902057184,
+      "original_faulty_latitude": 51.75661518803585,
+      "original_faulty_longitude": -3.8865322982669364
+    },
+    {
+      "source_record_id": "253",
+      "easting": 501545.0,
+      "northing": 416448.0,
+      "latitude": 53.63471282632121,
+      "longitude": -0.4657452391046278,
+      "original_faulty_latitude": 53.63554216399274,
+      "original_faulty_longitude": -0.4624270035303869
+    },
+    {
+      "source_record_id": "255",
+      "easting": 321166.0,
+      "northing": 175969.0,
+      "latitude": 51.47716544010058,
+      "longitude": -3.1365354976619417,
+      "original_faulty_latitude": 51.477595924101784,
+      "original_faulty_longitude": -3.1340138681225023
+    },
+    {
+      "source_record_id": "256",
+      "easting": 419664.0,
+      "northing": 291273.0,
+      "latitude": 52.51898750298508,
+      "longitude": -1.711638908264929,
+      "original_faulty_latitude": 52.51960908119969,
+      "original_faulty_longitude": -1.7087103630332892
+    },
+    {
+      "source_record_id": "257",
+      "easting": 463399.0,
+      "northing": 339854.0,
+      "latitude": 52.95232786275181,
+      "longitude": -1.057804884524219,
+      "original_faulty_latitude": 52.95302547820725,
+      "original_faulty_longitude": -1.0546871777512719
+    },
+    {
+      "source_record_id": "258",
+      "easting": 551017.0,
+      "northing": 180976.0,
+      "latitude": 51.507540224838415,
+      "longitude": 0.1746580346636274,
+      "original_faulty_latitude": 51.50788045214704,
+      "original_faulty_longitude": 0.17794015081017137
+    },
+    {
+      "source_record_id": "259",
+      "easting": 465377.0,
+      "northing": 146817.0,
+      "latitude": 51.21681922368244,
+      "longitude": -1.0653311779951002,
+      "original_faulty_latitude": 51.217134112622325,
+      "original_faulty_longitude": -1.0623540547895958
+    },
+    {
+      "source_record_id": "260",
+      "easting": 508839.0,
+      "northing": 411734.0,
+      "latitude": 53.59089571397927,
+      "longitude": -0.3571267531207959,
+      "original_faulty_latitude": 53.591711907193094,
+      "original_faulty_longitude": -0.35378652823880385
+    },
+    {
+      "source_record_id": "261",
+      "easting": 300938.0,
+      "northing": 205377.0,
+      "latitude": 51.73831441423443,
+      "longitude": -3.4360326348495382,
+      "original_faulty_latitude": 51.73881047072296,
+      "original_faulty_longitude": -3.433562943005716
+    },
+    {
+      "source_record_id": "262",
+      "easting": 613200.0,
+      "northing": 275000.0,
+      "latitude": 52.331642061578165,
+      "longitude": 1.12763406983359,
+      "original_faulty_latitude": 52.332131509825764,
+      "original_faulty_longitude": 1.131206814016912
+    },
+    {
+      "source_record_id": "263",
+      "easting": 392500.0,
+      "northing": 392300.0,
+      "latitude": 53.42743560244445,
+      "longitude": -2.1143367842423197,
+      "original_faulty_latitude": 53.428269428050804,
+      "original_faulty_longitude": -2.1114315551550313
+    },
+    {
+      "source_record_id": "264",
+      "easting": 499560.0,
+      "northing": 268037.0,
+      "latitude": 52.301441512371184,
+      "longitude": -0.5413545090934406,
+      "original_faulty_latitude": 52.30197958655881,
+      "original_faulty_longitude": -0.5381704692927662
+    },
+    {
+      "source_record_id": "265",
+      "easting": 465057.0,
+      "northing": 362789.0,
+      "latitude": 53.158264803826235,
+      "longitude": -1.0285062890813763,
+      "original_faulty_latitude": 53.15900691785549,
+      "original_faulty_longitude": -1.025364196756239
+    },
+    {
+      "source_record_id": "266",
+      "easting": 229333.0,
+      "northing": 650530.0,
+      "latitude": 55.71805291703512,
+      "longitude": -4.718572121526718,
+      "original_faulty_latitude": 55.71946129898739,
+      "original_faulty_longitude": -4.716133910153749
+    },
+    {
+      "source_record_id": "267",
+      "easting": 312882.0,
+      "northing": 552124.0,
+      "latitude": 54.85629636351758,
+      "longitude": -3.358571732407354,
+      "original_faulty_latitude": 54.85748005347253,
+      "original_faulty_longitude": -3.3558563328933673
+    },
+    {
+      "source_record_id": "268",
+      "easting": 397144.0,
+      "northing": 350648.0,
+      "latitude": 53.053080856250936,
+      "longitude": -2.0440587673145627,
+      "original_faulty_latitude": 53.053830010001654,
+      "original_faulty_longitude": -2.0411666388147327
+    },
+    {
+      "source_record_id": "269",
+      "easting": 308683.0,
+      "northing": 690319.0,
+      "latitude": 56.09689517166064,
+      "longitude": -3.4694439932173906,
+      "original_faulty_latitude": 56.09835531249345,
+      "original_faulty_longitude": -3.4666539219996513
+    },
+    {
+      "source_record_id": "270",
+      "easting": 428111.0,
+      "northing": 297109.0,
+      "latitude": 52.571082492741276,
+      "longitude": -1.586665018958373,
+      "original_faulty_latitude": 52.57171190543141,
+      "original_faulty_longitude": -1.5837030315589804
+    },
+    {
+      "source_record_id": "271",
+      "easting": 527584.0,
+      "northing": 235416.0,
+      "latitude": 52.00253112566947,
+      "longitude": -0.1428262968237981,
+      "original_faulty_latitude": 52.00299065819979,
+      "original_faulty_longitude": -0.1395752426026244
+    },
+    {
+      "source_record_id": "272",
+      "easting": 498144.0,
+      "northing": 263639.0,
+      "latitude": 52.26216932208056,
+      "longitude": -0.5633921273434758,
+      "original_faulty_latitude": 52.26269943218001,
+      "original_faulty_longitude": -0.5602164838935846
+    },
+    {
+      "source_record_id": "273",
+      "easting": 559921.0,
+      "northing": 286678.0,
+      "latitude": 52.454645897231444,
+      "longitude": 0.35208178504473076,
+      "original_faulty_latitude": 52.455188783979104,
+      "original_faulty_longitude": 0.3554864210135739
+    },
+    {
+      "source_record_id": "274",
+      "easting": 602618.0,
+      "northing": 284869.0,
+      "latitude": 52.42425237704617,
+      "longitude": 0.9785192474993417,
+      "original_faulty_latitude": 52.424767341057375,
+      "original_faulty_longitude": 0.9820661540800354
+    },
+    {
+      "source_record_id": "275",
+      "easting": 460867.0,
+      "northing": 146936.0,
+      "latitude": 51.21838684885869,
+      "longitude": -1.129875732683773,
+      "original_faulty_latitude": 51.21870401605898,
+      "original_faulty_longitude": -1.1269131576030569
+    },
+    {
+      "source_record_id": "277",
+      "easting": 323366.0,
+      "northing": 138920.0,
+      "latitude": 51.14439422124727,
+      "longitude": -3.0968906665237723,
+      "original_faulty_latitude": 51.144749951989326,
+      "original_faulty_longitude": -3.0943819524834697
+    },
+    {
+      "source_record_id": "278",
+      "easting": 523801.0,
+      "northing": 297290.0,
+      "latitude": 52.55937144135177,
+      "longitude": -0.17520540151167352,
+      "original_faulty_latitude": 52.5599546720326,
+      "original_faulty_longitude": -0.17191416616047267
+    },
+    {
+      "source_record_id": "279",
+      "easting": 603151.0,
+      "northing": 284969.0,
+      "latitude": 52.42495258746566,
+      "longitude": 0.9864073613945186,
+      "original_faulty_latitude": 52.42546743302442,
+      "original_faulty_longitude": 0.9899561552272418
+    },
+    {
+      "source_record_id": "280",
+      "easting": 427211.0,
+      "northing": 523486.0,
+      "latitude": 54.605814630199774,
+      "longitude": -1.5802656061432028,
+      "original_faulty_latitude": 54.60689251560504,
+      "original_faulty_longitude": -1.5771302894631514
+    },
+    {
+      "source_record_id": "281",
+      "easting": 548394.0,
+      "northing": 182415.0,
+      "latitude": 51.52116419235606,
+      "longitude": 0.13749620317508504,
+      "original_faulty_latitude": 51.5215086285913,
+      "original_faulty_longitude": 0.1407710083094315
+    },
+    {
+      "source_record_id": "282",
+      "easting": 540324.0,
+      "northing": 328455.0,
+      "latitude": 52.83534397678208,
+      "longitude": 0.08164703205384775,
+      "original_faulty_latitude": 52.835979586540425,
+      "original_faulty_longitude": 0.08502268133775295
+    },
+    {
+      "source_record_id": "283",
+      "easting": 470457.0,
+      "northing": 217300.0,
+      "latitude": 51.84985834051828,
+      "longitude": -0.9785269741855644,
+      "original_faulty_latitude": 51.850310343899565,
+      "original_faulty_longitude": -0.9754808293094966
+    },
+    {
+      "source_record_id": "284",
+      "easting": 330110.0,
+      "northing": 198710.0,
+      "latitude": 51.682783245594436,
+      "longitude": -3.0123058713858293,
+      "original_faulty_latitude": 51.68325602012009,
+      "original_faulty_longitude": -3.009741681586213
+    },
+    {
+      "source_record_id": "285",
+      "easting": 374201.0,
+      "northing": 293951.0,
+      "latitude": 52.54279638364479,
+      "longitude": -2.381840627497871,
+      "original_faulty_latitude": 52.54344235638241,
+      "original_faulty_longitude": -2.3790677562878018
+    },
+    {
+      "source_record_id": "286",
+      "easting": 259509.0,
+      "northing": 662366.0,
+      "latitude": 55.834008067387195,
+      "longitude": -4.244732238080086,
+      "original_faulty_latitude": 55.83543038798645,
+      "original_faulty_longitude": -4.242163409258857
+    },
+    {
+      "source_record_id": "287",
+      "easting": 410161.0,
+      "northing": 98525.0,
+      "latitude": 50.786209548989696,
+      "longitude": -1.857225985744097,
+      "original_faulty_latitude": 50.786452357057115,
+      "original_faulty_longitude": -1.854459783558094
+    },
+    {
+      "source_record_id": "288",
+      "easting": 366362.0,
+      "northing": 134820.0,
+      "latitude": 51.111678634962345,
+      "longitude": -2.4819011525232586,
+      "original_faulty_latitude": 51.11201077632536,
+      "original_faulty_longitude": -2.479254130663893
+    },
+    {
+      "source_record_id": "289",
+      "easting": 443726.0,
+      "northing": 411990.0,
+      "latitude": 53.6026571584547,
+      "longitude": -1.3406970680976964,
+      "original_faulty_latitude": 53.603506777818076,
+      "original_faulty_longitude": -1.3375914947991177
+    },
+    {
+      "source_record_id": "290",
+      "easting": 510170.0,
+      "northing": 430424.0,
+      "latitude": 53.75853532287076,
+      "longitude": -0.330400273316813,
+      "original_faulty_latitude": 53.75938753455434,
+      "original_faulty_longitude": -0.32703824131184417
+    },
+    {
+      "source_record_id": "291",
+      "easting": 536298.0,
+      "northing": 350519.0,
+      "latitude": 53.03459138631876,
+      "longitude": 0.031184752281824,
+      "original_faulty_latitude": 53.0352725006408,
+      "original_faulty_longitude": 0.0345665079937114
+    },
+    {
+      "source_record_id": "292",
+      "easting": 391166.0,
+      "northing": 286880.0,
+      "latitude": 52.47977200368345,
+      "longitude": -2.131500659652567,
+      "original_faulty_latitude": 52.48039700626019,
+      "original_faulty_longitude": -2.1286736916316147
+    },
+    {
+      "source_record_id": "293",
+      "easting": 475087.0,
+      "northing": 253122.0,
+      "latitude": 52.1712611942791,
+      "longitude": -0.903481094523389,
+      "original_faulty_latitude": 52.17178181660952,
+      "original_faulty_longitude": -0.9003918165465706
+    },
+    {
+      "source_record_id": "294",
+      "easting": 361141.0,
+      "northing": 131346.0,
+      "latitude": 51.08011029842421,
+      "longitude": -2.556105269125469,
+      "original_faulty_latitude": 51.080437462519676,
+      "original_faulty_longitude": -2.5534773271702402
+    },
+    {
+      "source_record_id": "295",
+      "easting": 283383.0,
+      "northing": 635612.0,
+      "latitude": 55.60011073389725,
+      "longitude": -3.8523839190664475,
+      "original_faulty_latitude": 55.60147148028271,
+      "original_faulty_longitude": -3.849733367135804
+    },
+    {
+      "source_record_id": "296",
+      "easting": 488703.0,
+      "northing": 240458.0,
+      "latitude": 52.055416561882325,
+      "longitude": -0.7077313295585493,
+      "original_faulty_latitude": 52.055905591903894,
+      "original_faulty_longitude": -0.704606170085857
+    },
+    {
+      "source_record_id": "297",
+      "easting": 461566.0,
+      "northing": 190948.0,
+      "latitude": 51.61400292313315,
+      "longitude": -1.1122387204920485,
+      "original_faulty_latitude": 51.61440691196095,
+      "original_faulty_longitude": -1.1092417976061917
+    },
+    {
+      "source_record_id": "298",
+      "easting": 250440.0,
+      "northing": 669070.0,
+      "latitude": 55.891464147125035,
+      "longitude": -4.393095069324817,
+      "original_faulty_latitude": 55.89290283962697,
+      "original_faulty_longitude": -4.390559861393815
+    },
+    {
+      "source_record_id": "302",
+      "easting": 363395.0,
+      "northing": 165868.0,
+      "latitude": 51.39066332559992,
+      "longitude": -2.5274692091966102,
+      "original_faulty_latitude": 51.391058455163154,
+      "original_faulty_longitude": -2.5248133586769193
+    },
+    {
+      "source_record_id": "304",
+      "easting": 527064.0,
+      "northing": 168315.0,
+      "latitude": 51.39964526854729,
+      "longitude": -0.17482531742671006,
+      "original_faulty_latitude": 51.399972968755414,
+      "original_faulty_longitude": -0.17163150575258032
+    },
+    {
+      "source_record_id": "305",
+      "easting": 256301.0,
+      "northing": 61291.0,
+      "latitude": 50.43383570207418,
+      "longitude": -4.024731554580824,
+      "original_faulty_latitude": 50.43405700441519,
+      "original_faulty_longitude": -4.022478035051331
+    },
+    {
+      "source_record_id": "306",
+      "easting": 350392.0,
+      "northing": 384214.0,
+      "latitude": 53.35247138683772,
+      "longitude": -2.7467308511849855,
+      "original_faulty_latitude": 53.35330641151309,
+      "original_faulty_longitude": -2.7439833751314846
+    },
+    {
+      "source_record_id": "307",
+      "easting": 457265.0,
+      "northing": 404820.0,
+      "latitude": 53.536916850990416,
+      "longitude": -1.137433598427227,
+      "original_faulty_latitude": 53.53774577127317,
+      "original_faulty_longitude": -1.1342849283685925
+    },
+    {
+      "source_record_id": "308",
+      "easting": 499459.0,
+      "northing": 165739.0,
+      "latitude": 51.38199647961853,
+      "longitude": -0.5722212131935306,
+      "original_faulty_latitude": 51.38233277523918,
+      "original_faulty_longitude": -0.5691191559148773
+    },
+    {
+      "source_record_id": "309",
+      "easting": 462309.0,
+      "northing": 431934.0,
+      "latitude": 53.780016144207536,
+      "longitude": -1.055910527630208,
+      "original_faulty_latitude": 53.780896105897405,
+      "original_faulty_longitude": -1.0527209980065206
+    },
+    {
+      "source_record_id": "310",
+      "easting": 530006.0,
+      "northing": 166069.0,
+      "latitude": 51.378794810708285,
+      "longitude": -0.13337911055492943,
+      "original_faulty_latitude": 51.37911659525185,
+      "original_faulty_longitude": -0.13017758403846633
+    },
+    {
+      "source_record_id": "311",
+      "easting": 538126.0,
+      "northing": 209495.0,
+      "latitude": 51.76710142465782,
+      "longitude": 0.0002792810024716592,
+      "original_faulty_latitude": 51.76750448073548,
+      "original_faulty_longitude": 0.003543368587023143
+    },
+    {
+      "source_record_id": "312",
+      "easting": 517281.0,
+      "northing": 135056.0,
+      "latitude": 51.102818937889026,
+      "longitude": -0.3262785066105355,
+      "original_faulty_latitude": 51.10308598519496,
+      "original_faulty_longitude": -0.32314281878582635
+    },
+    {
+      "source_record_id": "313",
+      "easting": 582782.0,
+      "northing": 230400.0,
+      "latitude": 51.9420715015851,
+      "longitude": 0.6578094402832816,
+      "original_faulty_latitude": 51.942491381235236,
+      "original_faulty_longitude": 0.6612390730654358
+    },
+    {
+      "source_record_id": "314",
+      "easting": 410878.0,
+      "northing": 289562.0,
+      "latitude": 52.50385016834421,
+      "longitude": -1.8411740724492671,
+      "original_faulty_latitude": 52.504472170783906,
+      "original_faulty_longitude": -1.8382771023320323
+    },
+    {
+      "source_record_id": "315",
+      "easting": 420921.0,
+      "northing": 285739.0,
+      "latitude": 52.46919136842654,
+      "longitude": -1.693460431755739,
+      "original_faulty_latitude": 52.46980141895171,
+      "original_faulty_longitude": -1.6905315307832605
+    },
+    {
+      "source_record_id": "316",
+      "easting": 521310.0,
+      "northing": 182908.0,
+      "latitude": 51.53205603206343,
+      "longitude": -0.252494554921695,
+      "original_faulty_latitude": 51.53241538574849,
+      "original_faulty_longitude": -0.24930763366156478
+    },
+    {
+      "source_record_id": "317",
+      "easting": 331400.0,
+      "northing": 143200.0,
+      "latitude": 51.183895068707216,
+      "longitude": -2.982878567871804,
+      "original_faulty_latitude": 51.18425657514016,
+      "original_faulty_longitude": -2.9803411517187097
+    },
+    {
+      "source_record_id": "318",
+      "easting": 304959.0,
+      "northing": 374970.0,
+      "latitude": 53.2631833429798,
+      "longitude": -3.4263280228983524,
+      "original_faulty_latitude": 53.26401678380744,
+      "original_faulty_longitude": -3.423750515668106
+    },
+    {
+      "source_record_id": "319",
+      "easting": 549090.0,
+      "northing": 169697.0,
+      "latitude": 51.40670710204149,
+      "longitude": 0.14216173666399493,
+      "original_faulty_latitude": 51.407026174978846,
+      "original_faulty_longitude": 0.14542808035653249
+    },
+    {
+      "source_record_id": "320",
+      "easting": 380250.0,
+      "northing": 416825.0,
+      "latitude": 53.647552708841566,
+      "longitude": -2.300247320743115,
+      "original_faulty_latitude": 53.648440438652415,
+      "original_faulty_longitude": -2.297369122329568
+    },
+    {
+      "source_record_id": "321",
+      "easting": 431341.0,
+      "northing": 560661.0,
+      "latitude": 54.93963712095347,
+      "longitude": -1.512332929063491,
+      "original_faulty_latitude": 54.940786424327165,
+      "original_faulty_longitude": -1.5091504797547293
+    },
+    {
+      "source_record_id": "322",
+      "easting": 451868.0,
+      "northing": 143268.0,
+      "latitude": 51.18629394015388,
+      "longitude": -1.2592416912819149,
+      "original_faulty_latitude": 51.18660786672554,
+      "original_faulty_longitude": -1.2563109348045918
+    },
+    {
+      "source_record_id": "323",
+      "easting": 464904.0,
+      "northing": 443729.0,
+      "latitude": 53.88569638187395,
+      "longitude": -1.01405061722635,
+      "original_faulty_latitude": 53.88659831843463,
+      "original_faulty_longitude": -1.0108416087549108
+    },
+    {
+      "source_record_id": "324",
+      "easting": 466125.0,
+      "northing": 284563.0,
+      "latitude": 52.45502686778023,
+      "longitude": -1.0283355830341363,
+      "original_faulty_latitude": 52.45561390853419,
+      "original_faulty_longitude": -1.025252226013164
+    },
+    {
+      "source_record_id": "325",
+      "easting": 625958.0,
+      "northing": 166890.0,
+      "latitude": 51.35612367857441,
+      "longitude": 1.2439722178257144,
+      "original_faulty_latitude": 51.356394711872646,
+      "original_faulty_longitude": 1.2474833077681777
+    },
+    {
+      "source_record_id": "326",
+      "easting": 458500.0,
+      "northing": 519500.0,
+      "latitude": 54.56735092990332,
+      "longitude": -1.0967261428562438,
+      "original_faulty_latitude": 54.568405493822645,
+      "original_faulty_longitude": -1.0934753766201881
+    },
+    {
+      "source_record_id": "327",
+      "easting": 452924.0,
+      "northing": 86485.0,
+      "latitude": 50.675629036865736,
+      "longitude": -1.2523612503647839,
+      "original_faulty_latitude": 50.67582995123985,
+      "original_faulty_longitude": -1.249466678625727
+    },
+    {
+      "source_record_id": "328",
+      "easting": 548310.0,
+      "northing": 182740.0,
+      "latitude": 51.52410641751697,
+      "longitude": 0.13642305268743032,
+      "original_faulty_latitude": 51.52445153667914,
+      "original_faulty_longitude": 0.13969785930192755
+    },
+    {
+      "source_record_id": "330",
+      "easting": 429880.0,
+      "northing": 488497.0,
+      "latitude": 54.291229183181535,
+      "longitude": -1.5424656192279782,
+      "original_faulty_latitude": 54.2922366428422,
+      "original_faulty_longitude": -1.5393490169377841
+    },
+    {
+      "source_record_id": "331",
+      "easting": 502320.0,
+      "northing": 360674.0,
+      "latitude": 53.13341341693761,
+      "longitude": -0.47207783624136235,
+      "original_faulty_latitude": 53.134132596846136,
+      "original_faulty_longitude": -0.46880603547695354
+    },
+    {
+      "source_record_id": "332",
+      "easting": 446272.0,
+      "northing": 118254.0,
+      "latitude": 50.961859207893724,
+      "longitude": -1.342498327541509,
+      "original_faulty_latitude": 50.962126009254376,
+      "original_faulty_longitude": -1.3396031198288063
+    },
+    {
+      "source_record_id": "333",
+      "easting": 351977.0,
+      "northing": 674000.0,
+      "latitude": 55.95660914884887,
+      "longitude": -2.7706977196044087,
+      "original_faulty_latitude": 55.958019190111344,
+      "original_faulty_longitude": -2.7677403166296113
+    },
+    {
+      "source_record_id": "335",
+      "easting": 349663.0,
+      "northing": 122127.0,
+      "latitude": 50.996323402824274,
+      "longitude": -2.7186622277740766,
+      "original_faulty_latitude": 50.996636379255385,
+      "original_faulty_longitude": -2.716076987475488
+    },
+    {
+      "source_record_id": "336",
+      "easting": 399036.0,
+      "northing": 141476.0,
+      "latitude": 51.17252251873448,
+      "longitude": -2.01516923366809,
+      "original_faulty_latitude": 51.17285521871486,
+      "original_faulty_longitude": -2.0124115351400707
+    },
+    {
+      "source_record_id": "337",
+      "easting": 620476.0,
+      "northing": 327900.0,
+      "latitude": 52.803564737809744,
+      "longitude": 1.2693893526153024,
+      "original_faulty_latitude": 52.804152875107,
+      "original_faulty_longitude": 1.273039424059738
+    },
+    {
+      "source_record_id": "338",
+      "easting": 566208.0,
+      "northing": 156263.0,
+      "latitude": 51.281263231100205,
+      "longitude": 0.3817926444280922,
+      "original_faulty_latitude": 51.28154685446285,
+      "original_faulty_longitude": 0.3851027951428672
+    },
+    {
+      "source_record_id": "339",
+      "easting": 445484.0,
+      "northing": 401479.0,
+      "latitude": 53.5080384220657,
+      "longitude": -1.315658179665098,
+      "original_faulty_latitude": 53.50886642423384,
+      "original_faulty_longitude": -1.3125547027341475
+    },
+    {
+      "source_record_id": "340",
+      "easting": 355602.0,
+      "northing": 340776.0,
+      "latitude": 52.96250104406159,
+      "longitude": -2.6624262543969754,
+      "original_faulty_latitude": 52.96324756255007,
+      "original_faulty_longitude": -2.6596882444244057
+    },
+    {
+      "source_record_id": "341",
+      "easting": 257192.0,
+      "northing": 209823.0,
+      "latitude": 51.76881634421128,
+      "longitude": -4.071018920048483,
+      "original_faulty_latitude": 51.769334957365785,
+      "original_faulty_longitude": -4.0686948989736305
+    },
+    {
+      "source_record_id": "342",
+      "easting": 530613.0,
+      "northing": 201383.0,
+      "latitude": 51.69600673845387,
+      "longitude": -0.11157210171081255,
+      "original_faulty_latitude": 51.69639773108854,
+      "original_faulty_longitude": -0.10833952786122818
+    },
+    {
+      "source_record_id": "343",
+      "easting": 234362.0,
+      "northing": 636566.0,
+      "latitude": 55.594461587711095,
+      "longitude": -4.630184383591764,
+      "original_faulty_latitude": 55.595840555508666,
+      "original_faulty_longitude": -4.627732868236377
+    },
+    {
+      "source_record_id": "344",
+      "easting": 468377.0,
+      "northing": 458725.0,
+      "latitude": 54.02000861669726,
+      "longitude": -0.9578685352463059,
+      "original_faulty_latitude": 54.02093837381423,
+      "original_faulty_longitude": -0.954633890723055
+    },
+    {
+      "source_record_id": "345",
+      "easting": 272135.0,
+      "northing": 124437.0,
+      "latitude": 51.00506781054026,
+      "longitude": -3.823811304691712,
+      "original_faulty_latitude": 51.00541099785244,
+      "original_faulty_longitude": -3.8214777738804186
+    },
+    {
+      "source_record_id": "346",
+      "easting": 509450.0,
+      "northing": 178120.0,
+      "latitude": 51.491442579883646,
+      "longitude": -0.42488902241716314,
+      "original_faulty_latitude": 51.491798416938835,
+      "original_faulty_longitude": -0.42174467852526076
+    },
+    {
+      "source_record_id": "347",
+      "easting": 345687.0,
+      "northing": 377142.0,
+      "latitude": 53.2884466349124,
+      "longitude": -2.81619306507703,
+      "original_faulty_latitude": 53.289269409059784,
+      "original_faulty_longitude": -2.8134671493502785
+    },
+    {
+      "source_record_id": "348",
+      "easting": 452775.0,
+      "northing": 521083.0,
+      "latitude": 54.58220386001633,
+      "longitude": -1.1849774462482596,
+      "original_faulty_latitude": 54.58326443878931,
+      "original_faulty_longitude": -1.181746994730306
+    },
+    {
+      "source_record_id": "349",
+      "easting": 412017.0,
+      "northing": 551124.0,
+      "latitude": 54.85477019742105,
+      "longitude": -1.8143494365863968,
+      "original_faulty_latitude": 54.85590993073216,
+      "original_faulty_longitude": -1.8112496763073183
+    },
+    {
+      "source_record_id": "350",
+      "easting": 479949.0,
+      "northing": 409327.0,
+      "latitude": 53.574460929748575,
+      "longitude": -0.7940888283500274,
+      "original_faulty_latitude": 53.575287442787214,
+      "original_faulty_longitude": -0.7908546237565808
+    },
+    {
+      "source_record_id": "351",
+      "easting": 389596.0,
+      "northing": 568832.0,
+      "latitude": 55.01392907282226,
+      "longitude": -2.1642276428545646,
+      "original_faulty_latitude": 55.01511417853627,
+      "original_faulty_longitude": -2.161200786419451
+    },
+    {
+      "source_record_id": "352",
+      "easting": 582400.0,
+      "northing": 220500.0,
+      "latitude": 51.85328257258815,
+      "longitude": 0.6470249710563137,
+      "original_faulty_latitude": 51.853683282178956,
+      "original_faulty_longitude": 0.6504443318654939
+    },
+    {
+      "source_record_id": "353",
+      "easting": 469299.0,
+      "northing": 385640.0,
+      "latitude": 53.36309932934724,
+      "longitude": -0.9601079824823446,
+      "original_faulty_latitude": 53.36388447004247,
+      "original_faulty_longitude": -0.9569319963113904
+    },
+    {
+      "source_record_id": "354",
+      "easting": 385467.0,
+      "northing": 195975.0,
+      "latitude": 51.66236535119379,
+      "longitude": -2.211510166280319,
+      "original_faulty_latitude": 51.66281189053988,
+      "original_faulty_longitude": -2.20876238514431
+    },
+    {
+      "source_record_id": "355",
+      "easting": 443976.0,
+      "northing": 426218.0,
+      "latitude": 53.73051115118886,
+      "longitude": -1.3349096666914912,
+      "original_faulty_latitude": 53.73138877388757,
+      "original_faulty_longitude": -1.331791684731001
+    },
+    {
+      "source_record_id": "356",
+      "easting": 394374.0,
+      "northing": 227514.0,
+      "latitude": 51.94609362376133,
+      "longitude": -2.0832590447957924,
+      "original_faulty_latitude": 51.94659929980917,
+      "original_faulty_longitude": -2.080460866015717
+    },
+    {
+      "source_record_id": "357",
+      "easting": 530540.0,
+      "northing": 354400.0,
+      "latitude": 53.07089253202263,
+      "longitude": -0.053058766992961415,
+      "original_faulty_latitude": 53.07158439917672,
+      "original_faulty_longitude": -0.049693579657376946
+    },
+    {
+      "source_record_id": "358",
+      "easting": 441799.0,
+      "northing": 406582.0,
+      "latitude": 53.55420825662226,
+      "longitude": -1.3705375628906018,
+      "original_faulty_latitude": 53.555048101004715,
+      "original_faulty_longitude": -1.3674433016572471
+    },
+    {
+      "source_record_id": "359",
+      "easting": 302227.0,
+      "northing": 578926.0,
+      "latitude": 55.09508843131879,
+      "longitude": -3.5336348237917505,
+      "original_faulty_latitude": 55.096329454798564,
+      "original_faulty_longitude": -3.53094416398265
+    },
+    {
+      "source_record_id": "360",
+      "easting": 461270.0,
+      "northing": 343928.0,
+      "latitude": 52.98919214822126,
+      "longitude": -1.088719183854312,
+      "original_faulty_latitude": 52.989898839637775,
+      "original_faulty_longitude": -1.08560568295873
+    },
+    {
+      "source_record_id": "361",
+      "easting": 378059.0,
+      "northing": 368999.0,
+      "latitude": 53.217587786946325,
+      "longitude": -2.330041721768901,
+      "original_faulty_latitude": 53.21838141769324,
+      "original_faulty_longitude": -2.3272048340220652
+    },
+    {
+      "source_record_id": "362",
+      "easting": 190542.0,
+      "northing": 64879.0,
+      "latitude": 50.446277211487015,
+      "longitude": -4.95156594696018,
+      "original_faulty_latitude": 50.44652259958343,
+      "original_faulty_longitude": -4.94952170788931
+    },
+    {
+      "source_record_id": "363",
+      "easting": 286587.0,
+      "northing": 208584.0,
+      "latitude": 51.76441387707764,
+      "longitude": -3.6448266963054126,
+      "original_faulty_latitude": 51.76492099979423,
+      "original_faulty_longitude": -3.6424037957933475
+    },
+    {
+      "source_record_id": "365",
+      "easting": 508556.0,
+      "northing": 168426.0,
+      "latitude": 51.40448307803895,
+      "longitude": -0.4407316827112906,
+      "original_faulty_latitude": 51.40482023555969,
+      "original_faulty_longitude": -0.4375979234519685
+    },
+    {
+      "source_record_id": "366",
+      "easting": 372306.0,
+      "northing": 97577.0,
+      "latitude": 50.777104825466715,
+      "longitude": -2.3941488872714767,
+      "original_faulty_latitude": 50.77736052134406,
+      "original_faulty_longitude": -2.391504729011964
+    },
+    {
+      "source_record_id": "367",
+      "easting": 525991.0,
+      "northing": 312650.0,
+      "latitude": 52.69687882503856,
+      "longitude": -0.13706583965902702,
+      "original_faulty_latitude": 52.697491100970275,
+      "original_faulty_longitude": -0.13375368225963236
+    },
+    {
+      "source_record_id": "368",
+      "easting": 440675.0,
+      "northing": 459799.0,
+      "latitude": 54.03258102941185,
+      "longitude": -1.3804976810283982,
+      "original_faulty_latitude": 54.03352659919092,
+      "original_faulty_longitude": -1.3773643939179188
+    },
+    {
+      "source_record_id": "369",
+      "easting": 566070.0,
+      "northing": 297629.0,
+      "latitude": 52.55117176652182,
+      "longitude": 0.447947117204521,
+      "original_faulty_latitude": 52.551732685932066,
+      "original_faulty_longitude": 0.45138266971142504
+    },
+    {
+      "source_record_id": "370",
+      "easting": 520447.0,
+      "northing": 204547.0,
+      "latitude": 51.72671292220299,
+      "longitude": -0.257494224730823,
+      "original_faulty_latitude": 51.72711534028601,
+      "original_faulty_longitude": -0.2542924875809207
+    },
+    {
+      "source_record_id": "371",
+      "easting": 332400.0,
+      "northing": 670800.0,
+      "latitude": 55.92550330222851,
+      "longitude": -3.083379646270234,
+      "original_faulty_latitude": 55.9269152160393,
+      "original_faulty_longitude": -3.0805051425804955
+    },
+    {
+      "source_record_id": "373",
+      "easting": 354564.0,
+      "northing": 181223.0,
+      "latitude": 51.52807896325968,
+      "longitude": -2.6563568903954615,
+      "original_faulty_latitude": 51.528507998835224,
+      "original_faulty_longitude": -2.6537211403598286
+    },
+    {
+      "source_record_id": "376",
+      "easting": 302332.0,
+      "northing": 89045.0,
+      "latitude": 50.69282586255383,
+      "longitude": -3.3841241330124747,
+      "original_faulty_latitude": 50.693088867394486,
+      "original_faulty_longitude": -3.381709814768027
+    },
+    {
+      "source_record_id": "378",
+      "easting": 490943.0,
+      "northing": 290854.0,
+      "latitude": 52.50800472879667,
+      "longitude": -0.6614936807880374,
+      "original_faulty_latitude": 52.508592105184945,
+      "original_faulty_longitude": -0.6583202790822381
+    },
+    {
+      "source_record_id": "379",
+      "easting": 411200.0,
+      "northing": 196800.0,
+      "latitude": 51.66986464973102,
+      "longitude": -1.8394465177657593,
+      "original_faulty_latitude": 51.67030232579687,
+      "original_faulty_longitude": -1.8366124470313743
+    },
+    {
+      "source_record_id": "380",
+      "easting": 363915.0,
+      "northing": 136582.0,
+      "latitude": 51.12737263326793,
+      "longitude": -2.5170322794929776,
+      "original_faulty_latitude": 51.127709202168504,
+      "original_faulty_longitude": -2.5143921973529677
+    },
+    {
+      "source_record_id": "381",
+      "easting": 439943.0,
+      "northing": 442482.0,
+      "latitude": 53.87700647388363,
+      "longitude": -1.393932729270138,
+      "original_faulty_latitude": 53.87791817351087,
+      "original_faulty_longitude": -1.3908162911076187
+    },
+    {
+      "source_record_id": "382",
+      "easting": 432562.0,
+      "northing": 431608.0,
+      "latitude": 53.779789647352445,
+      "longitude": -1.5073435286757348,
+      "original_faulty_latitude": 53.78068334801071,
+      "original_faulty_longitude": -1.5042628886214613
+    },
+    {
+      "source_record_id": "383",
+      "easting": 466380.0,
+      "northing": 302338.0,
+      "latitude": 52.614767751241004,
+      "longitude": -1.0210373970931135,
+      "original_faulty_latitude": 52.61538980196528,
+      "original_faulty_longitude": -1.017939190406539
+    },
+    {
+      "source_record_id": "384",
+      "easting": 394860.0,
+      "northing": 564306.0,
+      "latitude": 54.973341158952834,
+      "longitude": -2.0818281523973563,
+      "original_faulty_latitude": 54.97451491552697,
+      "original_faulty_longitude": -2.0787843398736463
+    },
+    {
+      "source_record_id": "385",
+      "easting": 448771.0,
+      "northing": 520961.0,
+      "latitude": 54.58150870312242,
+      "longitude": -1.246941539960608,
+      "original_faulty_latitude": 54.58257104800351,
+      "original_faulty_longitude": -1.243726385453648
+    },
+    {
+      "source_record_id": "386",
+      "easting": 462191.0,
+      "northing": 190619.0,
+      "latitude": 51.61097657738376,
+      "longitude": -1.1032717072223672,
+      "original_faulty_latitude": 51.61137962847147,
+      "original_faulty_longitude": -1.1002729635617348
+    },
+    {
+      "source_record_id": "46",
+      "easting": 446531.0,
+      "northing": 314260.0,
+      "latitude": 52.723993965341805,
+      "longitude": -1.3124891701130164,
+      "original_faulty_latitude": 52.724648958933116,
+      "original_faulty_longitude": -1.309450433369988
+    },
+    {
+      "source_record_id": "4786",
+      "easting": 284103.0,
+      "northing": 180025.0,
+      "latitude": 51.50723352023733,
+      "longitude": -3.6713399481831006,
+      "original_faulty_latitude": 51.50768429725914,
+      "original_faulty_longitude": -3.6689398165543485
+    },
+    {
+      "source_record_id": "4787",
+      "easting": 343358.0,
+      "northing": 399823.0,
+      "latitude": 53.492049546159954,
+      "longitude": -2.8552030038338967,
+      "original_faulty_latitude": 53.49291838061474,
+      "original_faulty_longitude": -2.8524709423254824
+    },
+    {
+      "source_record_id": "4876",
+      "easting": 501535.0,
+      "northing": 416439.0,
+      "latitude": 53.63463389896913,
+      "longitude": -0.4658993495671781,
+      "original_faulty_latitude": 53.63546322422308,
+      "original_faulty_longitude": -0.4625811580701082
+    },
+    {
+      "source_record_id": "4877",
+      "easting": 586229.0,
+      "northing": 265294.0,
+      "latitude": 52.25429240743982,
+      "longitude": 0.7269520810992086,
+      "original_faulty_latitude": 52.25477862022722,
+      "original_faulty_longitude": 0.730425428279618
+    },
+    {
+      "source_record_id": "4904",
+      "easting": 450704.0,
+      "northing": 479574.0,
+      "latitude": 54.20940611247891,
+      "longitude": -1.2240853538090508,
+      "original_faulty_latitude": 54.21038583784717,
+      "original_faulty_longitude": -1.220898335662497
+    },
+    {
+      "source_record_id": "4906",
+      "easting": 487065.0,
+      "northing": 214308.0,
+      "latitude": 51.82062421470868,
+      "longitude": -0.7382249418434624,
+      "original_faulty_latitude": 51.82106240316351,
+      "original_faulty_longitude": -0.7351258365778798
+    },
+    {
+      "source_record_id": "4919",
+      "easting": 468377.0,
+      "northing": 458725.0,
+      "latitude": 54.02000861669726,
+      "longitude": -0.9578685352463059,
+      "original_faulty_latitude": 54.02093837381423,
+      "original_faulty_longitude": -0.954633890723055
+    },
+    {
+      "source_record_id": "4970",
+      "easting": 635759.0,
+      "northing": 253035.0,
+      "latitude": 52.12530745890711,
+      "longitude": 1.4428060317366036,
+      "original_faulty_latitude": 52.12574054226091,
+      "original_faulty_longitude": 1.4464319863382302
+    },
+    {
+      "source_record_id": "5081",
+      "easting": 321166.0,
+      "northing": 175969.0,
+      "latitude": 51.47716544010058,
+      "longitude": -3.1365354976619417,
+      "original_faulty_latitude": 51.477595924101784,
+      "original_faulty_longitude": -3.1340138681225023
+    },
+    {
+      "source_record_id": "5091",
+      "easting": 372395.0,
+      "northing": 161189.0,
+      "latitude": 51.349103410440705,
+      "longitude": -2.3977616485676227,
+      "original_faulty_latitude": 51.34948580063221,
+      "original_faulty_longitude": -2.3950789437300486
+    },
+    {
+      "source_record_id": "5135",
+      "easting": 512940.0,
+      "northing": 165672.0,
+      "latitude": 51.378874934339585,
+      "longitude": -0.37860687464490766,
+      "original_faulty_latitude": 51.379204497226134,
+      "original_faulty_longitude": -0.37546104131869473
+    },
+    {
+      "source_record_id": "5323",
+      "easting": 374234.0,
+      "northing": 293942.0,
+      "latitude": 52.54271704617846,
+      "longitude": -2.3813533483544798,
+      "original_faulty_latitude": 52.5433629877906,
+      "original_faulty_longitude": -2.3785803683871447
+    },
+    {
+      "source_record_id": "5516",
+      "easting": 314453.0,
+      "northing": 541167.0,
+      "latitude": 54.758129876752484,
+      "longitude": -3.3308674378316745,
+      "original_faulty_latitude": 54.75929116266348,
+      "original_faulty_longitude": -3.32815297317749
+    },
+    {
+      "source_record_id": "5561",
+      "easting": 579452.0,
+      "northing": 141169.0,
+      "latitude": 51.14166120139272,
+      "longitude": 0.5639500600385223,
+      "original_faulty_latitude": 51.14190807949665,
+      "original_faulty_longitude": 0.5672896074028492
+    },
+    {
+      "source_record_id": "5623",
+      "easting": 462248.0,
+      "northing": 356530.0,
+      "latitude": 53.10234537775646,
+      "longitude": -1.0717224636928118,
+      "original_faulty_latitude": 53.10307649472649,
+      "original_faulty_longitude": -1.068595380088181
+    },
+    {
+      "source_record_id": "5626",
+      "easting": 561301.0,
+      "northing": 321012.0,
+      "latitude": 52.76262837452611,
+      "longitude": 0.3891033785701056,
+      "original_faulty_latitude": 52.76323777729071,
+      "original_faulty_longitude": 0.39254438496145627
+    },
+    {
+      "source_record_id": "5627",
+      "easting": 410868.0,
+      "northing": 289561.0,
+      "latitude": 52.50384137575228,
+      "longitude": -1.8413214248625753,
+      "original_faulty_latitude": 52.504463380515915,
+      "original_faulty_longitude": -1.8384244900056235
+    },
+    {
+      "source_record_id": "5645",
+      "easting": 314330.0,
+      "northing": 540378.0,
+      "latitude": 54.751020446145816,
+      "longitude": -3.3325453102403833,
+      "original_faulty_latitude": 54.75218020765472,
+      "original_faulty_longitude": -3.329831830516412
+    },
+    {
+      "source_record_id": "5652",
+      "easting": 397499.0,
+      "northing": 165857.0,
+      "latitude": 51.391746589377796,
+      "longitude": -2.037332848320424,
+      "original_faulty_latitude": 51.392128396273804,
+      "original_faulty_longitude": -2.0345645314835963
+    },
+    {
+      "source_record_id": "5668",
+      "easting": 430006.0,
+      "northing": 305205.0,
+      "latitude": 52.64376062273208,
+      "longitude": -1.557974166518489,
+      "original_faulty_latitude": 52.64440523243377,
+      "original_faulty_longitude": -1.5549996484364206
+    },
+    {
+      "source_record_id": "5703",
+      "easting": 274982.0,
+      "northing": 849481.0,
+      "latitude": 57.5181805557772,
+      "longitude": -4.088863424469017,
+      "original_faulty_latitude": 57.519969596963676,
+      "original_faulty_longitude": -4.086111906595397
+    },
+    {
+      "source_record_id": "5718",
+      "easting": 506337.0,
+      "northing": 436538.0,
+      "latitude": 53.81426136415512,
+      "longitude": -0.38640763965310665,
+      "original_faulty_latitude": 53.8151276508288,
+      "original_faulty_longitude": -0.38305390738571476
+    },
+    {
+      "source_record_id": "5722",
+      "easting": 488146.0,
+      "northing": 432144.0,
+      "latitude": 53.778176434910094,
+      "longitude": -0.6638614336260069,
+      "original_faulty_latitude": 53.779043681872736,
+      "original_faulty_longitude": -0.6605777060495952
+    },
+    {
+      "source_record_id": "5745",
+      "easting": 422281.0,
+      "northing": 492570.0,
+      "latitude": 54.32821941799889,
+      "longitude": -1.6589015090574981,
+      "original_faulty_latitude": 54.32923852975657,
+      "original_faulty_longitude": -1.65581013518436
+    },
+    {
+      "source_record_id": "5746",
+      "easting": 356173.0,
+      "northing": 322726.0,
+      "latitude": 52.8003009976014,
+      "longitude": -2.651488707758322,
+      "original_faulty_latitude": 52.801011357016456,
+      "original_faulty_longitude": -2.648760264800125
+    },
+    {
+      "source_record_id": "5747",
+      "easting": 208580.0,
+      "northing": 207612.0,
+      "latitude": 51.73444597683737,
+      "longitude": -4.773523457515308,
+      "original_faulty_latitude": 51.73497349918436,
+      "original_faulty_longitude": -4.771365266897712
+    },
+    {
+      "source_record_id": "5748",
+      "easting": 303030.0,
+      "northing": 111217.0,
+      "latitude": 50.89226811554706,
+      "longitude": -3.3801043355253753,
+      "original_faulty_latitude": 50.89257523483475,
+      "original_faulty_longitude": -3.377676546067836
+    },
+    {
+      "source_record_id": "5749",
+      "easting": 263684.0,
+      "northing": 649872.0,
+      "latitude": 55.72302822202085,
+      "longitude": -4.171875186574621,
+      "original_faulty_latitude": 55.724424233553314,
+      "original_faulty_longitude": -4.169296457715511
+    },
+    {
+      "source_record_id": "5750",
+      "easting": 352544.0,
+      "northing": 276744.0,
+      "latitude": 52.386656013743995,
+      "longitude": -2.6987015619317978,
+      "original_faulty_latitude": 52.387276184222095,
+      "original_faulty_longitude": -2.6960147245659374
+    },
+    {
+      "source_record_id": "5751",
+      "easting": 455740.0,
+      "northing": 243658.0,
+      "latitude": 52.088473147676304,
+      "longitude": -1.187888109136092,
+      "original_faulty_latitude": 52.08898414693018,
+      "original_faulty_longitude": -1.1848714103779954
+    },
+    {
+      "source_record_id": "5755",
+      "easting": 634881.0,
+      "northing": 253511.0,
+      "latitude": 52.12995271695751,
+      "longitude": 1.4303325630575314,
+      "original_faulty_latitude": 52.13038726056933,
+      "original_faulty_longitude": 1.4339560946729288
+    },
+    {
+      "source_record_id": "5816",
+      "easting": 367920.0,
+      "northing": 374201.0,
+      "latitude": 53.26382834919528,
+      "longitude": -2.482402223345782,
+      "original_faulty_latitude": 53.26463647213619,
+      "original_faulty_longitude": -2.479598184002669
+    },
+    {
+      "source_record_id": "5821",
+      "easting": 511449.0,
+      "northing": 454539.0,
+      "latitude": 53.97491099473934,
+      "longitude": -0.30225879161515945,
+      "original_faulty_latitude": 53.97580988436903,
+      "original_faulty_longitude": -0.2988698400304589
+    },
+    {
+      "source_record_id": "5830",
+      "easting": 481592.0,
+      "northing": 439471.0,
+      "latitude": 53.84508234124279,
+      "longitude": -0.7613526930864213,
+      "original_faulty_latitude": 53.84596740725712,
+      "original_faulty_longitude": -0.7580863758906932
+    },
+    {
+      "source_record_id": "5886",
+      "easting": 596926.0,
+      "northing": 286007.0,
+      "latitude": 52.43654758850681,
+      "longitude": 0.8955935193996182,
+      "original_faulty_latitude": 52.43706811048935,
+      "original_faulty_longitude": 0.8991223918739535
+    },
+    {
+      "source_record_id": "5890",
+      "easting": 379939.0,
+      "northing": 243542.0,
+      "latitude": 52.08985786717286,
+      "longitude": -2.2942112392310747,
+      "original_faulty_latitude": 52.09040125355073,
+      "original_faulty_longitude": -2.2914514864729894
+    },
+    {
+      "source_record_id": "5899",
+      "easting": 324885.0,
+      "northing": 699061.0,
+      "latitude": 56.17824431409138,
+      "longitude": -3.211547798215257,
+      "original_faulty_latitude": 56.179715379913134,
+      "original_faulty_longitude": -3.2086841108980906
+    },
+    {
+      "source_record_id": "5951",
+      "easting": 317439.0,
+      "northing": 713725.0,
+      "latitude": 56.30872117471015,
+      "longitude": -3.3360333975704326,
+      "original_faulty_latitude": 56.3102243462992,
+      "original_faulty_longitude": -3.3331904478041383
+    },
+    {
+      "source_record_id": "5968",
+      "easting": 600294.0,
+      "northing": 289735.0,
+      "latitude": 52.468795313409224,
+      "longitude": 0.9473056488018977,
+      "original_faulty_latitude": 52.46932114312859,
+      "original_faulty_longitude": 0.9508494544646781
+    },
+    {
+      "source_record_id": "5974",
+      "easting": 625353.0,
+      "northing": 273685.0,
+      "latitude": 52.31498741820091,
+      "longitude": 1.3048055564898116,
+      "original_faulty_latitude": 52.31546701753169,
+      "original_faulty_longitude": 1.3084175413791834
+    },
+    {
+      "source_record_id": "5999",
+      "easting": 250389.0,
+      "northing": 669199.0,
+      "latitude": 55.892606332063295,
+      "longitude": -4.393981119908871,
+      "original_faulty_latitude": 55.894045298442116,
+      "original_faulty_longitude": -4.391446050388258
+    },
+    {
+      "source_record_id": "6000",
+      "easting": 451345.0,
+      "northing": 528361.0,
+      "latitude": 54.647749894205035,
+      "longitude": -1.2058280567791362,
+      "original_faulty_latitude": 54.648825543240704,
+      "original_faulty_longitude": -1.2025966975057378
+    },
+    {
+      "source_record_id": "6040",
+      "easting": 348081.0,
+      "northing": 677289.0,
+      "latitude": 55.98575069677307,
+      "longitude": -2.833723041308552,
+      "original_faulty_latitude": 55.9871689251097,
+      "original_faulty_longitude": -2.830779188188246
+    },
+    {
+      "source_record_id": "6046",
+      "easting": 443094.0,
+      "northing": 132424.0,
+      "latitude": 51.08951718974519,
+      "longitude": -1.3860675060231984,
+      "original_faulty_latitude": 51.089813473962,
+      "original_faulty_longitude": -1.3831727531648725
+    },
+    {
+      "source_record_id": "6052",
+      "easting": 611607.0,
+      "northing": 310520.0,
+      "latitude": 52.6511085279258,
+      "longitude": 1.1268442309181634,
+      "original_faulty_latitude": 52.6516681855098,
+      "original_faulty_longitude": 1.130446664270164
+    },
+    {
+      "source_record_id": "6054",
+      "easting": 467434.0,
+      "northing": 155168.0,
+      "latitude": 51.291660623884596,
+      "longitude": -1.0343127907552352,
+      "original_faulty_latitude": 51.2919911050859,
+      "original_faulty_longitude": -1.0313229049597157
+    },
+    {
+      "source_record_id": "6081",
+      "easting": 580868.0,
+      "northing": 172818.0,
+      "latitude": 51.42550594150684,
+      "longitude": 0.6001820013511928,
+      "original_faulty_latitude": 51.425814090578896,
+      "original_faulty_longitude": 0.6035537178996281
+    },
+    {
+      "source_record_id": "6109",
+      "easting": 427927.0,
+      "northing": 562773.0,
+      "latitude": 54.95881743816916,
+      "longitude": -1.5654152018768164,
+      "original_faulty_latitude": 54.95997257799246,
+      "original_faulty_longitude": -1.5622441787624661
+    },
+    {
+      "source_record_id": "6123",
+      "easting": 433623.0,
+      "northing": 431801.0,
+      "latitude": 53.78145706340474,
+      "longitude": -1.4912222904172154,
+      "original_faulty_latitude": 53.7823506462989,
+      "original_faulty_longitude": -1.4881376154841433
+    },
+    {
+      "source_record_id": "6148",
+      "easting": 498997.0,
+      "northing": 104022.0,
+      "latitude": 50.827282054950835,
+      "longitude": -0.5957684612846468,
+      "original_faulty_latitude": 50.82749669812439,
+      "original_faulty_longitude": -0.5927149672682419
+    },
+    {
+      "source_record_id": "6152",
+      "easting": 336678.0,
+      "northing": 416725.0,
+      "latitude": 53.643185683184264,
+      "longitude": -2.959304848405658,
+      "original_faulty_latitude": 53.644090743547224,
+      "original_faulty_longitude": -2.9565863529800933
+    },
+    {
+      "source_record_id": "6167",
+      "easting": 544192.0,
+      "northing": 218430.0,
+      "latitude": 51.84585452377637,
+      "longitude": 0.09183803837153215,
+      "original_faulty_latitude": 51.8462719583516,
+      "original_faulty_longitude": 0.09512973201196664
+    },
+    {
+      "source_record_id": "6193",
+      "easting": 347540.0,
+      "northing": 376597.0,
+      "latitude": 53.28373526701396,
+      "longitude": -2.7883095211844195,
+      "original_faulty_latitude": 53.284556238926065,
+      "original_faulty_longitude": -2.7855772736366538
+    },
+    {
+      "source_record_id": "6199",
+      "easting": 497450.0,
+      "northing": 188596.0,
+      "latitude": 51.58780137568472,
+      "longitude": -0.5947791665158777,
+      "original_faulty_latitude": 51.58818376640529,
+      "original_faulty_longitude": -0.5916658602324346
+    },
+    {
+      "source_record_id": "6212",
+      "easting": 161464.0,
+      "northing": 32249.0,
+      "latitude": 50.14222619394396,
+      "longitude": -5.339832967211459,
+      "original_faulty_latitude": 50.14241240358164,
+      "original_faulty_longitude": -5.33789267591159
+    },
+    {
+      "source_record_id": "6218",
+      "easting": 396604.0,
+      "northing": 312804.0,
+      "latitude": 52.712885041104556,
+      "longitude": -2.051706503950291,
+      "original_faulty_latitude": 52.71355927664364,
+      "original_faulty_longitude": -2.04884284479962
+    },
+    {
+      "source_record_id": "6270",
+      "easting": 454313.0,
+      "northing": 287877.0,
+      "latitude": 52.48611645067605,
+      "longitude": -1.2016013302428048,
+      "original_faulty_latitude": 52.486715615381094,
+      "original_faulty_longitude": -1.1985559341791503
+    },
+    {
+      "source_record_id": "6355",
+      "easting": 263684.0,
+      "northing": 649872.0,
+      "latitude": 55.72302822202085,
+      "longitude": -4.171875186574621,
+      "original_faulty_latitude": 55.724424233553314,
+      "original_faulty_longitude": -4.169296457715511
+    },
+    {
+      "source_record_id": "6368",
+      "easting": 457525.0,
+      "northing": 522360.0,
+      "latitude": 54.59316160573145,
+      "longitude": -1.111244946906,
+      "original_faulty_latitude": 54.5942223017082,
+      "original_faulty_longitude": -1.107995361326732
+    },
+    {
+      "source_record_id": "6390",
+      "easting": 298374.0,
+      "northing": 90778.0,
+      "latitude": 50.70772645873561,
+      "longitude": -3.440619456375636,
+      "original_faulty_latitude": 50.70799419123456,
+      "original_faulty_longitude": -3.438217027065072
+    },
+    {
+      "source_record_id": "6430",
+      "easting": 561216.0,
+      "northing": 321368.0,
+      "latitude": 52.7658512130565,
+      "longitude": 0.3880198275028188,
+      "original_faulty_latitude": 52.76646136097264,
+      "original_faulty_longitude": 0.39146087417846215
+    },
+    {
+      "source_record_id": "6450",
+      "easting": 312306.0,
+      "northing": 196957.0,
+      "latitude": 51.66452395872261,
+      "longitude": -3.269325597664622,
+      "original_faulty_latitude": 51.66499938913516,
+      "original_faulty_longitude": -3.2668221522795484
+    },
+    {
+      "source_record_id": "6489",
+      "easting": 413372.0,
+      "northing": 185464.0,
+      "latitude": 51.567893009259826,
+      "longitude": -1.8084685649904821,
+      "original_faulty_latitude": 51.568307258217786,
+      "original_faulty_longitude": -1.8056349108080676
+    },
+    {
+      "source_record_id": "6490",
+      "easting": 539261.0,
+      "northing": 210391.0,
+      "latitude": 51.77487150700379,
+      "longitude": 0.01707536479581452,
+      "original_faulty_latitude": 51.77527573172431,
+      "original_faulty_longitude": 0.020343948218815217
+    },
+    {
+      "source_record_id": "6491",
+      "easting": 535666.0,
+      "northing": 193784.0,
+      "latitude": 51.62652509618389,
+      "longitude": -0.041452740159735185,
+      "original_faulty_latitude": 51.62689852741184,
+      "original_faulty_longitude": -0.038209923565125085
+    },
+    {
+      "source_record_id": "6505",
+      "easting": 549545.0,
+      "northing": 180595.0,
+      "latitude": 51.5045080273998,
+      "longitude": 0.15330230515455257,
+      "original_faulty_latitude": 51.50484828135929,
+      "original_faulty_longitude": 0.15657931398154595
+    },
+    {
+      "source_record_id": "6538",
+      "easting": 560056.0,
+      "northing": 230336.0,
+      "latitude": 51.94849312450658,
+      "longitude": 0.3274643502675204,
+      "original_faulty_latitude": 51.94892543522964,
+      "original_faulty_longitude": 0.33081884637334413
+    },
+    {
+      "source_record_id": "6539",
+      "easting": 561216.0,
+      "northing": 321368.0,
+      "latitude": 52.7658512130565,
+      "longitude": 0.3880198275028188,
+      "original_faulty_latitude": 52.76646136097264,
+      "original_faulty_longitude": 0.39146087417846215
+    },
+    {
+      "source_record_id": "6578",
+      "easting": 542047.0,
+      "northing": 283203.0,
+      "latitude": 52.428362603230994,
+      "longitude": 0.08776052509812524,
+      "original_faulty_latitude": 52.42890843491823,
+      "original_faulty_longitude": 0.09110149929779181
+    },
+    {
+      "source_record_id": "6626",
+      "easting": 481091.0,
+      "northing": 108860.0,
+      "latitude": 50.87356055837263,
+      "longitude": -0.8488744254081585,
+      "original_faulty_latitude": 50.87379313995776,
+      "original_faulty_longitude": -0.8458743660428449
+    },
+    {
+      "source_record_id": "6638",
+      "easting": 450243.0,
+      "northing": 91601.0,
+      "latitude": 50.72186927189899,
+      "longitude": -1.2896062599935276,
+      "original_faulty_latitude": 50.722081497061644,
+      "original_faulty_longitude": -1.2867166946416169
+    },
+    {
+      "source_record_id": "68",
+      "easting": 626522.0,
+      "northing": 324286.0,
+      "latitude": 52.76862994091147,
+      "longitude": 1.3564188352405893,
+      "original_faulty_latitude": 52.7692073332029,
+      "original_faulty_longitude": 1.360085788484748
+    },
+    {
+      "source_record_id": "6808",
+      "easting": 215473.0,
+      "northing": 89507.0,
+      "latitude": 50.675899297493544,
+      "longitude": -4.613040909161832,
+      "original_faulty_latitude": 50.67618809623652,
+      "original_faulty_longitude": -4.610906983414852
+    },
+    {
+      "source_record_id": "6822",
+      "easting": 342293.0,
+      "northing": 353022.0,
+      "latitude": 53.07129996521193,
+      "longitude": -2.862736848140309,
+      "original_faulty_latitude": 53.07207600127379,
+      "original_faulty_longitude": -2.860038425910145
+    },
+    {
+      "source_record_id": "6824",
+      "easting": 550047.0,
+      "northing": 293013.0,
+      "latitude": 52.51435394588583,
+      "longitude": 0.2097409835557272,
+      "original_faulty_latitude": 52.51491469206607,
+      "original_faulty_longitude": 0.21311787919338482
+    },
+    {
+      "source_record_id": "7180",
+      "easting": 442605.0,
+      "northing": 132252.0,
+      "latitude": 51.08800707237725,
+      "longitude": -1.3930694152242538,
+      "original_faulty_latitude": 51.08830322818789,
+      "original_faulty_longitude": -1.3901763627337536
+    },
+    {
+      "source_record_id": "72",
+      "easting": 497563.0,
+      "northing": 383132.0,
+      "latitude": 53.336109250704034,
+      "longitude": -0.5362872315909074,
+      "original_faulty_latitude": 53.33687511316364,
+      "original_faulty_longitude": -0.5330126963163783
+    },
+    {
+      "source_record_id": "7245",
+      "easting": 423375.0,
+      "northing": 588667.0,
+      "latitude": 55.191730403768275,
+      "longitude": -1.6343846522727812,
+      "original_faulty_latitude": 55.19293888405788,
+      "original_faulty_longitude": -1.6312093451865315
+    },
+    {
+      "source_record_id": "7477",
+      "easting": 332714.0,
+      "northing": 841065.0,
+      "latitude": 57.45486993417208,
+      "longitude": -3.1229921892162755,
+      "original_faulty_latitude": 57.45661909165397,
+      "original_faulty_longitude": -3.119987859572262
+    },
+    {
+      "source_record_id": "7512",
+      "easting": 332714.0,
+      "northing": 841065.0,
+      "latitude": 57.45486993417208,
+      "longitude": -3.1229921892162755,
+      "original_faulty_latitude": 57.45661909165397,
+      "original_faulty_longitude": -3.119987859572262
+    },
+    {
+      "source_record_id": "7590",
+      "easting": 603299.0,
+      "northing": 295670.0,
+      "latitude": 52.52096805674246,
+      "longitude": 0.9951012014020766,
+      "original_faulty_latitude": 52.52150370104203,
+      "original_faulty_longitude": 0.9986609050175228
+    },
+    {
+      "source_record_id": "8206",
+      "easting": 541766.0,
+      "northing": 283489.0,
+      "latitude": 52.43100491237811,
+      "longitude": 0.08375182989133859,
+      "original_faulty_latitude": 52.431551457055605,
+      "original_faulty_longitude": 0.08709210511240746
+    },
+    {
+      "source_record_id": "8240",
+      "easting": 496567.0,
+      "northing": 425186.0,
+      "latitude": 53.71416654038036,
+      "longitude": -0.5382877776765856,
+      "original_faulty_latitude": 53.71501569171274,
+      "original_faulty_longitude": -0.5349796994980804
+    },
+    {
+      "source_record_id": "8244",
+      "easting": 359474.0,
+      "northing": 199283.0,
+      "latitude": 51.69082797182115,
+      "longitude": -2.5876768738880385,
+      "original_faulty_latitude": 51.691291168217475,
+      "original_faulty_longitude": -2.585013909543711
+    },
+    {
+      "source_record_id": "8250",
+      "easting": 482404.0,
+      "northing": 280162.0,
+      "latitude": 52.41326094497736,
+      "longitude": -0.7899108438828054,
+      "original_faulty_latitude": 52.41383143509026,
+      "original_faulty_longitude": -0.7867753055037813
+    },
+    {
+      "source_record_id": "8282",
+      "easting": 483540.885,
+      "northing": 267904.613,
+      "latitude": 52.30291829093147,
+      "longitude": -0.7762471652193416,
+      "original_faulty_latitude": 52.30346402611337,
+      "original_faulty_longitude": -0.7731175729103705
+    },
+    {
+      "source_record_id": "8423",
+      "easting": 414508.0,
+      "northing": 195103.0,
+      "latitude": 51.65453165010274,
+      "longitude": -1.7916831070588228,
+      "original_faulty_latitude": 51.654964566752746,
+      "original_faulty_longitude": -1.7888391778067472
+    },
+    {
+      "source_record_id": "8845",
+      "easting": 419250.0,
+      "northing": 291209.0,
+      "latitude": 52.518426849804904,
+      "longitude": -1.7177436886503687,
+      "original_faulty_latitude": 52.519048482529406,
+      "original_faulty_longitude": -1.7148166196229373
+    },
+    {
+      "source_record_id": "8913",
+      "easting": 336091.0,
+      "northing": 416904.0,
+      "latitude": 53.64472285209571,
+      "longitude": -2.9682194769736445,
+      "original_faulty_latitude": 53.645628493529834,
+      "original_faulty_longitude": -2.9655030220726037
+    },
+    {
+      "source_record_id": "9008",
+      "easting": 387347.0,
+      "northing": 283911.0,
+      "latitude": 52.45300491610039,
+      "longitude": -2.1876177595095143,
+      "original_faulty_latitude": 52.45362559131162,
+      "original_faulty_longitude": -2.1848059972138936
+    },
+    {
+      "source_record_id": "912",
+      "easting": 381036.0,
+      "northing": 399888.0,
+      "latitude": 53.49534909582654,
+      "longitude": -2.287322374026677,
+      "original_faulty_latitude": 53.49620285644565,
+      "original_faulty_longitude": -2.284453268256665
+    },
+    {
+      "source_record_id": "9170",
+      "easting": 310169.0,
+      "northing": 581224.0,
+      "latitude": 55.11723518865283,
+      "longitude": -3.4099548627978225,
+      "original_faulty_latitude": 55.11847782156068,
+      "original_faulty_longitude": -3.4072313188988637
+    },
+    {
+      "source_record_id": "9487",
+      "easting": 533406.0,
+      "northing": 275296.0,
+      "latitude": 52.35949414118415,
+      "longitude": -0.04239223093596505,
+      "original_faulty_latitude": 52.36002905482446,
+      "original_faulty_longitude": -0.039087458527226795
+    },
+    {
+      "source_record_id": "9510",
+      "easting": 447963.0,
+      "northing": 339252.0,
+      "latitude": 52.94851535844502,
+      "longitude": -1.2876234635325121,
+      "original_faulty_latitude": 52.94921913229691,
+      "original_faulty_longitude": -1.284560397977581
+    },
+    {
+      "source_record_id": "9622",
+      "easting": 363412.0,
+      "northing": 165891.0,
+      "latitude": 51.39087122427533,
+      "longitude": -2.5272272770687882,
+      "original_faulty_latitude": 51.391266393274464,
+      "original_faulty_longitude": -2.5245713565771717
+    },
+    {
+      "source_record_id": "9646",
+      "easting": 267117.0,
+      "northing": 695966.0,
+      "latitude": 56.13784052211397,
+      "longitude": -4.139961349494103,
+      "original_faulty_latitude": 56.13932717889515,
+      "original_faulty_longitude": -4.137341098373592
+    },
+    {
+      "source_record_id": "9753",
+      "easting": 530006.0,
+      "northing": 166069.0,
+      "latitude": 51.378794810708285,
+      "longitude": -0.13337911055492943,
+      "original_faulty_latitude": 51.37911659525185,
+      "original_faulty_longitude": -0.13017758403846633
+    },
+    {
+      "source_record_id": "9870",
+      "easting": 543771.0,
+      "northing": 262981.0,
+      "latitude": 52.24623629215321,
+      "longitude": 0.10445394156768271,
+      "original_faulty_latitude": 52.24674148131622,
+      "original_faulty_longitude": 0.10778289214404792
+    },
+    {
+      "source_record_id": "9872",
+      "easting": 271458.0,
+      "northing": 869856.0,
+      "latitude": 57.700079461839316,
+      "longitude": -4.158469437003681,
+      "original_faulty_latitude": 57.70191024571425,
+      "original_faulty_longitude": -4.155720350355732
+    }
+  ]
+}

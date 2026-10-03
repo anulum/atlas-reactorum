@@ -1,0 +1,1140 @@
+{
+  "schema": "scpn.atlas-project-links.v1",
+  "snapshot_at_utc": "2026-09-29T20:27:38.803310+00:00",
+  "owner_group": "SCPN-REACTOR-SYSTEMS",
+  "purpose": "source-pinned project citations; no registration or capability admission",
+  "record_count": 54,
+  "public_repository_source": {
+    "snapshot": "sources/65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8.json",
+    "sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+  },
+  "records": [
+    {
+      "project_id": "SCPN-ADS-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "7e2582bd6072751470449661ca5688ddaeec76ab",
+        "sha256": "20ac09d95cb447b7748454de40bdb89d3f6d1d27ed5e69dff6275b223062c5ff",
+        "snapshot": "sources/20ac09d95cb447b7748454de40bdb89d3f6d1d27ed5e69dff6275b223062c5ff.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:accelerator_driven_system",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-BEAM-TARGET-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "63633923ff92b33771159b82a90dc2e39307c064",
+        "sha256": "ab5dc0585f94b376266ad3bfb0ab5f151f4a6f8a51df77d37fd4ea440db42d15",
+        "snapshot": "sources/ab5dc0585f94b376266ad3bfb0ab5f151f4a6f8a51df77d37fd4ea440db42d15.json"
+      },
+      "configurations": [
+        "beam_target",
+        "colliding_beam"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-beam-target-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-BIOCHEM-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "510da404352f6c424b68611fec7a15c9069eb890",
+        "sha256": "5dc514ed935b709a52a33282d8ebcc479964db7a2ddc1bed1d9bd6925159e86f",
+        "snapshot": "sources/5dc514ed935b709a52a33282d8ebcc479964db7a2ddc1bed1d9bd6925159e86f.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:biochemical_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-BREED-BURN-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "c43a70489af6581f4d3aef80f54fe74534b63547",
+        "sha256": "1d25981fc008a9d1d000433e238351f00831be992d9544942db89b2c7818b6eb",
+        "snapshot": "sources/1d25981fc008a9d1d000433e238351f00831be992d9544942db89b2c7818b6eb.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:breed_and_burn_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-BWR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "3c236c3715d43c2df859415308959b853f5cf465",
+        "sha256": "6a72f3c6a7b08c23c0f57639623af98e5d6116f5fdc7132c550b6b28cb2bf594",
+        "snapshot": "sources/6a72f3c6a7b08c23c0f57639623af98e5d6116f5fdc7132c550b6b28cb2bf594.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:boiling_water_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-CATALYTIC-BED-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "e343b7ea6b67fe11f5d4f97008f77743d7cb9ff0",
+        "sha256": "edae47ba9053b2d3ac3a9141dd3400777c9c2129cefaedb9397796cf3670d075",
+        "snapshot": "sources/edae47ba9053b2d3ac3a9141dd3400777c9c2129cefaedb9397796cf3670d075.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:catalytic_fixed_bed_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-CHANNEL-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "dcc1606b5b3fc5fead561e655d29568f8ec33ef1",
+        "sha256": "46ecbb34831c0765218dc0cbac4628171b793614f84cfbe70447d4a54d181244",
+        "snapshot": "sources/46ecbb34831c0765218dc0cbac4628171b793614f84cfbe70447d4a54d181244.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:channel_type_graphite_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-CHEM-KINETICS-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "40e16d11f470ffe5ec16e9348e285640f2c4d31d",
+        "sha256": "89af7960eb0747637d50674f73865e4907b3b34f715126fe23ebeacac42bc819",
+        "snapshot": "sources/89af7960eb0747637d50674f73865e4907b3b34f715126fe23ebeacac42bc819.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:ideal_gas_chemical_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-CHEM-PROCESS-HYBRID-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "hybrid_composition",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "3b990422499fff76c36c8064b6ef33d9cefa424a",
+        "sha256": "1ecb3c1e1c96ff0ac8581337ef9f5d1737eb18e925c1e29b8d32c38743b16f5b",
+        "snapshot": "sources/1ecb3c1e1c96ff0ac8581337ef9f5d1737eb18e925c1e29b8d32c38743b16f5b.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-DENSE-PLASMA-FOCUS-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "f0dc6650442167988f67b6151ffa50713e0d0e6b",
+        "sha256": "7e20123ee608d39bfd74bf2f035ef8f404e95b6a95c91ea3755487891f704615",
+        "snapshot": "sources/7e20123ee608d39bfd74bf2f035ef8f404e95b6a95c91ea3755487891f704615.json"
+      },
+      "configurations": [
+        "dense_plasma_focus"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-dense-plasma-focus-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-ELECTROCHEM-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "e130c7abf7a845ee5b5f9fb35714c54eeeee2c68",
+        "sha256": "577d59a0521b4bcce05e5a89701087a15ccaa633ab90aba863fe0f7604d7d244",
+        "snapshot": "sources/577d59a0521b4bcce05e5a89701087a15ccaa633ab90aba863fe0f7604d7d244.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:electrochemical_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-FRC-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "defa4abc11156d9958c2dd0b9b12633d714367d4",
+        "sha256": "7809ba75080ad923ed5364cc1b526ed193d70bab1ec45cc95eb25f4d01c0ca30",
+        "snapshot": "sources/7809ba75080ad923ed5364cc1b526ed193d70bab1ec45cc95eb25f4d01c0ca30.json"
+      },
+      "configurations": [
+        "field_reversed_configuration"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-frc-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-FUSION-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "solver_library",
+      "source": {
+        "file": "pyproject.toml",
+        "git_commit": "a87ad0867a0876f59892a49b6b0c9754438a66d8",
+        "sha256": "a6df1d74bf5ef83642df9b3f9cd18022c7046fb432e7c74f98ed0e3283f9c06a",
+        "snapshot": "sources/a6df1d74bf5ef83642df9b3f9cd18022c7046fb432e7c74f98ed0e3283f9c06a.toml"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": null,
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-fusion-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-FUSION-FISSION-HYBRID-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "b868a66c9358ff187a3f5e5414f5a9c14bd6762d",
+        "sha256": "5d0408682f699b521fd505c66c00ea597b3e59ba2df8e4075127110e4697535c",
+        "snapshot": "sources/5d0408682f699b521fd505c66c00ea597b3e59ba2df8e4075127110e4697535c.json"
+      },
+      "configurations": [
+        "fusion_fission_hybrid"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-fusion-fission-hybrid-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-FUSION-PROCESS-HEAT-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "hybrid_composition",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "b477d491c879bebec0ac255d05c0e5892d9f0c2f",
+        "sha256": "f7e6bec5de6092b8a9ff7ffc229c7b29ca6119335419e05d0edc2b4c68ca46f9",
+        "snapshot": "sources/f7e6bec5de6092b8a9ff7ffc229c7b29ca6119335419e05d0edc2b4c68ca46f9.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-GFR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "fb8ee6c33f3e084affe40c008a6f61ebe247c753",
+        "sha256": "3381a0c9a741bf6d093459624768fc878d0a297329590b5392a053de0f3b44c7",
+        "snapshot": "sources/3381a0c9a741bf6d093459624768fc878d0a297329590b5392a053de0f3b44c7.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:gas_cooled_fast_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-HEAT-PIPE-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "b64695ce058b0cde05679d46f3a2780ffe8e885e",
+        "sha256": "52bcc67876965aa6121d9afd900cf869a83f9f84bd3dc243030307777e03c7a6",
+        "snapshot": "sources/52bcc67876965aa6121d9afd900cf869a83f9f84bd3dc243030307777e03c7a6.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:heat_pipe_microreactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-HTGR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "775034ac56064c8e43da9cff76fb2df83e49b050",
+        "sha256": "15c08ddf5a5cc89403c130ef9d2223123d914e32c1c5d2715b9095d0af6e8158",
+        "snapshot": "sources/15c08ddf5a5cc89403c130ef9d2223123d914e32c1c5d2715b9095d0af6e8158.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:high_temperature_gas_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-HYBRID-ENERGY-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "hybrid_composition",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "19f9ad46e2dbcb636bf677acd66eefbf7d09ec86",
+        "sha256": "b7511c6bedfa5280a0d8cddd23a1a8c8f5b15473c92027008c94140ba5b37093",
+        "snapshot": "sources/b7511c6bedfa5280a0d8cddd23a1a8c8f5b15473c92027008c94140ba5b37093.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-HYDROGEN-PROCESS-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "0a82f00ede86cc95f387f30cc375b12be736b621",
+        "sha256": "569caceed5f08696578a86ee664105331949e63b857faa4a621575effdb9f852",
+        "snapshot": "sources/569caceed5f08696578a86ee664105331949e63b857faa4a621575effdb9f852.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:nuclear_hydrogen_process",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-ICF-BEAM-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "7b288468fd3fc927c617eaed6bf1f142662f3e75",
+        "sha256": "de3823e4afcc6d01813b8a370a3d7832e13cf3918234ded770be66d7021f4c6b",
+        "snapshot": "sources/de3823e4afcc6d01813b8a370a3d7832e13cf3918234ded770be66d7021f4c6b.json"
+      },
+      "configurations": [
+        "ion_beam_icf",
+        "pulsed_electron_beam_icf"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-icf-beam-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-ICF-IMPACT-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "c580b791e6e46947aee477b6892f10b0cd0792a3",
+        "sha256": "812c99014d39eb64ead7a79b6240bf85c5328c4356130b5d61d4aaa5de1f683a",
+        "snapshot": "sources/812c99014d39eb64ead7a79b6240bf85c5328c4356130b5d61d4aaa5de1f683a.json"
+      },
+      "configurations": [
+        "projectile_or_impact_icf"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-icf-impact-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-ICF-LASER-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "c5050cbd2defa79826046b8f375e3d99ef2d7db5",
+        "sha256": "fc2b54e1de8553c336de6997576c30b5e6278f295a00b6c28f307bf370af4d06",
+        "snapshot": "sources/fc2b54e1de8553c336de6997576c30b5e6278f295a00b6c28f307bf370af4d06.json"
+      },
+      "configurations": [
+        "laser_icf_direct_drive",
+        "laser_icf_fast_or_shock_ignition",
+        "laser_icf_indirect_drive"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-icf-laser-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-IEC-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "5357a656a7eb57ce9c4819e1d6e3edfd6d98acbb",
+        "sha256": "65935351f1b7a706d4590ebec04453bf53961d5c052b6834f27ca87c0d286bde",
+        "snapshot": "sources/65935351f1b7a706d4590ebec04453bf53961d5c052b6834f27ca87c0d286bde.json"
+      },
+      "configurations": [
+        "gridded_iec",
+        "polywell"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-iec-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-LATTICE-FUSION-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "6cb74f90af4c3d02a3744c23b9fd1d5b8438bd1b",
+        "sha256": "609e8a5e9207e7fd2962aca5d45c801a22f5cff194696381969e7a90d332f2c8",
+        "snapshot": "sources/609e8a5e9207e7fd2962aca5d45c801a22f5cff194696381969e7a90d332f2c8.json"
+      },
+      "configurations": [
+        "scpn.reactor_systems:lattice_confinement_fusion"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-lattice-fusion-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-LEVITATED-DIPOLE-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "8c25082c25aff18b421d72aa987e4b5baee180b3",
+        "sha256": "f58fff873c62024ebc285bfbf1a2ca0ac5cc00d5865125d2144a0f72ac59f824",
+        "snapshot": "sources/f58fff873c62024ebc285bfbf1a2ca0ac5cc00d5865125d2144a0f72ac59f824.json"
+      },
+      "configurations": [
+        "levitated_dipole"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-levitated-dipole-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-LFR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "46d649d4502e28f0a8857f6ff43d5f39337c903d",
+        "sha256": "1f9861b0699aa213effcef446d6beb5c8b66e11a0351d08fe42dc5d853d55d5c",
+        "snapshot": "sources/1f9861b0699aa213effcef446d6beb5c8b66e11a0351d08fe42dc5d853d55d5c.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:lead_cooled_fast_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MAGNETIC-CUSP-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "dd0635af936e0eff9b056cb4811943add36632b3",
+        "sha256": "2c69be0dccd7f244bbe71fe9e59c6cab11d7c8c5306e7a0fe19e2e53653f54ce",
+        "snapshot": "sources/2c69be0dccd7f244bbe71fe9e59c6cab11d7c8c5306e7a0fe19e2e53653f54ce.json"
+      },
+      "configurations": [
+        "cusp"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-magnetic-cusp-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MEMBRANE-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "50df62b6f01b4b1a989da4f7607eaf059c7a49fa",
+        "sha256": "e01dd20b8916c0b8801ea8ac0b5de8605dcc6ed5f9f43f6fe7130d4c4bb3e754",
+        "snapshot": "sources/e01dd20b8916c0b8801ea8ac0b5de8605dcc6ed5f9f43f6fe7130d4c4bb3e754.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:membrane_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-METHANE-REFORMER-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "666e86219f464c62150bcfe27542d8b18b4782db",
+        "sha256": "f2b710f27dc98bb828c8688a78ef27e6ec03302d31b663187f47a0292b8ff7fe",
+        "snapshot": "sources/f2b710f27dc98bb828c8688a78ef27e6ec03302d31b663187f47a0292b8ff7fe.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:steam_methane_reformer",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MIF-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "solver_library",
+      "source": {
+        "file": "pyproject.toml",
+        "git_commit": "cb3b104362c1f821ebc4e7861257dce572fab188",
+        "sha256": "dd2532165af8fa5c73d0a916714da55db91458e4a4fff4ce3a52c0b702df5c85",
+        "snapshot": "sources/dd2532165af8fa5c73d0a916714da55db91458e4a4fff4ce3a52c0b702df5c85.toml"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": null,
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-mif-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MIF-LINER-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "b4a373e1fe6c5e7ecd240f17b5c1cb2261d32b54",
+        "sha256": "6b8e340f89064c420e062012af5345db510a06ec2f21886533a6a1805208aa94",
+        "snapshot": "sources/6b8e340f89064c420e062012af5345db510a06ec2f21886533a6a1805208aa94.json"
+      },
+      "configurations": [
+        "mechanical_or_liquid_liner_mif"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-mif-liner-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MIF-MAGLIF-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "526bdbb17f769feac9f9db0a161ab72c0a4eeaa5",
+        "sha256": "b8602d598d3c322ad5362d7bbb439cce9ec9a5e063da5e860cb49d0913287992",
+        "snapshot": "sources/b8602d598d3c322ad5362d7bbb439cce9ec9a5e063da5e860cb49d0913287992.json"
+      },
+      "configurations": [
+        "maglif"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-mif-maglif-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MIF-PLASMA-JET-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "6fc3f905006d0f62423a88d0656a291c92a832e5",
+        "sha256": "0c911d6e8961d072f5b730aa3e495df59ddca02200953a133884c7a3f0f78690",
+        "snapshot": "sources/0c911d6e8961d072f5b730aa3e495df59ddca02200953a133884c7a3f0f78690.json"
+      },
+      "configurations": [
+        "plasma_jet_mif"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-mif-plasma-jet-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MIRROR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "63e16dd0c437bf5965b26e13794ce56c44738aec",
+        "sha256": "91a0925780c73580938e5cd2665f2466e41f479b2e87142ff343554480e6f1cc",
+        "snapshot": "sources/91a0925780c73580938e5cd2665f2466e41f479b2e87142ff343554480e6f1cc.json"
+      },
+      "configurations": [
+        "gas_dynamic_mirror",
+        "simple_magnetic_mirror",
+        "tandem_mirror"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-mirror-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MSR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "2259400a34c8ec3692c305195b9efb7ab8934064",
+        "sha256": "f96c4dc770e5b421d48e5a613af404993f5c619835244b76b95516d488f6109e",
+        "snapshot": "sources/f96c4dc770e5b421d48e5a613af404993f5c619835244b76b95516d488f6109e.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:molten_salt_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-MUON-FUSION-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "14b629dd7cc856e9feeb1f48c4931e49e30567cf",
+        "sha256": "15033775f80cbc130cc2c69c53b7ca93565b62c8fe533bec8773c076965f6a4f",
+        "snapshot": "sources/15033775f80cbc130cc2c69c53b7ca93565b62c8fe533bec8773c076965f6a4f.json"
+      },
+      "configurations": [
+        "scpn.reactor_systems:muon_catalysed_fusion"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-muon-fusion-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-NTP-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "c3704302865d83f66b9f3dce0fbf703f2569a569",
+        "sha256": "89985415f44f64b99b6555f638fe7e86d5883e03dac02c376e00ee842fecd046",
+        "snapshot": "sources/89985415f44f64b99b6555f638fe7e86d5883e03dac02c376e00ee842fecd046.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:nuclear_thermal_propulsion",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-NUCLEAR-DESALINATION-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "hybrid_composition",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "544fb4952077812a84bd3edd7d08e19c21bbca0d",
+        "sha256": "ad8234baeec0ba80ce10464f5f5133e380016ff705e2e031fe4d07c23a558062",
+        "snapshot": "sources/ad8234baeec0ba80ce10464f5f5133e380016ff705e2e031fe4d07c23a558062.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-NUCLEAR-HYDROGEN-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "hybrid_composition",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "ebf7069a08249d30175693add59156e6e3f9d718",
+        "sha256": "9411f02cc24f26943c359dc939baacde32e8fb6bdb097e4f48df3aa32b829d92",
+        "snapshot": "sources/9411f02cc24f26943c359dc939baacde32e8fb6bdb097e4f48df3aa32b829d92.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-PHOTOCATALYTIC-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "chemical_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "918906ccfed4edea3cb36819954859eb47be6a94",
+        "sha256": "e50fc184b4b664e454b2e203b1b578266374118b380e001c842670710f2278f7",
+        "snapshot": "sources/e50fc184b4b664e454b2e203b1b578266374118b380e001c842670710f2278f7.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:photocatalytic_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-PHWR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "e82da0674bad6b5a730b9ad42fd6d6a39e2c361a",
+        "sha256": "b944119b9e7ecc345ec936de74c7500f148e407340fa140e40a91a779e5b3f16",
+        "snapshot": "sources/b944119b9e7ecc345ec936de74c7500f148e407340fa140e40a91a779e5b3f16.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:pressurised_heavy_water_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-PWR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "42388b00469a6b9203984e68b1382de79010df2a",
+        "sha256": "be2a402b43d962d265c6523672cd4743db9ea2c41f6b3ad4f2b2e99081d08c23",
+        "snapshot": "sources/be2a402b43d962d265c6523672cd4743db9ea2c41f6b3ad4f2b2e99081d08c23.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:pressurised_water_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-REACTOR-CATALOGUE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "catalogue",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "2ae9ec5e7acab74b6fec300d27ec2ba12c20bd89",
+        "sha256": "a862cb88c4669bec8d0bb657274403e334d516f90314d3a6d824027cd7b6ced1",
+        "snapshot": "sources/a862cb88c4669bec8d0bb657274403e334d516f90314d3a6d824027cd7b6ced1.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-REACTOR-KERNELS",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "shared_kernel_library",
+      "source": {
+        "file": "kernels-domain.json",
+        "git_commit": "790a70fd89a74ef4b138d19043f9f0fa49e9a194",
+        "sha256": "9a9ddd8121793aea9c54384929911408e1268f5f5e30db0691b66aa9d21d627f",
+        "snapshot": "sources/9a9ddd8121793aea9c54384929911408e1268f5f5e30db0691b66aa9d21d627f.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-reactor-kernels",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-RESEARCH-REACTOR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "561c6ef9a2bfec3b0eccfb81eb3d489cb36b2002",
+        "sha256": "a68db8f63e6de09766dc08904bbc1897591d2dcf0972b4577d5a27d7e789d76c",
+        "snapshot": "sources/a68db8f63e6de09766dc08904bbc1897591d2dcf0972b4577d5a27d7e789d76c.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:research_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-RFP-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "d3ded21f2dde5a5d41384e8d44fe322fb1035ed8",
+        "sha256": "a265342e1220a592b8c3a80f0417ce5af6310449645faef1a549ae401e14de19",
+        "snapshot": "sources/a265342e1220a592b8c3a80f0417ce5af6310449645faef1a549ae401e14de19.json"
+      },
+      "configurations": [
+        "reversed_field_pinch"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-rfp-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-SCWR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "bcafe5014f1958e95d53b5d0ff2b6b05cba4f467",
+        "sha256": "c8709b450b3a1963c1ab44251c6b3994c66b26a6964a30a402a8c2c981cf8304",
+        "snapshot": "sources/c8709b450b3a1963c1ab44251c6b3994c66b26a6964a30a402a8c2c981cf8304.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:supercritical_water_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-SFR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "fission_device",
+      "source": {
+        "file": "project-boundary.json",
+        "git_commit": "1e024bf2a2e09274401921b3605523b2bb31ef08",
+        "sha256": "2e9e932236163d0639abb25e57151bb418f1f543588eb2a37055c0fbc1b37cf1",
+        "snapshot": "sources/2e9e932236163d0639abb25e57151bb418f1f543588eb2a37055c0fbc1b37cf1.json"
+      },
+      "configurations": [],
+      "proposed_configuration_id": "scpn.reactor_systems:sodium_cooled_fast_reactor",
+      "source_declared_maturity": "architecture_only",
+      "boundary_registration_state": "not_registered",
+      "public_repository": null,
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-SPHEROMAK-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "5b25c49b1982679a6f805aead1b0b7fb4ca8bb24",
+        "sha256": "ac86d517804b307360929b508ceaa75ba8926f61a2023d302e03f2a7e0f56d20",
+        "snapshot": "sources/ac86d517804b307360929b508ceaa75ba8926f61a2023d302e03f2a7e0f56d20.json"
+      },
+      "configurations": [
+        "spheromak"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-spheromak-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-STELLARATOR-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "4a181b61d0a6591bedb0397d8513ec90ee661af9",
+        "sha256": "88621e8db2b454f9f21ba6e5f546de4ae48988da38ff93f5358e5a1d1c4c4f94",
+        "snapshot": "sources/88621e8db2b454f9f21ba6e5f546de4ae48988da38ff93f5358e5a1d1c4c4f94.json"
+      },
+      "configurations": [
+        "heliotron",
+        "stellarator",
+        "torsatron"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-stellarator-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-THETA-PINCH-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "46e57e20b93cc7d300b807850e790755b8bc497f",
+        "sha256": "c6ffb8f72ba61ceecc8467c19f1367d2abbd2a2b7ccd28f4ed78bed234208887",
+        "snapshot": "sources/c6ffb8f72ba61ceecc8467c19f1367d2abbd2a2b7ccd28f4ed78bed234208887.json"
+      },
+      "configurations": [
+        "theta_pinch"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-theta-pinch-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-TOKAMAK-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "9535ea78b587c1c8351fcc33fd0118e85fc5b9ce",
+        "sha256": "1caf71c9bdab4cdc924b791a84b0cdf8548b3bfd2f6d2a098b9d6e0d9cf5ebf8",
+        "snapshot": "sources/1caf71c9bdab4cdc924b791a84b0cdf8548b3bfd2f6d2a098b9d6e0d9cf5ebf8.json"
+      },
+      "configurations": [
+        "conventional_tokamak",
+        "spherical_tokamak"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-tokamak-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    },
+    {
+      "project_id": "SCPN-Z-PINCH-CORE",
+      "owner_group": "SCPN-REACTOR-SYSTEMS",
+      "category": "device",
+      "source": {
+        "file": "reactor-domain.json",
+        "git_commit": "7a5f1dc52ab3f51162814c4268fbe830420427ad",
+        "sha256": "18f6bea82a215fdc1b8c56ba52d9e3a9accb65d5f65b00c167c86f73f3f799a1",
+        "snapshot": "sources/18f6bea82a215fdc1b8c56ba52d9e3a9accb65d5f65b00c167c86f73f3f799a1.json"
+      },
+      "configurations": [
+        "sheared_flow_z_pinch",
+        "z_pinch"
+      ],
+      "proposed_configuration_id": null,
+      "source_declared_maturity": "computational_prototype",
+      "boundary_registration_state": null,
+      "public_repository": {
+        "url": "https://github.com/anulum/scpn-z-pinch-core",
+        "retrieved": "2026-09-27",
+        "source_snapshot_sha256": "65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8"
+      },
+      "technical_validation": "not_assessed_by_atlas",
+      "control_authority": false
+    }
+  ]
+}

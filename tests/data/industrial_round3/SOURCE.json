@@ -1,0 +1,19 @@
+{
+  "captured_at_utc": "2026-09-30T09:21:41.945102+00:00",
+  "source_url": "https://assets.publishing.service.gov.uk/media/6a633033243ee000f7127f33/uk_prtr_dataset_2024.csv",
+  "licence": "OGL-UK-3.0",
+  "licence_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "attribution": "Contains public sector information from the Department for Environment, Food & Rural Affairs licensed under the Open Government Licence v3.0.",
+  "licence_evidence_url": "https://consult.defra.gov.uk/industrial-reporting-team/the-uk-pollutant-release-and-transfer-register-nat/supporting_documents/2025%20Clean%20%20draft%20UK%20PRTR%20Implementation%20Report%20in%20accordance%20with%20Decision%20I_5.pdf",
+  "raw_bytes": 5619305,
+  "raw_sha256": "f3f10db63ad7e7980d40454abdd47bcd4cd45aeabe69ad0130607916c3bc4841",
+  "raw_rows": 5802,
+  "selected_rows": 722,
+  "fixture_rows": 723,
+  "fixture_bytes": 109235,
+  "fixture_sha256": "a2d6d4e069f1ff50e2cdba0196a4e9200cee4018011f83e83996a6fd65e66b59",
+  "selection": "Every actual selected source row and first actual excluded-NACE control; only eight required source columns. Source cells unmodified; CSV reserialized as UTF8-SIG. Street addresses, postcodes, employee counts, hours, releases, waste transfers and unused source fields excluded. Full selected cell/record list equals the historical compact snapshot.",
+  "historical_manifest_matches": true,
+  "historical_retrieved_date": "2026-09-28",
+  "full_raw_reporting_year_basis": "2024 official annual CSV URL and pinned original response; do not use PreviousNationalID_ReportingYear as the current report year."
+}

@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .github/ISSUE_TEMPLATE/feature_request.yml
+
+name: Coverage or feature request
+description: Propose new coverage, a new layer, or an interface change.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Candidate sources
+      description: >-
+        Publisher, licence, retrieval method, and whether redistribution is
+        permitted. Catalogue-only records are valid where it is not.
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Evidence boundary
+      description: What the proposed records would and would not establish.

@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Graphite-moderated, gas-cooled and TRISO design evidence with a declared process-heat interface.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F4",
+  "project_id": "SCPN-HTGR-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:high_temperature_gas_reactor",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "B"
+}

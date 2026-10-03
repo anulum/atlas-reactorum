@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .pre-commit-config.yaml
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff lint
+        entry: python -m ruff check --fix
+        language: system
+        types_or: [python, pyi]
+      - id: ruff-format
+        name: Ruff format
+        entry: python -m ruff format
+        language: system
+        types_or: [python, pyi]
+      - id: end-of-file-fixer
+        name: Final newline
+        entry: end-of-file-fixer
+        language: system
+        types: [text]
+        # These data formats include byte-exact publisher responses and products.
+        exclude: '\.(tsv|json|ndjson|csv|geojson|frames)$|^04_interactive_presentation/data/'
+      - id: trailing-whitespace
+        name: Trailing whitespace
+        entry: trailing-whitespace-fixer
+        language: system
+        types: [text]
+        exclude: '\.(tsv|json|ndjson|csv|geojson|frames|md)$|^04_interactive_presentation/data/'
+      - id: check-merge-conflict
+        name: Merge conflict markers
+        entry: check-merge-conflict
+        language: system
+        types: [text]
+      - id: detect-private-key
+        name: Private key scan
+        entry: detect-private-key
+        language: system
+        types: [text]
+      - id: check-added-large-files
+        name: Large file scan
+        entry: check-added-large-files --maxkb=40000
+        language: system
+      - id: no-secrets-in-docs
+        name: Credential content scan
+        entry: python tools/preflight.py --check secrets
+        language: system
+        pass_filenames: false

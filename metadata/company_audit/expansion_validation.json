@@ -1,0 +1,38 @@
+{
+  "records": 18,
+  "sha256": "be35e7580c42472f55412304c40dde7d616f5311cdf1824db8e713d9677d8da3",
+  "identity_classes": {
+    "fusion reactor/device developer": 12,
+    "fusion propulsion/device developer": 2,
+    "historical/dormant fusion developer": 1,
+    "speculative non-mainstream nuclear claim": 1,
+    "public-program operator and fusion technology supplier; not a standalone private power-plant developer": 1,
+    "fusion materials supplier/integrator; not a reactor developer": 1
+  },
+  "evidence_tiers": {
+    "C — company profile and industry-registry evidence only": 1,
+    "C — company and industry-registry evidence; no power milestone": 1,
+    "B/C — device existence independently catalogued; performance mainly company-reported": 1,
+    "B/C — underlying NRL science is published; company hardware milestone not established": 1,
+    "C — conceptual design/company and industry-registry evidence": 1,
+    "C — operating R&D project reported; performance not independently established": 1,
+    "C — company/industry-registry evidence only": 1,
+    "C — public prototype reporting; no independently measured propulsion or gain result": 1,
+    "B/C — independent recognition and research lineage; company reactor performance not yet established": 1,
+    "B/C — university/ARPA-E physics platform exists; company commercialization is conceptual": 1,
+    "C — industry-profile and limited technical trail": 1,
+    "B/C — corporate and public-research partnership independently documented; no company fusion shot": 1,
+    "B/C — LLNL collaboration and inherited NIF physics basis; company performance is modeled": 1,
+    "B/C — government-zone reporting confirms company, financing and assembly; no plasma milestone yet": 1,
+    "C-H — historical concept; no current development evidence": 1,
+    "D — claim-led; no broadly accepted independent validation": 1,
+    "A — government-verified operating facility and delivered engineering work": 1,
+    "B — current supplier activity corroborated by UKAEA": 1
+  },
+  "confidence": {
+    "low": 5,
+    "medium": 7,
+    "high": 6
+  },
+  "errors": []
+}

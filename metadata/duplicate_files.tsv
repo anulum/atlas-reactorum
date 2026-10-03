@@ -1,0 +1,6 @@
+sha256	copies	paths
+34408793925e127bc5e0b7fc589f88196fc06dfb6432ac8cd2cdd49f30dae8a0	2	./metadata/company_audit/depth_round8/reviewed_inputs/reviewed_sources.tsv | ./metadata/company_audit/depth_round8/source_registry.tsv
+4021a756be90b54bd3f3e1dac32525430bfcce93fb49a99bb21dbee9a24df53d	2	./metadata/company_audit/depth_round8/enrichment_overlays.tsv | ./metadata/company_audit/depth_round8/reviewed_inputs/reviewed_profiles.tsv
+640bae831a78d72503f6de9c7107c7c3b511cf117f83d2fe39a778d6cf045d06	2	./05_global_reactor_map/imports/fusion/ffdb/visible_data.frames | ./tests/data/fusion_ffdb/visible_data.frames
+65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8	3	./04_interactive_presentation/data/anulum_reactor_repos.json | ./metadata/anulum_github/reactor_repositories.json | ./metadata/reactor_portfolio/sources/65970b560a5ab803013da45cbb70bfad9acd8c9029cdedc3e283e02d65d964a8.json
+bdcd27cdb08bdf4af6713e5aac352d3725691933e06d1aeab262753c30325fa3	2	./metadata/company_audit/depth_round8/field_source_bindings.tsv | ./metadata/company_audit/depth_round8/reviewed_inputs/field_source_bindings.tsv

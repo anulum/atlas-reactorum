@@ -1,0 +1,33 @@
+{
+  "audit_date": "2026-09-27",
+  "candidate_records": 15,
+  "source_records": 30,
+  "candidate_sha256": "3737618d47f79985078c5fe3f03c8fc9d1f19f8b44273bcbb57f3b11d457459a",
+  "source_registry_sha256": "d751c56b7af97abd90b9162a6df2f1dc4f21dea4f9c0b8c75c0560974c1cf7e3",
+  "countries": {
+    "China": 5,
+    "Japan": 3,
+    "South Korea": 2,
+    "India": 3,
+    "Spain": 1,
+    "Russia": 1
+  },
+  "identity_classes": {
+    "fusion reactor/device developer": 6,
+    "fusion magnet supplier/integrator; not a reactor developer": 1,
+    "fusion cryogenic-system supplier; not a reactor developer": 1,
+    "fusion project company/developer": 1,
+    "fusion materials supplier; not a reactor developer": 1,
+    "fusion engineering platform/supplier; not a reactor developer": 1,
+    "fusion R&D organization; pre-hardware": 1,
+    "speculative non-mainstream nuclear claim": 1,
+    "applied plasma/neutron systems company; fusion is long-term": 1,
+    "state research operator; not a private commercial reactor developer": 1
+  },
+  "confidence": {
+    "medium": 6,
+    "low": 3,
+    "high": 6
+  },
+  "errors": []
+}

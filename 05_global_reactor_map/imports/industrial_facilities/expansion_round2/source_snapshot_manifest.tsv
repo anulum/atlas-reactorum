@@ -1,0 +1,3 @@
+source	url	retrieved	bytes	sha256	selected_rows
+canada-npri	https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_GeolocationsGeolocalisation_1993-present.csv	2026-09-27	13651974	2dcb73082aac50a95446600e1e86b28aec2c48da502265002c05176af4be8781	908
+australia-npi	https://data.gov.au/data/dataset/043f58e0-a188-4458-b61c-04e5b540aea4/resource/f83cdee9-ebcb-4f24-941b-34bb2f0996cf/download/facilities.csv	2026-09-27	3248241	a0be4c37d588b391ea81baf240f675b2c9f3d9ee0210f9c451c7371eac11d6c7	868

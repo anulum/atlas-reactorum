@@ -1,0 +1,1198 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# SCPN Fusion Core — source/config header compliance
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scpn-fusion"
+version = "4.0.0"
+description = "SCPN Fusion Core - Advanced Plasma Physics & Control Suite"
+authors = [
+    {name = "Miroslav Sotek"},
+]
+license = {text = "AGPL-3.0-or-later"}
+classifiers = [
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Development Status :: 4 - Beta",
+]
+readme = "README.md"
+dependencies = [
+    "click>=8.1,<9",
+    "numpy>=1.24,<2.0",
+    "matplotlib>=3.5,<4",
+    "scipy>=1.10,<2",
+    "pydantic>=2.0,<3",
+    "pandas>=1.5,<4",
+    "requests>=2.31,<3",
+    "tomli==2.2.1; python_version < '3.11'",
+]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/anulum/scpn-fusion-core"
+Documentation = "https://anulum.github.io/scpn-fusion-core/"
+Repository = "https://github.com/anulum/scpn-fusion-core"
+"Bug Tracker" = "https://github.com/anulum/scpn-fusion-core/issues"
+
+[project.optional-dependencies]
+ui = [
+    "streamlit",
+]
+ml = [
+    "jax>=0.7.1,<0.8",
+    "jaxlib>=0.7.1,<0.8",
+]
+rl = [
+    "gymnasium>=1.0.0",
+]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-cov>=5.0",
+    "hypothesis>=6.0",
+    "jax>=0.7.1,<0.8",
+    "jaxlib>=0.7.1,<0.8",
+    "jsonschema>=4.26.0",
+    "mypy>=1.10",
+    "ruff>=0.8",
+    "bandit>=1.7",
+    "pre-commit>=3.0",
+    "types-psutil>=7.2.2.20260518",
+    "types-PyYAML>=6.0.12.20260906",
+]
+fuzz = [
+    "atheris>=2.3",
+]
+rust = [
+    "maturin>=1.14.1,<2.0",
+]
+snn = []  # pure-numpy LIF+NEF engine, no external deps
+studio = [
+    "scpn-studio-platform>=0.10,<0.11",
+]
+benchmark = [
+    "freegs>=0.6",
+]
+mast = [
+    "fsspec>=2026.4,<2027; python_version >= '3.11'",
+    "pyyaml>=6.0,<7; python_version >= '3.11'",
+    "s3fs>=2026.4,<2027; python_version >= '3.11'",
+    "xarray>=2026.4,<2027; python_version >= '3.11'",
+    "zarr>=3.1,<3.2; python_version >= '3.11'",
+]
+full-physics = [
+    "freegs>=0.6",
+    "omas>=0.70",
+]
+gpu = [
+    "jax[cuda12]>=0.7.1,<0.8",
+    "cupy-cuda12x>=13.6,<14.0",
+    "nvidia-cuda-nvrtc-cu12>=12.0,<13.0",
+]
+mpi = [
+    "mpi4py>=4.1",
+]
+full = [
+    "streamlit",
+    "jax>=0.7.1,<0.8",
+    "jaxlib>=0.7.1,<0.8",
+    "cupy-cuda12x>=13.6,<14.0",
+    "nvidia-cuda-nvrtc-cu12>=12.0,<13.0",
+    "gymnasium>=1.0.0",
+    "freegs>=0.6",
+    "mpi4py>=4.1",
+    "omas>=0.70",
+    "maturin>=1.14.1,<2.0",
+    "fsspec>=2026.4,<2027; python_version >= '3.11'",
+    "pyyaml>=6.0,<7; python_version >= '3.11'",
+    "s3fs>=2026.4,<2027; python_version >= '3.11'",
+    "xarray>=2026.4,<2027; python_version >= '3.11'",
+    "zarr>=3.1,<3.2; python_version >= '3.11'",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src", "validation" = "validation", "weights" = "weights"}
+
+# Discover every scpn_fusion subpackage (core/, control/, io/, …) plus the
+# validation package; the previous explicit ``packages`` list named only the
+# top-level packages, so the built wheel shipped scpn_fusion/*.py but none of
+# the subpackages, leaving it non-importable for downstream consumers.
+[tool.setuptools.packages.find]
+where = ["src", "."]
+include = ["scpn_fusion*", "validation*", "weights"]
+
+# Ship the reference datasets the package loads at import/runtime (e.g. the IPB98
+# scaling coefficients read at module import in core/scaling_laws) so the wheel is
+# usable, not just importable.
+[tool.setuptools.package-data]
+validation = [
+    "**/*.json",
+    "**/*.npz",
+    "**/*.geqdsk",
+    "**/*.eqdsk",
+    "**/*.csv",
+]
+# Ship only the small runtime surrogate weights the library loads by default (~12 MB
+# total). Large training-only checkpoints — the 302 MB legacy ``fno_turbulence_jax.npz``
+# (opt-in via SCPN_ENABLE_LEGACY_FNO) and the variant/augmented artifacts — are
+# deliberately excluded to keep the wheel within a sane distribution size.
+weights = [
+    "neural_transport_qlknn.npz",
+    "neural_transport_qlknn.metrics.json",
+    "neural_equilibrium_sparc.npz",
+    "neural_equilibrium_iter_v1.npz",
+    "pretrained_mlp_itpa.npz",
+    "pretrained_fno_eurofusion_jet.npz",
+    "pretrained_surrogates_manifest.json",
+]
+scpn_fusion = ["py.typed"]
+
+# Exclude large training-only datasets from the wheel. The 157 MB TGLF training
+# corpus is consumed solely by tools/generate_tglf_dataset.py (a source-tree
+# training utility) and is never loaded by the installed library, so shipping it
+# would push the wheel past the PyPI size limit for no runtime benefit.
+[tool.setuptools.exclude-package-data]
+validation = ["reference_data/tglf_training_data.npz"]
+
+[project.scripts]
+scpn-fusion = "scpn_fusion.cli:main"
+scpn-dashboard = "scpn_fusion.ui.dashboard_launcher:main"
+scpn-emit-studio-manifest = "scpn_fusion.studio.federation:main"
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = false
+
+# Strict defaults apply to every mypy invocation. The file cohort below is the
+# currently gated typed surface and is expanded incrementally as modules are
+# brought to strict-clean status.
+files = [
+    "tools/build_rustbca_reference.py",
+    "tools/check_definition_docstrings.py",
+    "tools/check_ci_workflow_ownership.py",
+    "tests/test_tools_run_python_preflight.py",
+    "tests/test_check_ci_workflow_ownership.py",
+    "tests/test_ci_workflow_references.py",
+    "tests/test_check_definition_docstrings.py",
+    "validation/rustbca_request.py",
+    "validation/rustbca_reference.py",
+    "validation/rustbca_build_receipt.py",
+    "integration_tests/rustbca/test_request.py",
+    "integration_tests/rustbca/test_reference.py",
+    "integration_tests/rustbca/test_build_receipt.py",
+    "integration_tests/rustbca/test_builder.py",
+    "validation/process_power_report.py",
+    "validation/process_reference_run.py",
+    "integration_tests/process/conftest.py",
+    "integration_tests/process/test_power_report.py",
+    "integration_tests/process/test_reference_run.py",
+    "tests/test_thermal_hydraulics.py",
+    "tests/test_balance_of_plant.py",
+    "validation/cfspopcon_operating_map.py",
+    "integration_tests/cfspopcon/test_operating_map.py",
+    # Top-level package entrypoints
+    "src/scpn_fusion/__init__.py",
+    "src/scpn_fusion/cli.py",
+    "src/scpn_fusion/repro.py",
+    "src/scpn_fusion/_data_paths.py",
+    "tests/test_data_paths.py",
+    "tests/test_repro.py",
+    # scpn/ (existing)
+    "src/scpn_fusion/scpn/contracts.py",
+    "tests/test_feature_extraction.py",
+    "src/scpn_fusion/scpn/controller.py",
+    "src/scpn_fusion/scpn/controller_backend_mixin.py",
+    "tests/test_controller_backend_mixin.py",
+    "src/scpn_fusion/scpn/controller_features_mixin.py",
+    "tests/test_controller_features_mixin.py",
+    "src/scpn_fusion/scpn/structure.py",
+    "src/scpn_fusion/scpn/artifact.py",
+    "tests/test_artifact_packed_roundtrip.py",
+    "src/scpn_fusion/scpn/artifact_codec.py",
+    "src/scpn_fusion/scpn/artifact_schema.py",
+    "tests/test_artifact_schema.py",
+    "src/scpn_fusion/scpn/artifact_validation.py",
+    "tests/test_artifact_validation.py",
+    "src/scpn_fusion/scpn/compiler.py",
+    "tests/test_compiler_kernels.py",
+    "tests/test_controller_runtime.py",
+    "src/scpn_fusion/scpn/controller_runtime_backend.py",
+    "src/scpn_fusion/scpn/safety_interlocks.py",
+    "tests/test_safety_interlocks.py",
+    "src/scpn_fusion/scpn/__init__.py",
+    "tests/test_controller_runtime_backend.py",
+    "tests/test_controller_runtime_backend_probe.py",
+    # io/
+    "src/scpn_fusion/io/__init__.py",
+    "src/scpn_fusion/io/_tokamak_archive_shots.py",
+    "tests/test_tokamak_archive_shots_facade.py",
+    "src/scpn_fusion/io/imas_connector.py",
+    "src/scpn_fusion/io/imas_connector_common.py",
+    "src/scpn_fusion/io/imas_connector_digital_twin.py",
+    "tests/test_imas_connector_digital_twin.py",
+    "src/scpn_fusion/io/imas_connector_equilibrium.py",
+    "tests/test_imas_connector_equilibrium.py",
+    "src/scpn_fusion/io/imas_connector_omas.py",
+    "src/scpn_fusion/io/omas_free_boundary_inputs.py",
+    "tests/test_omas_free_boundary_inputs.py",
+    "src/scpn_fusion/io/imas_connector_storage.py",
+    "src/scpn_fusion/io/imas_connector_transport.py",
+    "tests/test_imas_connector_transport.py",
+    "src/scpn_fusion/io/imas_history_payloads.py",
+    "tests/test_imas_history_payloads.py",
+    "src/scpn_fusion/io/logging_config.py",
+    "src/scpn_fusion/io/deeponet_training_data.py",
+    "src/scpn_fusion/io/deeponet_training_recovery.py",
+    "src/scpn_fusion/io/deeponet_training_report.py",
+    "src/scpn_fusion/io/machine_conditioned_deeponet_cli.py",
+    "tests/test_deeponet_training_modules.py",
+    "tests/test_machine_conditioned_deeponet_training.py",
+    "src/scpn_fusion/io/mast_ingestor.py",
+    "src/scpn_fusion/io/mast_magnetic_archive.py",
+    "src/scpn_fusion/io/mast_magnetic_archive_acquisition.py",
+    "src/scpn_fusion/io/mast_magnetic_archive_codec.py",
+    "tests/test_mast_magnetic_archive.py",
+    "tests/test_mast_magnetic_archive_acquisition.py",
+    "tests/test_mast_magnetic_archive_codec.py",
+    "tests/test_mast_magnetic_archive_validation.py",
+    "src/scpn_fusion/io/safe_loaders.py",
+    "tests/test_safe_loaders.py",
+    "src/scpn_fusion/io/tokamak_live_payload.py",
+    "src/scpn_fusion/io/tokamak_archive.py",
+    "src/scpn_fusion/io/tokamak_archive_profiles.py",
+    "tests/test_tokamak_archive_profiles.py",
+    "src/scpn_fusion/io/tokamak_disruption_archive.py",
+    "src/scpn_fusion/io/tokamak_synthetic_archive.py",
+    "tests/test_tokamak_synthetic_archive.py",
+    "tests/test_tokamak_archive.py",
+    # diagnostics/
+    "src/scpn_fusion/diagnostics/__init__.py",
+    "src/scpn_fusion/diagnostics/forward.py",
+    "src/scpn_fusion/diagnostics/run_diagnostics.py",
+    "src/scpn_fusion/diagnostics/synthetic_sensors.py",
+    "src/scpn_fusion/diagnostics/tomography.py",
+    "tests/test_tomography.py",
+    # hpc/
+    "src/scpn_fusion/hpc/__init__.py",
+    "src/scpn_fusion/hpc/hpc_bridge.py",
+    "src/scpn_fusion/hpc/_hpc_native_trust.py",
+    "tests/test_hpc_bridge.py",
+    "tests/test_hpc_bridge_runtime_contracts.py",
+    "tests/test_hpc_native_trust.py",
+    "tests/test_blanket_neutronics.py",
+    "tests/test_turbulence_oracle.py",
+    "tests/test_faraday_recovery.py",
+    "tests/test_sandpile_fusion_reactor.py",
+    "tests/test_global_design_scanner.py",
+    "tests/test_wdm_engine.py",
+    "tests/test_tglf_surrogate_bridge.py",
+    "tests/test_divertor_thermal_sim.py",
+    "tests/test_pwi_erosion.py",
+    "tests/test_mhd_sawtooth.py",
+    "tests/test_hall_mhd_discovery.py",
+    "tests/test_controller_tuning.py",
+    "tests/test_rmf_phase_lock.py",
+    "tests/test_nuclear_wall_interaction.py",
+    "benchmarks/bench_dispatcher_kernel_tiers.py",
+    "tests/test_dispatcher_kernel_tier_benchmark.py",
+    "benchmarks/bench_transport_jax.py",
+    "tests/test_transport_jax_benchmark.py",
+    "validation/benchmark_transport_uncertainty_envelope.py",
+    "tests/test_transport_uncertainty_envelope_benchmark.py",
+    "validation/benchmark_transport.py",
+    "tests/test_transport_benchmark.py",
+    "validation/collect_results.py",
+    "tests/test_collect_results.py",
+    "validation/stress_test_campaign.py",
+    "validation/vertical_control_replay_benchmark.py",
+    "tests/test_vertical_control_replay_benchmark.py",
+    "validation/scpn_end_to_end_latency.py",
+    "tests/test_scpn_end_to_end_latency.py",
+    "validation/benchmark_free_boundary_strict_parity.py",
+    "tests/test_benchmark_free_boundary_strict_parity.py",
+    "validation/free_boundary_strict_parity_report.py",
+    "tests/test_free_boundary_strict_parity_report.py",
+    "validation/free_boundary_vacuum_evidence.py",
+    "tests/test_free_boundary_vacuum_evidence.py",
+    "validation/free_boundary_threshold_evidence.py",
+    "tests/test_free_boundary_threshold_evidence.py",
+    "validation/benchmark_freegsnke_inverse.py",
+    "tests/test_benchmark_freegsnke_inverse.py",
+    "validation/ida_fixed_reference_source_contract.py",
+    "tests/test_ida_fixed_reference_source_contract.py",
+    "validation/diagnose_ida_fixed_reference_source.py",
+    "tests/test_diagnose_ida_fixed_reference_source.py",
+    "validation/ida_geometry_feedback_trace_contract.py",
+    "validation/ida_geometry_feedback_trace_metrics.py",
+    "validation/ida_geometry_feedback_trace_render.py",
+    "validation/trace_ida_geometry_feedback.py",
+    "tests/test_ida_geometry_feedback_trace_contract.py",
+    "tests/test_trace_ida_geometry_feedback.py",
+    "validation/ida_fixed_reference_operator_contract.py",
+    "validation/diagnose_ida_fixed_reference_operator.py",
+    "tests/test_ida_fixed_reference_operator_contract.py",
+    "tests/test_diagnose_ida_fixed_reference_operator.py",
+    "validation/ida_fixed_reference_source_mechanism_contract.py",
+    "validation/diagnose_ida_fixed_reference_source_mechanism.py",
+    "tests/test_ida_fixed_reference_source_mechanism_contract.py",
+    "tests/test_diagnose_ida_fixed_reference_source_mechanism.py",
+    "validation/ida_fixed_point_stability_contract.py",
+    "validation/diagnose_ida_fixed_point_stability.py",
+    "tests/test_ida_fixed_point_stability_contract.py",
+    "tests/test_diagnose_ida_fixed_point_stability.py",
+    "validation/ida_operator_response_contract.py",
+    "validation/ida_operator_response_fields.py",
+    "validation/diagnose_ida_operator_response.py",
+    "tests/test_ida_operator_response_contract.py",
+    "tests/test_diagnose_ida_operator_response.py",
+    "validation/ida_coil_vacuum_grid_contract.py",
+    "validation/ida_coil_vacuum_grid_convergence.py",
+    "validation/ida_coil_vacuum_grid_manifest.py",
+    "validation/ida_coil_vacuum_grid_measurement.py",
+    "validation/ida_coil_vacuum_grid_fields.py",
+    "validation/ida_coil_vacuum_grid_runtime.py",
+    "validation/diagnose_ida_coil_vacuum_grid_convergence.py",
+    "validation/ida_coil_vacuum_fixed_physical_contract.py",
+    "validation/ida_coil_vacuum_fixed_physical_response.py",
+    "validation/diagnose_ida_coil_vacuum_fixed_physical_response.py",
+    "tests/test_ida_coil_vacuum_grid_contract.py",
+    "tests/test_ida_coil_vacuum_grid_fields.py",
+    "tests/test_ida_coil_vacuum_grid_runtime.py",
+    "tests/test_diagnose_ida_coil_vacuum_grid_convergence.py",
+    "tests/test_ida_coil_vacuum_fixed_physical_contract.py",
+    "tests/test_ida_coil_vacuum_fixed_physical_response.py",
+    "tests/test_diagnose_ida_coil_vacuum_fixed_physical_response.py",
+    "tools/__init__.py",
+    "tools/preflight.py",
+    "tests/test_preflight.py",
+    "tools/generate_release_checksums.py",
+    "tests/test_generate_release_checksums.py",
+    "tools/verify_release_checksums.py",
+    "tests/test_verify_release_checksums.py",
+    "tools/check_release_readiness.py",
+    "tests/test_check_release_readiness.py",
+    "tools/coverage_delta_report.py",
+    "tests/test_coverage_delta_report.py",
+    "tools/generate_psi_gate_attribution.py",
+    "tests/test_generate_psi_gate_attribution.py",
+    "tools/calibrate_gyro_bohm.py",
+    "tests/test_calibrate_gyro_bohm.py",
+    "tools/generate_tglf_dataset.py",
+    "tests/test_generate_tglf_dataset.py",
+    "src/scpn_fusion/io/tglf_dataset_contract.py",
+    "tools/tglf_dataset_contract.py",
+    "tests/test_tglf_dataset_contract.py",
+    "src/scpn_fusion/io/tglf_development_corpus.py",
+    "src/scpn_fusion/io/tglf_development_plan.py",
+    "src/scpn_fusion/io/tglf_species_dataset_contract.py",
+    "tools/generate_tglf_development_corpus.py",
+    "tests/test_tglf_development_corpus.py",
+    "tests/test_tglf_development_plan.py",
+    "tests/test_tglf_species_dataset_contract.py",
+    "src/scpn_fusion/core/tglf_surrogate_candidates.py",
+    "src/scpn_fusion/io/_tglf_model_selection_data.py",
+    "src/scpn_fusion/io/_tglf_model_selection_metrics.py",
+    "src/scpn_fusion/io/tglf_model_selection.py",
+    "tools/run_tglf_model_selection.py",
+    "tests/test_tglf_surrogate_candidates.py",
+    "tests/test_tglf_model_selection.py",
+    "src/scpn_fusion/io/_tglf_constrained_targets.py",
+    "src/scpn_fusion/io/tglf_constrained_model_selection.py",
+    "tools/run_tglf_constrained_model_selection.py",
+    "tests/test_tglf_constrained_model_selection.py",
+    "tools/train_frc_jacobian_surrogate.py",
+    "tests/test_train_frc_jacobian_surrogate.py",
+    "tools/train_frc_linear_surrogate.py",
+    "tests/test_train_frc_linear_surrogate.py",
+    "tools/generate_disruption_profiles.py",
+    "tests/test_generate_disruption_profiles.py",
+    "tools/capability_manifest.py",
+    "tests/test_capability_manifest.py",
+    "tools/benchmark_regression_guard.py",
+    "tests/test_benchmark_regression_guard.py",
+    "tools/check_mast_label_manifest.py",
+    "tests/test_check_mast_label_manifest.py",
+    "tools/download_mast_labelled_shots.py",
+    "tests/test_download_mast_labelled_shots.py",
+    "tools/check_lfs_hygiene.py",
+    "tests/test_check_lfs_hygiene.py",
+    "tools/github_token_format_guard.py",
+    "tests/test_github_token_format_guard.py",
+    "tools/check_commit_trailers.py",
+    "tests/test_check_commit_trailers.py",
+    "tools/check_packaging_contract.py",
+    "tests/test_packaging_contract.py",
+    "tools/check_pypi_sync.py",
+    "tests/test_check_pypi_sync.py",
+    "tools/check_test_module_linkage.py",
+    "tests/test_check_test_module_linkage.py",
+    "tests/test_remaining_tool_contracts.py",
+    "tools/claim_range_guard.py",
+    "tests/test_claim_range_guard.py",
+    "tools/claims_audit.py",
+    "tests/test_claims_audit.py",
+    "tools/generate_claims_evidence_map.py",
+    "tests/test_generate_claims_evidence_map.py",
+    "tools/run_ruff_docstrings.py",
+    "tests/test_run_ruff_docstrings.py",
+    "tools/deprecated_default_lane_guard.py",
+    "tests/test_deprecated_default_lane_guard.py",
+    "tools/ci_rmse_gate.py",
+    "tests/test_ci_rmse_gate.py",
+    "tools/check_disruption_shot_splits.py",
+    "tests/test_check_disruption_shot_splits.py",
+    "tools/check_freegs_strict_artifact.py",
+    "tests/test_check_freegs_strict_artifact.py",
+    "tools/mypy_expansion_guard.py",
+    "tests/test_mypy_expansion_guard.py",
+    "tools/real_data_roadmap_non_regression_guard.py",
+    "tests/test_real_data_roadmap_non_regression_guard.py",
+    "tools/runtime_parity_perf_guard.py",
+    "tests/test_runtime_parity_perf_guard.py",
+    "tools/honest_validated_coverage.py",
+    "tests/test_honest_validated_coverage.py",
+    "tools/release_delta_guard.py",
+    "tests/test_release_delta_guard.py",
+    "tools/real_shot_validation_guard.py",
+    "tests/test_real_shot_validation_guard.py",
+    "tools/run_real_data_strict_gate.py",
+    "tests/test_run_real_data_strict_gate.py",
+    "tools/generate_disruption_risk_calibration.py",
+    "tests/test_generate_disruption_risk_calibration.py",
+    "tools/generate_disruption_shot_manifest.py",
+    "tests/test_generate_disruption_shot_manifest.py",
+    "tools/fallback_budget_guard.py",
+    "tests/test_fallback_budget_guard.py",
+    "tools/sync_metadata.py",
+    "tests/test_sync_metadata.py",
+    "tools/generate_readiness_scope_reports.py",
+    "tests/test_generate_readiness_scope_reports.py",
+    "tools/real_data_roadmap_progress.py",
+    "tests/test_real_data_roadmap_progress.py",
+    "tools/generate_source_p0p1_readiness.py",
+    "tests/test_generate_source_p0p1_readiness.py",
+    "tools/generate_fno_qlknn_spatial.py",
+    "tests/test_generate_fno_qlknn_spatial.py",
+    "tools/onboard_diiid_raw_disruption_shots.py",
+    "tests/test_onboard_diiid_raw_disruption_shots.py",
+    "tools/gk_external_output_parity.py",
+    "tests/test_gk_external_output_parity.py",
+    "tools/verify_native_distribution_artifacts.py",
+    "tests/test_native_distribution_artifacts.py",
+    "tools/coverage_guard.py",
+    "tests/test_quality_gate_tool.py",
+    "tools/check_docstring_coverage.py",
+    "tests/test_docstring_guard_tool.py",
+    "tools/download_efit_geqdsk.py",
+    "tests/test_download_efit_geqdsk.py",
+    "tools/export_zenodo_dataset.py",
+    "tests/test_export_zenodo_dataset.py",
+    "tools/sanitize_scorecard_sarif.py",
+    "tests/test_security_runtime_policies.py",
+    "tools/validate_cyclonedx_sbom.py",
+    "tests/test_cyclonedx_sbom_validator.py",
+    # Complete top-level tool strict cohort
+    "tools/acquire_mast_level2_panel.py",
+    "tools/check_gpu.py",
+    "tools/compute_coronal_lz_from_adas.py",
+    "tools/convert_full_fidelity_reference_artifacts.py",
+    "tools/download_diiid_data.py",
+    "tools/download_full_fidelity_public_sources.py",
+    "tools/download_qlknn10d.py",
+    "tools/export_fno_external_retrain_request.py",
+    "tools/generate_benchmark_plots.py",
+    "tools/generate_readiness_register.py",
+    "tools/generate_reference_data_provenance_manifest.py",
+    "tools/generate_safety_traceability.py",
+    "tools/import_external_fno_weights.py",
+    "tools/inventory_free_boundary_public_machine_metadata.py",
+    "tools/inventory_gk_public_reference_decks.py",
+    "tools/parallel_gen_iter.py",
+    "tools/pypi_downloads.py",
+    "tools/qlknn10d_to_npz.py",
+    "tools/remote_mast_digestor.py",
+    "tools/run_aurora_reference_artifact.py",
+    "tools/run_dream_reference_artifact.py",
+    "tools/run_dream_full_kinetic_campaign.py",
+    "tests/test_run_dream_full_kinetic_campaign.py",
+    "tests/test_run_dream_full_kinetic_campaign_archive.py",
+    "tools/run_mypy_strict.py",
+    "tools/run_native_docs.py",
+    "tools/run_python_preflight.py",
+    "tools/sweep_disruption_threshold.py",
+    "tools/train_fno_qlknn_spatial.py",
+    "tools/train_frc_quantized_surrogate.py",
+    "tools/train_frc_snn_surrogate.py",
+    "tools/train_frc_surrogate.py",
+    "tools/generate_iter_machine_conditioned_dataset.py",
+    "tools/train_machine_conditioned_deeponet.py",
+    "tools/train_machine_conditioned_equilibrium_surrogate.py",
+    "tools/train_iter_surrogate.py",
+    "tests/test_iter_surrogate_tool.py",
+    "tools/verify_iter_machine_conditioned_dataset.py",
+    "tools/verify_iter_synthetic_dataset.py",
+    "tests/test_iter_synthetic_dataset_verifier.py",
+    "tools/train_mast_snn.py",
+    "tools/train_neural_eq_v3.py",
+    "tools/train_neural_equilibrium_augmented.py",
+    "tools/train_neural_equilibrium_gpu.py",
+    "tools/train_neural_transport.py",
+    "tools/train_neural_transport_qlknn.py",
+    "tools/upgrade_notebook_to_golden_base.py",
+    "benchmarks/polyglot_gs_solver_comparison.py",
+    "benchmarks/solver_comparison.py",
+    "tests/test_polyglot_gs_solver_comparison_report.py",
+    "tests/test_solver_comparison.py",
+    "validation/full_fidelity_end_to_end_campaign.py",
+    "validation/dream_full_kinetic_execution_custody.py",
+    "tests/test_dream_full_kinetic_execution_custody.py",
+    "validation/verify_mast_complete_magnetic_archive.py",
+    "tests/test_full_fidelity_end_to_end_campaign.py",
+    "validation/torax_imas_interchange.py",
+    "tests/test_torax_imas_interchange.py",
+    "validation/torax_same_physics_config_study.py",
+    "tests/test_torax_same_physics_config_study.py",
+    "validation/torax_coupled_reference_runner.py",
+    "validation/benchmark_torax_coupled_transport_parity.py",
+    "validation/reference_data/torax/coupled_transport_model_intersection_deck.py",
+    "tests/test_torax_coupled_transport_parity.py",
+    "src/scpn_fusion/integrations/__init__.py",
+    "src/scpn_fusion/integrations/torax/__init__.py",
+    "src/scpn_fusion/integrations/torax/__main__.py",
+    "src/scpn_fusion/integrations/torax/client.py",
+    "src/scpn_fusion/integrations/torax/contracts.py",
+    "src/scpn_fusion/integrations/torax/projection.py",
+    "src/scpn_fusion/integrations/torax/review.py",
+    "src/scpn_fusion/integrations/torax/serialization.py",
+    "src/scpn_fusion/integrations/torax/worker.py",
+    "validation/benchmark_torax_runtime_contract.py",
+    "tests/test_torax_runtime_client.py",
+    "tests/test_torax_runtime_contracts.py",
+    "tests/test_torax_runtime_real_backend.py",
+    "tests/test_torax_runtime_review.py",
+    "tests/test_torax_runtime_serialization.py",
+    "validation/benchmark_torax_differentiable_transport.py",
+    "tests/test_torax_differentiable_transport.py",
+    "validation/external_parity_score.py",
+    "tests/test_external_parity_score.py",
+    "validation/validate_grad_shafranov_solovev.py",
+    "tests/test_grad_shafranov_solovev.py",
+    "tests/test_psi_gate_attribution.py",
+    "tests/test_safety_traceability.py",
+    "src/scpn_fusion/core/eped_pb_kbm.py",
+    "tests/test_eped_pb_kbm.py",
+    "validation/benchmark_eped_pedestal_tiers.py",
+    "tests/test_eped_pedestal_tiers_benchmark.py",
+    "tools/generate_surrogate_conformal_certificates.py",
+    "tests/test_surrogate_conformal_certificates.py",
+    "tools/generate_surrogate_uq_cards.py",
+    "tests/test_surrogate_uq_cards.py",
+    "tests/test_free_boundary_plotting.py",
+    "tests/test_free_boundary_tracking_config.py",
+    "tests/test_fusion_control_room.py",
+    "tests/test_fusion_ignition_sim.py",
+    "tests/test_fusion_burn_physics.py",
+    "tests/test_dynamic_burn_model.py",
+    "tests/test_structure.py",
+    "tests/test_tokamak_digital_twin.py",
+    "tests/test_tokamak_flight_sim.py",
+    "tests/test_logging_config.py",
+    "tests/test_subsystem_logging_contracts.py",
+    "tests/test_tokamak_live_payload.py",
+    "tests/test_tokamak_disruption_archive.py",
+    "tests/test_imas_connector_storage.py",
+    "tests/test_imas_connector_omas_contracts.py",
+    "tests/test_geometry_3d.py",
+    # ui/
+    "src/scpn_fusion/ui/__init__.py",
+    "src/scpn_fusion/ui/app.py",
+    "src/scpn_fusion/ui/dashboard_generator.py",
+    "src/scpn_fusion/ui/dashboard_launcher.py",
+    "src/scpn_fusion/ui/security_headers.py",
+    "tests/test_ui_app.py",
+    "tests/test_dashboard_generator.py",
+    "tests/test_security_headers.py",
+    # nuclear/
+    "src/scpn_fusion/nuclear/__init__.py",
+    "src/scpn_fusion/nuclear/blanket_neutronics.py",
+    "src/scpn_fusion/nuclear/_blanket_validators.py",
+    "tests/test_blanket_validators.py",
+    "src/scpn_fusion/nuclear/multigroup_blanket.py",
+    "tests/test_multigroup_blanket.py",
+    "src/scpn_fusion/nuclear/nuclear_wall_interaction.py",
+    "src/scpn_fusion/nuclear/pwi_erosion.py",
+    "src/scpn_fusion/nuclear/temhd_peltier.py",
+    # core/
+    "src/scpn_fusion/core/eqdsk.py",
+    "src/scpn_fusion/core/stability_mhd.py",
+    "tests/test_stability_mhd_validation.py",
+    "src/scpn_fusion/core/integrated_transport_solver.py",
+    "src/scpn_fusion/core/integrated_transport_solver_coupled.py",
+    "src/scpn_fusion/core/integrated_transport_solver_coupled_contracts.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_coupled_numerics.py",
+    "tests/test_integrated_transport_solver_coupled.py",
+    "src/scpn_fusion/core/integrated_transport_solver_differentiable.py",
+    "src/scpn_fusion/core/integrated_transport_solver_differentiable_contracts.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_differentiable_numerics.py",
+    "tests/test_integrated_transport_solver_differentiable.py",
+    "src/scpn_fusion/core/integrated_transport_solver_contracts.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_model_common.py",
+    "tests/test__integrated_transport_solver_model_common.py",
+    "src/scpn_fusion/core/tglf_interface.py",
+    "src/scpn_fusion/core/tglf_validation_runtime.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_base.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_init.py",
+    "tests/test_integrated_transport_solver_init.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_model_backend.py",
+    "tests/test_integrated_transport_solver_model_backend.py",
+    "src/scpn_fusion/core/_integrated_transport_solver_model_pedestal.py",
+    "tests/test_integrated_transport_solver_model_pedestal.py",
+    "src/scpn_fusion/core/integrated_transport_solver_coupling.py",
+    "tests/test_integrated_transport_solver_coupling_confinement.py",
+    "tests/test_gs_transport_coupling.py",
+    "src/scpn_fusion/core/integrated_transport_solver_model.py",
+    "tests/test_integrated_transport_solver_model_members.py",
+    "src/scpn_fusion/core/integrated_transport_solver_runtime.py",
+    "src/scpn_fusion/core/integrated_transport_solver_runtime_physics.py",
+    "src/scpn_fusion/core/integrated_transport_solver_runtime_utils.py",
+    "src/scpn_fusion/core/gk_nonlinear.py",
+    "src/scpn_fusion/core/_gk_nonlinear_time.py",
+    "tests/test_gk_nonlinear_time.py",
+    "src/scpn_fusion/core/_gk_nonlinear_operators.py",
+    "tests/test_gk_nonlinear_operators.py",
+    "src/scpn_fusion/core/_gk_nonlinear_setup.py",
+    "tests/test_gk_nonlinear_setup.py",
+    "src/scpn_fusion/core/_gk_nonlinear_base.py",
+    "src/scpn_fusion/core/gk_registry.py",
+    "tests/test_gk_registry.py",
+    "src/scpn_fusion/core/gk_qualikiz.py",
+    "tests/test_optional_import_probe_contracts.py",
+    "src/scpn_fusion/core/neural_transport.py",
+    "src/scpn_fusion/core/quantum_bridge.py",
+    "src/scpn_fusion/core/gk_scheduler.py",
+    "src/scpn_fusion/core/gk_interface.py",
+    "src/scpn_fusion/core/gk_quasilinear.py",
+    "src/scpn_fusion/core/gk_gs2.py",
+    "src/scpn_fusion/core/gk_cgyro.py",
+    "src/scpn_fusion/core/gk_corrector.py",
+    "src/scpn_fusion/core/gk_eigenvalue.py",
+    "src/scpn_fusion/core/gk_species.py",
+    "src/scpn_fusion/core/gk_geometry.py",
+    "src/scpn_fusion/core/gk_verification_report.py",
+    "src/scpn_fusion/core/gk_ood_detector.py",
+    "src/scpn_fusion/core/gk_gene.py",
+    "src/scpn_fusion/core/gk_maxwell_evolution.py",
+    "src/scpn_fusion/core/gk_online_learner.py",
+    "tests/test_gk_online_learner.py",
+    "src/scpn_fusion/core/gk_tglf.py",
+    "src/scpn_fusion/core/gk_tglf_native.py",
+    "src/scpn_fusion/core/integrated_transport_solver_adaptive.py",
+    "src/scpn_fusion/control/digital_twin_ingest.py",
+    "tests/test_digital_twin_ingest_runtime.py",
+    "validation/nstx_u_sparc_digital_twin_ingestion.py",
+    "tests/test_nstx_u_sparc_digital_twin_ingestion.py",
+    "src/scpn_fusion/control/disruption_checkpoint_policy.py",
+    "src/scpn_fusion/control/rmf_phase_lock.py",
+    "src/scpn_fusion/control/controller_tuning.py",
+    "src/scpn_fusion/control/gym_tokamak_env.py",
+    "src/scpn_fusion/control/jax_traceable_runtime.py",
+    "tests/test_control_exception_specificity.py",
+    "src/scpn_fusion/control/fusion_control_room.py",
+    "src/scpn_fusion/control/federated_disruption.py",
+    "src/scpn_fusion/control/tokamak_digital_twin.py",
+    "src/scpn_fusion/control/neuro_cybernetic_controller.py",
+    "src/scpn_fusion/control/analytic_solver.py",
+    "src/scpn_fusion/control/fusion_optimal_control.py",
+    "src/scpn_fusion/control/nmpc_controller.py",
+    "src/scpn_fusion/control/hil_demo_runner.py",
+    "src/scpn_fusion/control/neural_surrogate_mpc.py",
+    "src/scpn_fusion/control/disruption_predictor.py",
+    "src/scpn_fusion/control/realtime_efit.py",
+    "src/scpn_fusion/control/mu_synthesis.py",
+    "src/scpn_fusion/control/advanced_soc_fusion_learning.py",
+    "src/scpn_fusion/control/disruption_risk_runtime.py",
+    "tests/test_disruption_risk_runtime.py",
+    "tests/test_disruption_sliding_window.py",
+    "validation/disruption_anomaly_alarm_validation.py",
+    "tests/test_disruption_anomaly_alarm.py",
+    "validation/replay_certificate.py",
+    "tests/test_replay_certificate.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_base.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_config.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_control.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_runtime.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_shot.py",
+    "src/scpn_fusion/control/free_boundary_tracking.py",
+    "src/scpn_fusion/control/_free_boundary_simulation.py",
+    "tests/test_free_boundary_simulation.py",
+    "src/scpn_fusion/control/director_interface.py",
+    "src/scpn_fusion/control/spi_mitigation.py",
+    "src/scpn_fusion/control/tokamak_flight_sim.py",
+    "src/scpn_fusion/control/torax_hybrid_loop.py",
+    "tests/test_torax_hybrid_realtime_control_benchmark.py",
+    "src/scpn_fusion/core/hpc_bridge.py",
+    "src/scpn_fusion/core/_surrogate_utils.py",
+    "tests/test_surrogate_utils.py",
+    "src/scpn_fusion/core/neural_transport_math.py",
+    "tests/test_neural_transport_math.py",
+    "tests/test_neural_transport_math_funcs.py",
+    "tests/test_neural_transport_runtime_contracts.py",
+    "tests/test_neural_equilibrium_training.py",
+    "src/scpn_fusion/core/runaway_electrons.py",
+    # Full radius-momentum-pitch runaway kinetic cohort
+    "src/scpn_fusion/core/runaway_kinetic_grid.py",
+    "src/scpn_fusion/core/runaway_kinetic_coefficients.py",
+    "src/scpn_fusion/core/runaway_kinetic_operator.py",
+    "src/scpn_fusion/core/runaway_kinetic_solver.py",
+    "src/scpn_fusion/core/runaway_kinetic_diagnostics.py",
+    "validation/benchmark_runaway_kinetic_rust.py",
+    "tests/test_runaway_kinetic_grid.py",
+    "tests/test_runaway_kinetic_coefficients.py",
+    "tests/test_runaway_kinetic_operator.py",
+    "tests/test_runaway_kinetic_solver.py",
+    "tests/test_runaway_kinetic_rust_parity.py",
+    "src/scpn_fusion/core/mrti.py",
+    "src/scpn_fusion/core/vessel_model.py",
+    "src/scpn_fusion/core/vmec_lite.py",
+    "src/scpn_fusion/core/ntm_dynamics.py",
+    "src/scpn_fusion/core/locked_mode.py",
+    "src/scpn_fusion/core/_neural_transport_types.py",
+    "tests/test_neural_transport_types.py",
+    "src/scpn_fusion/core/_neural_transport_analytic.py",
+    "tests/test_neural_transport_analytic.py",
+    "src/scpn_fusion/core/_neural_transport_runtime.py",
+    "src/scpn_fusion/core/_gk_nonlinear_types.py",
+    "src/scpn_fusion/core/_multi_compat.py",
+    "tests/test_multi_compat.py",
+    "src/scpn_fusion/core/_multi_compat_providers.py",
+    "tests/test_multi_compat_providers.py",
+    "tests/test_phase_rust_tier.py",
+    "src/scpn_fusion/core/_tglf_interface_benchmark.py",
+    "tests/test_tglf_interface_benchmark.py",
+    "src/scpn_fusion/core/_tglf_interface_reference.py",
+    "tests/test_tglf_interface_reference.py",
+    "src/scpn_fusion/core/_tglf_interface_runtime.py",
+    "tests/test_tglf_interface_runtime.py",
+    "src/scpn_fusion/core/_tglf_interface_types.py",
+    "src/scpn_fusion/core/_validators.py",
+    "src/scpn_fusion/core/amr_patch.py",
+    "tests/test_amr_equilibrium.py",
+    "src/scpn_fusion/core/checkpoint.py",
+    "src/scpn_fusion/core/config_schema.py",
+    "src/scpn_fusion/core/current_diffusion.py",
+    "src/scpn_fusion/core/elm_model.py",
+    "src/scpn_fusion/core/eped_pedestal.py",
+    "src/scpn_fusion/core/heating_neutronics_contracts.py",
+    "src/scpn_fusion/core/imas_adapter.py",
+    "src/scpn_fusion/core/marfe.py",
+    "src/scpn_fusion/core/plasma_startup.py",
+    "src/scpn_fusion/core/public_frc_reference.py",
+    "tests/test_c2u_public_frc_reference.py",
+    "src/scpn_fusion/core/scaling_laws.py",
+    "src/scpn_fusion/core/tokamak_config.py",
+    "src/scpn_fusion/core/sol_model.py",
+    "src/scpn_fusion/core/pedestal.py",
+    "src/scpn_fusion/core/sawtooth.py",
+    "src/scpn_fusion/core/neoclassical.py",
+    "src/scpn_fusion/core/current_drive.py",
+    "src/scpn_fusion/core/orbit_following.py",
+    "src/scpn_fusion/core/tearing_mode_coupling.py",
+    "src/scpn_fusion/core/blob_transport.py",
+    "src/scpn_fusion/core/ballooning_solver.py",
+    "tests/test_ballooning_solver.py",
+    "src/scpn_fusion/core/alfven_eigenmodes.py",
+    "src/scpn_fusion/core/pellet_injection.py",
+    "src/scpn_fusion/core/lh_transition.py",
+    "src/scpn_fusion/core/rf_heating.py",
+    "src/scpn_fusion/core/momentum_transport.py",
+    "src/scpn_fusion/core/faraday_recovery.py",
+    "src/scpn_fusion/core/uncertainty.py",
+    "src/scpn_fusion/core/direct_energy_conversion.py",
+    "tests/test_direct_energy_conversion.py",
+    "src/scpn_fusion/core/plasma_wall_interaction.py",
+    "src/scpn_fusion/core/state_space.py",
+    "src/scpn_fusion/core/disruption_structural_response.py",
+    "tests/test_disruption_structural_response_report.py",
+    "src/scpn_fusion/core/hts_quench.py",
+    "tests/test_hts_quench.py",
+    "src/scpn_fusion/core/fieldline_3d.py",
+    "src/scpn_fusion/core/kinetic_efit.py",
+    "src/scpn_fusion/core/geometry_3d.py",
+    "src/scpn_fusion/core/equilibrium_3d.py",
+    "src/scpn_fusion/core/compact_reactor_optimizer.py",
+    "src/scpn_fusion/core/frc_rigid_rotor.py",
+    "src/scpn_fusion/core/frc_rigid_rotor_contracts.py",
+    "tests/test_frc_rigid_rotor_contracts.py",
+    "src/scpn_fusion/core/frc_rigid_rotor_closures.py",
+    "tests/test_frc_rigid_rotor_closures.py",
+    "src/scpn_fusion/core/frc_rigid_rotor_solver.py",
+    "tests/test_frc_rigid_rotor_solver.py",
+    "src/scpn_fusion/core/frc_rigid_rotor_validation.py",
+    "tests/test_frc_rigid_rotor_validation.py",
+    "src/scpn_fusion/core/fusion_ignition_sim.py",
+    "src/scpn_fusion/core/fusion_burn_physics.py",
+    "src/scpn_fusion/core/dynamic_burn_model.py",
+    "src/scpn_fusion/core/disruption_sequence.py",
+    "src/scpn_fusion/core/fno_training_multi_regime.py",
+    "src/scpn_fusion/core/fno_jax_training.py",
+    "tests/test_fno_training.py",
+    "src/scpn_fusion/core/fusion_kernel_numerics.py",
+    "tests/test_fusion_kernel_numerics.py",
+    "src/scpn_fusion/core/fusion_kernel_coilset_config.py",
+    "tests/test_fusion_kernel_coilset_config.py",
+    "src/scpn_fusion/core/fusion_kernel_newton_runtime.py",
+    "src/scpn_fusion/core/fusion_kernel_free_boundary_mixin.py",
+    "tests/test_fusion_kernel_free_boundary_mixin.py",
+    "src/scpn_fusion/core/fusion_kernel.py",
+    "src/scpn_fusion/core/fusion_kernel_free_boundary.py",
+    "src/scpn_fusion/core/_rust_compat.py",
+    "tests/test_rust_compat_wrapper.py",
+    "src/scpn_fusion/core/fusion_kernel_solver_runtime.py",
+    "src/scpn_fusion/core/fusion_kernel_iterative_solver.py",
+    "tests/test_fusion_kernel_iterative_solver_contracts.py",
+    "src/scpn_fusion/core/multigrid_solve.py",
+    "src/scpn_fusion/core/fusion_kernel_newton_solver.py",
+    "tests/test_fusion_kernel_newton_dispatch.py",
+    "src/scpn_fusion/core/pulsed_compression.py",
+    "src/scpn_fusion/core/stability_mhd_extended.py",
+    "src/scpn_fusion/core/jax_gk_solver.py",
+    "src/scpn_fusion/core/neural_equilibrium_training.py",
+    "src/scpn_fusion/core/jax_equilibrium_solver.py",
+    "src/scpn_fusion/core/jax_continuation_history.py",
+    "tests/test_jax_continuation_history.py",
+    "src/scpn_fusion/core/jax_free_boundary_predictive.py",
+    "tests/test_jax_free_boundary_predictive.py",
+    "src/scpn_fusion/core/jax_predictive_checkpoint_trace.py",
+    "src/scpn_fusion/core/jax_predictive_forward_compiled.py",
+    "tests/test_jax_predictive_compiled_trace.py",
+    "src/scpn_fusion/core/jax_gk_nonlinear.py",
+    "src/scpn_fusion/core/pretrained_surrogates.py",
+    "src/scpn_fusion/core/_pretrained_surrogate_config.py",
+    "tests/test_pretrained_surrogate_config.py",
+    "src/scpn_fusion/core/pretrained_mlp_surrogate.py",
+    "tests/test_pretrained_mlp_surrogate.py",
+    "src/scpn_fusion/core/pretrained_fno_surrogate.py",
+    "tests/test_pretrained_fno_surrogate.py",
+    "src/scpn_fusion/core/gs_transport_surrogate_training.py",
+    "src/scpn_fusion/core/jax_neural_equilibrium.py",
+    "src/scpn_fusion/core/quasi_3d_contracts.py",
+    "src/scpn_fusion/core/heat_ml_shadow_surrogate.py",
+    "tests/test_heat_ml_shadow_surrogate.py",
+    "src/scpn_fusion/core/fno_training.py",
+    "tests/test_fno_training_cli.py",
+    "src/scpn_fusion/core/uncertainty_full_chain.py",
+    "tests/test_uncertainty_full_chain_contracts.py",
+    "src/scpn_fusion/core/gyro_swin_surrogate.py",
+    "src/scpn_fusion/core/sandpile_fusion_reactor.py",
+    "src/scpn_fusion/core/stability_analyzer.py",
+    "src/scpn_fusion/core/jax_gs_solver.py",
+    "src/scpn_fusion/core/physical_case.py",
+    "src/scpn_fusion/core/array_contract.py",
+    "tests/test_strict_array_contract.py",
+    "src/scpn_fusion/core/turbulence_oracle.py",
+    "src/scpn_fusion/core/neural_turbulence.py",
+    "src/scpn_fusion/core/neural_equilibrium.py",
+    "src/scpn_fusion/core/deeponet_equilibrium.py",
+    "src/scpn_fusion/core/deeponet_training.py",
+    "src/scpn_fusion/core/deeponet_training_contracts.py",
+    "tests/test_deeponet_equilibrium.py",
+    "src/scpn_fusion/core/jax_solvers.py",
+    "src/scpn_fusion/core/gyrokinetic_transport.py",
+    "src/scpn_fusion/core/hall_mhd_discovery.py",
+    "src/scpn_fusion/core/jax_transport_solver.py",
+    "tests/test_jax_transport_solver.py",
+    "src/scpn_fusion/core/integrated_scenario.py",
+    "src/scpn_fusion/core/impurity_transport.py",
+    "src/scpn_fusion/core/impurity_transport_contracts.py",
+    "tests/test_impurity_transport_contracts.py",
+    "src/scpn_fusion/core/impurity_transport_charge_state.py",
+    "tests/test_impurity_transport_charge_state.py",
+    "src/scpn_fusion/core/impurity_transport_cooling.py",
+    "tests/test_impurity_transport_cooling.py",
+    "src/scpn_fusion/core/impurity_transport_aurora_parity.py",
+    "tests/test_impurity_transport_aurora_parity.py",
+    "src/scpn_fusion/core/impurity_transport_diagnostics.py",
+    "tests/test_impurity_transport_diagnostics.py",
+    "src/scpn_fusion/core/impurity_transport_solver.py",
+    "tests/test_impurity_transport_solver.py",
+    "src/scpn_fusion/core/__init__.py",
+    "src/scpn_fusion/core/force_balance.py",
+    "tests/test_force_balance.py",
+    "src/scpn_fusion/core/fno_turbulence_suppressor.py",
+    "src/scpn_fusion/core/wdm_engine.py",
+    "src/scpn_fusion/core/global_design_scanner.py",
+    "src/scpn_fusion/core/tglf_surrogate_bridge.py",
+    "src/scpn_fusion/core/gk_domain_decomposition.py",
+    "src/scpn_fusion/core/gpu_runtime.py",
+    "validation/deterministic_cpu_gpu_sim_runtime_benchmark.py",
+    "tests/test_deterministic_cpu_gpu_sim_runtime_benchmark.py",
+    "validation/eu_demo_k_demo_synthetic_holdout_validation.py",
+    "tests/test_eu_demo_k_demo_synthetic_holdout_validation.py",
+    "validation/compact_reactor_engineering_constraint_validation.py",
+    "tests/test_compact_reactor_engineering_constraint_validation.py",
+    "validation/liquid_metal_temhd_divertor_validation.py",
+    "tests/test_liquid_metal_temhd_divertor_validation.py",
+    "validation/stellarator_snn_stability_control_validation.py",
+    "tests/test_stellarator_snn_stability_control_validation.py",
+    "validation/snn_rl_tearing_mode_fault_benchmark.py",
+    "tests/test_snn_rl_tearing_mode_fault_benchmark.py",
+    "validation/ice_pellet_density_control_validation.py",
+    "tests/test_ice_pellet_density_control_validation.py",
+    "src/scpn_fusion/core/stellarator_geometry.py",
+    "src/scpn_fusion/core/tilt_mode_frc.py",
+    "src/scpn_fusion/core/hall_mhd_pulsed.py",
+    "src/scpn_fusion/core/neural_equilibrium_kernel.py",
+    # control/
+    "src/scpn_fusion/control/halo_re_physics.py",
+    "src/scpn_fusion/control/h_infinity_controller.py",
+    "src/scpn_fusion/control/nengo_snn_wrapper.py",
+    "src/scpn_fusion/control/__init__.py",
+    "src/scpn_fusion/control/_free_boundary_control_geometry.py",
+    "src/scpn_fusion/control/_free_boundary_estimator.py",
+    "tests/test_free_boundary_estimator.py",
+    "src/scpn_fusion/control/_free_boundary_plotting.py",
+    "src/scpn_fusion/control/_free_boundary_safety_supervisor.py",
+    "tests/test_free_boundary_safety_supervisor.py",
+    "src/scpn_fusion/control/_free_boundary_simulation_arrays.py",
+    "src/scpn_fusion/control/_free_boundary_simulation_summary.py",
+    "src/scpn_fusion/control/_free_boundary_supervisory_types.py",
+    "tests/test_free_boundary_supervisory_types.py",
+    "src/scpn_fusion/control/_free_boundary_tracking_types.py",
+    "src/scpn_fusion/control/codac_interface.py",
+    "src/scpn_fusion/control/fault_tolerant_control.py",
+    "src/scpn_fusion/control/flight_sim_controllers.py",
+    "src/scpn_fusion/control/gain_scheduled_controller.py",
+    "src/scpn_fusion/control/hil_harness.py",
+    "tests/test_hil_harness.py",
+    "src/scpn_fusion/control/hil_sensors.py",
+    "tests/test_hil_sensors.py",
+    "src/scpn_fusion/control/hil_control_loop.py",
+    "tests/test_hil_control_loop.py",
+    "src/scpn_fusion/control/hil_fpga_export.py",
+    "tests/test_hil_fpga_export.py",
+    "src/scpn_fusion/control/hil_benchmarks.py",
+    "tests/test_hil_benchmarks.py",
+    "src/scpn_fusion/control/hil_latency_campaign.py",
+    "tests/test_hil_latency_campaign.py",
+    "src/scpn_fusion/control/replay_pipeline.py",
+    "src/scpn_fusion/control/free_boundary_supervisory_control.py",
+    "src/scpn_fusion/control/stellarator_control_contracts.py",
+    "tests/test_stellarator_control_contracts.py",
+    # Sprint 4 mypy expansion
+    "src/scpn_fusion/control/fokker_planck_re.py",
+    "tests/test_fokker_planck.py",
+    "src/scpn_fusion/control/spi_ablation.py",
+    "src/scpn_fusion/control/fusion_nmpc_jax.py",
+    "src/scpn_fusion/control/disruption_contract_primitives.py",
+    "src/scpn_fusion/control/disruption_contracts.py",
+    "src/scpn_fusion/control/disruption_replay_contracts.py",
+    "tests/test_disruption_replay_contracts.py",
+    "src/scpn_fusion/control/burn_controller.py",
+    "src/scpn_fusion/control/density_controller.py",
+    "src/scpn_fusion/control/detachment_controller.py",
+    "src/scpn_fusion/control/fueling_mode.py",
+    "src/scpn_fusion/control/sliding_mode_vertical.py",
+    "src/scpn_fusion/control/state_estimator.py",
+    "src/scpn_fusion/control/volt_second_manager.py",
+    "src/scpn_fusion/control/runaway_electron_model.py",
+    "tests/test_runaway_electron_model_module.py",
+    "src/scpn_fusion/control/rust_flight_sim_wrapper.py",
+    "src/scpn_fusion/control/rwm_feedback.py",
+    "src/scpn_fusion/control/rzip_model.py",
+    "src/scpn_fusion/control/constrained_policy.py",
+    "src/scpn_fusion/control/safe_rl_controller.py",
+    "src/scpn_fusion/control/shielded_tokamak_env.py",
+    "src/scpn_fusion/control/scenario_scheduler.py",
+    "src/scpn_fusion/control/shape_controller.py",
+    "src/scpn_fusion/core/mhd_sawtooth.py",
+    "src/scpn_fusion/core/divertor_thermal_sim.py",
+    # Phase dynamics strict cohort
+    "src/scpn_fusion/phase/__init__.py",
+    "src/scpn_fusion/phase/adaptive_knm.py",
+    "src/scpn_fusion/phase/gk_upde_bridge.py",
+    "src/scpn_fusion/phase/knm.py",
+    "src/scpn_fusion/phase/kuramoto.py",
+    "src/scpn_fusion/phase/lyapunov_guard.py",
+    "src/scpn_fusion/phase/plasma_knm.py",
+    "src/scpn_fusion/phase/realtime_monitor.py",
+    "src/scpn_fusion/phase/upde.py",
+    "src/scpn_fusion/phase/ws_phase_stream.py",
+    # Engineering strict cohort
+    "src/scpn_fusion/engineering/__init__.py",
+    "src/scpn_fusion/engineering/balance_of_plant.py",
+    "src/scpn_fusion/engineering/cad_raytrace.py",
+    "tests/test_cad_raytrace.py",
+    "src/scpn_fusion/engineering/thermal_hydraulics.py",
+    # Runtime compatibility strict cohort
+    "src/scpn_fusion/exceptions.py",
+    "src/scpn_fusion/fallback_telemetry.py",
+    "src/scpn_fusion/neurocore_compat.py",
+    # studio/ (SCPN-STUDIO federation surface, schema A)
+    "src/scpn_fusion/studio/__init__.py",
+    "src/scpn_fusion/studio/exactness.py",
+    "src/scpn_fusion/studio/federation.py",
+    "src/scpn_fusion/studio/manifest.py",
+    "src/scpn_fusion/studio/verbs.py",
+]
+
+[[tool.mypy.overrides]]
+module = ["sc_neurocore", "sc_neurocore.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# torch is an optional runtime backend, absent from the CI type-check environment.
+module = ["torch", "torch.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["scpn_fusion_rs"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["matplotlib", "matplotlib.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["MDSplus", "MDSplus.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["scipy", "scipy.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# FreeGSNKE and FreeGS4E are pinned comparison dependencies without PEP 561
+# markers or public stubs. Keep the untyped boundary limited to those packages;
+# the enrolled benchmark and its SCPN-facing calculations remain strict.
+module = ["freegsnke", "freegsnke.*", "freegs4e", "freegs4e.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["streamlit", "streamlit.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["omas", "omas.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# scpn-studio-platform is the optional [studio] federation SDK, absent from the
+# base CI type-check environment (only the studio-conformance job installs it).
+module = ["scpn_studio_platform", "scpn_studio_platform.*"]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = [
+    "scpn_fusion.control.h_infinity_controller",
+    "scpn_fusion.control.fokker_planck_re",
+    "scpn_fusion.control.spi_ablation",
+    "scpn_fusion.control.fusion_nmpc_jax",
+    "scpn_fusion.core.mhd_sawtooth",
+    "scpn_fusion.core.divertor_thermal_sim",
+]
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:nengo --strict-markers"
+markers = [
+    "slow: marks long-running regression tests",
+    "experimental: marks experimental/research-only validation lanes",
+    "external_reference: requires external reference data or a sibling repository",
+    "dedicated_hardware: requires a dedicated high-memory or accelerated runner",
+    "stress: marks stress tests (long-running, main-push only)",
+]
+filterwarnings = [
+    "error::DeprecationWarning",
+    "ignore:.*oneOf.*[dD]eprecated.*:Warning",
+    "default::UserWarning",
+]
+xfail_strict = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["notebooks", "validation/reference_data", "weights"]
+
+[tool.ruff.lint]
+# NumPy-convention docstring (`D`) rules are enforced separately on the strict
+# mypy cohort via `tools/run_ruff_docstrings.py` (wired into the preflight gate),
+# so the cohort is the single source of truth for both typing and docstrings.
+# They are intentionally kept out of the global `select` until every src module
+# has graduated into the cohort.
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = [
+  "E501",
+  "E402",
+  "E741",
+  "I001",
+  "UP006", "UP007", "UP015", "UP031", "UP035", "UP037", "UP045",
+  "F841",
+  "SIM102", "SIM105", "SIM108",
+  "B007", "B017", "B018", "B023", "B028", "B904", "B905",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Re-exports
+"__init__.py" = ["F401"]
+# Notebooks: re-exports + cell redefinitions
+"examples/*.ipynb" = ["F401", "F811"]
+# Conditional imports in try/except blocks (optional dependencies)
+"src/scpn_fusion/control/director_interface.py" = ["F401"]
+"src/scpn_fusion/control/fusion_nmpc_jax.py" = ["F401"]
+"src/scpn_fusion/core/_rust_compat.py" = ["F401"]
+"src/scpn_fusion/core/fno_turbulence_suppressor.py" = ["F401"]
+"src/scpn_fusion/core/force_balance.py" = ["F401"]
+"src/scpn_fusion/core/current_diffusion.py" = ["F841"]
+"src/scpn_fusion/core/global_design_scanner.py" = ["F401"]
+"src/scpn_fusion/core/wdm_engine.py" = ["F401"]
+# Forward reference to TransportSolver (circular import guard)
+"src/scpn_fusion/core/integrated_transport_solver_adaptive.py" = ["F821"]
+# Conditional imports in tests/tools/validation
+"tests/test_rust_python_parity.py" = ["F401"]
+"tests/test_fno_training.py" = ["F401"]
+"tests/test_gpu_jax_backend.py" = ["F401"]
+"tools/generate_benchmark_plots.py" = ["F401"]
+"validation/benchmark_vs_freegs.py" = ["F401"]
+
+[tool.bandit]
+# B101 (assert) and B311 (non-crypto random) are intentional throughout the
+# scientific code. B404/B603 cover importing and calling subprocess with a list
+# argv and shell disabled — the deliberate pattern for orchestrating external
+# physics codes (GENE/GS2/CGYRO/TGLF), native builds, git, and the dashboard;
+# the genuinely dangerous shell=True variant is still caught by B602.
+skips = ["B101", "B311", "B404", "B603"]
+exclude_dirs = ["tests", "notebooks", "validation"]
+
+[tool.coverage.run]
+source = ["scpn_fusion"]
+omit = [
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "except ImportError",
+    "if HAS_JAX",
+    "if HAS_FREEGS",
+    "if HAS_OMAS",
+    # Structurally unexecutable stub bodies (Protocol/abstract/overload declarations).
+    "^\\s*\\.\\.\\.\\s*$",
+    "@(typing\\.)?overload",
+    "@(abc\\.)?abstractmethod",
+]

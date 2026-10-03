@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "publisher": "International Atomic Energy Agency",
+  "source_url": "https://nucleus.iaea.org/sites/fusion-portal/SitePages/FFDB.aspx?web=1",
+  "retrieved_date": "2026-10-02",
+  "permission_url": "https://nucleus.iaea.org/sites/fusion-portal/SitePages/FFDB.aspx?web=1",
+  "permission_sha256": "a4194334f267a3de2e02a326297972f0e90f6907f6397d457478e1142838f581",
+  "source_permission": "FFDB-specific publisher reuse; acknowledgement and no implied endorsement",
+  "selection_rule": "Direct complete typed dictionaries plus all Table/Main tuple, value and display-alias indices; authored framing/header; excludes renderer, credentials and permission HTML; no TSV reconstruction",
+  "coordinate_semantics": "Publisher map location; facility/device granularity and precision unspecified",
+  "current_identity_review_pending": true,
+  "raw_container_redistribution_review_pending": true,
+  "scientific_approval": false,
+  "historical146_reconstructed": false,
+  "original_response_sha256": "a87305137acebaaa3acf4dee2992324061c9d0e3eed433f1abe3cf49e1f9d037",
+  "original_response_bytes": 2537474,
+  "artifact_path": "tests/data/fusion_ffdb/visible_data.frames",
+  "artifact_sha256": "640bae831a78d72503f6de9c7107c7c3b511cf117f83d2fe39a778d6cf045d06",
+  "artifact_bytes": 37968,
+  "artifact_kind": "atlas-ffdb-visible-data-selection-v1",
+  "full_container_redistributed": false,
+  "data_selection_redistribution_review_pending": true
+}

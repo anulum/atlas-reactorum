@@ -1,0 +1,374 @@
+{
+  "claims": [],
+  "consumers": [
+    {
+      "project": "SCPN-BEAM-TARGET-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "9ea9eaee41a4378a8c23e647bbfde01bfb21bc49",
+      "inventory_sha256": "943d8f7a3e96069309ceab13f92d0c3fe86838216d23a067c531b50f45db8462"
+    },
+    {
+      "project": "SCPN-DENSE-PLASMA-FOCUS-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+      "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a"
+    },
+    {
+      "project": "SCPN-FRC-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "7f419ea413af0e8fc051587ec0b3c83edf209c9f",
+      "inventory_sha256": "c1db6afb2dc0f196500514bcc53305c2bc69878e6e5d61730c76e3afcdc418f6"
+    },
+    {
+      "project": "SCPN-FUSION-FISSION-HYBRID-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "9ea9eaee41a4378a8c23e647bbfde01bfb21bc49",
+      "inventory_sha256": "943d8f7a3e96069309ceab13f92d0c3fe86838216d23a067c531b50f45db8462"
+    },
+    {
+      "project": "SCPN-ICF-BEAM-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "4d48b811ebf0c5a633963c047410c790ed0daa57",
+      "inventory_sha256": "de551e5ee272c42c646a89b77be5ad7a0475ceda951b0ac2d8a975fd00c42b79"
+    },
+    {
+      "project": "SCPN-ICF-IMPACT-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "4095aa8304974fd44d02c718d36eafc69b254944",
+      "inventory_sha256": "704bcca75675615fa87ff1c1debdf594f3dcdb9df17b19de48ef28046f95a303"
+    },
+    {
+      "project": "SCPN-ICF-LASER-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "4d48b811ebf0c5a633963c047410c790ed0daa57",
+      "inventory_sha256": "de551e5ee272c42c646a89b77be5ad7a0475ceda951b0ac2d8a975fd00c42b79"
+    },
+    {
+      "project": "SCPN-LEVITATED-DIPOLE-CORE",
+      "version": "2.0.0.dev0",
+      "source_commit": "c83745c6011d9b0ea6c413cf0b7d607c724090e7",
+      "inventory_sha256": "46dc34f9a3c7f498c454bd3219c0233848a71405371ee947d4ab79cf2f5d63f8"
+    },
+    {
+      "project": "SCPN-MIF-LINER-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "5bb26fd6bfd43acec34c3df9ef4c074532d671e4",
+      "inventory_sha256": "4e3f85ff448b6ff86ff85cda007319c0edb31553d0e2874e0578da9fd4ede888"
+    },
+    {
+      "project": "SCPN-MIF-MAGLIF-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "d9db5a425ae744bf60659edc7a1c3dda16bb1802",
+      "inventory_sha256": "9c43405ec5a184b813171f29ac0fc1a44eb0860777de9b08e65cd4a7554abb57"
+    },
+    {
+      "project": "SCPN-MIF-PLASMA-JET-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "86f14c0f0fd2dfb05e4cf9c78bad6308dcd5197e",
+      "inventory_sha256": "2bcbfd2adb3873ed38508bebefc3b5175fae9548fb372c9efa7cb845157ff7ac"
+    },
+    {
+      "project": "SCPN-MIRROR-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+      "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a"
+    },
+    {
+      "project": "SCPN-RFP-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+      "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a"
+    },
+    {
+      "project": "SCPN-SPHEROMAK-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+      "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a"
+    },
+    {
+      "project": "SCPN-THETA-PINCH-CORE",
+      "version": "2.0.0.dev0",
+      "source_commit": "c83745c6011d9b0ea6c413cf0b7d607c724090e7",
+      "inventory_sha256": "46dc34f9a3c7f498c454bd3219c0233848a71405371ee947d4ab79cf2f5d63f8"
+    },
+    {
+      "project": "SCPN-TOKAMAK-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "9ea9eaee41a4378a8c23e647bbfde01bfb21bc49",
+      "inventory_sha256": "943d8f7a3e96069309ceab13f92d0c3fe86838216d23a067c531b50f45db8462"
+    },
+    {
+      "project": "SCPN-Z-PINCH-CORE",
+      "version": "0.1.0.dev0",
+      "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+      "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a"
+    }
+  ],
+  "evidence_maturity": "computational_prototype",
+  "excluded_domains": [
+    {
+      "domain": "device_truth_configurations_geometry_and_lifecycle",
+      "owner": "SCPN-<FAMILY>-CORE device repositories"
+    },
+    {
+      "domain": "solver_mathematics_and_validation_evidence",
+      "owner": "SCPN-FUSION-CORE"
+    },
+    {
+      "domain": "typed_signal_semantics_and_comparability",
+      "owner": "SCPN-PHASE-ORCHESTRATOR"
+    },
+    {
+      "domain": "control_admission_and_action_formation",
+      "owner": "SCPN-CONTROL"
+    },
+    {
+      "domain": "machine_protection_final_veto",
+      "owner": "independent_machine_protection"
+    },
+    {
+      "domain": "portfolio_presentation_identity_entitlement_execution_gating",
+      "owner": "SCPN-STUDIO"
+    }
+  ],
+  "kernels": [
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_unit_circle",
+      "module": "src/scpn_reactor_kernels/geometry/trig.py",
+      "native_parity": true,
+      "sources": [
+        "Taylor polynomials of sine and cosine in Horner form; exact octant and quadrant symmetry (elementary; no external source)",
+        "Arbitrary-angle sine and cosine on the same polynomials, reduced against a three-word split of pi/2 in a fixed operation order, with a declared domain and a measured residue bound (Cody-Waite argument reduction; elementary; no external source; ADR 0016)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_mesh_contract",
+      "module": "src/scpn_reactor_kernels/geometry/mesh.py",
+      "native_parity": true,
+      "sources": [
+        "Divergence-theorem volume of a closed triangle mesh and the cross-product area identity (elementary; no external source)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_primitives",
+      "module": "src/scpn_reactor_kernels/geometry/primitives.py",
+      "native_parity": true,
+      "sources": [
+        "Inscribed regular polygon prisms of the solid cylinder and the annular tube (elementary; no external source)",
+        "Rectangular prism as eight vertices and twelve triangles: not an inscribed approximation but the body itself, so it carries no segment count and no deficit converges (elementary; no external source; ADR 0015)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_exports",
+      "module": "src/scpn_reactor_kernels/geometry/export.py",
+      "native_parity": false,
+      "sources": [
+        "The Khronos Group, glTF 2.0 Specification (binary glTF container, accessors, buffer views)",
+        "Binary STL file layout (80-byte header, uint32 triangle count, float32 normal and vertices, uint16 attribute)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_profiles",
+      "module": "src/scpn_reactor_kernels/geometry/profiles.py",
+      "native_parity": true,
+      "sources": [
+        "Surface of revolution through a sampled axial radius profile, linear between samples (elementary; the rings are those of geometry_unit_circle and the vertex and face order is that of geometry_primitives)",
+        "Closed forms of the conical frustum: volume (pi / 3) (r1^2 + r1 r2 + r2^2) h and lateral area pi (r1 + r2) sqrt((r2 - r1)^2 + h^2) (elementary; no external source)",
+        "Solid of revolution whose profile closes on the axis at one or both poles: a pole is one apex vertex and the faces are those of the open primitive with the degenerate ones removed; the frustum closed forms reduce to the cone forms at a pole and are reused unchanged (ADR 0012)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_spheres",
+      "module": "src/scpn_reactor_kernels/geometry/spheres.py",
+      "native_parity": true,
+      "sources": [
+        "Sphere sampled uniformly in polar angle and its shell as two nested closed surfaces (elementary; no external source)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#geometry-tessellation",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#geometry-kernels",
+      "identifier": "geometry_placement",
+      "module": "src/scpn_reactor_kernels/geometry/placement.py",
+      "native_parity": true,
+      "sources": [
+        "translation of a vertex stream and equally spaced centres on a circle (elementary; the circle points are those of geometry_unit_circle)",
+        "Rigid aiming of a body built about z, as Rz(azimuth) Ry(polar) from two circle points rather than from a direction vector, which removes the 1/(1+dz) term of the minimal rotation and its loss of precision near the negative z axis (elementary; no external source; ADR 0017)",
+        "Centres of a ring of bodies on one latitude of a sphere, with a declared twist of the ring, and the centre-to-centre distance a consumer proves non-intersection with (elementary; the azimuths are those of geometry_unit_circle and the latitude is its arbitrary-angle circle point)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#transcendental-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#numerics-kernels",
+      "identifier": "numerics_transcendental",
+      "module": "src/scpn_reactor_kernels/numerics/transcendental.py",
+      "native_parity": true,
+      "sources": [
+        "Natural logarithm by exact binary decomposition and the odd series of atanh((m-1)/(m+1)); exponential by the Cody-Waite reduction and the Taylor series; power as exp(y ln x) (elementary; no external source)",
+        "W. J. Cody, W. Waite, Software Manual for the Elementary Functions, Prentice-Hall (1980): the split of ln 2 into a high part with trailing zero bits and a low part"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#bessel-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#numerics-kernels",
+      "identifier": "numerics_bessel",
+      "module": "src/scpn_reactor_kernels/numerics/bessel.py",
+      "native_parity": true,
+      "sources": [
+        "NIST Digital Library of Mathematical Functions, 10.2.2: ascending series of J_nu (evaluated in Horner form on x^2/4 with exact integer-quotient coefficients, 30 terms, |x| <= 8)",
+        "NIST DLMF 10.21 and OEIS A115368, A115369: the first positive zeros of J0 and J1 as correctly rounded doubles"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_brep_solids",
+      "module": "src/scpn_reactor_kernels/cad/solids.py",
+      "native_parity": false,
+      "sources": [
+        "CadQuery 2.8 documentation (Workplane, Shape.Volume/Area/BoundingBox) and Open CASCADE Technology 7.9 reference (BRepGProp, Bnd_Box): the pinned third-party B-rep kernel that builds the solids; measures checked against the analytic closed forms of the cylinder and the annular tube (elementary; no external source)",
+        "Rectangular prism through the same pinned B-rep kernel, checked against the closed forms w d h and 2 (w d + w h + d h); the first body in this library that is not a solid of revolution (elementary; no external source; ADR 0015)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_step_export",
+      "module": "src/scpn_reactor_kernels/cad/step.py",
+      "native_parity": false,
+      "sources": [
+        "Open CASCADE Technology 7.9: STEPControl_Writer and APIHeaderSection_MakeHeader (Part 21 HEADER: FILE_DESCRIPTION, FILE_NAME with time stamp, FILE_SCHEMA); CadQuery 2.8 Assembly export",
+        "ISO 10303-21 clear-text encoding: structure taken from the writer output and the OCC documentation (the standard text is not freely available)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_faceting",
+      "module": "src/scpn_reactor_kernels/cad/facet.py",
+      "native_parity": false,
+      "sources": [
+        "Open CASCADE Technology 7.9: BRepMesh_IncrementalMesh (linear and angular deflection) through CadQuery Shape.tessellate; vertex welding by exact coordinate equality into the geometry_mesh_contract kernel",
+        "Inscribed-chord volume deficit bound 2 d / r and the inscribed regular polygon area ratio (n / 2 pi) sin(2 pi / n) (elementary; no external source)",
+        "A triangle that vertex welding collapses to a repeated index has zero area and is dropped before the mesh contract; its two non-degenerate directed edges are each other's reverse, so no other face's pairing changes (ADR 0012)",
+        "Faceting of a body with no curved surface is exact: measured over nine rectangular prisms from 1 micrometre to 10 metres and aspect ratios to 1000:1, at every linear deflection the back-end accepts and angular deflections from 0.01 to 1.0 rad, the mesh never left 8 vertices and 12 triangles and the worst relative volume deviation was 2.581e-16, so the declared bound is a round-off tolerance rather than a chord deficit (ADR 0015)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_volume_mesh",
+      "module": "src/scpn_reactor_kernels/cad/volume_mesh.py",
+      "native_parity": false,
+      "sources": [
+        "Gmsh 4.15.2 reference manual: OpenCASCADE import (model.occ.importShapes), Mesh.MeshSizeMin/Max, Mesh.Algorithm3D, MSH 4.1 ASCII format",
+        "Tetrahedron volume |det(v1 - v0, v2 - v0, v3 - v0)| / 6 (elementary; no external source)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_profiles",
+      "module": "src/scpn_reactor_kernels/cad/profiles.py",
+      "native_parity": false,
+      "sources": [
+        "Open CASCADE Technology 7.9 through CadQuery 2.8: revolution of a closed polyline about the axis (Workplane.polyline, Workplane.revolve); the profile contract and the closed forms are those of the tier-G1 geometry_profiles kernel",
+        "Revolution of a profile that closes on the axis: no axis return point is appended at an end already on it, and the analytic references are the tier-G1 closed forms, a pole contributing no disc (ADR 0012)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-operations",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_spheres",
+      "module": "src/scpn_reactor_kernels/cad/spheres.py",
+      "native_parity": false,
+      "sources": [
+        "Exact solids of revolution of the sphere profile and of the region between two concentric spheres (elementary; no external source)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_evidence",
+      "module": "src/scpn_reactor_kernels/cad/evidence.py",
+      "native_parity": false,
+      "sources": [
+        "Composition of the declared bounds of cad_brep_solids (relative measure tolerance against the analytic closed forms) and cad_faceting (the chord deficit bound 2 d / r and the inscribed regular polygon area ratio); no external source",
+        "Selection of a body's faceting bounds by its curvature: the chord and polygon deficits where a body has a smallest circular radius, and the round-off tolerance where it has none; the faceted volume deviation is checked in magnitude, so a faceted volume that overshoots its analytic form is refused as well as one that undershoots (ADR 0015)"
+      ]
+    },
+    {
+      "benchmark": "docs/benchmarks.md#cad-kernels",
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#cad-kernels",
+      "identifier": "cad_placement",
+      "module": "src/scpn_reactor_kernels/cad/placement.py",
+      "native_parity": false,
+      "sources": [
+        "Open CASCADE Technology 7.9 through CadQuery 2.8: Shape.translate (gp_Trsf rigid translation); the ring centres are those of the tier-G1 geometry_placement kernel",
+        "Open CASCADE Technology 7.9 through CadQuery 2.8: Shape.moved with a Location built from the frame whose first and third columns are those of the tier-G1 aiming rotation, so one rotation places both tiers (ADR 0018)",
+        "Invariance of volume and surface area under a rigid motion (elementary; no external source): the analytic closed forms are carried over, the kernel's own measure of the placed solid is checked against them within the declared tolerance and is not claimed bit-identical to the measure of the source solid"
+      ]
+    }
+  ],
+  "library": {
+    "distribution": "scpn-reactor-kernels",
+    "native_distribution": "scpn-reactor-kernels-native",
+    "native_module": "scpn_reactor_kernels_native",
+    "package": "scpn_reactor_kernels"
+  },
+  "license": "AGPL-3.0-or-later",
+  "machine_protection": {
+    "final_veto": "independent",
+    "statement": "Independent machine-protection systems retain the final veto before any plant actuator path; nothing in this library participates in, or substitutes for, that path, and no kernel reaches any actuator or facility."
+  },
+  "non_claims": [
+    "not machine-ready",
+    "not safety-certified",
+    "not reactor-ready",
+    "no solver, controller, dataset, experimental correlation or published artefact; every kernel is a computational prototype of a cited closed form or a standard method",
+    "no value describes or validates any real machine; a kernel's presence says nothing about any device's performance"
+  ],
+  "owned_domains": [
+    "shared_physics_geometry_and_numerics_kernels",
+    "shared_physics_kernels",
+    "shared_geometry_kernels",
+    "shared_numerical_integrators",
+    "shared_cad_and_meshing_adapters"
+  ],
+  "project": "SCPN-REACTOR-KERNELS",
+  "research_group": {
+    "coordination_identity": "SCPN-REACTOR-SYSTEMS",
+    "display_name": "SCPN Reactor Systems Research Group"
+  },
+  "schema": "scpn.reactor-kernels-domain.v1",
+  "schema_version": "1.0.0"
+}

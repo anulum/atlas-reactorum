@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — .github/CODEOWNERS
+
+# The owner reviews everything until the project has a second maintainer.
+*                                   @anulum
+
+# Evidence surfaces carry the atlas's central claims and change rarely.
+/00_index/                          @anulum
+/metadata/                          @anulum
+/04_interactive_presentation/data/  @anulum

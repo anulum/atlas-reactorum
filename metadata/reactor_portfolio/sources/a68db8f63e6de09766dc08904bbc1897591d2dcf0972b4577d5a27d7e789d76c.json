@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Research and isotope-production reactor design, including pulse-operation boundaries.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F8",
+  "project_id": "SCPN-RESEARCH-REACTOR-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:research_reactor",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}

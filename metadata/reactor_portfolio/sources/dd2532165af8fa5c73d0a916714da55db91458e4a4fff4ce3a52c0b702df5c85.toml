@@ -1,0 +1,323 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# SCPN-MIF-CORE — Python project metadata.
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scpn-mif-core"
+version = "0.1.1"
+description = "Deterministic phase synchronisation and hardware synthesis for high-beta pulsed magneto-inertial fusion plasmas"
+authors = [
+    {name = "Miroslav Sotek", email = "protoscience@anulum.li"},
+]
+keywords = [
+    "magneto-inertial-fusion",
+    "field-reversed-configuration",
+    "pulsed-plasma",
+    "kuramoto-synchronisation",
+    "hall-mhd",
+    "spiking-neural-network",
+    "systemverilog",
+    "formal-verification",
+    "ultrascale-plus",
+    "q8-8",
+]
+license = {text = "AGPL-3.0-or-later"}
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+readme = "README.md"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "jax>=0.4.30",
+    "pydantic>=2.5",
+]
+requires-python = ">=3.12,<3.13"
+
+[project.scripts]
+scpn-mif = "scpn_mif_core.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/anulum/scpn-mif-core"
+Documentation = "https://anulum.github.io/scpn-mif-core/"
+Repository = "https://github.com/anulum/scpn-mif-core"
+"Bug Tracker" = "https://github.com/anulum/scpn-mif-core/issues"
+Discussions = "https://github.com/anulum/scpn-mif-core/discussions"
+Changelog = "https://github.com/anulum/scpn-mif-core/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+# Sibling-repository install floor. The generated compatibility matrix is the
+# source of truth for live sibling readiness and blocker status.
+ecosystem = [
+    "sc-neurocore>=3.16.0",
+    "scpn-phase-orchestrator>=1.0.0",
+    "scpn-control>=0.23.0",
+    "scpn-fusion>=4.0.0",
+    "scpn-quantum-control>=1.0.0",
+]
+dev = [
+    "setuptools==84.0.0",
+    "wheel==0.48.0",
+    "ruff==0.16.7",
+    "mypy==2.3.1",
+    "bandit==1.9.4",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pytest-benchmark>=4.0",
+    "pytest-xdist>=3.5",
+    "hypothesis>=6.100",
+    "pre-commit>=3.7",
+    "build>=1.2",
+    "maturin==1.15.0",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.26",
+    "mkdocs-include-markdown-plugin>=6.2",
+]
+formal = [
+    "pysmt>=0.9",
+    "pyverilog>=1.3",
+]
+# `demo` carries the figure dependency the campaigns use to render their PNGs
+# (campaigns/*.render_figure). `make demo` and the Docker/devcontainer install it;
+# the package itself never imports matplotlib, so the core install stays lean.
+demo = [
+    "matplotlib>=3.8",
+]
+# `accelerated` pulls the native PyO3 extension (scpn-mif-core-rs) so the
+# dispatcher selects the Rust backend — the fastest measured chain — instead of
+# the pure-Python floor the bare install ships. The wheels are published by
+# wheels.yml; until a release lands on PyPI this extra resolves only from a
+# local build of scpn-mif-rs/crates/mif-ffi.
+accelerated = [
+    "scpn-mif-core-rs>=0.1.0",
+]
+# `studio` pulls the domain-neutral SCPN STUDIO platform SDK that the
+# `scpn_mif_core.studio` vertical consumes (it never forks it). The core install
+# stays lean and dependency-free; the studio surface is opt-in. Local dev can use
+# PYTHONPATH=../SCPN-STUDIO-PLATFORM/src instead of installing.
+studio = [
+    "scpn-studio-platform>=0.11.2,<0.12",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["scpn_mif_core*"]
+
+[tool.setuptools.package-data]
+scpn_mif_core = ["py.typed", "VERSION", "_dispatch_table.toml"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["lean", "go", "scpn-mif-rs", "hdl"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",   # pycodestyle / pyflakes
+    "I",             # isort
+    "B",             # bugbear
+    "UP",            # pyupgrade
+    "SIM",           # simplify
+    "RUF",           # ruff-specific
+    "N",             # pep8-naming
+    "S",             # bandit-light
+    "PT",            # pytest-style
+    "PIE",           # misc
+    "C4",            # comprehensions
+    "D",             # pydocstyle docstrings
+]
+ignore = [
+    "E501",     # line length handled by formatter
+    "S101",     # assert is fine in tests
+    "D301",     # existing math docstrings use escaped LaTeX; content quality is enforced by D1xx/D2xx/D4xx
+    "RUF003",   # EN DASH in copyright year ranges is the ANULUM branding standard
+    "N803",     # SI-unit-suffixed argument names (initial_voltage_V) are intentional scientific convention
+    "N815",     # SI-unit-suffixed dataclass field names (capacitance_F, voltage_max_V) likewise
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S", "PT011", "PT012", "E402", "D"]
+"bench/**/*.py" = ["S", "D"]
+"examples/**/*.py" = ["S"]
+"campaigns/**/*.py" = ["S"]
+"tools/**/*.py" = ["S", "D"]
+# Cosimulation harnesses and their tests drive external simulators by subprocess
+# and follow the test-style docstring convention, like tools/ and bench/.
+"cosim/**/*.py" = ["S", "D"]
+"conftest.py" = ["S", "D"]
+# Parity tests intentionally use `pytest.importorskip` before further imports,
+# quote forward references to the runtime-resolved Rust extension module, and
+# use the multiplication sign in mathematical prose.
+"tests/unit/lifecycle/test_capacitor_bank_rust_parity.py" = ["UP037", "RUF002"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unreachable = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+namespace_packages = true
+mypy_path = ["src"]
+packages = ["scpn_mif_core"]
+# Strict gate runs over src + tools + cosim + examples (all strict-clean). `bench`
+# and `campaigns` stay outside it by design: they are auxiliary benchmark/campaign
+# scripts whose hot paths consume the untyped compiled Rust extension via
+# `pytest.importorskip`, so full static typing there would be `Any`-laundering with
+# no checking benefit. They still run under ruff + the Benchmark-nightly workflow.
+# Re-evaluate if a typed Rust stub (.pyi) for scpn_mif_core_rs is published.
+exclude = ["lean", "go", "scpn-mif-rs", "hdl", "build", "dist", "bench", "campaigns"]
+
+[[tool.mypy.overrides]]
+module = [
+    "jax.*",
+    "scipy.*",
+    "pyverilog.*",
+    "pysmt.*",
+    "scpn_mif_core_rs",
+    "scpn_mif_core_rs.*",
+    # The studio vertical's optional SDK: when scpn-studio-platform is not installed
+    # (pre-commit hook, local dev without the extra) mypy treats it as Any instead of
+    # erroring; the CI gate job installs it for full type checking.
+    "scpn_studio_platform",
+    "scpn_studio_platform.*",
+    # The full-chain demo uses sibling source checkouts at runtime. Core CI does
+    # not install the optional ecosystem extra, so their typed imports must stay
+    # optional here; the integration gate exercises the installed real siblings.
+    "sc_neurocore",
+    "sc_neurocore.*",
+    "scpn_control",
+    "scpn_control.*",
+    # The M3 demonstration's optional sibling: when scpn-fusion is not importable
+    # (CI, local dev without the FUSION source on the path) mypy treats it as Any
+    # instead of erroring; the live coupling is exercised only where it is present.
+    "scpn_fusion",
+    "scpn_fusion.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests", "cosim"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    # Block a globally-installed pytest-nengo plugin from leaking into the suite
+    # (it imports nengo at collection, raising a numpy.core DeprecationWarning that
+    # the error filter promotes to a collection failure). No-op when absent (CI).
+    "-p",
+    "no:nengo",
+    # Point coverage at the source tree instead of importing the package merely
+    # to resolve its location. The import-style target can load NumPy before
+    # pytest collection and then reload it under instrumentation, which the
+    # warning-as-error policy correctly rejects.
+    "--cov=src/scpn_mif_core",
+    "--cov=tools",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-fail-under=100",
+]
+markers = [
+    "slow: marks tests as slow (deselect with -m 'not slow')",
+    "full_chain: requires the pinned Fusion, CONTROL and SC-NeuroCore source checkouts plus Verilator",
+    "formal: requires SymbiYosys, nuXmv, or Kind 2",
+    "vivado: requires Vivado 2024.2 (MIF_VIVADO_CI=1)",
+    "lean: requires Lean 4 lake (MIF_LEAN_CI=1)",
+    "preempt_rt: requires PREEMPT_RT kernel (MIF_PREEMPT_RT_CI=1)",
+    "hardware: requires physical FPGA / ADC / NV-centre hardware",
+    "contract: cross-repository contract test",
+    "sc_neurocore: contract test for the sc-neurocore sibling",
+    "scpn_phase_orchestrator: contract test for the scpn-phase-orchestrator sibling",
+    "scpn_control: contract test for the scpn-control sibling",
+    "scpn_fusion_core: contract test for the scpn-fusion-core sibling",
+    "scpn_quantum_control: contract test for the scpn-quantum-control sibling",
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:jax.*",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "bench", "examples", "campaigns", "lean", "go", "scpn-mif-rs", "hdl"]
+skips = ["B101"]  # assert is fine
+
+[tool.coverage.run]
+source = ["src/scpn_mif_core", "tools"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/bench/*",
+    "*/examples/*",
+    "*/campaigns/*",
+    # The source-bound Fusion-to-Fire modules are exercised in the dedicated
+    # cross-repository CI job with real sibling checkouts and Verilator.
+    "*/scpn_mif_core/full_chain/*",
+    # The exact-current AER bridge requires pinned CONTROL/SC distributions.
+    # Required full-chain CI enforces its separate 100% branch/statement gate.
+    "*/scpn_mif_core/aer/exact_current_lif_bridge.py",
+    # Operational / environment entry-point scripts: their bodies are subprocess,
+    # filesystem, and git orchestration (a CI/preflight harness, a workspace-mount
+    # check, a secret scanner, a sync-tag check). Their logic is the orchestration
+    # itself, so unit coverage would be mock theatre; CI exercises them by running
+    # them, not by assertion. Consciously excluded from the coverage gate.
+    "*/tools/preflight.py",
+    "*/tools/check_samsung_workspace.py",
+    "*/tools/check_secrets.py",
+    "*/tools/check_sync_tags.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+skip_covered = false
+
+[tool.mutmut]
+# Advisory mutation-testing pilot: decision-critical kinematic kernels.
+# Not a CI gate yet. KNOWN BLOCKER (2026-07-04): mutmut 3.6's in-process pytest
+# runner fails against this repository's src layout + numpy-importing conftest
+# (the same per-process numpy reimport class as the coverage gremlin); the same
+# pytest invocation passes when run as a subprocess from the mutants workspace.
+# The Rust decision core is baselined with cargo-mutants instead; revisit when
+# mutmut grows a subprocess runner.
+paths_to_mutate = [
+    "src/scpn_mif_core/kinematic/streaming_trigger.py",
+    "src/scpn_mif_core/kinematic/merge_window.py",
+    "src/scpn_mif_core/kinematic/safety_certificate.py",
+]
+tests_dir = ["tests/unit/kinematic/"]
+# Neutralise the repository addopts (the 100% whole-package coverage gate cannot
+# hold under mutmut's per-mutant focused runs).
+pytest_add_cli_args = ["-o", "addopts=", "-p", "no:cacheprovider"]

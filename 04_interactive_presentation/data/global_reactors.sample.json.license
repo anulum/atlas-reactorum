@@ -1,0 +1,20 @@
+SPDX-License-Identifier: AGPL-3.0-or-later AND CC-BY-4.0 AND CC0-1.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND etalab-2.0 AND LicenseRef-US-Public-Domain AND LicenseRef-opendata-swiss-terms-by AND LicenseRef-IAEA-FFDB-Reuse
+Commercial license available
+© Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+© Code 2020–2026 Miroslav Šotek. All rights reserved.
+ORCID: 0009-0009-3560-0851
+Contact: www.anulum.li | protoscience@anulum.li
+Atlas Reactorum — 04_interactive_presentation/data/global_reactors.sample.json ownership metadata
+SPDX-FileCopyrightText: 1996-2026 Miroslav Šotek <protoscience@anulum.li> (concepts)
+SPDX-FileCopyrightText: 2020-2026 Miroslav Šotek <protoscience@anulum.li> (code)
+
+SPDX-FileCopyrightText: World Resources Institute and Global Power Plant Database contributors
+SPDX-FileCopyrightText: International Atomic Energy Agency, Fusion Facility Database
+SPDX-FileCopyrightText: Wikidata contributors; Canadian Nuclear Safety Commission
+SPDX-FileCopyrightText: Global Energy Monitor, Global Nuclear Power Tracker, August 2026
+SPDX-FileCopyrightText: European Environment Agency; U.S. Environmental Protection Agency
+SPDX-FileCopyrightText: Environment and Climate Change Canada; Commonwealth of Australia
+SPDX-FileCopyrightText: Crown copyright, DEFRA and Department for Energy Security and Net Zero
+SPDX-FileCopyrightText: Federal Office for the Environment FOEN; Swiss Federal Office of Energy
+SPDX-FileCopyrightText: ADEME; Empresa de Pesquisa Energética; Arpae Emilia-Romagna
+Scope: Each listed source keeps its own field-specific terms. AGPL applies to Atlas original contributions. See source_rights.json and ATTRIBUTION.md.

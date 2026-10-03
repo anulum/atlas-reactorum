@@ -1,0 +1,10 @@
+U.S. Public Domain — EPA-produced data
+
+This identifier records the U.S. Environmental Protection Agency's published
+default for data produced by the agency, under 17 U.S.C. § 105. It is not a
+CC0 dedication, a grant for third-party copyrighted material, or a statement
+that all material linked from an EPA page belongs to the agency.
+
+Source policy: https://edg.epa.gov/EPA_Data_License.html
+Dataset metadata and any source-specific exceptions remain applicable.
+Source limitations, accuracy disclaimers and attribution accompany the data.

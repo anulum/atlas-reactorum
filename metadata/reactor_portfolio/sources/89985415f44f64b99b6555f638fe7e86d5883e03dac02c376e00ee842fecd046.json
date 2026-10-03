@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Reactor-side nuclear thermal propulsion design; no verified source anchor or thrust result yet.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F15",
+  "project_id": "SCPN-NTP-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:nuclear_thermal_propulsion",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}

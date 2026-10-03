@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas project citation snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "snapshot_at_utc",
+    "owner_group",
+    "purpose",
+    "record_count",
+    "public_repository_source",
+    "records"
+  ],
+  "properties": {
+    "schema": {
+      "const": "scpn.atlas-project-links.v1"
+    },
+    "snapshot_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "owner_group": {
+      "const": "SCPN-REACTOR-SYSTEMS"
+    },
+    "purpose": {
+      "const": "source-pinned project citations; no registration or capability admission"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "public_repository_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "sha256"
+      ],
+      "properties": {
+        "snapshot": {
+          "type": "string",
+          "pattern": "^sources/[0-9a-f]{64}\\.json$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "project_id",
+          "owner_group",
+          "category",
+          "source",
+          "configurations",
+          "proposed_configuration_id",
+          "source_declared_maturity",
+          "boundary_registration_state",
+          "public_repository",
+          "technical_validation",
+          "control_authority"
+        ],
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "pattern": "^SCPN-[A-Z0-9-]+$"
+          },
+          "owner_group": {
+            "const": "SCPN-REACTOR-SYSTEMS"
+          },
+          "category": {
+            "enum": [
+              "catalogue",
+              "chemical_device",
+              "device",
+              "fission_device",
+              "hybrid_composition",
+              "shared_kernel_library",
+              "solver_library"
+            ]
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "file",
+              "git_commit",
+              "sha256",
+              "snapshot"
+            ],
+            "properties": {
+              "file": {
+                "enum": [
+                  "project-boundary.json",
+                  "reactor-domain.json",
+                  "kernels-domain.json",
+                  "pyproject.toml"
+                ]
+              },
+              "git_commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^sources/[0-9a-f]{64}\\.(json|toml)$"
+              }
+            }
+          },
+          "configurations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "proposed_configuration_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_declared_maturity": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "boundary_registration_state": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "public_repository": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "url",
+              "retrieved",
+              "source_snapshot_sha256"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "pattern": "^https://github.com/anulum/[A-Za-z0-9_-]+$"
+              },
+              "retrieved": {
+                "type": "string",
+                "format": "date"
+              },
+              "source_snapshot_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "technical_validation": {
+            "const": "not_assessed_by_atlas"
+          },
+          "control_authority": {
+            "const": false
+          }
+        }
+      }
+    }
+  }
+}

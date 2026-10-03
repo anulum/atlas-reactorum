@@ -1,0 +1,818 @@
+[
+  {
+    "name": "scpn-phase-orchestrator",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-phase-orchestrator",
+    "url": "https://api.github.com/repos/anulum/scpn-phase-orchestrator",
+    "description": "Evidence-first synchronization analysis and review-only control proposals for coupled rhythmic systems (Kuramoto/UPDE), with reproducible audits.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "NOASSERTION"
+    },
+    "updated_at": "2026-09-27T15:46:17Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "coherence-control",
+      "control-systems",
+      "coupled-oscillators",
+      "digital-twin",
+      "dynamical-systems",
+      "early-warning-signals",
+      "kuramoto",
+      "kuramoto-model",
+      "network-science",
+      "phase-dynamics",
+      "phase-synchronization",
+      "python",
+      "reproducible-research",
+      "rust",
+      "scientific-computing",
+      "scpn",
+      "synchrony",
+      "upde"
+    ]
+  },
+  {
+    "name": "scpn-quantum-control",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-quantum-control",
+    "url": "https://api.github.com/repos/anulum/scpn-quantum-control",
+    "description": "Evidence-governed quantum simulation of coupled-oscillator synchronisation — Kuramoto–XY workloads on Superconducting Computers, raw counts + hash-bound result packs, preregistered protocols.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "NOASSERTION"
+    },
+    "updated_at": "2026-09-27T15:14:43Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "coupled-oscillators",
+      "fusion-energy",
+      "ibm-quantum",
+      "kuramoto",
+      "nisq",
+      "physics-simulation",
+      "plasma-control",
+      "plasma-physics",
+      "pyo3",
+      "python",
+      "qiskit",
+      "quantum-circuit",
+      "quantum-computing",
+      "quantum-control",
+      "quantum-physics",
+      "quantum-simulation",
+      "rust",
+      "spiking-neural-networks",
+      "tokamak",
+      "vqe"
+    ]
+  },
+  {
+    "name": "anulum",
+    "private": false,
+    "html_url": "https://github.com/anulum/anulum",
+    "url": "https://api.github.com/repos/anulum/anulum",
+    "description": "Miroslav Šotek — independent research and systems engineering.",
+    "language": "Python",
+    "license": null,
+    "updated_at": "2026-09-25T21:28:07Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "sc-neurocore",
+    "private": false,
+    "html_url": "https://github.com/anulum/sc-neurocore",
+    "url": "https://api.github.com/repos/anulum/sc-neurocore",
+    "description": "Universal Stochastic Computing Framework for Neuromorphic Hardware — Rust SIMD engine, Python simulation, Verilog RTL, HDC/VSA, SCPN integration",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-25T14:24:22Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "edge-ai",
+      "fpga",
+      "hyper-dimensional-computing",
+      "neuromorphic",
+      "neuromorphic-computing",
+      "petri-nets",
+      "pyo3",
+      "quantum",
+      "rust",
+      "simd",
+      "snn",
+      "spiking-neural-networks",
+      "stochastic-computing",
+      "verilog"
+    ]
+  },
+  {
+    "name": "LOOP-TIMING-WITNESS",
+    "private": false,
+    "html_url": "https://github.com/anulum/LOOP-TIMING-WITNESS",
+    "url": "https://api.github.com/repos/anulum/LOOP-TIMING-WITNESS",
+    "description": "Open hardware timing witness for real-time control loops on PolarFire SoC",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-24T17:44:38Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "synapse-channel",
+    "private": false,
+    "html_url": "https://github.com/anulum/synapse-channel",
+    "url": "https://api.github.com/repos/anulum/synapse-channel",
+    "description": "Neutral control plane for coding-agent fleets: claims, roles, mailbox reliability, receipts, audit, federation, dead-letter visibility, sandbox receipts, and cross-agent coordination. This is still pre-1.0.0 - Software works however you might need help from your local agents to set it up.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-23T18:10:07Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "a2a",
+      "agentic-ai",
+      "agentic-workflow",
+      "agents",
+      "ai-agents",
+      "claude-code",
+      "codex",
+      "coordination",
+      "cursor",
+      "developer-tools",
+      "federation",
+      "local-first",
+      "mcp",
+      "multi-agent",
+      "multi-agent-systems",
+      "orchestration-systems",
+      "parallel-agents",
+      "python",
+      "vscode-extension",
+      "websocket"
+    ]
+  },
+  {
+    "name": "rigor-foundry",
+    "private": false,
+    "html_url": "https://github.com/anulum/rigor-foundry",
+    "url": "https://api.github.com/repos/anulum/rigor-foundry",
+    "description": "Evidence-bound repository auditing and remediation planning.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "Apache-2.0"
+    },
+    "updated_at": "2026-09-19T23:30:40Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "code-audit",
+      "code-quality",
+      "devsecops",
+      "evidence",
+      "governance",
+      "python",
+      "remediation",
+      "security",
+      "software-architecture",
+      "supply-chain"
+    ]
+  },
+  {
+    "name": "scpn-control",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-control",
+    "url": "https://api.github.com/repos/anulum/scpn-control",
+    "description": "Control-grade tokamak runtime with neuro-symbolic controllers, fail-closed admission, replay evidence, Python and Rust.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T23:13:45Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "control-systems",
+      "digital-twin",
+      "formal-verification",
+      "fusion",
+      "fusion-energy",
+      "grad-shafranov",
+      "kuramoto",
+      "model-predictive-control",
+      "neuro-symbolic",
+      "petri-net",
+      "plasma-control",
+      "plasma-physics",
+      "pyo3",
+      "python",
+      "real-time-control",
+      "rust",
+      "safety-critical-systems",
+      "scientific-computing",
+      "spiking-neural-network",
+      "tokamak"
+    ]
+  },
+  {
+    "name": "scpn-beam-target-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-beam-target-core",
+    "url": "https://api.github.com/repos/anulum/scpn-beam-target-core",
+    "description": "SCPN Beam Target Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T22:45:52Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-reactor-kernels",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-reactor-kernels",
+    "url": "https://api.github.com/repos/anulum/scpn-reactor-kernels",
+    "description": "SCPN Reactor Kernels — shared physics and geometry kernel library of the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T22:34:49Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-theta-pinch-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-theta-pinch-core",
+    "url": "https://api.github.com/repos/anulum/scpn-theta-pinch-core",
+    "description": "SCPN Theta Pinch Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T21:46:54Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-z-pinch-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-z-pinch-core",
+    "url": "https://api.github.com/repos/anulum/scpn-z-pinch-core",
+    "description": "SCPN Z-Pinch Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:40:44Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-stellarator-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-stellarator-core",
+    "url": "https://api.github.com/repos/anulum/scpn-stellarator-core",
+    "description": "SCPN Stellarator Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:40:07Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-spheromak-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-spheromak-core",
+    "url": "https://api.github.com/repos/anulum/scpn-spheromak-core",
+    "description": "SCPN Spheromak Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:39:56Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-rfp-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-rfp-core",
+    "url": "https://api.github.com/repos/anulum/scpn-rfp-core",
+    "description": "SCPN RFP Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:39:18Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-muon-fusion-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-muon-fusion-core",
+    "url": "https://api.github.com/repos/anulum/scpn-muon-fusion-core",
+    "description": "SCPN Muon Fusion Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:38:53Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-mirror-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-mirror-core",
+    "url": "https://api.github.com/repos/anulum/scpn-mirror-core",
+    "description": "SCPN Mirror Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:38:50Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-magnetic-cusp-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-magnetic-cusp-core",
+    "url": "https://api.github.com/repos/anulum/scpn-magnetic-cusp-core",
+    "description": "SCPN Magnetic Cusp Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:38:16Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-levitated-dipole-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-levitated-dipole-core",
+    "url": "https://api.github.com/repos/anulum/scpn-levitated-dipole-core",
+    "description": "SCPN Levitated Dipole Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:37:54Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-lattice-fusion-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-lattice-fusion-core",
+    "url": "https://api.github.com/repos/anulum/scpn-lattice-fusion-core",
+    "description": "SCPN Lattice Fusion Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:22:50Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-iec-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-iec-core",
+    "url": "https://api.github.com/repos/anulum/scpn-iec-core",
+    "description": "SCPN IEC Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:22:47Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-tokamak-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-tokamak-core",
+    "url": "https://api.github.com/repos/anulum/scpn-tokamak-core",
+    "description": "SCPN Tokamak Core — device configuration and diagnostic-plan truth for tokamak reactor concepts.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:22:13Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-mif-plasma-jet-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-mif-plasma-jet-core",
+    "url": "https://api.github.com/repos/anulum/scpn-mif-plasma-jet-core",
+    "description": "SCPN MIF Plasma Jet Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:21:39Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-mif-maglif-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-mif-maglif-core",
+    "url": "https://api.github.com/repos/anulum/scpn-mif-maglif-core",
+    "description": "SCPN MIF MagLIF Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:21:25Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-mif-liner-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-mif-liner-core",
+    "url": "https://api.github.com/repos/anulum/scpn-mif-liner-core",
+    "description": "SCPN MIF Liner Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:20:30Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-icf-laser-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-icf-laser-core",
+    "url": "https://api.github.com/repos/anulum/scpn-icf-laser-core",
+    "description": "SCPN ICF Laser Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:19:33Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-icf-impact-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-icf-impact-core",
+    "url": "https://api.github.com/repos/anulum/scpn-icf-impact-core",
+    "description": "SCPN ICF Impact Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:18:01Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-icf-beam-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-icf-beam-core",
+    "url": "https://api.github.com/repos/anulum/scpn-icf-beam-core",
+    "description": "SCPN ICF Beam Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:17:09Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-fusion-fission-hybrid-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-fusion-fission-hybrid-core",
+    "url": "https://api.github.com/repos/anulum/scpn-fusion-fission-hybrid-core",
+    "description": "SCPN Fusion Fission Hybrid Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:15:43Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-frc-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-frc-core",
+    "url": "https://api.github.com/repos/anulum/scpn-frc-core",
+    "description": "SCPN FRC Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:12:26Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-dense-plasma-focus-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-dense-plasma-focus-core",
+    "url": "https://api.github.com/repos/anulum/scpn-dense-plasma-focus-core",
+    "description": "SCPN Dense Plasma Focus Core — governed device-family repository in the SCPN Reactor Systems Research Group.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T20:08:02Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "scpn-fusion-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-fusion-core",
+    "url": "https://api.github.com/repos/anulum/scpn-fusion-core",
+    "description": "Evidence-bounded tokamak physics and control toolkit with differentiable free-boundary equilibrium solvers, validation campaigns, Python and Rust.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T18:39:46Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "ai-surrogates",
+      "control-systems",
+      "differentiable-programming",
+      "digital-twin",
+      "fusion",
+      "fusion-energy",
+      "grad-shafranov",
+      "machine-learning",
+      "mhd",
+      "neuro-symbolic",
+      "nuclear-engineering",
+      "numpy",
+      "petri-net",
+      "plasma-physics",
+      "python",
+      "rust",
+      "scientific-computing",
+      "scipy",
+      "spiking-neural-network",
+      "tokamak"
+    ]
+  },
+  {
+    "name": "scpn-mif-core",
+    "private": false,
+    "html_url": "https://github.com/anulum/scpn-mif-core",
+    "url": "https://api.github.com/repos/anulum/scpn-mif-core",
+    "description": "Pulsed FRC kinematics, deterministic trigger logic, FPGA/RTL and formal verification for magneto-inertial fusion control.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-09-19T16:13:29Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "digital-twin",
+      "field-reversed-configuration",
+      "formal-verification",
+      "fpga",
+      "fusion",
+      "fusion-energy",
+      "hardware-in-the-loop",
+      "kuramoto",
+      "lean4",
+      "magneto-inertial-fusion",
+      "plasma-control",
+      "plasma-physics",
+      "pulsed-power",
+      "pyo3",
+      "python",
+      "real-time",
+      "rtl",
+      "rust",
+      "scientific-computing",
+      "spiking-neural-network"
+    ]
+  },
+  {
+    "name": "director-ai",
+    "private": false,
+    "html_url": "https://github.com/anulum/director-ai",
+    "url": "https://api.github.com/repos/anulum/director-ai",
+    "description": "Real-time LLM hallucination guardrail — NLI + RAG fact-checking with opt-in claim-level streaming contradiction halt. Drop-in for any LLM backend.",
+    "language": "Python",
+    "license": {
+      "spdx_id": "Apache-2.0"
+    },
+    "updated_at": "2026-09-04T07:31:07Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "ai-safety",
+      "coherence",
+      "deberta",
+      "factual-consistency",
+      "hallucination-detection",
+      "llm",
+      "llm-guardrail",
+      "machine-learning",
+      "nli",
+      "python",
+      "rag"
+    ]
+  },
+  {
+    "name": "Kimi-K3",
+    "private": false,
+    "html_url": "https://github.com/anulum/Kimi-K3",
+    "url": "https://api.github.com/repos/anulum/Kimi-K3",
+    "description": "Open Frontier Intelligence",
+    "language": null,
+    "license": {
+      "spdx_id": "NOASSERTION"
+    },
+    "updated_at": "2026-07-29T13:15:00Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "remanentia",
+    "private": false,
+    "html_url": "https://github.com/anulum/remanentia",
+    "url": "https://api.github.com/repos/anulum/remanentia",
+    "description": "Local-first, auditable memory for AI agents and knowledge-intensive software",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-07-22T01:47:08Z",
+    "archived": false,
+    "fork": false,
+    "topics": [
+      "agent-memory",
+      "ai-agents",
+      "knowledge-graph",
+      "local-first",
+      "mcp",
+      "python",
+      "rag",
+      "retrieval",
+      "rust",
+      "temporal-reasoning"
+    ]
+  },
+  {
+    "name": "HushLine",
+    "private": false,
+    "html_url": "https://github.com/anulum/HushLine",
+    "url": "https://api.github.com/repos/anulum/HushLine",
+    "description": "Standalone HUSHLINE application",
+    "language": "Python",
+    "license": {
+      "spdx_id": "AGPL-3.0"
+    },
+    "updated_at": "2026-07-18T14:14:10Z",
+    "archived": false,
+    "fork": false,
+    "topics": []
+  },
+  {
+    "name": "Sana",
+    "private": false,
+    "html_url": "https://github.com/anulum/Sana",
+    "url": "https://api.github.com/repos/anulum/Sana",
+    "description": "SANA: Efficient High-Resolution Image Synthesis with Linear Diffusion Transformer",
+    "language": null,
+    "license": {
+      "spdx_id": "Apache-2.0"
+    },
+    "updated_at": "2026-05-17T04:16:16Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "ecosystem",
+    "private": false,
+    "html_url": "https://github.com/anulum/ecosystem",
+    "url": "https://api.github.com/repos/anulum/ecosystem",
+    "description": "The Qiskit ecosystem is a collection of tools created by researchers and developers who use Qiskit every day.",
+    "language": null,
+    "license": {
+      "spdx_id": "Apache-2.0"
+    },
+    "updated_at": "2026-05-07T19:39:00Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "staged-recipes",
+    "private": false,
+    "html_url": "https://github.com/anulum/staged-recipes",
+    "url": "https://api.github.com/repos/anulum/staged-recipes",
+    "description": "A place to submit conda recipes before they become fully fledged conda-forge feedstocks",
+    "language": null,
+    "license": {
+      "spdx_id": "BSD-3-Clause"
+    },
+    "updated_at": "2026-05-06T16:29:32Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "awesome-quantum-software",
+    "private": false,
+    "html_url": "https://github.com/anulum/awesome-quantum-software",
+    "url": "https://api.github.com/repos/anulum/awesome-quantum-software",
+    "description": "Curated list of open-source quantum software projects.",
+    "language": null,
+    "license": {
+      "spdx_id": "CC0-1.0"
+    },
+    "updated_at": "2026-04-12T05:21:52Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "awesome-opensource-ai",
+    "private": false,
+    "html_url": "https://github.com/anulum/awesome-opensource-ai",
+    "url": "https://api.github.com/repos/anulum/awesome-opensource-ai",
+    "description": "Curated list of the best truly open-source AI projects, models, tools, and infrastructure.",
+    "language": null,
+    "license": {
+      "spdx_id": "NOASSERTION"
+    },
+    "updated_at": "2026-04-12T05:21:50Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  },
+  {
+    "name": "awesome-hallucination-detection",
+    "private": false,
+    "html_url": "https://github.com/anulum/awesome-hallucination-detection",
+    "url": "https://api.github.com/repos/anulum/awesome-hallucination-detection",
+    "description": "List of papers on hallucination detection in LLMs.",
+    "language": null,
+    "license": {
+      "spdx_id": "Apache-2.0"
+    },
+    "updated_at": "2026-04-12T05:21:49Z",
+    "archived": false,
+    "fork": true,
+    "topics": []
+  }
+]

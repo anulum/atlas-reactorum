@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0.0",
+  "checked_on": "2026-09-30",
+  "editorial_metadata_licence": "AGPL-3.0-or-later",
+  "scope": "Only Atlas original editorial metadata and code. This does not relicense any referenced source or accept whole-Atlas release rights.",
+  "excluded_artifacts": [
+    "third-party fulltexts and PDFs",
+    "source figures and survey profile tables",
+    "private source observations and retrieval captures",
+    "unaccepted original draft",
+    "coordination and workflow records"
+  ],
+  "scientific_boundary": "Company-authored reports, participant responses, grants, issuer filings and legal registries retain their actual roles; none is silently treated as independent replication.",
+  "sources": [
+    {
+      "source_id": "N01",
+      "organization": "NearStar Fusion",
+      "url": "https://www.nearstarfusion.com/learn-more",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "N02",
+      "organization": "NearStar Fusion",
+      "url": "https://www.sbir.gov/awards/202175",
+      "checked_on": "2026-09-30",
+      "source_type": "government award record",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "N03",
+      "organization": "NearStar Fusion",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "L01",
+      "organization": "Longview Fusion Energy Systems",
+      "url": "https://www.longviewfusion.com/product.html",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "L02",
+      "organization": "Longview Fusion Energy Systems",
+      "url": "https://www.iea.org/reports/the-state-of-energy-innovation-2026",
+      "checked_on": "2026-09-30",
+      "source_type": "intergovernmental report",
+      "reference_rights_boundary": "IEA report states CC-BY-4.0. This layer contains original metadata/citations, not report pages or figures.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "L03",
+      "organization": "Longview Fusion Energy Systems",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "B01",
+      "organization": "Blue Laser Fusion",
+      "url": "https://bluelaserfusion.com/",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "B02",
+      "organization": "Blue Laser Fusion",
+      "url": "https://www.sec.gov/Archives/edgar/data/1938570/000119312526385826/d162976d8k.htm",
+      "checked_on": "2026-09-30",
+      "source_type": "issuer corporate filing",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "B03",
+      "organization": "Blue Laser Fusion",
+      "url": "https://doi.org/10.1364/OE.575181",
+      "checked_on": "2026-09-30",
+      "source_type": "company-authored peer-reviewed design and components",
+      "reference_rights_boundary": "Article states CC-BY-4.0; attribution/title/journal/DOI required. No paper copy in this layer.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "X01",
+      "organization": "EX-Fusion",
+      "url": "https://ex-fusion.com/",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "X02",
+      "organization": "EX-Fusion",
+      "url": "https://www.jst.go.jp/moonshot/en/program/goal10/",
+      "checked_on": "2026-09-30",
+      "source_type": "government programme",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "X03",
+      "organization": "EX-Fusion",
+      "url": "https://ifsa2025-openconf.org/openconf/modules/request.php?action=view.php&file=1%2F198.pdf&id=198&module=oc_program",
+      "checked_on": "2026-09-30",
+      "source_type": "conference paper",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "H01",
+      "organization": "Helical Fusion",
+      "url": "https://global.helicalfusion.com/rd",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "H02",
+      "organization": "Helical Fusion",
+      "url": "https://doi.org/10.2221/jcsj.60.199",
+      "checked_on": "2026-09-30",
+      "source_type": "peer-reviewed company-authored review",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "H03",
+      "organization": "Helical Fusion",
+      "url": "https://www.da.nra.go.jp/detail/NRA100016614",
+      "checked_on": "2026-09-30",
+      "source_type": "government meeting record",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "E01",
+      "organization": "Energy Singularity",
+      "url": "https://energysingularity.cn/en/news.php",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "E02",
+      "organization": "Energy Singularity",
+      "url": "https://doi.org/10.1016/j.fusengdes.2025.115341",
+      "checked_on": "2026-09-30",
+      "source_type": "indexed publisher abstract; full article not inspected",
+      "reference_rights_boundary": "Indexed publisher lists an unspecified Creative Commons notice. Exact licence variant/full body not accepted; no article copy.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "E03",
+      "organization": "Energy Singularity",
+      "url": "https://www-pub.iaea.org/MTCD/Publications/PDF/p15777-24-02766E_WFO_web.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "intergovernmental report",
+      "reference_rights_boundary": "IAEA World Fusion Outlook2024 copyright page: all rights reserved. Full report remains excluded.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "T01",
+      "organization": "nT-Tao",
+      "url": "https://www.nt-tao.com/nt-tao-technology",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "T02",
+      "organization": "nT-Tao",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "T03",
+      "organization": "nT-Tao",
+      "url": "https://meetings-archive.aps.org/dpp/2025/co04/12/",
+      "checked_on": "2026-09-30",
+      "source_type": "company-authored conference abstract",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "A01",
+      "organization": "Acceleron Fusion",
+      "url": "https://www.acceleron.energy/",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "A02",
+      "organization": "Acceleron Fusion",
+      "url": "https://arxiv.org/abs/2606.05333v2",
+      "checked_on": "2026-09-30",
+      "source_type": "company/academic collaboration author preprint, full text inspected",
+      "reference_rights_boundary": "Exact arXiv v2 uses the arXiv non-exclusive distribution licence, a grant to arXiv. No blanket Atlas redistribution grant or journal-version equivalence claimed.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "A03",
+      "organization": "Acceleron Fusion",
+      "url": "https://www.aip.org/scilights/diamond-anvil-cell-developed-for-studying-lower-temperature-muon-catalyzed-fusion-reactions",
+      "checked_on": "2026-09-30",
+      "source_type": "publisher commentary on apparatus paper",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "F01",
+      "organization": "Fuse Energy Technologies",
+      "url": "https://www.f.energy/z-star-img-based-maglif-pulsed-power-user-facility",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "F02",
+      "organization": "Fuse Energy Technologies",
+      "url": "https://doi.org/10.1038/s41598-024-67774-4",
+      "checked_on": "2026-09-30",
+      "source_type": "company/academic-authored engineering experiment",
+      "reference_rights_boundary": "Article states CC-BY-NC-ND-4.0 (PDF p. 10). No public copy, derivative fulltext or broad relicensing.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "F03",
+      "organization": "Fuse Energy Technologies",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "G01",
+      "organization": "ENG8 International",
+      "url": "https://eng8.energy/technology/",
+      "checked_on": "2026-09-30",
+      "source_type": "company primary",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "G02",
+      "organization": "ENG8 International",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/14648601",
+      "checked_on": "2026-09-30",
+      "source_type": "government registry",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "G03",
+      "organization": "ENG8 International",
+      "url": "https://www.ul.com/news/ul-solutions-warns-false-references-made-eng8",
+      "checked_on": "2026-09-30",
+      "source_type": "independent public notice",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "H04",
+      "organization": "Helical Fusion",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "E04",
+      "organization": "Energy Singularity",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    },
+    {
+      "source_id": "X04",
+      "organization": "EX-Fusion",
+      "url": "https://www.fusionindustryassociation.org/wp-content/uploads/2025/07/2025-Global-Fusion-Industry-Report.pdf",
+      "checked_on": "2026-09-30",
+      "source_type": "participant survey",
+      "reference_rights_boundary": "No full-text redistribution grant accepted; citation and original editorial paraphrase only.",
+      "published_payload": "Original dated attribution and bibliographic metadata; no source fulltext, figure or survey-table copy."
+    }
+  ]
+}

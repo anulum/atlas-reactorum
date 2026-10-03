@@ -1,0 +1,22 @@
+{
+  "title": "Atlas Reactorum",
+  "description": "An English-first, source-aware atlas and research library of reactor technology across nuclear fission, plasma and alternative fusion, chemical and biochemical, hybrid and speculative domains. Physical principle, technology maturity and strength of evidence are recorded as separate fields; records are publisher rows rather than verified reactor vessels.",
+  "license": "AGPL-3.0-or-later",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Šotek, Miroslav",
+      "affiliation": "ANULUM / Fortis Studio",
+      "orcid": "0009-0009-3560-0851"
+    }
+  ],
+  "keywords": [
+    "reactors",
+    "nuclear fission",
+    "nuclear fusion",
+    "chemical engineering",
+    "evidence library"
+  ],
+  "notes": "Catalogued third-party sources remain under their own publishers' terms and are not relicensed by inclusion."
+}

@@ -1,0 +1,152 @@
+{
+  "capabilities": [
+    {
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#device-configuration-model",
+      "identifier": "device_configuration_model"
+    },
+    {
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#diagnostic-and-clock-semantics",
+      "identifier": "diagnostic_clock_semantics"
+    },
+    {
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#level-0-device-physics",
+      "identifier": "level0_device_physics"
+    },
+    {
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#device-3d-model",
+      "identifier": "device_3d_model"
+    },
+    {
+      "evidence_maturity": "computational_prototype",
+      "evidence_pointer": "VALIDATION.md#device-cad-model",
+      "identifier": "device_cad_model"
+    }
+  ],
+  "claims": [],
+  "configurations": [
+    "reversed_field_pinch"
+  ],
+  "confinement_family": "magnetic_closed",
+  "control_adapter": {
+    "contract_version": "0.1.0-spec",
+    "direct_actuation": false,
+    "identifier": "scpn-rfp-core.control-adapter",
+    "implementation": null,
+    "specification": "docs/CONTROL_ADAPTER_SPECIFICATION.md"
+  },
+  "device_family": "reversed_field_pinch",
+  "evidence_maturity": "computational_prototype",
+  "excluded_domains": [
+    {
+      "domain": "solver_mathematics_and_validation_evidence",
+      "owner": "SCPN-FUSION-CORE"
+    },
+    {
+      "domain": "typed_signal_semantics_and_comparability",
+      "owner": "SCPN-PHASE-ORCHESTRATOR"
+    },
+    {
+      "domain": "control_admission_and_action_formation",
+      "owner": "SCPN-CONTROL"
+    },
+    {
+      "domain": "machine_protection_final_veto",
+      "owner": "independent_machine_protection"
+    },
+    {
+      "domain": "portfolio_presentation_identity_entitlement_execution_gating",
+      "owner": "SCPN-STUDIO"
+    },
+    {
+      "domain": "axisymmetric_tokamak_devices",
+      "owner": "SCPN-TOKAMAK-CORE"
+    },
+    {
+      "domain": "stellarator_heliotron_torsatron_devices",
+      "owner": "SCPN-STELLARATOR-CORE"
+    },
+    {
+      "domain": "spheromak_devices",
+      "owner": "SCPN-SPHEROMAK-CORE"
+    },
+    {
+      "domain": "self_magnetic_pinch_devices",
+      "owner": "SCPN-Z-PINCH-CORE"
+    },
+    {
+      "domain": "shared_physics_geometry_and_numerics_kernels",
+      "owner": "SCPN-REACTOR-KERNELS"
+    }
+  ],
+  "fusion_solver_seams": {
+    "active": [],
+    "policy": "Versioned seams from SCPN-FUSION-CORE may be consumed only after the reactor family migration gate proves exact replacement; no solver code is copied into this repository."
+  },
+  "kernel_library": {
+    "distribution": "scpn-reactor-kernels",
+    "inventory_sha256": "8b409c63435088f2e36d66322ec7a379243474bf8b99856100e8fc4c8add679a",
+    "kernels": [
+      "cad_brep_solids",
+      "cad_evidence",
+      "cad_faceting",
+      "cad_step_export",
+      "geometry_exports",
+      "geometry_mesh_contract",
+      "geometry_primitives",
+      "geometry_unit_circle",
+      "numerics_bessel"
+    ],
+    "source_commit": "98e6de5139f8856f5d50b4ac86f531b7dc38c1dc",
+    "version": "0.1.0.dev0"
+  },
+  "license": "AGPL-3.0-or-later",
+  "machine_protection": {
+    "final_veto": "independent",
+    "statement": "Independent machine-protection systems retain the final veto before any plant actuator path; nothing in this repository participates in, or substitutes for, that path."
+  },
+  "non_claims": [
+    "not machine-ready",
+    "not safety-certified",
+    "not autonomous-plant-ready",
+    "not commercially reactor-ready",
+    "no implemented solver, controller, dataset, or published artefact; the level-0 Bessel-function relaxed state (evaluated on the pinned shared numerics kernels), the analytic-surface device 3D model of the cylindrical periodic equivalent, the B-rep CAD model of the same design (built by the pinned third-party OpenCASCADE kernel, checked against the analytic closed forms, STEP deterministic only within the pinned back-end environment) and their timing benchmarks are computational prototypes, not validated equilibrium or confinement claims",
+    "no experimental correlation",
+    "no parameter set describes or validates any real machine"
+  ],
+  "owned_domains": [
+    "reversed_field_pinch_configuration_policy",
+    "shot_lifecycle_definition",
+    "diagnostic_semantics_and_reference_frames",
+    "clock_identity_declarations",
+    "actuator_response_model_boundaries",
+    "safety_envelope_declaration",
+    "control_adapter_specification",
+    "analytic_device_physics_models"
+  ],
+  "project": "SCPN-RFP-CORE",
+  "research_group": {
+    "coordination_identity": "SCPN-REACTOR-SYSTEMS",
+    "display_name": "SCPN Reactor Systems Research Group"
+  },
+  "schema": "scpn.reactor-domain.v1",
+  "schema_version": "1.0.0",
+  "spo_registry": {
+    "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090",
+    "source_path": "03_CODE/SCPN-PHASE-ORCHESTRATOR/src/scpn_phase_orchestrator/reactor_semantics/registry.py",
+    "version": "1.0.0"
+  },
+  "spo_semantic_profile": {
+    "actionable": false,
+    "control_intent_contract": null,
+    "mode": "review_only"
+  },
+  "studio_integration": {
+    "descriptor": "studio/portfolio-descriptor.json",
+    "reason": "federation gates have not run; capabilities remain repository-local",
+    "state": "not_federated"
+  }
+}

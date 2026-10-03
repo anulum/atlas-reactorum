@@ -1,0 +1,21 @@
+IAEA Fusion Facility Database source-specific data reuse permission
+
+Publisher: International Atomic Energy Agency (IAEA)
+Source: https://nucleus.iaea.org/sites/fusion-portal/SitePages/FFDB.aspx?web=1
+Database citation: INTERNATIONAL ATOMIC ENERGY AGENCY, Fusion Facility Database (2025).
+Permission statement retrieved: 2026-10-02.
+Original permission-page SHA-256:
+a4194334f267a3de2e02a326297972f0e90f6907f6397d457478e1142838f581
+
+The following publisher permission paragraph was selected from the original
+SharePoint page bootstrap at page.Content.CanvasContent1, under Copyright.
+It is the actual source wording, not a standard open-source licence.
+
+The data provided through FFDB is protected by copyright. Content may be adapted, translated, copied, printed and downloaded for private study, research and teaching purposes, and for use in commercial and non-commercial products or services, provided that appropriate acknowledgement of the IAEA as the source is given and that the IAEA's endorsement of users' views, products or services is not stated or implied in any way.
+
+The annotated Atlas files contain selected visible FFDB data and its
+source-bound adaptation. This reference does not grant rights to unrelated
+viewer software, rendering metadata, access tokens, permission-page HTML,
+separate publications or other datasets. Atlas software retains its own
+AGPL-3.0-or-later licence. Source attribution and acquisition hashes remain
+in the source registry and RIGHTS.md.

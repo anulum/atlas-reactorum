@@ -1,0 +1,180 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Commercial license available
+# © Concepts 1996–2026 Miroslav Šotek. All rights reserved.
+# © Code 2020–2026 Miroslav Šotek. All rights reserved.
+# ORCID: 0009-0009-3560-0851
+# Contact: www.anulum.li | protoscience@anulum.li
+# Atlas Reactorum — project, linting and type-checking configuration
+
+[project]
+name = "atlas-reactorum"
+version = "0.1.0"
+description = "Evidence-bounded atlas and research library of reactor technology"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "AGPL-3.0-or-later" }
+authors = [{ name = "Miroslav Šotek", email = "protoscience@anulum.li" }]
+keywords = ["reactors", "fission", "fusion", "chemical engineering", "atlas"]
+classifiers = [
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = []
+
+[project.optional-dependencies]
+build = ["jsonschema==4.26.0"]
+dev = [
+  "ruff==0.16.9",
+  "mypy==2.3.1",
+  "bandit==1.9.4",
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "jsonschema==4.26.0",
+  "types-jsonschema==4.26.0.20260518",
+  "types-requests==2.33.0.20260906",
+  "types-beautifulsoup4==4.12.0.20250516",
+  "types-openpyxl==3.1.5.20260827",
+  "pre-commit==4.6.2",
+  "pre-commit-hooks==6.0.0",
+  "reuse==6.2.0",
+  "pip-audit==2.10.1",
+  "cyclonedx-bom==7.5.0",
+  "zizmor==1.30.1",
+  "beautifulsoup4==4.15.0",
+  "requests==2.34.2",
+  "openpyxl==3.1.5",
+  "websocket-client==1.9.2",
+]
+
+[project.urls]
+Homepage = "https://www.anulum.li"
+
+[tool.setuptools]
+# The repository is a data library with build scripts rather than an importable
+# package; nothing is installed from it.
+packages = []
+
+# --- Typing -----------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+# The repository is a set of standalone build and validation scripts, several
+# of which share a basename across import directories (validate.py,
+# build_dataset.py). Explicit package bases keep those distinct without
+# inventing packages the scripts do not have.
+explicit_package_bases = true
+namespace_packages = true
+mypy_path = "."
+warn_unreachable = true
+warn_unused_ignores = true
+disallow_any_generics = true
+no_implicit_reexport = true
+show_error_codes = true
+# Never relaxed globally: a missing stub is handled per module, with a reason.
+ignore_missing_imports = false
+
+[[tool.mypy.overrides]]
+module = ["websocket"]
+# websocket-client ships no type stubs; scoped to this one dependency rather
+# than relaxing missing-import checking across the project.
+ignore_missing_imports = true
+
+# --- Linting ----------------------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Local environments and scratch space are not project sources.
+extend-exclude = [".venv", ".pytest-scratch"]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "I",   # import ordering
+  "D",   # docstrings, NumPy convention
+  "B",   # bugbear
+  "UP",  # pyupgrade
+  "S",   # bandit-equivalent security rules
+  "RUF",
+]
+ignore = [
+  "D203",  # conflicts with D211
+  "D213",  # conflicts with D212
+  # `ruff format` owns code line length. E501 then fires only on lines the
+  # formatter cannot split: SPARQL query bodies and verbatim provenance
+  # strings, which must stay byte-exact to preserve source precision.
+  "E501",
+  # Typographic characters (en dash, non-breaking space) appear inside quoted
+  # source titles and provenance notes, where they are correct, not ambiguous.
+  "RUF001", "RUF002", "RUF003",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+# Assertions are the point of a test file. A test's name is its specification;
+# a docstring restating that name is the generic filler the docstring rules
+# exist to prevent, so D102 is not required on test methods. Module and class
+# docstrings, which carry the reasoning, remain mandatory.
+# D103 joins D102 for the same reason: a test function's name states what it
+# asserts, and a docstring repeating it is filler. S603 covers the entry-point
+# tests, which run the build scripts via [sys.executable, <repo-relative
+# constant>]; no argument derives from untrusted input.
+"**/tests/**" = ["S101", "D102", "D103", "S603"]
+"**/test_*.py" = ["S101", "D102", "D103", "S603"]
+# Dataset validators assert invariants as their entire purpose; they are
+# standalone scripts, never imported, and are never run under -O.
+"**/validate*.py" = ["S101"]
+"**/*_validator.py" = ["S101"]
+"04_interactive_presentation/browser-check.py" = ["S101"]
+# S310 reports Request construction without tracing source URL validation.
+# Builders with explicit mirror options validate anonymous HTTPS before every
+# request and redirect; their real TLS conformance tests exercise that boundary.
+# Source-specific review and remaining historical findings are kept internally.
+"**/build_dataset.py" = ["S310"]
+"**/build_industrial_facilities.py" = ["S310"]
+"**/build_repo_catalog.py" = ["S310"]
+"**/build_from_gem.py" = ["S310"]
+"**/fetch_*.py" = ["S310"]
+# Verified 2026-09-29: these validators re-run their sibling builder via
+# [sys.executable, <module-level constant path>]; no argument derives from
+# untrusted input.
+"**/validate.py" = ["S603"]
+"**/validate_*.py" = ["S603"]
+"**/check_*.py" = ["S603"]
+# The preflight runner invokes the four fixed native release build commands
+# in its newly owned source tree; no command argument derives from input data.
+"tools/preflight.py" = ["S603"]
+"tools/rebuild.py" = ["S603"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# --- Tests ------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+branch = true
+patch = ["subprocess"]
+# The suite runs the build scripts as real processes rather than importing
+# them behind substitutes, so coverage has to follow into those subprocesses.
+# parallel + sigterm collect their data files; pytest-cov combines them.
+parallel = true
+sigterm = true
+# Subprocess coverage drags in the interpreter's own sitecustomize hook. It is
+# not repository code and must not dilute the project's coverage figure.
+omit = ["/etc/*", "*/sitecustomize.py", "*/.venv/*"]
+
+[tool.coverage.report]
+# 100 per cent, and never lowered. Anything below the line is coverage debt:
+# an untested path that someone must later discover the hard way.
+fail_under = 100
+show_missing = true
+exclude_lines = []

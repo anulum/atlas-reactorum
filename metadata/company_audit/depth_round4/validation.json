@@ -1,0 +1,65 @@
+{
+  "audit_date": "2026-09-28",
+  "records": 98,
+  "overlays": 3,
+  "overlay_sources": 9,
+  "priority_bands": {
+    "high": 9,
+    "low": 26,
+    "medium": 63
+  },
+  "field_completeness": {
+    "status": {
+      "complete": 90,
+      "partial": 8
+    },
+    "identity": {
+      "complete": 98
+    },
+    "approach": {
+      "complete": 95,
+      "partial": 3
+    },
+    "device": {
+      "complete": 96,
+      "partial": 2
+    },
+    "fuel_cycle": {
+      "complete": 17,
+      "missing": 81
+    },
+    "milestone": {
+      "complete": 92,
+      "partial": 6
+    },
+    "unsupported_claims": {
+      "complete": 98
+    },
+    "official_url": {
+      "complete": 90,
+      "missing": 8
+    },
+    "independent_source": {
+      "complete": 98
+    },
+    "source_date": {
+      "complete": 47,
+      "partial": 51
+    },
+    "country": {
+      "complete": 98
+    },
+    "confidence": {
+      "complete": 98
+    }
+  },
+  "hashes": {
+    "gap_matrix.tsv": "4a81b299499dedccaf078c1ec72f0fb7a33ea8a356a908b48ad278f7ead51cc5",
+    "enrichment_overlays.tsv": "72bb12bc80e4c6af05d5bf602625ac4191777dd8b5e28f03e70a6e035743b5b6",
+    "overlay_sources.tsv": "001b43cc7e2b44bd32554e10c672cb46c5731dc105cd6a68f95c8727f0c03d99",
+    "summary_by_country.tsv": "984f770a85915bc3dc485e49f5d9508ae933eaa9ef34d97c174bc180d19f8085",
+    "summary_by_identity.tsv": "654cf7aa4f6405097332f410503a41f57a6f5318e537c2a100fe3320ba0001f2",
+    "summary_by_evidence_tier.tsv": "6580841da98726d1bba7a46b0fc65cbe45587b8b60ce62bda5e1f01aef6d319c"
+  },
+  "errors": []
+}

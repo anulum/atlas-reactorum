@@ -1,0 +1,49 @@
+{
+  "audit_date": "2026-09-28",
+  "baseline_records": 84,
+  "baseline_files": {
+    "audited_companies.tsv": 51,
+    "expansion_candidates.tsv": 18,
+    "expansion_round2/candidates.tsv": 15
+  },
+  "candidate_records": 14,
+  "combined_records_after_round3": 98,
+  "source_records": 28,
+  "candidate_sha256": "699ce014ea699a97dd2180bdfc85d5b3562e84cc812b792676424240995a591a",
+  "source_registry_sha256": "80aff38d703f57ef8e2d537f7ac6d9f5a62ea430cb445d4786d0e99c352634f7",
+  "countries": {
+    "Argentina": 2,
+    "Brazil": 1,
+    "Chile": 1,
+    "China": 1,
+    "Costa Rica": 1,
+    "Egypt": 1,
+    "France / Switzerland": 1,
+    "Iran": 1,
+    "Latin America and Caribbean": 1,
+    "Lebanon / Arab region": 1,
+    "Mexico": 1,
+    "United Kingdom / MENA focus": 1,
+    "United States": 1
+  },
+  "identity_classes": {
+    "fusion advisory and ecosystem consultancy; not a reactor developer": 1,
+    "fusion reactor/device developer": 1,
+    "fusion reactor/device developer and magnet supplier": 1,
+    "government fusion research laboratory; not a company": 1,
+    "historical state-backed speculative fusion claim; terminated": 1,
+    "national laboratory research programme; not a company": 1,
+    "national public fusion research programme; not a company": 3,
+    "public academic fusion laboratory; not a company": 1,
+    "public academic research programme; not a company": 1,
+    "regional fusion coordination network; not a reactor developer": 1,
+    "regional public-academic fusion initiative; planned device": 1,
+    "speculative fusion reactor/device developer; pre-hardware": 1
+  },
+  "confidence": {
+    "high": 10,
+    "low": 1,
+    "medium": 3
+  },
+  "errors": []
+}

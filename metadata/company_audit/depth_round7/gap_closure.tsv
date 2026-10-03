@@ -1,0 +1,11 @@
+organization	source_record_id	round4_gap_fields	gap_instances_before	fields_closed_or_resolved	gap_instances_resolved	remaining_explicit_negative_findings	audit_date
+EMC2 Fusion Development Corporation	AUD-048	status;fuel_cycle;official_url;source_date	4	status;fuel_cycle;official_url;source_date	4	Corrects dormant classification but does not treat a simulation/proposal programme as an operating reactor.	2026-09-28
+Lockheed Martin Compact Fusion Reactor program	AUD-049	status;fuel_cycle;official_url;source_date	4	status;fuel_cycle;official_url;source_date	4	Official URL is archival programme content, not a current product page.	2026-09-28
+Marvel Fusion	AUD-013	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Fuel is bounded to the current roadmap; the later tritium-lean chemistry is not guessed.	2026-09-28
+Renaissance Fusion	AUD-014	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Component validation is not represented as a fusion-device milestone.	2026-09-28
+Proxima Fusion	AUD-015	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Alpha and Stellaris are separated; no construction or gain is inferred from financing.	2026-09-28
+Gauss Fusion	AUD-016	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Identity is power-plant architect/integrator; no plasma milestone is claimed.	2026-09-28
+First Light Fusion	AUD-017	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Historical D-D experiments are not conflated with the untested D-T FLARE power cycle.	2026-09-28
+OpenStar Technologies	AUD-019	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Explicit negative finding: no project-bounded Junior fuel was located, so D-T is assigned only to the published power-plant design.	2026-09-28
+Avalanche Energy	AUD-020	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Corrects official domain and separates present D-D experiments from the proposed D-T power stage.	2026-09-28
+Princeton Fusion Systems	AUD-022	fuel_cycle;source_date	2	fuel_cycle;source_date	2	Fuel is device-bounded: present hydrogen research is not represented as D-He3 fusion operation.	2026-09-28

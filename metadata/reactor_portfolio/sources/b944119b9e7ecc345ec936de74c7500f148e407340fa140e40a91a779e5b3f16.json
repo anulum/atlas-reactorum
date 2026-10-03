@@ -1,0 +1,16 @@
+{
+  "active_configuration_id": null,
+  "boundary": "Heavy-water pressure-tube design and on-power refuelling interfaces; graphite channel physics belongs to F13.",
+  "category": "fission_device",
+  "evidence_maturity": "architecture_only",
+  "group_id": "SCPN-REACTOR-SYSTEMS",
+  "plan_id": "F3",
+  "project_id": "SCPN-PHWR-CORE",
+  "proposed_configuration_id": "scpn.reactor_systems:pressurised_heavy_water_reactor",
+  "public_capabilities": [],
+  "public_claims": [],
+  "registry_state": "not_registered",
+  "runtime_dependencies": [],
+  "schema": "gotm.architecture-only-boundary.v1",
+  "wave": "C"
+}
