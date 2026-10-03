@@ -19,6 +19,10 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 First public release of the source-linked atlas, static presentation and offline research library.
 
+- Open directly on the interactive world map, with locations, source-linked
+  details, search, filters and zoom visible before the supporting library.
+  Keep desktop/mobile navigation and existing shared section links intact.
+
 - Accept an explicitly verified public historical input bundle for offline
   presentation builds, recording all nine source hashes. Preserve distinct
   original-input requirements for complete historical reconstruction.

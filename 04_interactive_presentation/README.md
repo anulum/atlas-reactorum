@@ -14,6 +14,17 @@ An English-first, evidence-bounded presentation covering nuclear fission, plasma
 
 The static interface is released with the repository snapshot. Unknown values, source dates, evidence boundaries and per-source rights remain visible. Hosted availability is checked separately from reproducibility and source validation.
 
+## World map first
+
+The application opens directly on its interactive world map. Search and filter
+source records, zoom or pan the map, and select a point or facility for its
+location and source-linked details. Entries without coordinates remain in
+search and the facility list; locations are never inferred from a name.
+The map is the first section on desktop and mobile, with learning, taxonomy,
+comparisons and the research library available through navigation. The brand
+link and Home return to the map; existing section and comparison links remain
+valid. An embedded website entry must show this working map immediately.
+
 ## Open locally
 
 - Open `index.html` directly (`file://` is supported), or

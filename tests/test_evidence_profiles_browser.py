@@ -33,6 +33,69 @@ class Browser(Protocol):
     def wait_ready(self, *, timeout: float = 15) -> None: ...
 
 
+def test_world_map_is_visible_on_initial_desktop_and_mobile_entry(
+    browser: Browser, native_browser: BrowserEndpoints
+) -> None:
+    """Open the real page with no anchor and use its map before library navigation."""
+    for width, height, mobile in ((1440, 1000, False), (375, 812, True)):
+        browser.command(
+            "Emulation.setDeviceMetricsOverride",
+            {"width": width, "height": height, "deviceScaleFactor": 1, "mobile": mobile},
+        )
+        try:
+            browser.command("Page.navigate", {"url": "about:blank"})
+            browser.command("Page.navigate", {"url": native_browser["page"]})
+            browser.wait_ready()
+            assert (
+                browser.evaluate("""(() => {
+              const canvas = document.querySelector('#mapHost canvas');
+              const bounds = canvas.getBoundingClientRect();
+              return location.hash === '' && scrollY === 0 &&
+                bounds.width > 250 && bounds.height >= 280 &&
+                bounds.top >= 72 && bounds.top < innerHeight * .65 &&
+                bounds.bottom <= innerHeight + 1 &&
+                document.elementFromPoint(bounds.x + bounds.width / 2,
+                  bounds.y + bounds.height / 2) === canvas;
+            })()""")
+                is True
+            ), browser.evaluate("""(() => {
+              const canvas = document.querySelector('#mapHost canvas');
+              const bounds = canvas.getBoundingClientRect();
+              return {bounds: bounds.toJSON(), viewport: [innerWidth, innerHeight],
+                scroll: scrollY, hash: location.hash,
+                center: document.elementFromPoint(bounds.x + bounds.width / 2,
+                  bounds.y + bounds.height / 2)?.tagName};
+            })()""")
+            assert (
+                browser.evaluate("""(() => {
+              document.querySelector('#facilitySearch').value = 'LM26';
+              document.querySelector('#facilitySearch').dispatchEvent(new Event('input'));
+              const button = document.querySelector('#facilityList .facility-open');
+              if (!button || !button.textContent.includes('LM26')) return false;
+              button.click();
+              const dialog = document.querySelector('#reactorDialog');
+              const valid = dialog.open && dialog.textContent.includes('LM26') &&
+                dialog.textContent.includes('Location') &&
+                dialog.querySelector('.detail-sources a').href.startsWith('https://');
+              dialog.close();
+              return valid;
+            })()""")
+                is True
+            )
+            assert (
+                browser.evaluate("""(() => {
+              const sections = [...document.querySelectorAll('main > section')];
+              const targets = [...document.querySelectorAll('.topnav .nav-dot')]
+                .map(button => button.dataset.target);
+              return sections.every((section, index) => section.id === targets[index]) &&
+                document.querySelector('.brand').getAttribute('href') === '#global-map';
+            })()""")
+                is True
+            )
+        finally:
+            browser.command("Emulation.clearDeviceMetricsOverride")
+
+
 @pytest.fixture
 def browser(native_browser: BrowserEndpoints) -> Iterator[Browser]:
     """Connect to the actual application using the maintained public CDP interface."""
