@@ -68,7 +68,7 @@ done
       printf '%s\n' "${pdf_file#"$library_root"/}"
       pdf_failures=$((pdf_failures + 1))
     fi
-  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -iname '*.pdf' -print0)
+  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -iname '*.pdf' -print0 | LC_ALL=C sort -z)
   [[ "$pdf_failures" -gt 0 ]] || printf 'none\n'
 
   printf '\nZIP validation failures:\n'
@@ -78,7 +78,7 @@ done
       printf '%s\n' "${zip_file#"$library_root"/}"
       zip_failures=$((zip_failures + 1))
     fi
-  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -iname '*.zip' -print0)
+  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -iname '*.zip' -print0 | LC_ALL=C sort -z)
   [[ "$zip_failures" -gt 0 ]] || printf 'none\n'
 
   printf '\nEmpty files:\n'
@@ -86,7 +86,7 @@ done
   while IFS= read -r -d '' empty_file; do
     printf '%s\n' "${empty_file#"$library_root"/}"
     empty_count=$((empty_count + 1))
-  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -empty -print0)
+  done < <(find "$library_root" -type f ! \( "${PRUNE[@]}" \) -empty -print0 | LC_ALL=C sort -z)
   [[ "$empty_count" -gt 0 ]] || printf 'none\n'
 
   printf '\nMissing catalog local_file references:\n'
