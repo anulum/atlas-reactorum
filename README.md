@@ -197,8 +197,22 @@ for 1,342 records and fuel/feed classifications for 533 records. Six secondary
 WRI categories remain classifications of whole plants. Per-field provenance
 records the original cell, source identifier, capture date, licence and hash;
 unknown reactor composition and current physical operation remain unknown.
-The facility dataset uses schema 1.1.0. Search, facility details and filtered
+The current facility dataset uses schema 1.3.0. Search, facility details and filtered
 CSV/JSON retain these fields, and CSV carries the assertion array as JSON.
+
+Research records also retain 172 original operator, purpose and first-criticality
+assertions across 80 facilities from the discovery table and five accepted
+enrichment rounds. Each assertion identifies its original table, SHA-256,
+publisher URL, retrieval date, source role, rights and verification scope.
+Superseded assertions and every accepted source link remain accessible in the
+facility detail and downloads. Retrieval dates do not establish publication
+dates, reactor events or present operation; first criticality is distinct from
+first operation.
+
+The complete primary field review retains 358 decisions for originally blank
+fields in the 172-record research cohort: 275 selected values and 83 held or
+explicit no-fill outcomes. Map details and JSON/CSV exports retain every
+source, scope and decision. Original nonempty cells remain unchanged.
 
 The [research notebook and CLI](examples/research/README.md) restore a downloaded
 comparison against explicit original-file and whole-profile hashes, retaining

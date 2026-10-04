@@ -29,7 +29,23 @@ from ._facility_field_sources import original_source as original_source
 
 
 def release_projection(root: Path) -> list[dict[str, object]]:
-    """Supply complete accepted frozen bytes and actual public facility records."""
+    """Supply complete accepted frozen bytes and actual public facility records.
+
+    Parameters
+    ----------
+    root : Path
+        Owned source-copy directory receiving the frozen projection members.
+
+    Returns
+    -------
+    list of dict
+        Complete current public facility rows without converting source field values.
+
+    Raises
+    ------
+    OSError
+        An owned source or output member cannot be read or written.
+    """
     for member in MEMBERS[:2]:
         shutil.copy2(ROOT / member, root / member)
     return original_rows(
@@ -38,19 +54,39 @@ def release_projection(root: Path) -> list[dict[str, object]]:
 
 
 def replace_projection(root: Path, body: dict[str, object]) -> None:
-    """Change a complete owned projection for a negative structural conformance case."""
+    """Change a complete owned projection for a negative structural conformance case.
+
+    Parameters
+    ----------
+    root : Path
+        Owned source-copy directory receiving the frozen projection members.
+    body : dict[str, object]
+        Complete negative-control JSON document whose structure or source bindings were changed.
+
+    Raises
+    ------
+    OSError
+        An owned source or output member cannot be read or written.
+    """
     data = (json.dumps(body, ensure_ascii=False, indent=2) + "\n").encode()
     (root / MEMBERS[0]).write_bytes(data)
     (root / MEMBERS[1]).write_text(hashlib.sha256(data).hexdigest() + "\n")
 
 
 def test_all_frozen_assertions_apply_idempotently_to_actual_records(original_source: Path) -> None:
+    """Replay all 1,631 frozen assertions twice and preserve independent primary research additions.
+
+    Parameters
+    ----------
+    original_source : Path
+        Owned copy of original frozen inputs and their recorded source bindings.
+    """
     rows = release_projection(original_source)
     assert apply_fields(original_source, rows) == 1631
     once = copy.deepcopy(rows)
     assert apply_fields(original_source, rows) == 1631
     assert rows == once
-    assert sum(bool(row.get("purpose")) for row in rows) == 1342
+    assert sum(bool(row.get("purpose")) for row in rows) == 1443
     assert sum(bool(row.get("fuel_or_feed")) for row in rows) == 533
     assert (
         sum(
@@ -90,6 +126,15 @@ def test_all_frozen_assertions_apply_idempotently_to_actual_records(original_sou
 def test_structural_and_source_binding_refusals_leave_all_actual_records_unchanged(
     original_source: Path, failure: str
 ) -> None:
+    """Inject bound-source and contract faults and require refusal before any record is mutated.
+
+    Parameters
+    ----------
+    original_source : Path
+        Owned copy of original frozen inputs and their recorded source bindings.
+    failure : str
+        Specific source or structural fault injected into the owned input copy.
+    """
     rows = release_projection(original_source)
     body = document(original_source / MEMBERS[0])
     records = original_rows(body["records"])
@@ -148,6 +193,15 @@ def test_structural_and_source_binding_refusals_leave_all_actual_records_unchang
 
 @pytest.mark.parametrize("member", MEMBERS)
 def test_incomplete_frozen_member_refuses_runtime(original_source: Path, member: str) -> None:
+    """Remove one frozen input and forbid acceptance of a partial source-bound projection.
+
+    Parameters
+    ----------
+    original_source : Path
+        Owned copy of original frozen inputs and their recorded source bindings.
+    member : str
+        Original bundle member made unavailable or aliased for this case.
+    """
     rows = release_projection(original_source)
     path = original_source / member
     path.rename(path.with_suffix(path.suffix + ".unavailable"))
@@ -158,6 +212,13 @@ def test_incomplete_frozen_member_refuses_runtime(original_source: Path, member:
 def test_complete_absence_and_optional_layer_absence_have_explicit_scope(
     original_source: Path,
 ) -> None:
+    """Distinguish an absent optional industrial layer from a partly installed frozen bundle.
+
+    Parameters
+    ----------
+    original_source : Path
+        Owned copy of original frozen inputs and their recorded source bindings.
+    """
     rows = release_projection(original_source)
     path = (
         original_source
@@ -178,6 +239,15 @@ def test_complete_absence_and_optional_layer_absence_have_explicit_scope(
 def test_real_consumer_runs_without_any_original_preparation_fixture(
     tmp_path: Path, optimize: bool
 ) -> None:
+    """Build without test helpers under normal and optimised Python, then verify native serialisers.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned temporary directory for real process inputs and outputs.
+    optimize : bool
+        Whether the real interpreter removes assertions with its -O option.
+    """
     source = tmp_path / "release"
     copy_source(ROOT, source)
     (source / "tests").rename(tmp_path / "original-research-fixtures")
@@ -201,7 +271,7 @@ def test_real_consumer_runs_without_any_original_preparation_fixture(
     assert result.returncode == 0, result.stdout + result.stderr
     assert not (source / "tests").exists()
     dataset = document(data / "global_reactors.sample.json")
-    assert dataset["schema_version"] == "1.1.0"
+    assert dataset["schema_version"] == "1.3.0"
     assert dataset["record_count"] == 13459
     inventory = document(data / "dataset-inventory.json")
     assert inventory["facility_field_assertions"] == 1631
@@ -211,7 +281,7 @@ def test_real_consumer_runs_without_any_original_preparation_fixture(
             == hashlib.sha256((source / member).read_bytes()).hexdigest()
         )
     rows = original_rows(dataset["records"])
-    assert sum(bool(row.get("purpose")) for row in rows) == 1342
+    assert sum(bool(row.get("purpose")) for row in rows) == 1443
     assert sum(bool(row.get("fuel_or_feed")) for row in rows) == 533
 
     node_script = r"""

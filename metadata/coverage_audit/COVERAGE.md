@@ -28,10 +28,10 @@ Fuel/feed availability includes publisher classifications; it does not establish
 |---|---:|
 | coordinates | 102 |
 | type | 177 |
-| operator or organization | 1,069 |
-| purpose | 12,117 |
+| operator or organization | 1,008 |
+| purpose | 12,016 |
 | fuel or feed | 12,926 |
-| start or criticality date | 13,334 |
+| start or criticality date | 13,221 |
 | source checked | 9 |
 | unknown or explicitly non-asserted status | 9,014 |
 

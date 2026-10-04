@@ -10,7 +10,17 @@ Atlas Reactorum — 05_global_reactor_map/imports/research_reactors/README.md
 
 # Research reactor import
 
-This directory contains a legally reusable, evidence-linked **discovery dataset** of nuclear research reactors. It is deliberately separate from the presentation and current global map.
+This directory contains an evidence-linked **discovery dataset** of nuclear
+research reactors. It is a distinct source layer in the interactive global map;
+discovery records do not establish independently verified present operation.
+
+The map builder applies the base table and five accepted enrichment rounds in
+their original order. It preserves every source URL and each original operator,
+purpose and first-criticality assertion in `research_field_origins`, including
+superseded values. Those assertions bind the original table's SHA-256 and source
+metadata rather than inferring an event from a retrieval date. Facility details
+and JSON/CSV downloads expose the same source trail; source-specific rights
+remain in force.
 
 ## Release scope
 

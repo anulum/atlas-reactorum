@@ -34,6 +34,15 @@ Keyboard: Left/Right or Page Up/Page Down moves between sections; Home/End moves
 
 The facility view reports live domain counts and can export the complete current filter result as CSV or JSON. The 250-card display cap affects rendering only; it does not truncate map points, search, counts or exports.
 
+Research facility details retain the original operator, purpose and first-criticality
+sources, including earlier assertions superseded by later accepted enrichment
+rounds. Each source disclosure includes its original table and SHA-256, publisher
+link, role, retrieval date, rights and verification scope. An absent metadata
+value is displayed as unknown. Retrieval dates are distinct from publication
+and reactor-event dates; first criticality and first operation have separate
+labels. CSV exports serialize `research_field_origins`, `source_urls` and the
+existing `field_observations` arrays as JSON cells and retain `first_criticality`.
+
 ## Compare, cite and share
 
 Choose two or three distinct catalogue entries in the comparison section. The

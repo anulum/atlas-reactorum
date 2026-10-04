@@ -27,7 +27,18 @@ EXPECTED_DOMAINS = {"fission": 2192, "fusion": 180, "chemical": 11086, "hybrid":
 
 
 def has_coordinates(record: dict[str, Any]) -> bool:
-    """Report whether a record carries a usable coordinate pair."""
+    """Report whether a record carries a usable coordinate pair.
+
+    Parameters
+    ----------
+    record : dict[str, Any]
+        Published record retaining absent latitude or longitude as None or an empty cell.
+
+    Returns
+    -------
+    bool
+        True only when both coordinate cells are present; range checks are separate.
+    """
     lat, lon = record.get("lat"), record.get("lon")
     return lat not in (None, "") and lon not in (None, "")
 
@@ -36,15 +47,43 @@ class TestPublishedCounts:
     """The snapshot the atlas advertises must be the snapshot it ships."""
 
     def test_facility_count(self, facilities: list[dict[str, Any]]) -> None:
+        """Detect a dropped or duplicated source row against the pinned 13,459-record release.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         assert len(facilities) == EXPECTED_FACILITIES
 
     def test_mapped_count(self, facilities: list[dict[str, Any]]) -> None:
+        """Keep 13,357 usable coordinate pairs while retaining unmapped source records.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         assert sum(1 for r in facilities if has_coordinates(r)) == EXPECTED_MAPPED
 
     def test_company_count(self, companies: list[dict[str, Any]]) -> None:
+        """Detect omissions from the independently maintained 98-company catalogue.
+
+        Parameters
+        ----------
+        companies : list[dict[str, Any]]
+            Complete published company records from their separate source layer.
+        """
         assert len(companies) == EXPECTED_COMPANIES
 
     def test_domain_breakdown(self, facilities: list[dict[str, Any]]) -> None:
+        """Conserve each source layer separately so equal total counts cannot hide a domain swap.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         counts: dict[str, int] = {}
         for record in facilities:
             counts[record["domain"]] = counts.get(record["domain"], 0) + 1
@@ -55,14 +94,35 @@ class TestIdentity:
     """Records must be individually addressable."""
 
     def test_facility_ids_are_unique(self, facilities: list[dict[str, Any]]) -> None:
+        """Keep every source record independently addressable by map, detail and export consumers.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         ids = [r["id"] for r in facilities]
         assert len(set(ids)) == len(ids)
 
     def test_company_names_are_unique(self, companies: list[dict[str, Any]]) -> None:
+        """Prevent duplicate company cards from hiding a missing organisation in the release.
+
+        Parameters
+        ----------
+        companies : list[dict[str, Any]]
+            Complete published company records from their separate source layer.
+        """
         names = [r["name"] for r in companies]
         assert len(set(names)) == len(names)
 
     def test_every_facility_id_is_url_and_dom_safe(self, facilities: list[dict[str, Any]]) -> None:
+        """Reject identifiers that cannot round-trip through the existing URL and DOM contract.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         import re
 
         bad = [r["id"] for r in facilities if not re.fullmatch(r"[a-z0-9:._-]+", r["id"])]
@@ -73,6 +133,13 @@ class TestCoordinates:
     """A coordinate must be real, or absent — never invented."""
 
     def test_all_coordinates_are_in_range(self, facilities: list[dict[str, Any]]) -> None:
+        """Check published latitude and longitude bounds without claiming surveyed precision.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         out_of_range = [
             r["id"]
             for r in facilities
@@ -84,6 +151,13 @@ class TestCoordinates:
     def test_no_record_sits_at_null_island(self, facilities: list[dict[str, Any]]) -> None:
         # 0,0 is in the Gulf of Guinea and is the classic signature of a
         # missing coordinate silently coerced to zero.
+        """Catch the missing-coordinate-to-zero conversion that would create a false map location.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         at_origin = [
             r["id"]
             for r in facilities
@@ -96,6 +170,13 @@ class TestCoordinates:
     ) -> None:
         # A record with a latitude but no longitude would be plotted wrongly
         # or dropped inconsistently depending on the consumer.
+        """Keep absence consistent across latitude and longitude for every map consumer.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         partial = [
             r["id"]
             for r in facilities
@@ -108,6 +189,13 @@ class TestProvenance:
     """Every record must be traceable to a source."""
 
     def test_every_facility_has_an_http_source_url(self, facilities: list[dict[str, Any]]) -> None:
+        """Require a traceable source link for each facility without certifying the linked claim.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         missing = [
             r["id"]
             for r in facilities
@@ -116,6 +204,13 @@ class TestProvenance:
         assert missing == []
 
     def test_every_company_has_an_http_source_url(self, companies: list[dict[str, Any]]) -> None:
+        """Require a traceable publisher link for each company rather than an inferred source.
+
+        Parameters
+        ----------
+        companies : list[dict[str, Any]]
+            Complete published company records from their separate source layer.
+        """
         missing = [
             r["name"]
             for r in companies
@@ -126,12 +221,26 @@ class TestProvenance:
     def test_every_facility_declares_a_dataset_source(
         self, facilities: list[dict[str, Any]]
     ) -> None:
+        """Retain the owning input layer needed to reproduce and attribute every facility.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         missing = [r["id"] for r in facilities if not str(r.get("dataset_source", "")).strip()]
         assert missing == []
 
     def test_every_facility_carries_a_data_caveat(self, facilities: list[dict[str, Any]]) -> None:
         # The atlas's central claim is that a record is a source row, not a
         # verified reactor vessel; the caveat is how that reaches the reader.
+        """Preserve the source-row limitations that distinguish a catalogue entry from a verified vessel.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         missing = [r["id"] for r in facilities if not str(r.get("data_caveat", "")).strip()]
         assert missing == []
 
@@ -143,8 +252,17 @@ class TestSchemaConformance:
         self, facilities: list[dict[str, Any]], facility_schema: dict[str, Any]
     ) -> None:
         # The schema describes the whole document, wrapper included.
+        """Validate the complete facility wrapper and every record using the shipped schema.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        facility_schema : dict[str, Any]
+            Published facility JSON Schema, including the release wrapper.
+        """
         document = {
-            "schema_version": "1.1.0",
+            "schema_version": "1.3.0",
             "record_count": len(facilities),
             "records": facilities,
         }
@@ -157,6 +275,15 @@ class TestSchemaConformance:
     def test_companies_match_their_schema(
         self, companies: list[dict[str, Any]], company_schema: dict[str, Any]
     ) -> None:
+        """Validate company records and the declared wrapper against their own schema.
+
+        Parameters
+        ----------
+        companies : list[dict[str, Any]]
+            Complete published company records from their separate source layer.
+        company_schema : dict[str, Any]
+            Published company JSON Schema, including the release wrapper.
+        """
         document = {
             "schema_version": "1.0.0",
             "record_count": len(companies),
@@ -176,16 +303,39 @@ class TestEvidenceDiscipline:
     def test_classification_fields_are_always_populated(
         self, facilities: list[dict[str, Any]], field: str
     ) -> None:
+        """Detect missing filter and evidence categories without treating unknown as an operating state.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        field : str
+            Required classification field selected by the parametrised contract.
+        """
         missing = [r["id"] for r in facilities if not str(r.get(field, "")).strip()]
         assert missing == []
 
     def test_status_values_are_lower_case_normalised(
         self, facilities: list[dict[str, Any]]
     ) -> None:
+        """Keep the normalised filter contract distinct from the retained original source status.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         odd = {r["status"] for r in facilities if r["status"] != r["status"].lower()}
         assert odd == set()
 
     def test_no_status_is_blank(self, facilities: list[dict[str, Any]]) -> None:
         # A blank status would be indistinguishable from "operational" in a
         # filter; absence must read as "unknown".
+        """Keep absent status explicit as unknown so the interface cannot imply operation.
+
+        Parameters
+        ----------
+        facilities : list[dict[str, Any]]
+            Complete published facility records, including unmapped entries.
+        """
         assert [r["id"] for r in facilities if r["status"] == ""] == []

@@ -393,6 +393,31 @@
         ],
         "application": "Exact identity, in the producer's declared order; blank overlay fields preserve prior values. A later source_license value is not a licence over unchanged fields from an earlier layer.",
         "source_contract": "05_global_reactor_map/imports/research_reactors/enrichment_round5/README.md"
+      },
+      {
+        "source_file": "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-fields.tsv",
+        "sha256": "90f8574380eb7751a59287c72d8ee054c65fad4d8871072248da9dff71e4a751",
+        "rows": 358,
+        "selected_fields": 275,
+        "held_fields": 53,
+        "explicit_no_fill_fields": 30,
+        "producer_inputs": {
+          "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-baseline.json": "ea8943ca6aade386328c6eec455e7317c60e1ef8d0912f94a901e02c9c1ef551",
+          "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-fields.tsv": "90f8574380eb7751a59287c72d8ee054c65fad4d8871072248da9dff71e4a751",
+          "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json": "cea2b191b5635104bb75f24cb5a495fc6f395e77af9e8566e9e0e07a63f7ee2a"
+        },
+        "source_field_terms": [
+          {
+            "source_declaration": "Individual factual assertions and Atlas editorial scope; original publisher expression and document rights retained",
+            "rows": 358,
+            "license_id": null,
+            "basis": "Atlas original selection and factual summaries; no new licence over cited publisher works"
+          }
+        ],
+        "application": "After all five original research enrichment rounds, only selected originally blank fields change. All original nonempty cells remain exact; held and explicit no-fill outcomes remain research_primary_assertions without scalar fills.",
+        "source_contract": "05_global_reactor_map/imports/research_reactors/official_source_enrichment/README.md",
+        "rights_note": "05_global_reactor_map/imports/research_reactors/official_source_enrichment/RIGHTS.md",
+        "source_registry": "05_global_reactor_map/imports/research_reactors/official_source_enrichment/source_registry.tsv"
       }
     ]
   },
@@ -592,7 +617,10 @@
     "05_global_reactor_map/imports/research_reactors/enrichment_round2/research_reactor_enrichment_round2.tsv": "db7b8857dd31ed46f9ae99771efdba48e084bec6215ab2c53a39baf31c8f3f29",
     "05_global_reactor_map/imports/research_reactors/enrichment_round3/research_reactor_enrichment_round3.tsv": "cb81dd6b0b1d149ad679593aa6d24991f14048924b2430df8460a96fbb14d715",
     "05_global_reactor_map/imports/research_reactors/enrichment_round4/research_reactor_enrichment_round4.tsv": "6e42fcb82792de59b42f23cc10ff1560b2d387691b6a4616c7f9a0dc8ce24263",
-    "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919"
+    "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-baseline.json": "ea8943ca6aade386328c6eec455e7317c60e1ef8d0912f94a901e02c9c1ef551",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-fields.tsv": "90f8574380eb7751a59287c72d8ee054c65fad4d8871072248da9dff71e4a751",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json": "cea2b191b5635104bb75f24cb5a495fc6f395e77af9e8566e9e0e07a63f7ee2a"
   },
   "historical_option": {
     "public_base": "05_global_reactor_map/imports/fusion/fusion_facilities.tsv",

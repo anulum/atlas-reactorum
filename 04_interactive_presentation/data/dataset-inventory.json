@@ -1,4 +1,13 @@
 {
+  "research_primary_decisions": {
+    "selected": 275,
+    "held": 53,
+    "unknown": 7,
+    "not_applicable": 2,
+    "never_critical": 1,
+    "planned": 3,
+    "composite": 17
+  },
   "facilities": 13459,
   "imported_plant_records": 195,
   "supplemental_facilities": 10,
@@ -170,6 +179,9 @@
     "05_global_reactor_map/imports/research_reactors/enrichment_round2/research_reactor_enrichment_round2.tsv": "db7b8857dd31ed46f9ae99771efdba48e084bec6215ab2c53a39baf31c8f3f29",
     "05_global_reactor_map/imports/research_reactors/enrichment_round3/research_reactor_enrichment_round3.tsv": "cb81dd6b0b1d149ad679593aa6d24991f14048924b2430df8460a96fbb14d715",
     "05_global_reactor_map/imports/research_reactors/enrichment_round4/research_reactor_enrichment_round4.tsv": "6e42fcb82792de59b42f23cc10ff1560b2d387691b6a4616c7f9a0dc8ce24263",
-    "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919"
+    "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-baseline.json": "ea8943ca6aade386328c6eec455e7317c60e1ef8d0912f94a901e02c9c1ef551",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-fields.tsv": "90f8574380eb7751a59287c72d8ee054c65fad4d8871072248da9dff71e4a751",
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json": "cea2b191b5635104bb75f24cb5a495fc6f395e77af9e8566e9e0e07a63f7ee2a"
   }
 }

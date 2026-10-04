@@ -178,10 +178,10 @@
     "missing_fields": {
       "coordinates": 102,
       "type": 177,
-      "operator_or_organization": 1069,
-      "purpose": 12117,
+      "operator_or_organization": 1008,
+      "purpose": 12016,
       "fuel_or_feed": 12926,
-      "start_or_criticality_date": 13334,
+      "start_or_criticality_date": 13221,
       "source_checked": 9
     },
     "missing_fields_by_record_kind": {
@@ -239,10 +239,10 @@
         "records": 172,
         "coordinates": 65,
         "type": 0,
-        "operator_or_organization": 96,
-        "purpose": 117,
+        "operator_or_organization": 35,
+        "purpose": 16,
         "fuel_or_feed": 172,
-        "start_or_criticality_date": 145,
+        "start_or_criticality_date": 32,
         "source_checked": 0
       },
       "supplemental facility": {

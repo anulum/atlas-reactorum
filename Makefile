@@ -12,7 +12,7 @@ ATLAS_PYTHON ?= $(abspath $(VENV))/bin/python
 SHELL  := /bin/bash
 
 .DEFAULT_GOAL := help
-.PHONY: help setup hooks lint typecheck test validate build verify preflight clean research-example
+.PHONY: help setup hooks lint native-test-docs typecheck test validate build verify preflight clean research-example
 
 help:  ## List the available targets
 	@grep -hE '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed 's/:.*##/\t/' | sort
@@ -24,9 +24,16 @@ setup:  ## Create the development environment from the verified lock
 hooks:  ## Check staged source hooks using the same development graph
 	PATH="$(abspath $(VENV))/bin:$$PATH" $(VENV)/bin/python -m pre_commit run --all-files --show-diff-on-failure
 
-lint:  ## Lint and check formatting
+lint: native-test-docs  ## Lint and check formatting
 	$(VENV)/bin/python -m ruff check .
 	$(VENV)/bin/python -m ruff format --check .
+
+native-test-docs:  ## Require native contracts on the research integration test surface
+	$(VENV)/bin/python -m ruff check --select D --config 'lint.per-file-ignores = {}' \
+	  tests/test_dataset_integrity.py tests/test_facility_fields_integration.py \
+	  tests/test_research_official_browser.py tests/test_research_official_integration.py \
+	  tests/test_research_primary_browser.py tests/test_research_primary_integration.py \
+	  tests/test_research_primary_projection.py
 
 typecheck:  ## Strict mypy across every source directory
 	ATLAS_MYPY="$(abspath $(VENV))/bin/mypy" ./tools/typecheck.sh

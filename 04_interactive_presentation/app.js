@@ -937,7 +937,11 @@ function downloadFacilityData(format) {
       "purpose",
       "process_or_activity",
       "fuel_or_feed",
+      "first_criticality",
+      "research_field_origins",
+      "research_primary_assertions",
       "field_observations",
+      "source_urls",
       "source_url",
       "dataset_source",
       "data_caveat",
@@ -946,7 +950,7 @@ function downloadFacilityData(format) {
     payload =
       format === "json"
         ? JSON.stringify(rows, null, 2)
-        : [fields.join(","), ...rows.map((row) => fields.map((field) => csvCell(field === "field_observations" ? JSON.stringify(row[field] || []) : row[field])).join(","))].join("\n"),
+        : [fields.join(","), ...rows.map((row) => fields.map((field) => csvCell(["field_observations", "research_field_origins", "research_primary_assertions", "source_urls"].includes(field) ? JSON.stringify(row[field] || []) : row[field])).join(","))].join("\n"),
     blob = new Blob([payload + "\n"], {
       type: format === "json" ? "application/json" : "text/csv",
     }),
@@ -1028,10 +1032,8 @@ function openFacility(id) {
       ["Operator / organisation", x.operator || x.organization],
       ["Owner", x.owner],
       ["Construction start", x.construction_start],
-      [
-        "First operation / criticality",
-        x.first_criticality || x.first_operation,
-      ],
+      ["First criticality", x.first_criticality],
+      ["First operation", x.first_operation],
       ["Grid connection", x.grid_connection],
       ["Commercial operation", x.commercial_operation],
       [
@@ -1051,7 +1053,7 @@ function openFacility(id) {
       .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
       .join(
         "",
-      )}</dl>${facilityFieldSources(x)}<div class="detail-sources">${sourceLinks(x.source_urls || [x.source_url])}</div></div>`;
+      )}</dl>${facilityFieldSources(x)}${window.FacilitySourceAssertions.render(x.research_field_origins || [])}${window.PrimaryResearchAssertions.render(x.research_primary_assertions || [])}<div class="detail-sources">${sourceLinks(x.source_urls || [x.source_url])}</div></div>`;
   $("#reactorDialog").showModal();
 }
 /** Render each original field assertion with its source meaning and capture date. */

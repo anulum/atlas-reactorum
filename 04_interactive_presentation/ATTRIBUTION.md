@@ -57,3 +57,12 @@ Company records and unlicensed-source overlays are original Atlas selections
 and summaries of isolated factual assertions. Source expression remains
 reserved. A .gov host, a citation or a data checksum is not by itself a
 licence over a laboratory's article, report, slides or images.
+
+## Research field sources
+
+The complete research catalogue retains its original source cells and terms.
+The [primary field bundle](../05_global_reactor_map/imports/research_reactors/official_source_enrichment/README.md)
+adds individually scoped factual assertions and explicit held/no-fill decisions.
+Its [source registry](../05_global_reactor_map/imports/research_reactors/official_source_enrichment/source_registry.tsv)
+records original body hashes and retained rights. Publisher PDFs, pages and
+scans are referenced rather than embedded; Atlas does not grant rights to them.

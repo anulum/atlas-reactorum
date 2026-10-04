@@ -469,7 +469,12 @@ def run_checks(browser: BrowserSession, *, reload: bool = True) -> dict[str, obj
     browser.evaluate(
         "document.querySelector('#facilitySearch').value=''; document.querySelector('#facilitySearch').dispatchEvent(new Event('input'))"
     )
-    browser.verify("(window.REACTOR_FACILITIES.filter(r => r.purpose).length === 1342)")
+    browser.verify(
+        "(window.REACTOR_FACILITIES.filter(r => r.purpose).length === 1342 + "
+        "window.REACTOR_FACILITIES.reduce((n,r) => n + "
+        "(r.research_primary_assertions || []).filter(a => "
+        "a.field === 'purpose' && a.selection === 'selected').length, 0))"
+    )
     browser.verify("(window.REACTOR_FACILITIES.filter(r => r.fuel_or_feed).length === 533)")
     browser.verify(
         "(window.REACTOR_FACILITIES.reduce((n,r) => n + (r.field_observations || []).length, 0) === 1631)"

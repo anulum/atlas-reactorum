@@ -63,7 +63,14 @@ it does not perform fresh research or upgrade the evidence quality of the inputs
   The open layer contains 172 records from Wikidata CC0 discovery and an openly
   licensed CNSC supplement. Fifty-four exact-ID official-source overlay rows
   add reviewed status, type, power, operator, purpose and date values without modifying the base. IAEA RRDB was
-  referenced but not redistributed.
+  referenced but not redistributed. The complete
+  [primary field bundle](../../05_global_reactor_map/imports/research_reactors/official_source_enrichment/README.md)
+  retains 358 individual decisions for originally blank fields: 275 selected,
+  53 held, and 30 explicit unknown, composite, planned, nonapplicable or
+  never-critical outcomes. Dataset schema 1.3.0 exposes every decision as
+  research_primary_assertions in map details and JSON/CSV exports. Original
+  nonempty cells and coordinate precision remain unchanged; scope and rights
+  do not become an independent confirmation of current operation.
 - Fusion records: `../../05_global_reactor_map/imports/fusion/ffdb/`. The default
   build uses all 174 visible FFDB catalogue records captured on 2026-10-02.
   It decodes the complete pinned capture and compares both cached source

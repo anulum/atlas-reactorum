@@ -42,6 +42,10 @@ Version links bind both data and authored learning content; stale versions must
 refuse. Native keyboard, mobile, assessment and file-download checks do not
 substitute for a human comprehension study.
 
+make lint includes make native-test-docs, which requires native contracts
+on the complete research integration and dataset-integrity test files. This
+check runs without the general test-method docstring exemptions.
+
 The locked development environment and native Node, Chrome, Poppler
 `pdftotext` and shell tools are required; see [Validation](VALIDATION.md) for commands and current scope.
 

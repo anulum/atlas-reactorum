@@ -323,3 +323,10 @@ path = ".nojekyll"
 precedence = "override"
 SPDX-FileCopyrightText = ["1996-2026 Miroslav Šotek <protoscience@anulum.li> (concepts)", "2020-2026 Miroslav Šotek <protoscience@anulum.li> (code)"]
 SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Complete primary research snapshots retain all preceding source-cell terms.
+[[annotations]]
+path = ["05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-baseline.json", "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Source publishers and individual field origins in 04_interactive_presentation/data/source_rights.json", "2026 Miroslav Šotek, selection and editorial scope"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND CC0-1.0 AND CC-BY-4.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND LicenseRef-US-Public-Domain"

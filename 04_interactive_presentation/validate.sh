@@ -19,6 +19,14 @@ for file in index.html styles.css app.js taxonomy-claim-sources.js taxonomy-evid
   test -s "$root_dir/$file"
 done
 node --check "$root_dir/app.js"
+node --check "$root_dir/facility-source-assertions.js"
+node --check "$root_dir/research-primary-assertions.js"
+node --test --experimental-test-coverage \
+  --test-coverage-include="$root_dir/facility-source-assertions.js" \
+  --test-coverage-include="$root_dir/research-primary-assertions.js" \
+  --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \
+  "$root_dir/../tests/facility_source_assertions.test.cjs" \
+  "$root_dir/../tests/research_primary_assertions.test.cjs"
 node --check "$root_dir/taxonomy-claim-sources.js"
 node --check "$root_dir/taxonomy-evidence-profile.js"
 node --check "$root_dir/taxonomy-comparison.js"

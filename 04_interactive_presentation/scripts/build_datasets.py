@@ -125,6 +125,12 @@ FFDB_INTEGRATION = importlib.import_module("05_global_reactor_map.imports.fusion
 HISTORICAL_INPUTS = importlib.import_module(
     "05_global_reactor_map.imports.fusion.historical_inputs"
 )
+RESEARCH_INTEGRATION = importlib.import_module(
+    "05_global_reactor_map.imports.research_reactors.official_source_enrichment.integration"
+)
+PRIMARY_RESEARCH = importlib.import_module(
+    "05_global_reactor_map.imports.research_reactors.official_source_enrichment.primary_integration"
+)
 FUSION_SNAPSHOT: Path | None = None
 
 
@@ -297,7 +303,8 @@ def emit(
         Directory to write into. Defaults to the configured output directory.
 
     schema_version : str
-        Record-shape revision; facility fields use 1.1.0 while company records retain 1.0.0.
+        Record-shape revision; complete primary research uses 1.3.0, historical
+        research without the bundle uses 1.2.0, and companies retain 1.0.0.
 
     Notes
     -----
@@ -584,27 +591,20 @@ def build_research_facilities(
         The research-reactor records this layer contributes.
     """
     records: list[dict[str, Any]] = []
+    merged_rows: dict[str, dict[str, str]] = {}
     if source.exists():
-        research_enrichments: dict[str, dict[str, str]] = {}
-        for enrichment_source in enrichment_sources:
-            if enrichment_source.exists():
-                for enrichment in read_tsv(enrichment_source):
-                    research_enrichments[enrichment["stable_id"]] = {
-                        **research_enrichments.get(enrichment["stable_id"], {}),
-                        **{key: value for key, value in enrichment.items() if value},
-                    }
-        for source_row in read_tsv(source):
-            patch = research_enrichments.get(source_row["stable_id"])
-            row = {
-                **source_row,
-                **({key: value for key, value in patch.items() if value} if patch else {}),
-            }
-            opt_lat, opt_lon = nullable_number(row.get("lat")), nullable_number(row.get("lon"))
-            source_urls = list(
-                dict.fromkeys(
-                    [url for url in (source_row.get("source_url"), row.get("source_url")) if url]
-                )
+        base = RESEARCH_INTEGRATION.read_layer(source, LIBRARY)
+        layers = [
+            RESEARCH_INTEGRATION.read_layer(path, LIBRARY)
+            for path in enrichment_sources
+            if path.exists()
+        ]
+        for source_row in base.rows.values():
+            row, source_urls, origins, applied = RESEARCH_INTEGRATION.merge_layers(
+                source_row, base, layers
             )
+            merged_rows[row["stable_id"]] = row
+            opt_lat, opt_lon = nullable_number(row.get("lat")), nullable_number(row.get("lon"))
             records.append(
                 {
                     **row,
@@ -626,11 +626,28 @@ def build_research_facilities(
                     "source_urls": source_urls,
                     "source_checked": row.get("retrieved") or row.get("retrieved_date"),
                     "dataset_source": "05_global_reactor_map/imports/research_reactors/research_reactors.tsv",
-                    "enrichment_applied": bool(patch),
+                    "enrichment_applied": applied,
+                    **({"research_field_origins": origins} if origins else {}),
                     "data_caveat": row.get("verification_notes")
                     or "Discovery record; verify status and coordinates against the current regulator or operator.",
                 }
             )
+    projection = PRIMARY_RESEARCH.load_projection(
+        merged_rows, source.parent / "official_source_enrichment"
+    )
+    if projection is not None:
+        assertions_by_identity: dict[str, list[dict[str, str]]] = {}
+        for assertion in projection.assertions:
+            assertions_by_identity.setdefault(assertion["stable_id"], []).append(assertion)
+        for record in records:
+            identity = record["stable_id"]
+            for field in ("operator", "purpose", "first_criticality"):
+                record[field] = projection.rows[identity][field]
+            assertions = assertions_by_identity.get(identity, [])
+            if assertions:
+                record["research_primary_assertions"] = assertions
+                citations = [row["source_url"] for row in assertions if row["source_url"]]
+                record["source_urls"] = list(dict.fromkeys([*record["source_urls"], *citations]))
     return records
 
 
@@ -1125,7 +1142,28 @@ def write_dataset_manifest(
         input_paths.append(RESEARCH_ENRICHMENT_ROUND5_SOURCE)
     if FUSION_SNAPSHOT is not None:
         input_paths.extend(FUSION_SNAPSHOT / member for member in HISTORICAL_INPUTS.MEMBERS)
+    input_paths.extend(
+        RESEARCH_SOURCE.parent / "official_source_enrichment" / member
+        for member in PRIMARY_RESEARCH.MEMBERS
+        if (RESEARCH_SOURCE.parent / "official_source_enrichment" / member).exists()
+    )
     inventory = {
+        "research_primary_decisions": {
+            decision: sum(
+                assertion["selection"] == decision
+                for record in facilities
+                for assertion in record.get("research_primary_assertions", [])
+            )
+            for decision in (
+                "selected",
+                "held",
+                "unknown",
+                "not_applicable",
+                "never_critical",
+                "planned",
+                "composite",
+            )
+        },
         "facilities": len(facilities),
         "imported_plant_records": len(read_tsv(FACILITY_SOURCE)),
         "supplemental_facilities": len(
@@ -1291,11 +1329,8 @@ def main(argv: list[str] | None = None) -> None:
                 FUSION_NEW_SOURCE,
             )
             fusion_records = len(read_tsv(FUSION_SOURCE)) if FUSION_SOURCE.exists() else 0
-        arguments.data_dir.mkdir(parents=True, exist_ok=True)
-        facilities: list[dict[str, Any]] = build_base_facilities(FACILITY_SOURCE)
-        facilities.extend(fusion_facilities)
-        facilities.extend(
-            build_research_facilities(
+        try:
+            research_facilities = build_research_facilities(
                 RESEARCH_SOURCE,
                 (
                     RESEARCH_ENRICHMENT_SOURCE,
@@ -1305,7 +1340,15 @@ def main(argv: list[str] | None = None) -> None:
                     RESEARCH_ENRICHMENT_ROUND5_SOURCE,
                 ),
             )
-        )
+        except (OSError, UnicodeError, csv.Error, ValueError):
+            parser.exit(
+                2,
+                "Primary research inputs refused; check original sources and complete field review.\n",
+            )
+        arguments.data_dir.mkdir(parents=True, exist_ok=True)
+        facilities: list[dict[str, Any]] = build_base_facilities(FACILITY_SOURCE)
+        facilities.extend(fusion_facilities)
+        facilities.extend(research_facilities)
         facilities.extend(build_power_unit_facilities(POWER_UNIT_SOURCE))
         facilities.extend(
             build_industrial_facilities(
@@ -1328,7 +1371,14 @@ def main(argv: list[str] | None = None) -> None:
         normalise_facility_countries(facilities)
         require_source_urls(facilities, companies)
         apply_fields(LIBRARY, facilities)
-        emit("global_reactors.sample", "REACTOR_FACILITIES", facilities, schema_version="1.1.0")
+        emit(
+            "global_reactors.sample",
+            "REACTOR_FACILITIES",
+            facilities,
+            schema_version="1.3.0"
+            if any(row.get("research_primary_assertions") for row in facilities)
+            else "1.2.0",
+        )
         emit("fusion_companies.sample", "FUSION_COMPANIES", companies)
         write_dataset_manifest(
             facilities, companies, merged_supplemental, arguments.fusion_source, fusion_records
