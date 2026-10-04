@@ -145,7 +145,7 @@ temperature options retain process-specific benefits and coupled-stage limits.
 The [citation contract](metadata/taxonomy_audit/README.md) documents the authored
 metadata, catalogue-only source custody and schema 1.3.0 audit exports.
 
-`python3 tools/preflight.py --check reproducibility` rebuilds the 20 offline
+`python3 tools/preflight.py --check reproducibility` rebuilds the 22 offline
 release products in a fresh external temporary tree and requires identical
 bytes, including both JSON and JavaScript exports and the inventory receipts.
 It preserves accepted files. Use `--workspace /absolute/external/workspace`
@@ -217,3 +217,12 @@ source, scope and decision. Original nonempty cells remain unchanged.
 The [research notebook and CLI](examples/research/README.md) restore a downloaded
 comparison against explicit original-file and whole-profile hashes, retaining
 source locators, original claims and missing parameter reasons.
+
+
+## Support the project
+
+[![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/anulum)
+
+Support development through GitHub Sponsors or the other destinations in
+[the funding metadata](.github/FUNDING.yml). Sponsorship does not affect source
+review or the evidence assigned to a record.
