@@ -25,9 +25,9 @@ from .browser_checks_runtime import (
     ASSETS,
     NAVIGATION_CHECKER,
     SCRIPT,
-    BrowserEndpoints,
     wait_for_page,
 )
+from .browser_checks_runtime import BrowserEndpoints as BrowserEndpoints
 from .browser_checks_runtime import native_browser as native_browser
 from .conftest import load_module
 
