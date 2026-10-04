@@ -28,12 +28,14 @@ lint: native-test-docs  ## Lint and check formatting
 	$(VENV)/bin/python -m ruff check .
 	$(VENV)/bin/python -m ruff format --check .
 
-native-test-docs:  ## Require native contracts on the research integration test surface
+native-test-docs:  ## Require native contracts on research integration and browser tests
 	$(VENV)/bin/python -m ruff check --select D --config 'lint.per-file-ignores = {}' \
 	  tests/test_dataset_integrity.py tests/test_facility_fields_integration.py \
 	  tests/test_research_official_browser.py tests/test_research_official_integration.py \
 	  tests/test_research_primary_browser.py tests/test_research_primary_integration.py \
-	  tests/test_research_primary_projection.py
+	  tests/test_research_primary_projection.py \
+	  tests/test_browser_checks.py tests/test_browser_check_decoders.py \
+	  tests/browser_checks_runtime.py
 
 typecheck:  ## Strict mypy across every source directory
 	ATLAS_MYPY="$(abspath $(VENV))/bin/mypy" ./tools/typecheck.sh

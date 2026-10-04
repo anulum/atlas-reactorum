@@ -43,8 +43,12 @@ refuse. Native keyboard, mobile, assessment and file-download checks do not
 substitute for a human comprehension study.
 
 make lint includes make native-test-docs, which requires native contracts
-on the complete research integration and dataset-integrity test files. This
-check runs without the general test-method docstring exemptions.
+on the complete research integration, dataset-integrity and native browser
+test files, including the shared Chrome fixtures and protocol decoders. This
+check runs without the general test-method docstring exemptions. Owned browser
+fixtures wait for the exact page URL after startup and navigation; a DevTools
+HTTP response or navigation acknowledgement alone does not establish that the
+intended page is committed. Ambiguous and unsafe targets still refuse.
 
 The locked development environment and native Node, Chrome, Poppler
 `pdftotext` and shell tools are required; see [Validation](VALIDATION.md) for commands and current scope.
