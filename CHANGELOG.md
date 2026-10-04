@@ -15,6 +15,20 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Added — 2026-10-04
+
+- Review all 358 originally missing operator, purpose and first-criticality
+  fields across the 172 research-reactor identities. Add 275 source-backed
+  values and retain 83 individually documented non-fill decisions, without
+  changing original nonempty scientific values.
+- Display the field evidence, source locators, date precision, rights and
+  non-fill reasons in the map details. Preserve these assertions in the
+  complete JSON and CSV downloads using facility schema 1.3.0.
+- Publish the reproducible primary-field projection, source registry and
+  source-specific rights notes. Require native documentation contracts on
+  the research integration tests and native coverage checks for both field
+  evidence renderers in the maintained validation commands.
+
 ## [0.1.0] — 2026-10-03
 
 First public release of the source-linked atlas, static presentation and offline research library.

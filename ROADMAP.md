@@ -45,8 +45,15 @@ Dated, forward-only. Items move to `CHANGELOG.md` when they land.
   and separate source licences. Facility records do not establish vessel
   counts, reactor designs or current operation. Continue jurisdiction-specific
   source and facility-boundary reconciliation.
-- Close research-reactor enrichment gaps: 96 operator, 117 purpose and 145
-  first-criticality values, by exact-identifier overlay from official sources.
+- The 2026-10-04 primary-source review accounts for all 358 originally missing
+  fields across 172 research-reactor identities: 96 operator, 117 purpose and
+  145 first-criticality values. It supplies 275 source-backed values and
+  records 83 individually qualified non-fill decisions. Original nonempty
+  values remain unchanged; review completion does not mean every field is
+  known. Continue exact-identifier source research where values remain held,
+  unknown, composite or otherwise non-asserted. The
+  [primary-field review](05_global_reactor_map/imports/research_reactors/official_source_enrichment/README.md)
+  documents the projection and its evidence boundaries.
 
 Source-supported facility fields currently retain 1,631 assertions for 1,342
 purpose/use records and 533 fuel/feed-classification records. These source
