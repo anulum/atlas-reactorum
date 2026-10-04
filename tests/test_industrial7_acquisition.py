@@ -16,7 +16,16 @@ from pathlib import Path
 
 import pytest
 
-from ._industrial7_sources import ACQUISITION, CAPTURE, ROOT, run_cli, tls_source
+from ._industrial7_sources import (
+    ACQUISITION,
+    CAPTURE,
+    ROOT,
+    _prepared_custody,
+    copy_custody,
+    receipt_change,
+    run_cli,
+    tls_source,
+)
 from ._industrial7_sources import source_custody as source_custody
 
 
@@ -36,6 +45,13 @@ from ._industrial7_sources import source_custody as source_custody
     ],
 )
 def test_invalid_source_url_before_network(url: str) -> None:
+    """Reject malformed acquisition URLs before opening a transport connection.
+
+    Parameters
+    ----------
+    url : str
+        Anonymous-HTTPS boundary violation under test.
+    """
     with pytest.raises(ValueError, match="source URL"):
         ACQUISITION.download(url)
 
@@ -54,11 +70,27 @@ def test_invalid_source_url_before_network(url: str) -> None:
     ],
 )
 def test_positive_finite_source_limits(options: dict[str, object]) -> None:
+    """Reject invalid resource limits before fetching any publisher bytes.
+
+    Parameters
+    ----------
+    options : dict of str to object
+        Invalid socket timeout, elapsed deadline or maximum response size.
+    """
     with pytest.raises(ValueError, match="source limits"):
         ACQUISITION.download(CAPTURE.SFOE_URL, **options)
 
 
 def test_actual_source_bytes_root_and_query_targets(source_custody: Path, tmp_path: Path) -> None:
+    """Preserve complete archive bytes and require a trusted TLS certificate.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    """
     expected = (source_custody / "SFOE_ORIGINAL.csv.zip").read_bytes()
     with tls_source(tmp_path, source_custody) as (base, ca):
         assert ACQUISITION.download(base, ca_file=ca) == expected
@@ -74,12 +106,32 @@ def test_actual_source_bytes_root_and_query_targets(source_custody: Path, tmp_pa
 def test_real_http_status_refusal_without_following(
     source_custody: Path, tmp_path: Path, status: int
 ) -> None:
+    """Refuse redirect and error responses rather than treating them as source data.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    status : int
+        Actual HTTP status returned by the controlled TLS server.
+    """
     with tls_source(tmp_path, source_custody) as (base, ca):
         with pytest.raises(ValueError, match="HTTP 200"):
             ACQUISITION.download(base + f"/status/{status}", ca_file=ca)
 
 
 def test_actual_byte_limit_and_checked_deadline(source_custody: Path, tmp_path: Path) -> None:
+    """Stop genuine TLS reads that exceed byte or elapsed-time bounds.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    """
     with tls_source(tmp_path, source_custody) as (base, ca):
         with pytest.raises(ValueError, match="byte limit"):
             ACQUISITION.download(base + "/files/SFOE_ORIGINAL.csv.zip", ca_file=ca, max_bytes=100)
@@ -89,6 +141,17 @@ def test_actual_byte_limit_and_checked_deadline(source_custody: Path, tmp_path: 
 
 @pytest.mark.parametrize("kind", ["repository", "existing_directory", "existing_file", "symlink"])
 def test_new_external_custody_guards(source_custody: Path, tmp_path: Path, kind: str) -> None:
+    """Preserve existing owner paths and refuse capture targets inside the checkout.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    kind : str
+        Repository path, existing directory, existing file or symlink refusal.
+    """
     target = tmp_path / "output"
     if kind == "repository":
         target = ROOT / "tests/data/industrial_round7/refused-capture"
@@ -113,6 +176,15 @@ def test_new_external_custody_guards(source_custody: Path, tmp_path: Path, kind:
     ],
 )
 def test_mirror_boundaries_before_custody_creation(tmp_path: Path, base: str) -> None:
+    """Refuse an invalid explicit mirror without creating its capture destination.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    base : str
+        Mirror URL violating the HTTPS, query, credentials or fragment boundary.
+    """
     target = tmp_path / "output"
     with pytest.raises(ValueError):
         ACQUISITION.acquire(target, mirror_base=base)
@@ -122,6 +194,15 @@ def test_mirror_boundaries_before_custody_creation(tmp_path: Path, base: str) ->
 def test_complete_actual_tls_acquisition_and_source_parity(
     source_custody: Path, tmp_path: Path
 ) -> None:
+    """Bind complete mirrored source observations to real receipt hashes and URLs.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    """
     target = tmp_path / "capture"
     with tls_source(tmp_path, source_custody) as (base, ca):
         rows, receipts = ACQUISITION.acquire(target, mirror_base=base + "/files", ca_file=ca)
@@ -143,6 +224,15 @@ def test_complete_actual_tls_acquisition_and_source_parity(
 def test_complete_real_rows_across_publisher_page_boundary(
     source_custody: Path, tmp_path: Path
 ) -> None:
+    """Preserve every original feature when the publisher requires two pages.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    """
     layer = json.loads((source_custody / "ARPAE_LAYER.json").read_text())
     layer["maxRecordCount"] = 165
     page = json.loads((source_custody / "ARPAE_COMPLETE.json").read_text())
@@ -166,6 +256,17 @@ def test_complete_real_rows_across_publisher_page_boundary(
 def test_failed_acquisition_retains_real_partial_custody(
     source_custody: Path, tmp_path: Path, failure: str
 ) -> None:
+    """Retain acquired archive bytes and receipts when later source checks fail.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    failure : str
+        Invalid count, page limit, source document or unreviewed terms mutation.
+    """
     overrides: dict[str, bytes] = {}
     if failure == "count":
         value = json.loads((source_custody / "ARPAE_COUNT.json").read_text())
@@ -191,6 +292,17 @@ def test_failed_acquisition_retains_real_partial_custody(
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_real_native_acquisition_cli(source_custody: Path, tmp_path: Path, optimize: bool) -> None:
+    """Require the public acquisition CLI to succeed and refuse a repeated destination.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete real publisher captures with original acquisition receipts.
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    optimize : bool
+        Run the native interpreter normally or with optimization enabled.
+    """
     target = tmp_path / "native"
     with tls_source(tmp_path, source_custody) as (base, ca):
         success = run_cli(
@@ -210,9 +322,60 @@ def test_real_native_acquisition_cli(source_custody: Path, tmp_path: Path, optim
 
 
 def test_live_original_source_acquisition(tmp_path: Path) -> None:
-    """Require genuine live whole-source capture; retain failed originals for diagnosis."""
+    """Require complete current publisher acquisition with canonical origin receipts.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Owned external directory for TLS keys, capture files and negative copies.
+    """
     target = tmp_path / "direct"
     rows, receipts = ACQUISITION.acquire(target)
     assert len(rows) == 421 and len(receipts) == 8
     for receipt in receipts:
         assert receipt["url"] == receipt["origin_url"]
+
+
+@pytest.mark.parametrize("kind", ["valid", "changed_terms", "missing_receipt"])
+def test_retained_session_custody_preserves_original_validation(
+    source_custody: Path, tmp_path: Path, kind: str
+) -> None:
+    """Revisit genuine retained sources without replacing original failure evidence.
+
+    Parameters
+    ----------
+    source_custody : pathlib.Path
+        Complete original publisher bytes and acquisition receipts.
+    tmp_path : pathlib.Path
+        External directory for the isolated retained session capture.
+    kind : str
+        Positive retained input, altered terms or an incomplete receipt set.
+    """
+    directory = tmp_path / "atlas-industrial7-native-source" / "capture"
+    directory.parent.mkdir()
+    copy_custody(directory, source_custody)
+    if kind == "changed_terms":
+        path = directory / "SFOE_TERMS.html"
+        original = path.read_bytes()
+        changed = original.replace(
+            b"You <strong>may</strong> use this dataset for commercial purposes.",
+            b"You <strong>may not</strong> use this dataset for commercial purposes.",
+        )
+        assert changed != original
+        path.write_bytes(changed)
+        receipt_change(directory, path.name, "bytes", len(changed))
+        receipt_change(directory, path.name, "sha256", hashlib.sha256(changed).hexdigest())
+    elif kind == "missing_receipt":
+        (directory / "SFOE_METADATA.json.receipt.json").unlink()
+    before = {path.name: path.read_bytes() for path in directory.iterdir()}
+    for _ in range(2):
+        if kind == "valid":
+            assert _prepared_custody(tmp_path, None) == directory
+            assert len(CAPTURE.read_captures(directory)[0]) == 421
+        elif kind == "changed_terms":
+            with pytest.raises(ValueError, match="Swiss terms capture differs"):
+                _prepared_custody(tmp_path, None)
+        else:
+            with pytest.raises(ValueError, match="source capture must be a bounded regular file"):
+                _prepared_custody(tmp_path, None)
+        assert {path.name: path.read_bytes() for path in directory.iterdir()} == before

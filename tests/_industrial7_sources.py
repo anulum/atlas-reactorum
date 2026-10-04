@@ -36,7 +36,15 @@ SCRIPTS = ROOT / "05_global_reactor_map/imports/industrial_facilities/expansion_
 
 
 def copy_custody(target: Path, original: Path) -> None:
-    """Preserve every original required resource and receipt in a newly owned test copy."""
+    """Preserve complete originals and receipts in a newly owned test copy.
+
+    Parameters
+    ----------
+    target : pathlib.Path
+        Previously absent destination for the complete source and receipt set.
+    original : pathlib.Path
+        Verified complete original publisher custody.
+    """
     target.mkdir()
     for name in [*CAPTURE.BASE_URLS, "ARPAE_COMPLETE.json"]:
         for filename in (name, name + ".receipt.json"):
@@ -44,7 +52,17 @@ def copy_custody(target: Path, original: Path) -> None:
 
 
 def revise_json(directory: Path, name: str, value: object) -> None:
-    """Make an explicitly negative JSON mutation and update only its copy's byte binding."""
+    """Bind an explicit negative source mutation to its updated copy receipt.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Owned negative-test source copy; original custody remains unchanged.
+    name : str
+        Fixed JSON resource filename.
+    value : object
+        Explicit negative JSON content to serialize.
+    """
     path = directory / name
     path.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
     receipt_path = directory / (name + ".receipt.json")
@@ -55,7 +73,19 @@ def revise_json(directory: Path, name: str, value: object) -> None:
 
 
 def receipt_change(directory: Path, name: str, field: str, value: object) -> None:
-    """Change one authored negative receipt member without changing original custody."""
+    """Change one negative receipt member without modifying original custody.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Owned source copy for the refusal case.
+    name : str
+        Resource filename whose acquisition receipt is changed.
+    field : str
+        Receipt member deliberately made inconsistent.
+    value : object
+        Authored negative value for that member.
+    """
     path = directory / (name + ".receipt.json")
     record = json.loads(path.read_text())
     record[field] = value
@@ -65,7 +95,24 @@ def receipt_change(directory: Path, name: str, field: str, value: object) -> Non
 def run_cli(
     module: str, directory: Path, *args: str, optimize: bool = False
 ) -> subprocess.CompletedProcess[str]:
-    """Run the real public CLI from a separate directory with a finite native lifetime."""
+    """Exercise the public source CLI in a bounded separate native process.
+
+    Parameters
+    ----------
+    module : str
+        Fixed source-script basename.
+    directory : pathlib.Path
+        Capture or bundle path supplied to the CLI.
+    optimize : bool, optional
+        Enable interpreter optimization while retaining runtime source guards.
+    *args : str
+        Additional native CLI arguments, preserved in their original order.
+
+    Returns
+    -------
+    subprocess.CompletedProcess of str
+        Native exit status and captured stdout/stderr from the public CLI.
+    """
     return subprocess.run(
         [
             sys.executable,
@@ -87,7 +134,22 @@ def run_cli(
 def tls_source(
     directory: Path, original: Path, overrides: dict[str, bytes] | None = None
 ) -> Iterator[tuple[str, Path]]:
-    """Serve complete original sources and explicit negative mutations over trusted TLS."""
+    """Serve complete publisher originals through a real trusted TLS connection.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Owned directory for the one-day localhost certificate and private key.
+    original : pathlib.Path
+        Complete publisher source captures to serve without rewriting them.
+    overrides : dict of str to bytes or None, optional
+        Explicit negative bodies or real paginated features replacing named resources.
+
+    Yields
+    ------
+    tuple of str and pathlib.Path
+        HTTPS server URL and its trusted certificate path; shutdown is guaranteed.
+    """
     bodies = {name: (original / name).read_bytes() for name in CAPTURE.BASE_URLS}
     bodies["ARPAE_COMPLETE.json"] = (original / "ARPAE_COMPLETE.json").read_bytes()
     bodies["ARPAE_PAGE_0000.json"] = (original / "ARPAE_COMPLETE.json").read_bytes()
@@ -123,10 +185,18 @@ def tls_source(
         """Serve actual original bytes; special paths exercise real transport refusals."""
 
         def log_message(self, format: str, *args: object) -> None:
-            """Keep source and request contents out of diagnostics."""
+            """Suppress HTTP request diagnostics while retaining real transport behavior.
+
+            Parameters
+            ----------
+            format : str
+                HTTP-server diagnostic template, intentionally not emitted.
+            *args : object
+                HTTP-server formatting arguments, intentionally not emitted.
+            """
 
         def do_GET(self) -> None:
-            """Return complete originals or explicit status/slow-body responses."""
+            """Return exact source bodies or explicit status and slow-read refusal inputs."""
             path = urlsplit(self.path).path
             if path.startswith("/status/"):
                 self.send_response(int(path.rsplit("/", 1)[1]))
@@ -168,13 +238,42 @@ def tls_source(
 
 @cache
 def _prepared_custody(base: Path, supplied: str | None) -> Path:
-    """Keep both test modules on the same complete native session observation set."""
+    """Reuse retained originals without overwriting a failed source acquisition.
+
+    Parameters
+    ----------
+    base : pathlib.Path
+        External session directory containing the fixed capture location.
+    supplied : str or None
+        Explicit original custody; otherwise acquire only a previously absent target.
+
+    Returns
+    -------
+    pathlib.Path
+        Original custody after complete receipt, resource and rights validation.
+
+    Raises
+    ------
+    ValueError
+        Retained source captures fail their original validation contract.
+    OSError
+        Explicit custody or a required retained capture is unavailable.
+
+    Notes
+    -----
+    Successful preparation is cached. Exceptions retain their source files and
+    are not cached; later fixture requests revalidate those same bytes rather
+    than attempting to acquire into an existing target.
+    """
     if supplied:
         path = Path(supplied).resolve(strict=True)
         CAPTURE.read_captures(path)
     else:
         path = base / "atlas-industrial7-native-source" / "capture"
-        ACQUISITION.acquire(path)
+        if path.exists():
+            CAPTURE.read_captures(path)
+        else:
+            ACQUISITION.acquire(path)
     return path
 
 

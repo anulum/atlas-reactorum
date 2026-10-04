@@ -29,6 +29,15 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
   the research integration tests and native coverage checks for both field
   evidence renderers in the maintained validation commands.
 
+### Fixed — 2026-10-04
+
+- Accept the separately reviewed Swiss terms-page version whose only byte
+  change is the footer dataset count, retaining exact resource grants and
+  refusal of unreviewed hashes.
+- Revalidate preserved industrial source captures after failed session
+  preparation, keeping original source errors and bytes instead of attempting
+  acquisition into the same existing directory.
+
 ## [0.1.0] — 2026-10-03
 
 First public release of the source-linked atlas, static presentation and offline research library.

@@ -85,11 +85,22 @@ directory. Full terms-page HTML and source-model media are not public fixtures.
 Dataset reuse terms remain source-specific: Swiss
 `LicenseRef-opendata-swiss-terms-by` and Italian `CC-BY-4.0`.
 
+Swiss terms-page acceptance binds the complete HTML to explicitly reviewed
+SHA-256 versions. The version reviewed on 2026-10-04 changes only the unrelated
+footer dataset count from 16,528 to 16,529; every other byte matches the
+previously reviewed capture. This does not broaden the resource-specific grant.
+Any other page hash still requires a new source-specific review. Original HTML
+and dated retrieval receipts remain in private custody.
+
 Canonical tests use complete real publisher inputs and real TLS connections.
 They include actual direct publisher acquisition and consequently require
 upstream availability. `ATLAS_INDUSTRIAL7_CAPTURE_DIR` can select preserved
 complete custody for session preparation; it does not disable the direct
 publisher acquisition test.
+
+Session preparation validates any capture retained from an earlier failed
+request. It preserves those bytes and reports the original receipt or rights
+failure instead of trying to create the same capture directory again.
 
 ## Bundle versions and provenance migration
 
