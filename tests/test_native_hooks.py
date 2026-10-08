@@ -53,14 +53,16 @@ def test_registered_hook_checks_complete_new_root(
         str(source.relative_to(root)),
     ]
     modules = [".pre-commit-config.yaml", "Makefile", "tools/typecheck.sh"]
-    accepted = run_gate(root, command, modules, dict(os.environ), 150)
+    environment = dict(os.environ)
+    environment.setdefault("ATLAS_MYPY", str(Path(sys.executable).with_name("mypy")))
+    accepted = run_gate(root, command, modules, environment, 150)
     assert accepted.returncode == 0, accepted.stdout + accepted.stderr
     assert source.read_bytes() == original
     if hook == "native-shell":
         source.write_text(source.read_text().replace("    mypy_bin=", "   mypy_bin=", 1))
     else:
         source.write_bytes(original + b"\ndeliberate_type_failure: str = 7\n")
-    refused = run_gate(root, command, modules, dict(os.environ), 150)
+    refused = run_gate(root, command, modules, environment, 150)
     assert refused.returncode != 0, refused.stdout + refused.stderr
     assert str(source.relative_to(root)) in refused.stdout + refused.stderr
 

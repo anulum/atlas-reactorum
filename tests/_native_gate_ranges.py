@@ -150,7 +150,13 @@ def run_node_fault(
             descriptors = Path("/proc") / str(process.pid) / "fd"
             while time.monotonic() < deadline:
                 handles = list(descriptors.iterdir())
-                if any(handle.is_symlink() and handle.readlink() == metadata for handle in handles):
+                opened = False
+                for handle in handles:
+                    with suppress(FileNotFoundError):
+                        if handle.readlink() == metadata:
+                            opened = True
+                            break
+                if opened:
                     break
                 time.sleep(0.005)
             else:

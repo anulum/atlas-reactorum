@@ -169,7 +169,7 @@ spec=importlib.util.spec_from_file_location('coverage',package,submodule_search_
 module=importlib.util.module_from_spec(spec)
 sys.modules['coverage']=module
 spec.loader.exec_module(module)
-measurement=module.Coverage(data_file=os.environ.get('COVERAGE_FILE'),config_file=sys.argv[2],data_suffix=True)
+measurement=module.Coverage(config_file=sys.argv[2],data_suffix=True)
 measurement.start()
 sys.argv=[sys.argv[3],'profiles']
 try:
@@ -210,7 +210,7 @@ import coverage,os,runpy,sys
 from pathlib import Path
 target,config=sys.argv[1:]
 measurement=coverage.Coverage(source=[str(Path(target).parent)],
- config_file=config,data_file=os.environ.get('COVERAGE_FILE'),data_suffix=True)
+ config_file=config,data_suffix=True)
 measurement.start()
 sys.argv=[target,'profiles']
 try:
