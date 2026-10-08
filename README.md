@@ -10,6 +10,8 @@ ATLAS REACTORUM — public documentation
 
 # Atlas Reactorum
 
+![Atlas Reactorum logo](docs/assets/atlas-reactorum-logo.png)
+
 An English-first, source-aware atlas and research library of reactor
 technology: nuclear fission, plasma and alternative fusion, chemical and
 biochemical reactors, hybrid systems, and explicitly labelled speculative
@@ -217,7 +219,6 @@ source, scope and decision. Original nonempty cells remain unchanged.
 The [research notebook and CLI](examples/research/README.md) restore a downloaded
 comparison against explicit original-file and whole-profile hashes, retaining
 source locators, original claims and missing parameter reasons.
-
 
 ## Support the project
 
