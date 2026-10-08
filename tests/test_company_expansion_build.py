@@ -25,6 +25,7 @@ OUTPUT = SCRIPT.with_name("expansion_candidates.tsv")
 
 
 def test_actual_curated_expansion_is_byte_exact(tmp_path: Path) -> None:
+    """Reproduce and validate all 18 expansion rows normally and under -O, preserving inputs."""
     before = {
         path: path.read_bytes()
         for path in [AUDIT, OUTPUT, SCRIPT.with_name("expansion_validation.json")]
@@ -67,6 +68,7 @@ def test_actual_curated_expansion_is_byte_exact(tmp_path: Path) -> None:
     ],
 )
 def test_bad_required_audit_preserves_existing_expansion(tmp_path: Path, damage: str) -> None:
+    """Refuse malformed or colliding protected identities without replacing the expansion."""
     path = tmp_path / "audited.tsv"
     fields, rows = read_table(AUDIT)
     candidates = read_table(OUTPUT)[1]
@@ -123,6 +125,7 @@ def test_bad_required_audit_preserves_existing_expansion(tmp_path: Path, damage:
     ],
 )
 def test_public_identity_checks_use_full_reviewed_records(damage: str) -> None:
+    """Raise the expected public identity error for damaged complete reviewed candidates."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion_builder")
     rows = read_table(OUTPUT)[1]
     protected = module.read_protected(AUDIT)
@@ -160,6 +163,7 @@ def test_public_identity_checks_use_full_reviewed_records(damage: str) -> None:
 
 @pytest.mark.parametrize("symlink", [False, True])
 def test_expansion_cannot_replace_selected_audit(tmp_path: Path, symlink: bool) -> None:
+    """Reject direct or symlink output aliases of the audit and preserve its bytes."""
     path = tmp_path / "audit.tsv"
     shutil.copy2(AUDIT, path)
     output = tmp_path / "expansion.tsv" if symlink else path
@@ -172,6 +176,7 @@ def test_expansion_cannot_replace_selected_audit(tmp_path: Path, symlink: bool) 
 
 
 def test_missing_audit_creates_no_output(tmp_path: Path) -> None:
+    """Fail a missing protected audit before creating the output parent directory."""
     output = tmp_path / "new/expansion.tsv"
     result = run_cli(SCRIPT, "--audited", str(tmp_path / "missing"), "--output", str(output))
     assert result.returncode == 1 and "BUILD FAILED" in result.stdout
@@ -179,6 +184,7 @@ def test_missing_audit_creates_no_output(tmp_path: Path) -> None:
 
 
 def test_output_error_is_controlled(tmp_path: Path) -> None:
+    """Report a directory at the expansion-file destination without writing into it."""
     output = tmp_path / "expansion.tsv"
     output.mkdir()
     result = run_cli(SCRIPT, "--output", str(output))
@@ -187,6 +193,7 @@ def test_output_error_is_controlled(tmp_path: Path) -> None:
 
 
 def test_legal_empty_alias_tokens_preserve_protection_and_generation(tmp_path: Path) -> None:
+    """Ignore empty alias tokens while retaining protected identities and exact generation."""
     path = tmp_path / "audit.tsv"
     fields, rows = read_table(AUDIT)
     rows[0]["aliases"] += "; ;"
@@ -211,6 +218,7 @@ def test_legal_empty_alias_tokens_preserve_protection_and_generation(tmp_path: P
 def test_public_generation_preserves_imported_catalog_bytes_and_mtimes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Preserve catalogue bytes and mtimes on import and reproduce expansion through main."""
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in [AUDIT, OUTPUT]}
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion_builder")
     assert all(

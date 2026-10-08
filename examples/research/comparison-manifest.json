@@ -1,8 +1,8 @@
 {
   "schema_version": "atlas-research-example-1.0.0",
   "comparison_file": "pwr-bwr-comparison.json",
-  "profile_sha256": "6b9dc7c94cbf537518001ebf239ad0a03fee796199a21a5ada2c0610d85f9666",
-  "bundle_sha256": "127ab0fb6dc65609f5e9af2f8b498e9adee724ae629fdade8b908646069a0937",
+  "profile_sha256": "f7bf904d911e8da745d80d647cb544b5ef3c11bb69a91ce4cd6381edc908c8c2",
+  "bundle_sha256": "bbc5e1fc8a823311a7e6bfc3f716f83297f22ad88f096d43d9909d72c1b483e0",
   "entry_ids": [
     "pwr",
     "bwr"

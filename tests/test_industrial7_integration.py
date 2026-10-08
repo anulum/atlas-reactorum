@@ -92,6 +92,7 @@ def run_build(source: Path, optimized: bool) -> subprocess.CompletedProcess[str]
 def test_all_original_cells_and_full_node_assets_reach_the_map(
     complete_source: Path, optimized: bool
 ) -> None:
+    """Retain all 421 source records in the map and prove complete JavaScript/JSON parity in Node."""
     result = run_build(complete_source, optimized)
     assert result.returncode == 0, result.stderr
     data = complete_source / "04_interactive_presentation/data"
@@ -154,6 +155,7 @@ process.stdout.write('complete JavaScript/JSON parity');
 def test_absent_round_preserves_every_other_published_record(
     complete_source: Path, optimized: bool
 ) -> None:
+    """Omit round seven cleanly while retaining the exact remaining 13,038 published records."""
     for name in MEMBERS:
         (complete_source / LAYER / name).unlink()
     result = run_build(complete_source, optimized)
@@ -176,6 +178,7 @@ def test_absent_round_preserves_every_other_published_record(
 def test_any_incomplete_bundle_refuses_map_outputs(
     complete_source: Path, optimized: bool, missing: str
 ) -> None:
+    """Refuse each missing custody member normally and under -O before producing map datasets."""
     (complete_source / LAYER / missing).unlink()
     result = run_build(complete_source, optimized)
     assert result.returncode != 0
@@ -191,6 +194,7 @@ def test_any_incomplete_bundle_refuses_map_outputs(
 def test_changed_source_cells_or_resource_grant_refuse_map_outputs(
     complete_source: Path, optimized: bool, changed: str
 ) -> None:
+    """Refuse altered source cells or resource grants before publishing the map facility document."""
     path = complete_source / LAYER / changed
     if changed == MEMBERS[2]:
         manifest = json.loads(path.read_text())
@@ -215,6 +219,7 @@ def test_changed_source_cells_or_resource_grant_refuse_map_outputs(
 
 
 def test_dangling_completion_inventory_is_not_an_absent_round(complete_source: Path) -> None:
+    """Refuse a dangling completion-inventory symlink instead of treating the round as absent."""
     for name in MEMBERS:
         (complete_source / LAYER / name).unlink()
     (complete_source / LAYER / MEMBERS[-1]).symlink_to("missing-inventory.json")
@@ -228,6 +233,7 @@ def test_dangling_completion_inventory_is_not_an_absent_round(complete_source: P
 def test_complete_round_can_build_without_absent_earlier_industrial_layers(
     complete_source: Path,
 ) -> None:
+    """Retain all 421 round-seven observations when earlier industrial inputs are absent."""
     parent = complete_source / LAYER.parent
     (parent / "industrial_facilities.tsv").unlink()
     for number in range(2, 7):

@@ -39,11 +39,25 @@ MAIN = (*VIEWS, "Main", "presModelHolder", "genVizDataPresModel", "paneColumnsDa
 
 @pytest.fixture
 def reader() -> ModuleType:
+    """Load the production reader used for both complete captures and corruption probes.
+
+    Returns
+    -------
+    types.ModuleType
+        Public dashboard parser, file reader and DashboardRefused exception.
+    """
     return importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
 
 
 def captured_frames() -> list[dict[str, object]]:
-    """Decode the actual capture solely to introduce named corruption probes."""
+    """Decode the actual capture solely to introduce named corruption probes.
+
+    Returns
+    -------
+    list of dict
+        Fresh decoded frame objects in source order. Character counts are
+        checked against each original framing prefix before mutation.
+    """
     source = CAPTURE.read_text(encoding="utf-8")
     decoder = json.JSONDecoder()
     frames: list[dict[str, object]] = []
@@ -58,13 +72,47 @@ def captured_frames() -> list[dict[str, object]]:
 
 
 def framed(frames: list[dict[str, object]]) -> bytes:
-    """Reframe mutated copies using the publisher's Unicode character convention."""
+    """Reframe mutated copies using the publisher's Unicode character convention.
+
+    Parameters
+    ----------
+    frames : list of dict
+        Source-shaped frame copies, including deliberate invalid test values.
+
+    Returns
+    -------
+    bytes
+        UTF-8 JSON documents prefixed by their Unicode character lengths.
+        This helper does not validate the mutated dashboard's semantics.
+    """
     documents = [json.dumps(frame, ensure_ascii=False, separators=(",", ":")) for frame in frames]
     return "".join(f"{len(document)};{document}" for document in documents).encode("utf-8")
 
 
 def node(document: object, path: tuple[str | int, ...]) -> object:
-    """Select a member of the actual source shape before mutating that member."""
+    """Select a member of the actual source shape before mutating that member.
+
+    Parameters
+    ----------
+    document : object
+        Decoded frame containing the original nested dictionaries and lists.
+    path : tuple of str or int
+        Dictionary keys and list indices selecting the intended mutation site.
+
+    Returns
+    -------
+    object
+        Referenced member; mutations affect the supplied frame copy.
+
+    Raises
+    ------
+    AssertionError
+        A path component encounters a different container type.
+    KeyError
+        A named source member is absent.
+    IndexError
+        A source list index is out of range.
+    """
     for member in path:
         if isinstance(member, int):
             assert isinstance(document, list)
@@ -78,6 +126,7 @@ def node(document: object, path: tuple[str | int, ...]) -> object:
 def test_complete_real_capture_retains_raw_coordinates_and_display_aliases(
     reader: ModuleType,
 ) -> None:
+    """Decode the pinned full capture without replacing raw coordinates by display rounding."""
     dashboard = reader.read_dashboard(
         CAPTURE, "640bae831a78d72503f6de9c7107c7c3b511cf117f83d2fe39a778d6cf045d06"
     )
@@ -118,6 +167,7 @@ def test_complete_real_capture_retains_raw_coordinates_and_display_aliases(
     ],
 )
 def test_invalid_complete_framing_is_authored_refusal(reader: ModuleType, payload: bytes) -> None:
+    """Refuse malformed framing, duplicate keys, nonfinite JSON and incomplete frame sets."""
     with pytest.raises(reader.DashboardRefused):
         reader.parse_dashboard(payload)
 
@@ -152,6 +202,7 @@ def test_actual_view_structure_corruption_is_refused(
     key: str,
     value: object,
 ) -> None:
+    """Refuse corrupted real dictionary, pane, tuple and column bindings in the full capture."""
     frames = captured_frames()
     target = node(frames[1], path)
     assert isinstance(target, dict)
@@ -179,6 +230,7 @@ def test_actual_view_structure_corruption_is_refused(
 def test_actual_source_cell_corruption_is_refused(
     reader: ModuleType, kind: str, value: object
 ) -> None:
+    """Reject invalid source indices, coordinates, identities and disagreements between views."""
     frames = captured_frames()
     columns = cast(list[dict[str, object]], node(frames[1], (*DICTIONARY, "dataColumns")))
     dictionaries = {
@@ -219,6 +271,7 @@ def test_actual_source_cell_corruption_is_refused(
 
 
 def test_missing_capture_and_changed_digest_refuse(reader: ModuleType, tmp_path: Path) -> None:
+    """Refuse an unreadable capture and a source whose digest differs from its registered pin."""
     with pytest.raises(reader.DashboardRefused, match="cannot be read"):
         reader.read_dashboard(tmp_path / "missing.raw")
     with pytest.raises(reader.DashboardRefused, match="registered SHA-256"):
@@ -226,6 +279,7 @@ def test_missing_capture_and_changed_digest_refuse(reader: ModuleType, tmp_path:
 
 
 def test_complete_reframing_uses_characters_not_utf8_byte_lengths(reader: ModuleType) -> None:
+    """Preserve the complete table and map when Unicode character counts frame a UTF-8 payload."""
     frames = captured_frames()
     original = reader.read_dashboard(CAPTURE)
     reproduced = reader.parse_dashboard(framed(frames))
@@ -234,6 +288,7 @@ def test_complete_reframing_uses_characters_not_utf8_byte_lengths(reader: Module
 
 
 def test_incomplete_visible_field_set_is_refused(reader: ModuleType) -> None:
+    """Reject a capture with a consistently removed visible column instead of accepting a subset."""
     frames = captured_frames()
     metadata = cast(list[object], node(frames[1], (*TABLE, "vizDataColumns")))
     metadata.pop()
@@ -256,6 +311,7 @@ def test_incomplete_visible_field_set_is_refused(reader: ModuleType) -> None:
     ],
 )
 def test_selection_header_corruption_refuses(reader: ModuleType, field: str, value: object) -> None:
+    """Reject invalid projection versions, source identity, acquisition dates and extra metadata."""
     frames = captured_frames()
     header = cast(dict[str, object], frames[0]["atlas_projection"])
     header[field] = value
@@ -264,6 +320,7 @@ def test_selection_header_corruption_refuses(reader: ModuleType, field: str, val
 
 
 def test_selection_cannot_mix_authored_header_and_publisher_renderer(reader: ModuleType) -> None:
+    """Refuse a frame mixing authored projection metadata with an unrelated renderer member."""
     frames = captured_frames()
     frames[0]["renderer_metadata"] = {}
     with pytest.raises(reader.DashboardRefused, match="member set"):
@@ -273,6 +330,7 @@ def test_selection_cannot_mix_authored_header_and_publisher_renderer(reader: Mod
 def test_registered_artifact_and_original_response_digests_remain_separate(
     reader: ModuleType,
 ) -> None:
+    """Keep the selected artifact's digest, original response pin and acquisition date distinct."""
     dashboard = reader.read_dashboard(CAPTURE)
     assert dashboard.source_sha256 == hashlib.sha256(CAPTURE.read_bytes()).hexdigest()
     assert (

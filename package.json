@@ -1,0 +1,39 @@
+{
+  "name": "atlas-reactorum",
+  "version": "0.1.0",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": "24.21.0",
+    "npm": "11.19.0"
+  },
+  "packageManager": "npm@11.19.0",
+  "scripts": {
+    "lint:html": "node tools/web.cjs html",
+    "lint:css": "node tools/web.cjs css",
+    "format:web": "node tools/web.cjs format",
+    "check:notebooks": "node tools/notebooks.cjs static",
+    "test:notebooks": "node tools/notebooks.cjs execute",
+    "lint:js": "node tools/javascript.cjs lint",
+    "typecheck:js": "node tools/javascript.cjs types",
+    "format:js": "node tools/javascript.cjs format",
+    "audit:js": "npm audit --include=dev",
+    "test:map": "node --test 04_interactive_presentation/map/tests/*.test.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/css-tree": "3.2.0",
+    "@types/jsdom": "30.0.0",
+    "@types/node": "24.19.1",
+    "@typescript-eslint/parser": "8.71.1",
+    "canvas": "3.2.3",
+    "css-tree": "3.2.1",
+    "eslint": "10.12.0",
+    "eslint-plugin-jsdoc": "65.1.0",
+    "globals": "17.13.0",
+    "html-validate": "11.16.2",
+    "jsdom": "30.1.2",
+    "prettier": "3.9.9",
+    "typescript": "6.0.3"
+  }
+}

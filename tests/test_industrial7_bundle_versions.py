@@ -26,13 +26,39 @@ VALIDATION = importlib.import_module(PREFIX + ".validate")
 
 
 def bundle_bytes(directory: Path) -> dict[str, bytes]:
-    """Read every artifact without rewriting a frozen source or its inventory."""
+    """Read the complete bytes of every file in the owned bundle directory.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Bundle or capture directory whose immediate members are regular files.
+
+    Returns
+    -------
+    dict of str to bytes
+        Filename-to-content map used to verify source and product preservation.
+    """
     return {path.name: path.read_bytes() for path in directory.iterdir()}
 
 
 @pytest.fixture(params=[1, 2])
 def versioned_bundle(tmp_path: Path, source_custody: Path, request: pytest.FixtureRequest) -> Path:
-    """Create both exact report contracts from the same complete original custody."""
+    """Build and validate either provenance version from complete frozen source custody.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Parent for this test's bundle output directory.
+    source_custody : pathlib.Path
+        Complete captured source directory supplied by the source-custody fixture.
+    request : pytest.FixtureRequest
+        Version selector: 1 renders legacy artifacts; 2 retains the current contract.
+
+    Returns
+    -------
+    pathlib.Path
+        Validated 421-observation bundle in the selected provenance version.
+    """
     output = tmp_path / "bundle"
     assert BUNDLE.create_bundle(source_custody, output) == 421
     if request.param == 1:
@@ -49,6 +75,7 @@ def versioned_bundle(tmp_path: Path, source_custody: Path, request: pytest.Fixtu
 def test_native_frozen_reproduction_retains_version_and_all_original_bytes(
     tmp_path: Path, versioned_bundle: Path, optimised: bool
 ) -> None:
+    """Reproduce a frozen bundle byte for byte normally and under -O without altering its version."""
     before = bundle_bytes(versioned_bundle)
     output = tmp_path / "reproduced"
     result = run_cli(
@@ -70,6 +97,7 @@ def test_native_frozen_reproduction_retains_version_and_all_original_bytes(
 def test_explicit_native_upgrade_changes_only_report_and_inventory(
     tmp_path: Path, versioned_bundle: Path, source_custody: Path, optimised: bool
 ) -> None:
+    """Upgrade only legacy rights-report framing and inventory while retaining source licences."""
     before = bundle_bytes(versioned_bundle)
     version = json.loads(before[ARTIFACTS.BUNDLE_MANIFEST])["schema_version"]
     output = tmp_path / "upgraded"
@@ -111,6 +139,7 @@ def test_explicit_native_upgrade_changes_only_report_and_inventory(
 def test_unsupported_inventory_version_is_refused_before_output(
     tmp_path: Path, versioned_bundle: Path, value: object
 ) -> None:
+    """Reject unsupported or mistyped inventory versions under -O without creating outputs."""
     path = versioned_bundle / ARTIFACTS.BUNDLE_MANIFEST
     inventory = json.loads(path.read_text())
     inventory["schema_version"] = value
@@ -137,6 +166,7 @@ def test_unsupported_inventory_version_is_refused_before_output(
 def test_cross_version_or_self_rebound_report_never_validates(
     tmp_path: Path, versioned_bundle: Path, mutation: str, optimised: bool
 ) -> None:
+    """Refuse mismatched versions or altered rights reports even after local checksum rebinding."""
     inventory_path = versioned_bundle / ARTIFACTS.BUNDLE_MANIFEST
     inventory = json.loads(inventory_path.read_text())
     rights = versioned_bundle / "RIGHTS.md"
@@ -166,6 +196,7 @@ def test_cross_version_or_self_rebound_report_never_validates(
 def test_public_renderer_refuses_unsupported_bundle_contract(
     versioned_bundle: Path, value: object
 ) -> None:
+    """Raise the version error when the public renderer receives an unsupported contract selector."""
     snapshot, manifest, observations = ARTIFACTS.read_bundle(versioned_bundle)
     with pytest.raises(ValueError, match="version"):
         ARTIFACTS.expected_artifacts(snapshot, manifest, observations, schema_version=value)
@@ -175,6 +206,7 @@ def test_public_renderer_refuses_unsupported_bundle_contract(
 def test_upgrade_requires_frozen_input_and_preserves_capture_custody(
     tmp_path: Path, source_custody: Path, optimised: bool
 ) -> None:
+    """Refuse upgrade from live capture input through API and CLI while preserving its complete bytes."""
     before = bundle_bytes(source_custody)
     output = tmp_path / "must-not-exist"
     with pytest.raises(ValueError, match="frozen"):

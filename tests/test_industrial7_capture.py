@@ -23,6 +23,7 @@ from ._industrial7_sources import source_custody as source_custody
 def test_complete_original_source_and_unchanged_custody(
     source_custody: Path,
 ) -> None:
+    """Read all 421 observations and eight receipts in stable order without changing custody bytes."""
     paths = [path for path in source_custody.iterdir() if path.is_file()]
     before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in paths}
     rows, receipts = CAPTURE.read_captures(source_custody)
@@ -55,6 +56,7 @@ def test_complete_original_source_and_unchanged_custody(
 def test_original_receipt_binding(
     source_custody: Path, tmp_path: Path, field: str, value: object
 ) -> None:
+    """Reject changed resource, bytes, digest, TLS status, retrieval time or URL receipt bindings."""
     copy_custody(tmp_path / "copy", source_custody)
     directory = tmp_path / "copy"
     receipt_change(directory, "SFOE_ORIGINAL.csv.zip", field, value)
@@ -64,6 +66,7 @@ def test_original_receipt_binding(
 
 @pytest.mark.parametrize("kind", ["missing", "symlink", "oversized", "unsafe_name"])
 def test_original_body_file_bounds(source_custody: Path, tmp_path: Path, kind: str) -> None:
+    """Reject missing, aliased, oversized or escaping capture-body paths."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     name = "SFOE_ORIGINAL.csv.zip"
@@ -95,6 +98,7 @@ def test_original_body_file_bounds(source_custody: Path, tmp_path: Path, kind: s
 def test_native_source_page_plan_limits(
     source_custody: Path, tmp_path: Path, name: str, field: str, value: object
 ) -> None:
+    """Reject boolean, zero or oversized source counts and page-size declarations."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     data = json.loads((directory / name).read_text())
@@ -122,6 +126,7 @@ def test_native_source_page_plan_limits(
     ],
 )
 def test_full_native_exact_resource_rights(source_custody: Path, tmp_path: Path, kind: str) -> None:
+    """Reject absent or ambiguous resource rights and changed accepted terms bytes."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     if kind == "terms_changed":
@@ -160,6 +165,7 @@ def test_full_native_exact_resource_rights(source_custody: Path, tmp_path: Path,
 
 @pytest.mark.parametrize("kind", ["empty", "ambiguous", "page_filename"])
 def test_complete_page_membership(source_custody: Path, tmp_path: Path, kind: str) -> None:
+    """Reject absent or ambiguous complete-page membership and an unaccepted page filename."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     if kind != "ambiguous":
@@ -171,6 +177,7 @@ def test_complete_page_membership(source_custody: Path, tmp_path: Path, kind: st
 
 
 def test_receipt_mirror_origin_and_actual_utc_date(source_custody: Path, tmp_path: Path) -> None:
+    """Accept an origin-bound mirror and derive the retrieval date from its actual UTC instant."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     name = "SFOE_ORIGINAL.csv.zip"
@@ -190,6 +197,7 @@ def test_receipt_mirror_origin_and_actual_utc_date(source_custody: Path, tmp_pat
 def test_mirror_declaration_is_bound_to_the_actual_resource(
     source_custody: Path, tmp_path: Path, mirror: object
 ) -> None:
+    """Reject invalid mirror declarations and mismatches with the captured resource URL."""
     directory = tmp_path / "copy"
     copy_custody(directory, source_custody)
     name = "SFOE_ORIGINAL.csv.zip"
@@ -204,6 +212,7 @@ def test_mirror_declaration_is_bound_to_the_actual_resource(
 def test_native_public_cli_and_optimized_refusals(
     source_custody: Path, tmp_path: Path, optimize: bool
 ) -> None:
+    """Accept full captures and reject unrelated receipt URLs through both native CLI modes."""
     success = run_cli("capture", source_custody, optimize=optimize)
     assert success.returncode == 0, success.stdout + success.stderr
     assert json.loads(success.stdout)["observations"] == 421

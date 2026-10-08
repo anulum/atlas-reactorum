@@ -41,6 +41,7 @@ SCRIPT = ROUND / "review.py"
 def test_actual_full_matrix_refuses_identity_and_ranking_damage(
     tmp_path: Path, damage: str
 ) -> None:
+    """Refuse damaged matrix identity, ranking or eligibility without changing its input bytes."""
     path = tmp_path / "matrix.tsv"
     fields, rows = read_table(ROUND.parent / "depth_round4/gap_matrix.tsv")
     if damage == "duplicate_name":
@@ -86,6 +87,7 @@ def test_actual_full_matrix_refuses_identity_and_ranking_damage(
     ],
 )
 def test_complete_actual_history_refuses_drift(tmp_path: Path, layer: str, damage: str) -> None:
+    """Reject drift in complete prior overlays, including cross-layer overlap and identity mismatch."""
     history = tmp_path / "history"
     layers = ["depth_round4", "depth_round5", "depth_round6", "depth_round7"]
     for name in layers:
@@ -130,6 +132,7 @@ def test_complete_actual_history_refuses_drift(tmp_path: Path, layer: str, damag
 
 @pytest.mark.parametrize("column", read_table(INPUTS / "reviewed_profiles.tsv")[0])
 def test_blank_actual_profile_fields_are_refused(tmp_path: Path, column: str) -> None:
+    """Reject each blank cell in a copied reviewed profile through the real review CLI."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / "reviewed_profiles.tsv"
@@ -163,6 +166,7 @@ def test_blank_actual_profile_fields_are_refused(tmp_path: Path, column: str) ->
 def test_actual_provenance_refuses_changed_association(
     tmp_path: Path, table: str, column: str, value: str
 ) -> None:
+    """Reject altered profile, source or field associations without an uncaught traceback."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / table
@@ -176,6 +180,7 @@ def test_actual_provenance_refuses_changed_association(
 
 @pytest.mark.parametrize("column", read_table(INPUTS / "reviewed_sources.tsv")[0])
 def test_blank_actual_source_provenance_is_refused(tmp_path: Path, column: str) -> None:
+    """Require the real review CLI to reject every blank provenance column."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / "reviewed_sources.tsv"
@@ -206,6 +211,7 @@ def test_blank_actual_source_provenance_is_refused(tmp_path: Path, column: str) 
 def test_bad_source_or_profile_urls_are_refused(
     tmp_path: Path, table: str, column: str, url: str
 ) -> None:
+    """Reject insecure, hostless, credential-bearing or malformed source and profile URLs."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / table
@@ -220,6 +226,7 @@ def test_bad_source_or_profile_urls_are_refused(
 
 
 def test_extra_unassociated_actual_source_cannot_be_admitted(tmp_path: Path) -> None:
+    """Refuse an additional registry source without a reviewed organization association."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / "reviewed_sources.tsv"
@@ -233,6 +240,7 @@ def test_extra_unassociated_actual_source_cannot_be_admitted(tmp_path: Path) -> 
 
 
 def test_actual_profile_selection_order_is_required(tmp_path: Path) -> None:
+    """Refuse reordered reviewed profiles under -O with the deterministic-rule diagnostic."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / "reviewed_profiles.tsv"

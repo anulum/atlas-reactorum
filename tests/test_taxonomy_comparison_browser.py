@@ -256,6 +256,7 @@ def bundle(browser: Browser) -> dict[str, object]:
 
 
 def test_actual_three_entry_share_reload_and_all_claims_preserve_snapshot(browser: Browser) -> None:
+    """Restore a three-entry shared comparison with exact snapshot, source claims and export equality."""
     select(browser, "tokamak", "pwr", "bwr")
     settle(browser)
     before = bundle(browser)
@@ -288,6 +289,7 @@ def test_actual_three_entry_share_reload_and_all_claims_preserve_snapshot(browse
 
 
 def test_native_browser_history_restores_each_selection_and_default(browser: Browser) -> None:
+    """Restore each previous comparison and the default selection through native browser history."""
     default = bundle(browser)
     select(browser, "pwr", "bwr")
     settle(browser)
@@ -323,6 +325,7 @@ def test_native_browser_history_restores_each_selection_and_default(browser: Bro
 def test_shared_link_refuses_bad_snapshot_or_identity_and_can_recover(
     browser: Browser, state: str
 ) -> None:
+    """Refuse invalid shared state without stale links and recover through valid UI selection."""
     shared = browser.evaluate("document.querySelector('#compareShare').href")
     assert isinstance(shared, str)
     if state == "stale":
@@ -357,6 +360,7 @@ def test_shared_link_refuses_bad_snapshot_or_identity_and_can_recover(
 
 
 def test_hash_navigation_and_duplicate_choices_never_export_stale_result(browser: Browser) -> None:
+    """Refuse duplicate or unsupported state and restore the default after taxonomy navigation."""
     select(browser, "pwr", "pwr")
     settle(browser, "This comparison could not be restored.")
     assert (
@@ -373,6 +377,7 @@ def test_hash_navigation_and_duplicate_choices_never_export_stale_result(browser
 
 
 def test_rapid_valid_and_invalid_selections_keep_only_final_render(browser: Browser) -> None:
+    """Render and export only the final valid comparison after rapid asynchronous state changes."""
     browser.evaluate("""(() => {
       const change = () => compareB.dispatchEvent(new Event('change'));
       compareA.value = 'pwr'; compareB.value = 'bwr'; change();
@@ -387,6 +392,7 @@ def test_rapid_valid_and_invalid_selections_keep_only_final_render(browser: Brow
 
 
 def test_unavailable_actual_profile_document_has_visible_initial_refusal(browser: Browser) -> None:
+    """Show initial refusal and remove the download link when the profile document is unavailable."""
     browser.evaluate("window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = null")
     browser.evaluate("AtlasTaxonomyComparisonController.start(reactors)")
     settle(browser, "This comparison could not be restored.")
@@ -395,9 +401,43 @@ def test_unavailable_actual_profile_document_has_visible_initial_refusal(browser
     )
 
 
+@pytest.mark.parametrize("wrong_tag", [False, True])
+def test_actual_comparison_controller_refuses_damaged_template_controls(
+    browser: Browser, wrong_tag: bool
+) -> None:
+    """Refuse actual missing or incorrectly tagged controls before binding navigation."""
+    original = bundle(browser)
+    result = browser.evaluate(
+        "(async wrongTag => {const original=document.getElementById('compareA');"
+        "const replacement=document.createElement('p');"
+        "if(wrongTag) replacement.id='compareA'; original.replaceWith(replacement);"
+        "try {await AtlasTaxonomyComparisonController.start(reactors); return 'unexpected success';}"
+        "catch(error) {return error.message;}"
+        "finally {replacement.replaceWith(original);}})(" + json.dumps(wrong_tag) + ")"
+    )
+    assert result == "Required Atlas control is unavailable: compareA"
+    assert bundle(browser) == original
+
+
+@pytest.mark.parametrize("domain", ["fission", "fusion"])
+def test_actual_comparison_defaults_require_original_domain_rows(
+    browser: Browser, domain: str
+) -> None:
+    """Refuse a real source-row selection missing a required comparison domain."""
+    before = browser.evaluate("JSON.stringify(window.REACTOR_TAXONOMY_EVIDENCE_PROFILES)")
+    result = browser.evaluate(
+        "(async domain => {try {await AtlasTaxonomyComparisonController.start("
+        "reactors.filter(row => row.domain!==domain)); return 'unexpected success';}"
+        "catch(error) {return error.message;}})(" + json.dumps(domain) + ")"
+    )
+    assert result == "Original comparison domain is unavailable: " + domain
+    assert browser.evaluate("JSON.stringify(window.REACTOR_TAXONOMY_EVIDENCE_PROFILES)") == before
+
+
 def test_mobile_keyboard_source_disclosure_and_real_comparison_download(
     browser: Browser, tmp_path: Path
 ) -> None:
+    """Open sources by native mobile keyboard and download the exact current comparison bundle."""
     browser.command(
         "Emulation.setDeviceMetricsOverride",
         {"width": 375, "height": 812, "deviceScaleFactor": 1, "mobile": True},

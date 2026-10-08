@@ -30,6 +30,7 @@ SCRIPT = ROUND / "review.py"
     "damage", ["header", "no_header", "empty", "short", "extra", "quote", "utf8", "missing"]
 )
 def test_actual_complete_input_tables_fail_closed(tmp_path: Path, name: str, damage: str) -> None:
+    """Refuse corrupt copied TSV contracts under -O without modifying any surviving input."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     path = source / name
@@ -63,6 +64,7 @@ def test_actual_complete_input_tables_fail_closed(tmp_path: Path, name: str, dam
 
 
 def test_all_actual_tsv_contracts_are_exercised_without_writing(tmp_path: Path) -> None:
+    """Review all actual input tables with exact counts while preserving their source bytes."""
     before = {p: p.read_bytes() for p in INPUTS.glob("*.tsv")}
     result = run_cli(SCRIPT, cwd=tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr

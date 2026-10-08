@@ -27,7 +27,18 @@ FIXTURES = ROOT / "tests/data/industrial_round7"
 
 
 def native_paths(directory: Path) -> tuple[Path, Path, Path, list[Path]]:
-    """Locate the complete original layer, count, IDs and feature page."""
+    """Locate the complete original Italian layer and independent enumeration files.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Directory carrying the frozen ARPAE JSON fixture files.
+
+    Returns
+    -------
+    tuple
+        Layer, count and ID paths followed by the ordered one-page feature list.
+    """
     return (
         directory / "ARPAE_LAYER.json",
         directory / "ARPAE_COUNT.json",
@@ -37,11 +48,20 @@ def native_paths(directory: Path) -> tuple[Path, Path, Path, list[Path]]:
 
 
 def write_json(path: Path, value: object) -> None:
-    """Persist an explicitly mutated native JSON object for public-reader tests."""
+    """Write a deliberately altered native JSON value into an owned test file.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Owned destination with an existing parent directory.
+    value : object
+        JSON-serializable source value, written in UTF-8 with non-ASCII text retained.
+    """
     path.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
 
 
 def test_every_selected_native_cell_is_preserved() -> None:
+    """Retain all 268 selected observations, source cells, warnings, zeros and fixture hashes."""
     rows = ITALIAN.read_italian(*native_paths(FIXTURES), retrieved="2026-09-30")
     original = json.loads((FIXTURES / "ARPAE_COMPLETE.json").read_text())["features"]
     selected = [
@@ -103,6 +123,7 @@ def test_every_selected_native_cell_is_preserved() -> None:
     ],
 )
 def test_layer_contract_and_actual_unit_labels(tmp_path: Path, failure: str) -> None:
+    """Reject altered layer identity, field types or source unit labels through the public API."""
     layer = json.loads((FIXTURES / "ARPAE_LAYER.json").read_text())
     if failure == "identity":
         layer["name"] = "unrelated"
@@ -145,6 +166,7 @@ def test_layer_contract_and_actual_unit_labels(tmp_path: Path, failure: str) -> 
     ],
 )
 def test_independent_source_counts_and_ids(tmp_path: Path, kind: str, value: object) -> None:
+    """Reject invalid count or identifier types and duplicate IDs against the complete source layer."""
     layer, count, ids, pages = native_paths(FIXTURES)
     target = tmp_path / "mutated.json"
     write_json(target, {"count" if kind == "count" else "objectIds": value})
@@ -183,6 +205,7 @@ def test_independent_source_counts_and_ids(tmp_path: Path, kind: str, value: obj
     ],
 )
 def test_whole_native_feature_contract_before_selection(tmp_path: Path, failure: str) -> None:
+    """Reject malformed full feature data, ordering or selection before admitting observations."""
     layer, count, ids, _ = native_paths(FIXTURES)
     page = json.loads((FIXTURES / "ARPAE_COMPLETE.json").read_text())
     row = page["features"][0]["attributes"]
@@ -237,6 +260,7 @@ def test_whole_native_feature_contract_before_selection(tmp_path: Path, failure:
 
 
 def test_complete_ordered_pagination_and_empty_page_list(tmp_path: Path) -> None:
+    """Reject absent pages and reproduce identical observations from complete ordered pagination."""
     layer, count, ids, pages = native_paths(FIXTURES)
     with pytest.raises(ValueError, match="no feature pages"):
         ITALIAN.read_italian(layer, count, ids, [], retrieved="2026-09-30")
@@ -255,6 +279,7 @@ def test_complete_ordered_pagination_and_empty_page_list(tmp_path: Path) -> None
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_native_cli_success_and_safe_failure(tmp_path: Path, optimize: bool) -> None:
+    """Retain 23 publisher position warnings and handle missing input normally and under -O."""
     layer, count, ids, pages = native_paths(FIXTURES)
     args = [
         "--layer",

@@ -32,6 +32,18 @@ INPUTS = [
 
 @pytest.fixture
 def audit_copy(tmp_path: Path) -> Path:
+    """Copy the four canonical company inputs into an owned audit tree.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Parent for the test's audit root and later generated outputs.
+
+    Returns
+    -------
+    pathlib.Path
+        Copied audit root with base and expansion-round inputs in their relative paths.
+    """
     root = tmp_path / "audit"
     for name in INPUTS:
         target = root / name
@@ -41,6 +53,7 @@ def audit_copy(tmp_path: Path) -> Path:
 
 
 def test_real_matrix_corrects_only_inactive_company_priority(tmp_path: Path) -> None:
+    """Reproduce 98 rows and summaries while correcting only the inactive-company priority."""
     before = {(AUDIT / name): (AUDIT / name).read_bytes() for name in INPUTS}
     for optimized in (False, True):
         output = tmp_path / f"output-{optimized}"
@@ -92,6 +105,7 @@ def test_real_matrix_corrects_only_inactive_company_priority(tmp_path: Path) -> 
 def test_active_developer_bonus_does_not_match_inactive(
     audit_copy: Path, tmp_path: Path, status: str, bonus: int
 ) -> None:
+    """Apply the activity bonus only to active statuses atop the actual weighted gap sum."""
     path = audit_copy / INPUTS[1]
     fields, rows = read_table(path)
     target = next(r for r in rows if r["organization"] == "Fusion Power Corporation")
@@ -145,6 +159,7 @@ def test_active_developer_bonus_does_not_match_inactive(
 def test_evidence_tier_qualifiers_are_preserved_in_source_and_grouped(
     audit_copy: Path, tmp_path: Path, tier: str, band: str
 ) -> None:
+    """Group evidence tiers into supported bands without changing the qualified source value."""
     path = audit_copy / INPUTS[0]
     fields, rows = read_table(path)
     rows[0]["evidence_tier"] = tier
@@ -166,6 +181,7 @@ def test_evidence_tier_qualifiers_are_preserved_in_source_and_grouped(
 def test_source_input_failures_do_not_replace_existing_outputs(
     audit_copy: Path, tmp_path: Path, name: str, damage: str
 ) -> None:
+    """Refuse corrupted source tables under -O before replacing the sentinel matrix."""
     path = audit_copy / name
     fields, rows = read_table(path)
     if damage == "schema":
@@ -197,6 +213,7 @@ def test_source_input_failures_do_not_replace_existing_outputs(
 
 
 def test_output_write_failure_is_controlled(tmp_path: Path) -> None:
+    """Report output-directory failure without replacing the existing regular file."""
     output = tmp_path / "output"
     output.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(output))
@@ -208,6 +225,7 @@ def test_output_write_failure_is_controlled(tmp_path: Path) -> None:
 def test_unspecified_aneutronic_isotope_is_retained_as_a_claim(
     audit_copy: Path, tmp_path: Path
 ) -> None:
+    """Preserve claimed aneutronic fuel uncertainty and the original unsupported-claim caveat."""
     path = audit_copy / INPUTS[1]
     fields, rows = read_table(path)
     target = next(r for r in rows if r["organization"] == "Fusion Power Corporation")
@@ -228,6 +246,7 @@ def test_unspecified_aneutronic_isotope_is_retained_as_a_claim(
 def test_public_matrix_and_main_use_real_audit_inputs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Derive the actual 98-row matrix through the public API and reproduce it through main."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth4_builder")
     rows = module.build_matrix(AUDIT)
     assert len(rows) == 98

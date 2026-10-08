@@ -356,6 +356,33 @@ def test_invalid_submitted_choice_and_missing_initial_document_refuse(browser: B
     assert browser.evaluate("learningDownload.hasAttribute('href')") is False
 
 
+@pytest.mark.parametrize("damage", ["missing", "wrong-tag", "wrong-namespace"])
+def test_actual_learning_controller_refuses_damaged_template_control(
+    browser: Browser, damage: str
+) -> None:
+    """Refuse missing, mistagged or foreign-namespace controls in the actual page."""
+    original = bundle(browser)
+    result = browser.evaluate(
+        "(async damage => {const original=document.getElementById('learningPath');"
+        "const replacement=damage==='wrong-namespace' ? "
+        "document.createElementNS('http://www.w3.org/2000/svg','select') : document.createElement('p');"
+        "if(damage!=='missing') replacement.id='learningPath'; original.replaceWith(replacement);"
+        "try {await AtlasLearningPathController.start(reactors); return 'unexpected success';}"
+        "catch(error) {return error.message;}"
+        "finally {replacement.replaceWith(original);}})(" + json.dumps(damage) + ")"
+    )
+    assert result == "Required Atlas control is unavailable: learningPath"
+    assert bundle(browser) == original
+
+
+def test_actual_missing_form_answer_cannot_produce_source_feedback(browser: Browser) -> None:
+    """Refuse a real submitted form with no selected answer and disable stale exports."""
+    browser.evaluate("learningCheck.dispatchEvent(new Event('submit', {cancelable:true}))")
+    settle(browser, "This learning path could not be restored.")
+    assert browser.evaluate("learningView.children.length") == 0
+    assert browser.evaluate("learningDownload.hasAttribute('href')") is False
+
+
 def test_mobile_keyboard_check_source_disclosure_reduced_motion_and_real_download(
     browser: Browser, tmp_path: Path, evidence_directory: Path
 ) -> None:

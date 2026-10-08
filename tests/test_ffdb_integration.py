@@ -34,13 +34,32 @@ BUILDER = ROOT / "04_interactive_presentation/scripts/build_datasets.py"
 
 @pytest.fixture(scope="module")
 def integration() -> ModuleType:
-    """Load the actual source consumer with its normal namespace imports."""
+    """Load the actual source consumer with its normal namespace imports.
+
+    Returns
+    -------
+    types.ModuleType
+        Production source-binding and facility-construction implementation.
+    """
     return importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.integration")
 
 
 @pytest.fixture
 def registered_source(tmp_path: Path, integration: ModuleType) -> Path:
-    """Copy every complete production input needed by the FFDB consumer."""
+    """Copy every complete production input needed by the FFDB consumer.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Test-owned parent for the source copy and subsequent corruption probes.
+    integration : types.ModuleType
+        Real consumer declaring the required registered input paths.
+
+    Returns
+    -------
+    pathlib.Path
+        Source root with every required file preserved under its original name.
+    """
     source = tmp_path / "source"
     for member in integration.INPUTS:
         path = source / member
@@ -53,6 +72,11 @@ def test_public_consumer_retains_all_identities_raw_coordinates_and_absences(
     integration: ModuleType,
     build_datasets: ModuleType,
 ) -> None:
+    """Integrate all 174 source identities without historical enrichment or invented dates.
+
+    The 137 coordinate pairs retain their raw precision, absent pairs remain
+    absent, and normalised statuses preserve the original status separately.
+    """
     rows: list[dict[str, object]] = integration.build_facilities(
         ROOT, build_datasets.normalize_status
     )
@@ -90,6 +114,7 @@ def test_public_consumer_refuses_unreadable_or_changed_source_products(
     build_datasets: ModuleType,
     failure: str,
 ) -> None:
+    """Refuse missing, malformed or changed registered products through the real consumer."""
     table = registered_source / LAYER / "fusion_facilities.tsv"
     provenance = registered_source / LAYER / "field_provenance.json"
     if failure == "missing":
@@ -116,6 +141,11 @@ def test_default_map_cli_and_node_exports_use_only_the_new_fusion_catalogue(
     tmp_path: Path,
     optimize: bool,
 ) -> None:
+    """Build the full default map and consume both complete JSON and JavaScript exports in Node.
+
+    The pinned FFDB cohort must replace the historical fusion route, retain
+    its own input hashes and leave historical enrichment counts at zero.
+    """
     source = tmp_path / "source"
     copy_source(ROOT, source)
     data = source / "04_interactive_presentation/data"
@@ -192,6 +222,7 @@ def test_map_cli_cannot_fall_back_to_historical_rows_when_ffdb_is_incomplete(
     optimize: bool,
     member: str,
 ) -> None:
+    """Reject each missing FFDB input before output even when historical source rows are present."""
     path = registered_source / LAYER / member
     path.rename(path.with_suffix(path.suffix + ".unavailable"))
     historical = registered_source / "05_global_reactor_map/imports/fusion/fusion_facilities.tsv"
@@ -208,6 +239,7 @@ def test_map_cli_cannot_fall_back_to_historical_rows_when_ffdb_is_incomplete(
 def test_explicit_historical_route_preserves_its_original_records_and_input_scope(
     tmp_path: Path,
 ) -> None:
+    """Select historical rows explicitly and preserve their input pin without adding FFDB rows."""
     source = tmp_path / "historical"
     copy_source(ROOT, source)
     data = source / "04_interactive_presentation/data"

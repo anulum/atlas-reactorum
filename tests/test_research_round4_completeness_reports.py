@@ -30,12 +30,25 @@ REPORTS = (
 
 @pytest.fixture
 def research_catalogue(tmp_path: Path) -> Path:
+    """Copy the complete research catalogue for isolated report generation.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Owned parent directory for the copied base catalogue and all overlays.
+
+    Returns
+    -------
+    pathlib.Path
+        Complete copied research root with interpreter caches omitted.
+    """
     return shutil.copytree(
         DIRECTORY, tmp_path / "research", ignore=shutil.ignore_patterns("__pycache__")
     )
 
 
 def test_actual_round4_completeness_report_bytes(research_catalogue: Path) -> None:
+    """Reproduce all three canonical completeness reports normally and under -O."""
     output = research_catalogue / "enrichment_round4"
     expected = {name: (SCRIPT.parent / name).read_bytes() for name in REPORTS}
     for name in REPORTS:
@@ -56,6 +69,7 @@ def test_actual_round4_completeness_report_bytes(research_catalogue: Path) -> No
 def test_round4_completeness_country_and_placeholder_semantics(
     research_catalogue: Path,
 ) -> None:
+    """Count unknown-country placeholders at both stages and reconcile all 14 field-summary rows."""
     output = research_catalogue / "enrichment_round4"
     _, original_countries = read_table(output / REPORTS[0])
     original_unknown = {
@@ -105,6 +119,7 @@ def test_round4_completeness_country_and_placeholder_semantics(
 def test_round4_completeness_public_api_and_entrypoint(
     research_catalogue: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Reconcile public aggregation with source counts and reproduce report bytes through main."""
     output = research_catalogue / "enrichment_round4"
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_research_round4_reports")
     base = module.load(research_catalogue / "research_reactors.tsv")

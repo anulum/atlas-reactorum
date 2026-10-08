@@ -31,11 +31,30 @@ NAMES = {
 
 @pytest.fixture
 def validator() -> ModuleType:
+    """Load the Canadian and Australian validator through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Validator exposing native read-only record and rebuild checks.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round2_validator")
 
 
 @pytest.fixture
 def bundle(tmp_path: Path) -> dict[str, Path]:
+    """Copy the complete accepted four-table bundle into owned test storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for dataset, snapshot, manifest and source-registry copies.
+
+    Returns
+    -------
+    dict[str, Path]
+        All four table paths indexed by their native CLI argument names.
+    """
     paths = {key: tmp_path / name for key, name in NAMES.items()}
     for key, path in paths.items():
         path.write_bytes((DIRECTORY / NAMES[key]).read_bytes())
@@ -43,13 +62,25 @@ def bundle(tmp_path: Path) -> dict[str, Path]:
 
 
 def arguments(bundle: dict[str, Path]) -> list[str]:
-    """Pass all four real source tables to the actual validator CLI."""
+    """Construct native validation arguments for all four complete source tables.
+
+    Parameters
+    ----------
+    bundle : dict[str, Path]
+        Dataset, snapshot, manifest and source-registry paths.
+
+    Returns
+    -------
+    list[str]
+        Alternating option names and paths for the read-only native validator.
+    """
     return [value for key, path in bundle.items() for value in ("--" + key, str(path))]
 
 
 def test_full_native_validation_preserves_all_inputs(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Validate all 1,776 facilities in both CLI modes and through API without changing source bytes."""
     before = {key: path.read_bytes() for key, path in bundle.items()}
     for optimize in (False, True):
         result = run_cli(SCRIPT, *arguments(bundle), optimize=optimize)
@@ -81,6 +112,7 @@ def test_full_native_validation_preserves_all_inputs(
     ],
 )
 def test_required_source_observations_refuse(bundle: dict[str, Path], field: str) -> None:
+    """Reject blank required source observations in optimized mode without modifying candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = " "
     write_table(bundle["data"], fields, rows)
@@ -114,6 +146,7 @@ def test_required_source_observations_refuse(bundle: dict[str, Path], field: str
 def test_full_data_facts_refuse(
     bundle: dict[str, Path], field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject invalid geography, inferred reactor facts, status overclaims and unsafe source URLs."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = value
     write_table(bundle["data"], fields, rows)
@@ -126,6 +159,7 @@ def test_full_data_facts_refuse(
     "corruption", ["duplicate", "empty_id", "count", "snapshot_count", "snapshot_source"]
 )
 def test_historical_counts_and_identity_refuse(bundle: dict[str, Path], corruption: str) -> None:
+    """Reject changed historical counts, source namespaces and empty or duplicate stable IDs."""
     path = bundle["snapshot" if corruption.startswith("snapshot") else "data"]
     fields, rows = read_table(path)
     if corruption == "duplicate":
@@ -162,6 +196,7 @@ def test_historical_counts_and_identity_refuse(bundle: dict[str, Path], corrupti
 def test_source_provenance_refuses(
     bundle: dict[str, Path], which: str, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject invalid source identities, hashes, dates, counts and missing provenance fields."""
     fields, rows = read_table(bundle[which])
     rows[0][field] = value
     write_table(bundle[which], fields, rows)
@@ -175,6 +210,7 @@ def test_source_provenance_refuses(
     "corruption", ["header", "empty", "extra", "short", "quote", "utf8", "missing"]
 )
 def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corruption: str) -> None:
+    """Reject malformed or missing inputs for each of the four native table roles."""
     path = bundle[which]
     fields, rows = read_table(path)
     if corruption == "header":
@@ -199,6 +235,7 @@ def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corrup
 def test_registry_cardinality_and_duplicate_ids_refuse(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Reject duplicate registry IDs and incomplete registry or manifest membership through public main."""
     fields, rows = read_table(bundle["registry"])
     rows[1]["source_id"] = rows[0]["source_id"]
     write_table(bundle["registry"], fields, rows)
@@ -215,6 +252,7 @@ def test_registry_cardinality_and_duplicate_ids_refuse(
 def test_real_producer_mismatch_and_failure_leave_data_intact(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Reject actual rebuild mismatches, invalid snapshots and time limits while preserving candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0]["facility_name"] += " changed"
     write_table(bundle["data"], fields, rows)
@@ -238,6 +276,7 @@ def test_real_producer_mismatch_and_failure_leave_data_intact(
 def test_public_record_schema_refusal_and_sensitive_header(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Reject non-string or incomplete record schemas and an unexpected sensitive snapshot column."""
     tables = [read_table(bundle[k])[1] for k in NAMES]
     assert validator.validate_records(*tables) == []
     broken = json.loads(json.dumps(tables))

@@ -26,11 +26,53 @@ from .test_browser_checks import native_browser as native_browser
 class Browser(Protocol):
     """Public native Chrome session methods used by these application checks."""
 
-    def evaluate(self, expression: str, *, timeout: float | None = None) -> object: ...
+    def evaluate(self, expression: str, *, timeout: float | None = None) -> object:
+        """Evaluate JavaScript through the public native Chrome session.
+
+        Parameters
+        ----------
+        expression : str
+            Expression to evaluate in the connected document.
+        timeout : float or None
+            Optional operation deadline passed to the maintained session implementation.
+
+        Returns
+        -------
+        object
+            Native evaluation result exposed by the session.
+        """
+        ...
+
     def command(
         self, method: str, params: dict[str, object] | None = None, *, timeout: float | None = None
-    ) -> dict[str, object]: ...
-    def wait_ready(self, *, timeout: float = 15) -> None: ...
+    ) -> dict[str, object]:
+        """Send a command through the public Chrome DevTools interface.
+
+        Parameters
+        ----------
+        method : str
+            Native CDP method name.
+        params : dict or None
+            Command arguments, when required by the method.
+        timeout : float or None
+            Optional operation deadline passed to the maintained session implementation.
+
+        Returns
+        -------
+        dict of str to object
+            Native command response.
+        """
+        ...
+
+    def wait_ready(self, *, timeout: float = 15) -> None:
+        """Wait for the connected page through the maintained readiness API.
+
+        Parameters
+        ----------
+        timeout : float
+            Maximum readiness wait in seconds.
+        """
+        ...
 
 
 def test_world_map_is_visible_on_initial_desktop_and_mobile_entry(
@@ -116,6 +158,21 @@ def browser(native_browser: BrowserEndpoints) -> Iterator[Browser]:
 
 
 def press(browser: Browser, key: str, code: str, number: int, text: str = "") -> None:
+    """Dispatch a complete native keyboard key-down and key-up pair.
+
+    Parameters
+    ----------
+    browser : Browser
+        Connected native Chrome session.
+    key : str
+        DOM key value sent for both events.
+    code : str
+        Physical key code sent for both events.
+    number : int
+        Windows virtual-key code required by CDP.
+    text : str
+        Text sent on key-down only; key-up carries an empty text value.
+    """
     for kind in ("keyDown", "keyUp"):
         browser.command(
             "Input.dispatchKeyEvent",
@@ -130,6 +187,7 @@ def press(browser: Browser, key: str, code: str, number: int, text: str = "") ->
 
 
 def test_actual_all135_dialogs_keep_claim_text_locators_and_capture_scope(browser: Browser) -> None:
+    """Verify all 135 real dialogs preserve their 599 claims, source locators and capture scope."""
     result = browser.evaluate("""(() => {
       const doc = window.REACTOR_TAXONOMY_EVIDENCE_PROFILES;
       let entries = 0, claims = 0;
@@ -161,6 +219,7 @@ def test_actual_all135_dialogs_keep_claim_text_locators_and_capture_scope(browse
 def test_keyboard_mobile_expansion_close_and_actual_json_download(
     browser: Browser, tmp_path: Path
 ) -> None:
+    """Use native mobile keys to expand, download and close a profile with exact export equality."""
     browser.command(
         "Emulation.setDeviceMetricsOverride",
         {
@@ -229,6 +288,7 @@ def test_keyboard_mobile_expansion_close_and_actual_json_download(
 
 
 def test_reload_uses_identical_profile_snapshot_without_invented_review(browser: Browser) -> None:
+    """Reload the same profile snapshot without inventing complete or independent review status."""
     before = browser.evaluate("JSON.stringify(window.REACTOR_TAXONOMY_EVIDENCE_PROFILES)")
     browser.command("Page.reload")
     browser.wait_ready()

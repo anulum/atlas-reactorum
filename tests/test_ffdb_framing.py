@@ -19,6 +19,7 @@ from .test_ffdb_reader import CAPTURE, captured_frames
 
 
 def test_real_selection_round_trip_retains_character_lengths_and_all_members() -> None:
+    """Round-trip the registered selection byte-for-byte through the public frame codec."""
     framing = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.framing")
     frames = framing.decode_frames(CAPTURE.read_bytes())
     assert framing.encode_frames(frames) == CAPTURE.read_bytes()
@@ -27,6 +28,7 @@ def test_real_selection_round_trip_retains_character_lengths_and_all_members() -
 
 @pytest.mark.parametrize("invalid", [float("inf"), object()])
 def test_source_member_that_cannot_be_finite_json_is_refused(invalid: object) -> None:
+    """Reject nonfinite numbers and non-JSON objects in retained projection metadata."""
     framing = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.framing")
     frames = framing.decode_frames(CAPTURE.read_bytes())
     projection = cast(dict[str, object], frames[0]["atlas_projection"])
@@ -36,6 +38,7 @@ def test_source_member_that_cannot_be_finite_json_is_refused(invalid: object) ->
 
 
 def test_integer_decoder_limit_is_an_authored_public_refusal() -> None:
+    """Translate Python's oversized-integer rejection into the codec's documented refusal."""
     framing = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.framing")
     first = '{"oversized_integer":' + "1" * 5000 + "}"
     payload = f"{len(first)};{first}2;{{}}".encode()
@@ -47,6 +50,7 @@ def test_integer_decoder_limit_is_an_authored_public_refusal() -> None:
 def test_unrepresentable_utf8_source_value_is_an_authored_public_refusal(
     surrogate: str,
 ) -> None:
+    """Reject unpaired Unicode surrogates instead of emitting an invalid UTF-8 frame."""
     framing = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.framing")
     with pytest.raises(framing.DashboardRefused, match="valid UTF-8"):
         framing.encode_frames([{"value": surrogate}, {}])

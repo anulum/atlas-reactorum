@@ -9,6 +9,78 @@
 repos:
   - repo: local
     hooks:
+      - id: native-shell
+        name: Native shell lint and formatting
+        entry: make native-shell
+        language: system
+        files: '\.sh$|^Makefile$'
+        pass_filenames: false
+      - id: native-python-types
+        name: Native strict Python source and test types
+        entry: bash tools/typecheck.sh
+        language: system
+        files: '\.(py|pyi)$|^tools/typecheck\.sh$|^pyproject\.toml$|^requirements-dev\.(txt|in)$'
+        pass_filenames: false
+      - id: native-ffi
+        name: Native FFI source qualification
+        entry: node tools/ffi.cjs
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: native-python-stubs
+        name: Native Python stub source and runtime counterparts
+        entry: node tools/stubs.cjs
+        language: system
+        files: '\.(py|pyi)$|^tools/stubs\.cjs$|^requirements-dev\.(txt|in)$'
+        pass_filenames: false
+      - id: native-languages
+        name: Native first-source language and backend enrollment
+        entry: node tools/languages.cjs
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: native-notebooks
+        name: Native notebook schema and Python source contracts
+        entry: node tools/notebooks.cjs static
+        language: system
+        files: '\.ipynb$|^tools/notebooks\.(py|cjs)$|^requirements-dev\.(txt|in)$|^pyproject\.toml$'
+        pass_filenames: false
+      - id: native-html
+        name: Native HTML semantics and accessibility contracts
+        entry: node tools/web.cjs html
+        language: system
+        files: '\.html$|^tools/.*\.cjs$|^package(-lock)?\.json$'
+        pass_filenames: false
+      - id: native-css
+        name: Native CSS syntax and resolved value contracts
+        entry: node tools/web.cjs css
+        language: system
+        files: '\.css$|^tools/.*\.cjs$|^package(-lock)?\.json$'
+        pass_filenames: false
+      - id: native-web-format
+        name: Native web source formatting
+        entry: node tools/web.cjs format
+        language: system
+        files: '\.(html|css)$|^prettier\.config\.cjs$|^package(-lock)?\.json$'
+        pass_filenames: false
+      - id: native-js-lint
+        name: Native JavaScript lint and contracts
+        entry: node tools/javascript.cjs lint
+        language: system
+        files: '\.(js|cjs|mjs)$|\.d\.ts$|^package(-lock)?\.json$|^\.npmrc$'
+        pass_filenames: false
+      - id: native-js-types
+        name: Native strict JavaScript types
+        entry: node tools/javascript.cjs types
+        language: system
+        files: '\.(js|cjs|mjs)$|\.d\.ts$|^jsconfig\.json$|^package(-lock)?\.json$'
+        pass_filenames: false
+      - id: native-js-format
+        name: Native JavaScript formatting
+        entry: node tools/javascript.cjs format
+        language: system
+        files: '\.(js|cjs|mjs)$|\.d\.ts$|^\.prettierignore$'
+        pass_filenames: false
       - id: ruff-check
         name: Ruff lint
         entry: python -m ruff check --fix

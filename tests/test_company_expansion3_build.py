@@ -6,7 +6,7 @@
 # Contact: www.anulum.li | protoscience@anulum.li
 # Atlas Reactorum — third company expansion producer conformance
 
-"""Generate actual discovery outputs only after checking both protected catalogs."""
+"""Generate actual discovery outputs only after checking all three protected catalogues."""
 
 from __future__ import annotations
 
@@ -27,6 +27,18 @@ OUTPUTS = ["candidates.tsv", "source_registry.tsv"]
 
 @pytest.fixture
 def audit_copy(tmp_path: Path) -> Path:
+    """Copy the three complete protected company catalogues into owned test storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for the original protected catalogue copies.
+
+    Returns
+    -------
+    Path
+        Complete audit root for native identity checks and output protection.
+    """
     directory = tmp_path / "audit"
     directory.mkdir()
     for name in PROTECTED:
@@ -36,6 +48,7 @@ def audit_copy(tmp_path: Path) -> Path:
 
 
 def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
+    """Rebuild and validate all 14 candidates and 28 source records as exact original bytes in both CLI modes."""
     paths = [AUDIT / name for name in PROTECTED]
     paths.extend(SCRIPT.with_name(name) for name in [*OUTPUTS, "validation.json"])
     before = {path: path.read_bytes() for path in paths}
@@ -73,6 +86,7 @@ def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
 def test_bad_protected_catalog_preserves_existing_outputs(
     audit_copy: Path, tmp_path: Path, name: str, damage: str
 ) -> None:
+    """Reject malformed protected identities and candidate collisions without replacing existing outputs."""
     path = audit_copy / name
     fields, rows = read_table(path)
     key = "company" if name == PROTECTED[0] else "organization"
@@ -138,6 +152,7 @@ def test_bad_protected_catalog_preserves_existing_outputs(
     ],
 )
 def test_public_identity_checks_refuse_damaged_actual_candidates(damage: str) -> None:
+    """Reject incomplete candidate schemas, duplicate identities and collisions with protected names or aliases."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion3_builder")
     rows = read_table(SCRIPT.with_name(OUTPUTS[0]))[1]
     protected = module.read_protected(AUDIT)
@@ -177,6 +192,7 @@ def test_public_identity_checks_refuse_damaged_actual_candidates(damage: str) ->
 def test_output_symlink_cannot_replace_protected_catalog(
     audit_copy: Path, tmp_path: Path, name: str, output_name: str
 ) -> None:
+    """Protect every baseline catalogue from aliased candidate or registry output destinations."""
     path = audit_copy / name
     before = path.read_bytes()
     output = tmp_path / "output"
@@ -188,6 +204,7 @@ def test_output_symlink_cannot_replace_protected_catalog(
 
 
 def test_missing_protected_directory_creates_no_outputs(tmp_path: Path) -> None:
+    """Refuse absent protected catalogues without creating an output directory."""
     output = tmp_path / "output"
     result = run_cli(
         SCRIPT, "--audit-root", str(tmp_path / "missing"), "--output-directory", str(output)
@@ -197,6 +214,7 @@ def test_missing_protected_directory_creates_no_outputs(tmp_path: Path) -> None:
 
 
 def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
+    """Report an occupied output path without changing its owner-supplied bytes."""
     output = tmp_path / "output"
     output.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(output))
@@ -207,6 +225,7 @@ def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
 def test_public_read_check_and_main_preserve_imported_catalogs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Check accepted identities and reproduce exact outputs through main while preserving source bytes and mtimes."""
     paths = [SCRIPT.with_name(name) for name in OUTPUTS]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion3_builder")
@@ -231,6 +250,7 @@ def test_public_read_check_and_main_preserve_imported_catalogs(
 def test_empty_alias_tokens_do_not_create_protected_identities(
     audit_copy: Path, tmp_path: Path, name: str
 ) -> None:
+    """Ignore empty alias tokens without changing protected identities or derived output bytes."""
     path = audit_copy / name
     fields, rows = read_table(path)
     rows[0]["aliases"] += "; ;"
@@ -253,6 +273,7 @@ def test_empty_alias_tokens_do_not_create_protected_identities(
 def test_individual_baseline_counts_cannot_be_compensated(
     audit_copy: Path, tmp_path: Path, name: str, damage: str
 ) -> None:
+    """Reject changed individual 51/18/15 baseline counts even when compensating rows preserve the total."""
     path = audit_copy / name
     fields, rows = read_table(path)
     if damage == "extra_row":
@@ -272,6 +293,7 @@ def test_individual_baseline_counts_cannot_be_compensated(
 
 
 def test_output_directory_cannot_replace_previous_round(audit_copy: Path) -> None:
+    """Refuse a third-round output directory that would overwrite the protected second-round candidates."""
     path = audit_copy / "expansion_round2/candidates.tsv"
     before = path.read_bytes()
     result = run_cli(

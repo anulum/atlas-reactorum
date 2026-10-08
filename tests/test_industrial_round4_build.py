@@ -39,11 +39,28 @@ SOURCE = ROOT / "tests/data/industrial_round4/swiss_prtr.xlsx"
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the Swiss workbook producer through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Producer exposing the native selection, refresh and build entry points.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round4_build")
 
 
 def raw_records() -> tuple[list[str], list[list[object]]]:
-    """Read all actual required source cells, including repeated facilities."""
+    """Read every cell from the accepted workbook's first sheet.
+
+    Returns
+    -------
+    tuple[list[str], list[list[object]]]
+        Column names and complete source rows, including repeated facilities.
+
+    Notes
+    -----
+    Read cached cell values in read-only mode and close the workbook on exit.
+    """
     workbook = openpyxl.load_workbook(SOURCE, read_only=True, data_only=True)
     try:
         values = workbook.worksheets[0].iter_rows(values_only=True)
@@ -54,7 +71,20 @@ def raw_records() -> tuple[list[str], list[list[object]]]:
 
 
 def raw_payload(fields: list[str], rows: list[list[object]]) -> bytes:
-    """Reserialize full original-cell copies with the requested mutation."""
+    """Serialize the supplied complete source cells into an owned workbook copy.
+
+    Parameters
+    ----------
+    fields : list[str]
+        Source column names in their workbook order.
+    rows : list[list[object]]
+        Complete source rows with the case-specific cell mutations.
+
+    Returns
+    -------
+    bytes
+        XLSX content with one sheet; the original workbook is never written.
+    """
     workbook = openpyxl.Workbook()
     worksheet = workbook.worksheets[0]
     worksheet.append(fields)
@@ -67,6 +97,7 @@ def raw_payload(fields: list[str], rows: list[list[object]]) -> bytes:
 
 
 def test_actual_raw_selection_equals_complete_snapshot(producer: ModuleType) -> None:
+    """Select all 93 accepted facilities from 469 raw rows with exact snapshot equality."""
     selected, count = producer.select_source(SOURCE.read_bytes())
     assert count == 469 and selected == producer.read_snapshot(SNAPSHOT)
     assert len(selected) == 93
@@ -76,6 +107,7 @@ def test_actual_raw_selection_equals_complete_snapshot(producer: ModuleType) -> 
 def test_native_full_rebuild_preserves_historical_bytes(
     tmp_path: Path, producer: ModuleType
 ) -> None:
+    """Rebuild exact historical bytes through normal, optimized and API entry points."""
     before = SNAPSHOT.read_bytes(), DATA.read_bytes()
     for optimize in (False, True):
         output = tmp_path / f"built-{optimize}.tsv"
@@ -88,6 +120,7 @@ def test_native_full_rebuild_preserves_historical_bytes(
 
 
 def test_actual_raw_refresh_is_isolated(tmp_path: Path, producer: ModuleType) -> None:
+    """Refresh owned copies through API and both CLI modes without changing accepted data."""
     snapshot, manifest = tmp_path / "snapshot.tsv", tmp_path / "manifest.tsv"
     assert producer.refresh_snapshot(
         SOURCE.read_bytes(), snapshot=snapshot, manifest=manifest, retrieved="2026-09-28"
@@ -136,6 +169,7 @@ def test_actual_raw_refresh_is_isolated(tmp_path: Path, producer: ModuleType) ->
     ],
 )
 def test_full_snapshot_mutations_refuse(tmp_path: Path, field: str, value: str) -> None:
+    """Reject each invalid source observation without a traceback or output table."""
     fields, rows = read_table(SNAPSHOT)
     rows[0][field] = value
     path = tmp_path / "changed.tsv"
@@ -151,6 +185,7 @@ def test_full_snapshot_mutations_refuse(tmp_path: Path, field: str, value: str) 
     "corruption", ["empty", "header", "extra", "short", "quote", "utf8", "duplicate", "missing"]
 )
 def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
+    """Reject malformed, duplicate or missing snapshot input through the native CLI."""
     fields, rows = read_table(SNAPSHOT)
     path = tmp_path / "changed.tsv"
     if corruption == "empty":
@@ -175,6 +210,7 @@ def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
 
 
 def test_original_optional_activity_and_public_schema(producer: ModuleType) -> None:
+    """Keep optional activities absent and reject empty or non-string snapshot schemas."""
     rows = producer.read_snapshot(SNAPSHOT)
     rows[0]["ordinance_level_2"] = ""
     rows[0]["ordinance_level_3"] = ""
@@ -209,6 +245,7 @@ def test_original_optional_activity_and_public_schema(producer: ModuleType) -> N
     ],
 )
 def test_actual_raw_boundaries_refuse(producer: ModuleType, corruption: str) -> None:
+    """Reject invalid workbook identity, selection, coordinates and conflicting repeats."""
     fields, rows = raw_records()
     index = {field: i for i, field in enumerate(fields)}
     selected = rows[3]
@@ -240,6 +277,7 @@ def test_actual_raw_boundaries_refuse(producer: ModuleType, corruption: str) -> 
 
 
 def test_actual_archive_limits_and_corruption(producer: ModuleType) -> None:
+    """Reject expanded workbook content above 64 MiB and truncated ZIP input."""
     stream = io.BytesIO()
     with zipfile.ZipFile(io.BytesIO(SOURCE.read_bytes())) as original:
         with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED) as archive:
@@ -254,6 +292,7 @@ def test_actual_archive_limits_and_corruption(producer: ModuleType) -> None:
 
 @pytest.mark.parametrize("date", ["20260928", "2026-02-30"])
 def test_exact_retrieval_dates_required(tmp_path: Path, producer: ModuleType, date: str) -> None:
+    """Reject compact or impossible calendar dates in both public conversion paths."""
     with pytest.raises(ValueError):
         producer.rows_from_snapshot(producer.read_snapshot(SNAPSHOT), retrieved=date)
     with pytest.raises(ValueError):
@@ -266,6 +305,7 @@ def test_exact_retrieval_dates_required(tmp_path: Path, producer: ModuleType, da
 
 
 def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: ModuleType) -> None:
+    """Protect accepted inputs and preserve prior output when atomic serialization fails."""
     before = DATA.read_bytes(), SNAPSHOT.read_bytes()
     for target in [DATA, SNAPSHOT, tmp_path / "link.tsv"]:
         if target.name == "link.tsv":
@@ -289,6 +329,7 @@ def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: Mod
 
 
 def test_cli_refresh_refuses_bad_configuration(tmp_path: Path, producer: ModuleType) -> None:
+    """Reject incomplete refresh paths, aliases and absent raw input through native entry points."""
     assert (
         producer.main(
             ["--output", str(tmp_path / "out.tsv"), "--manifest", str(tmp_path / "m.tsv")]
@@ -339,6 +380,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Provide real HTTP response, redirect and timeout controls."""
 
     def do_GET(self) -> None:
+        """Serve source bytes, redirects, status failures and a delayed response over real TLS."""
         server = self.server
         assert isinstance(server, SourceServer)
         if self.path in {"/redirect", "/downgrade", "/credentials", "/loop"}:
@@ -370,6 +412,27 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture
 def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
+    """Serve the original workbook over a temporary, locally trusted TLS listener.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for the one-day certificate and private key.
+
+    Yields
+    ------
+    tuple[str, Path]
+        HTTPS origin and certificate path for the native downloader.
+
+    Raises
+    ------
+    RuntimeError
+        If the required OpenSSL executable is unavailable.
+
+    Notes
+    -----
+    Stop and close the listener and join its worker after the test.
+    """
     ca, key = tmp_path / "ca.pem", tmp_path / "key.pem"
     openssl = shutil.which("openssl")
     if openssl is None:
@@ -415,6 +478,7 @@ def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
 def test_real_tls_and_complete_native_refresh(
     tmp_path: Path, producer: ModuleType, tls_source: tuple[str, Path]
 ) -> None:
+    """Refresh all 93 facilities over trusted TLS and protect the certificate from output aliasing."""
     url, ca = tls_source
     assert producer.download(url + "/redirect", ca_file=ca) == SOURCE.read_bytes()
     result = run_cli(
@@ -460,6 +524,7 @@ def test_real_tls_and_complete_native_refresh(
 def test_native_transport_refusals(
     producer: ModuleType, tls_source: tuple[str, Path], path: str
 ) -> None:
+    """Reject unsafe redirects, non-200 responses and the actual delayed-response timeout."""
     url, ca = tls_source
     with pytest.raises((ValueError, HTTPError, URLError, TimeoutError)):
         producer.download(url + path, ca_file=ca, timeout=0.03 if path == "/stall" else 5)
@@ -468,6 +533,7 @@ def test_native_transport_refusals(
 def test_real_certificate_trust_and_limits(
     producer: ModuleType, tls_source: tuple[str, Path]
 ) -> None:
+    """Reject untrusted TLS, oversized responses, invalid limits and unsafe source URLs."""
     url, ca = tls_source
     with pytest.raises(URLError):
         producer.download(url + "/csv")

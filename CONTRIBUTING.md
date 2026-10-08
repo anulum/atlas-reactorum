@@ -41,17 +41,187 @@ missing values in both reading depths. Run `tests/learning_paths.test.cjs` and
 Version links bind both data and authored learning content; stale versions must
 refuse. Native keyboard, mobile, assessment and file-download checks do not
 substitute for a human comprehension study.
+Keep authored fallback display rows separate from source-bound catalogue
+entries; a missing identity or provenance must not be filled during a code
+refactor. Panel changes must retain every original explanation, diagram and
+source-link representation. Run the complete native presentation-component
+cohort and its actual Chrome controls, and preserve the real normal/optimised
+data-consumer integration cases when changing application wiring.
+Page navigation binds the actual maintained document, controls and direct main
+sections through `page-navigation.js`. Its handled keyboard keys cancel native
+page scrolling after section movement is selected; focused inputs, selects and
+textareas retain ordinary editing. Run `tests/test_page_navigation_browser.py`
+with native Chrome for desktop/mobile movement, dialog dismissal and unavailable
+targets. The ordinary `make test` discovers this cohort and requires execution
+of every complete source-exact native controller region and function. Keep its
+raw CDP evidence distinct from Node line/branch/function measurements.
+Bind learning controls through the required HTML tag and namespace reader.
+`application-data.js` admits the original wrapped or legacy arrays before the
+application consumes their text, coordinate, reference and observation cells.
+Other producer fields remain unknown and unchanged. Shape admission does not
+certify source claims: original source/profile validators remain authoritative.
+Run `tests/application_data.test.cjs` at the complete owning coverage floor and
+`tests/test_application_data_browser.py` for real missing-source and malformed
+input cases. An authored fallback never acquires a source identity or evidence
+profile; the complete-application CLI refuses that incomplete source state.
+Repeated controls retain their actual HTML tag/namespace through the native
+reader, including empty filtered views. Map selections use admitted original
+rows, and the engine owns its canvas keyboard controls; retired SVG circle
+handlers do not represent a current point layer.
+Keep version cells and FormData answers unknown until native admission, and
+refuse authored answers outside their retained original examples. The native
+cases use complete source-validated profiles; browser cases cover missing
+answers and damaged actual controls alongside the original journeys.
 
-make lint includes make native-test-docs, which requires native contracts
-on the complete research integration, dataset-integrity and native browser
-test files, including the shared Chrome fixtures and protocol decoders. This
-check runs without the general test-method docstring exemptions. Owned browser
-fixtures wait for the exact page URL after startup and navigation; a DevTools
+`make lint` includes `make native-test-docs`, which requires native contracts
+throughout the complete maintained test tree, including fixtures, shared
+Chrome support and protocol decoders. Ruff also enforces these contracts
+through the normal hooks and repository lint entry point. A new test file or
+method cannot bypass documentation checks through a filename exemption.
+Document the actual behaviour, invariant and assumptions being checked.
+
+`make lint` also runs ShellCheck 0.9.0 and shfmt 3.8.0 through
+`make native-shell`. Shell formatting uses four spaces, as declared by
+EditorConfig. `make validate` runs `make native-javascript` with Node 24.21.0
+before the presentation checks. Both native targets enumerate tracked and
+new, unignored source through Git, including files in new directories;
+missing files, symlink sources, absent tools and mismatched tool versions fail.
+JavaScript syntax checks complement the dedicated semantic and browser suites.
+The `native-shell` pre-commit hook runs that same complete shell gate. The
+`native-python-types` hook runs strict MyPy discovery over every maintained
+Python source, test, fixture and stub directory, including new roots.
+
+Run `npm ci` with Node24.21.0 and npm11.19.0 to install the immutable native
+JavaScript development graph. `make lint` includes ESLint10.12.0,
+JSDoc65.1.0 and Prettier3.9.9; `make typecheck` includes TypeScript6.0.3
+with `allowJs`, `checkJs`, `strict` and declaration checking. The same
+commands run from the installed pre-commit hooks and hosted correctness CI.
+Tracked and new JS, CJS and MJS files enter native discovery, including new
+directories. Missing source, symlink source, unavailable tools and changed tool
+versions refuse rather than becoming a pass.
+
+Six literal presentation wrappers remain owned by their source-bound
+generators: repository catalogue, retained evidence history, facilities,
+companies, taxonomy audit and evidence profiles. Their output bytes are
+checked by Node syntax, source/schema consumers and offline reproduction.
+They are not handwritten modules for TypeScript inference or formatter writes.
+The retained `taxonomy-expanded.js` editorial input contains executable
+construction code and remains in lint, strict types and formatting.
+Its authored tuples use `taxonomy-construction.js` in both browser and native
+readers. Keep all original output objects and member order when changing code.
+The taxonomy and citation byte pins must follow validated source changes;
+code-only changes still require full row/source equality and owning migration.
+Retain prior history snapshots and append an actual Atlas observation for the
+new complete profile version. Generate current examples through the native
+exporter and retain their explicit version hashes; an old version cannot become
+an implicit alias for current data. Run the whole constructor/exporter coverage
+cohort and actual five-producer reproduction before accepting these changes.
+The exclusions name the six products individually; a new handwritten file
+under `data/` still enters the native checks.
+
+`make dependency-audit` audits both complete dependency locks through
+`pip-audit --require-hashes` and `npm audit --include=dev`. Correctness CI
+requires the audit job to succeed at every push and pull request; registry
+errors and every advisory severity fail. Do not suppress failure, omit
+development packages or raise a severity threshold. The dedicated audit-policy
+test pins the actual Make commands and their blocking workflow wiring.
+
+Owned browser fixtures wait for the exact page URL after startup and navigation; a DevTools
 HTTP response or navigation acknowledgement alone does not establish that the
 intended page is committed. Ambiguous and unsafe targets still refuse.
 
 The locked development environment and native Node, Chrome, Poppler
 `pdftotext` and shell tools are required; see [Validation](VALIDATION.md) for commands and current scope.
+
+`make native-web` checks every tracked and new HTML/CSS source, including new
+roots. HTML-validate uses its recommended semantic/accessibility rules with
+the same void-element and doctype style as Prettier. Keep labelled landmarks
+unique, use native sections for named regions, and declare button/input types.
+The CSS Tree parser refuses recovery and checks property/at-rule grammar.
+Every declared custom-property alternative, alias and fallback is resolved
+before native value matching; missing dependencies, cycles and expansions
+above 64 alternatives refuse. All conditional alternatives must satisfy each
+consuming property's grammar. Formatting preserves the original cascade.
+Run the dedicated CSS source cohort at its 100 per cent line/branch/function
+floor and the public web-gate candidate tests. Missing tools/source fail.
+
+`make native-languages` refuses source and compiled backend formats whose
+complete native lane has not been enrolled. It runs before owning checks and
+on every commit; adding a Rust, Go, C/C++, HDL, generated foreign interface or
+native binary cannot inherit a Python/JavaScript success. Source suffixes use
+the exact lowercase spelling of their owning discovery pathspecs.
+TypeScript declarations enter the existing native lint/compiler/format graph
+through `*.d.ts`, with documentation required for declared aliases, interfaces,
+members and functions. TypeScript implementation is a separate unqualified
+lane. Any new native lane needs its complete contracts, native tooling,
+runtime coverage, parity and blocking CI before first implementation.
+Unknown source formats and unregistered extensionless names also refuse;
+an unlisted language cannot inherit another lane's success. The gate lists
+the current non-code asset suffixes and named metadata files explicitly.
+That role routing does not certify their contents, sources or rights.
+
+Python type discovery uses actual tracked/new `*.py` and `*.pyi` paths and
+refuses missing or linked source. Separate native passes keep source/stub
+counterparts and duplicate standalone basenames checked without false packages.
+`make native-python-stubs` additionally requires a real `.py` counterpart and
+the exact interface generated by mypy 2.3.1 `stubgen --no-import --parse-only
+--include-private`, formatted by locked Ruff and prefixed by its source's
+seven-line header. `stubtest` checks actual runtime symbols/signatures after
+that declaration comparison. It alone cannot establish return annotation
+correctness. Runtime implementation retains full documentation and tests;
+generated `.pyi` files supply types rather than duplicating docstrings.
+
+`make native-ffi` runs native Ruff over direct Python FFI imports. The existing
+libc inotify test observer has one exact complete-source binding; any changed
+byte or another FFI file needs fresh qualification.
+The complete approved observer is byte-bound before exemption from the import
+ban; every other discovered Python source must return zero native Ruff findings.
+FFI controls preserve the actual gate sources and their hashes beside raw V8
+receipts before candidate cleanup. Resolve native source URLs to their actual
+filesystem paths, and keep runtime-refusal measurements distinct from approval
+of that runtime or backend.
+Native imports/loading in JavaScript are blocked by the ordinary linter until
+their role is qualified.
+These static checks do not prove arbitrary dynamic library behavior. Native
+runtime/interface tests, exact source review and all applicable domain gates
+remain required for a new backend; code coverage is not physical validation.
+
+`make native-notebooks` checks every current/new notebook with the locked
+native schema, Ruff notebook lint/format and nbQA strict mypy. Only ordinary
+Python cells are currently qualified; kernel magics, skipped/empty cells and
+other notebook languages need their own complete qualification before use.
+`make native-notebook-runtime` additionally executes every unchanged cell
+through the actual Jupyter CLI in a fresh kernel. Temporary source, kernel,
+configuration and runtime files belong to the caller's working-disk workspace;
+accepted notebooks are not overwritten.
+The admission report retains the original native stdout as `execution_stdout`,
+alongside the complete source digest and executed-cell count. Use
+`tests/test_notebook_tools.py` for public CLI/Make source, tool, new-root,
+type/format/contract and genuine kernel refusal controls; the dedicated
+admission cohort also checks native stderr/display outputs and text encodings.
+The research notebook uses public
+object readers to keep container values unknown until their shape is admitted.
+Those readers preserve original fields and values; the source-linked public
+comparison reader retains scientific/source/rights validation responsibility.
+
+Catalogue changes belong to their control owners, while `app.js` remains the
+admission/startup wiring. Keep the original public selection, filter, download
+and native map entry points tied to their actual returned owner types. Source
+parent names and absent fallback identities must not be inferred from another
+entry. Use each module's dedicated native/browser surface and require its
+complete source coverage. Field-source consumers call the shared public HTML
+serializer against admitted original records; do not extract declarations from
+`app.js` into a fabricated Window. Complete CSV/JSON downloads and the public
+normal/optimised browser CLI remain integration gates.
+
+Map changes run `make native-map-runtime` and the original map test cohort.
+The shared engine delegates pointer/key behavior to `map/interactions.js` and
+source-row controls to `map/accessibility.js`; both loading modes consume the
+same owners. Runtime qualification binds all nine complete sources to their
+actual bytes, genuine DOM/Cairo execution and the complete Chrome page. Every
+native function and region must execute across those runtimes. Keep this
+measurement distinct from Node AST coverage, and retain the original
+call-recording tests as behavior checks rather than runtime qualification.
 
 `validate.sh` also runs the native taxonomy citation, exporter and detail
 serializer tests at 100 per cent line, branch and function coverage. The
@@ -136,12 +306,18 @@ data changes. A curator must separately review and edit the original catalogue
 inputs, regenerate the evidence profiles, explicitly import the successor into
 a new journal file, retain the old journal, and rebuild all generated products.
 Imports validate complete original profiles and preserve prior snapshots.
+Direct CLI commands require the locked Python build dependencies: select their
+interpreter with `ATLAS_PYTHON`, or provide it as `python3` on `PATH`. The
+native input checker validates complete wire shapes using the owning profile
+schema before history and correction models enforce their semantic contracts.
 
 Run the dedicated native history, correction, renderer and CLI suites in
 `validate.sh`, and `tests/test_evidence_history_browser.py` against the actual
 page. Preserve exact linked revisions, disabled exports on refusal, pending
 proposal custody and real native controller coverage. Date fields retain their
 own meanings; unknown source publication or event dates remain unknown.
+Run `tests/test_evidence_history_inputs.py` when changing history input
+admission; it exercises real producer packets and native safe refusals.
 
 ## Adding a data layer
 
@@ -187,3 +363,10 @@ contract. Execute the real `examples/research/comparison.ipynb` with Jupyter;
 retain execution evidence outside public source. Do not replace expected hashes
 with hashes computed from an untrusted import or promote metadata compatibility
 to a scientific result.
+Native research commands require Python with the locked `jsonschema` build
+dependency for complete profile wire admission; select it with `ATLAS_PYTHON`
+or provide `python3` on `PATH`. The Python API defaults the native checker to
+its own interpreter and honours an explicit nonempty `ATLAS_PYTHON` selection.
+Whole original source validation remains required above that wire check.
+History and research share the canonical UTF-8 reader; qualify both native
+caller suites and its whole line/branch/function coverage when changing it.

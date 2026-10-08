@@ -40,7 +40,22 @@ FIXTURE = ROOT / "tests/data/anulum_github/repositories.json"
 
 @pytest.fixture(scope="module")
 def certificate(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
-    """Create a real localhost certificate used by server and trusted client."""
+    """Create a localhost certificate and key for real trusted HTTPS requests.
+
+    Parameters
+    ----------
+    tmp_path_factory
+        Pytest owner of the module-scoped TLS directory.
+
+    Returns
+    -------
+    tuple[pathlib.Path, pathlib.Path]
+        Certificate and private-key paths; the certificate covers DNS localhost.
+
+    Notes
+    -----
+    OpenSSL is required. The fixture fails if it cannot create the certificate.
+    """
     directory = tmp_path_factory.mktemp("catalogue-tls")
     cert, key = directory / "cert.pem", directory / "key.pem"
     openssl = shutil.which("openssl")
@@ -77,7 +92,25 @@ def api_server(
     certificate: tuple[Path, Path],
     routes: dict[str, tuple[int, dict[str, str], bytes, float]],
 ) -> Iterator[tuple[str, list[str]]]:
-    """Serve actual HTTPS responses and reap every owned connection/thread."""
+    """Serve selected responses over real HTTPS and reap all owned threads.
+
+    Parameters
+    ----------
+    certificate
+        Localhost certificate and private-key paths used by the TLS listener.
+    routes
+        Request-path mapping to HTTP status, headers, body bytes and delay in seconds.
+
+    Yields
+    ------
+    tuple[str, list[str]]
+        HTTPS repository endpoint and the mutable ordered request-path log.
+
+    Notes
+    -----
+    Refusal tests may close a live connection early. Cleanup shuts down the
+    listener, closes its sockets and verifies the serving thread has stopped.
+    """
     requests: list[str] = []
 
     class Handler(BaseHTTPRequestHandler):
@@ -116,23 +149,53 @@ def api_server(
 
 
 def api_body(records: object) -> bytes:
-    """Encode original API cells or one explicit malformed-response mutation."""
+    """Encode complete source cells or an explicit malformed-response mutation.
+
+    Parameters
+    ----------
+    records
+        JSON-compatible API records or a selected invalid response structure.
+
+    Returns
+    -------
+    bytes
+        ASCII-escaped JSON response body for the real HTTPS listener.
+    """
     return json.dumps(records, ensure_ascii=True).encode()
 
 
 def api_records() -> list[dict[str, Any]]:
-    """Read the complete minimised real source on every test invocation."""
+    """Reload the complete minimised real GitHub response for each test.
+
+    Returns
+    -------
+    list[dict[str, typing.Any]]
+        Fresh mutable source records whose consumed cells have fixture provenance.
+    """
     records: list[dict[str, Any]] = json.loads(FIXTURE.read_bytes())
     return records
 
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the actual catalogue producer in an isolated module namespace.
+
+    Returns
+    -------
+    types.ModuleType
+        Production API used by these source, output and HTTPS conformance cases.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_public_repository_build")
 
 
 def source() -> dict[str, Any]:
-    """Read all 43 genuine records afresh so mutations cannot escape a test."""
+    """Reload all 43 captured records so mutations cannot escape their test.
+
+    Returns
+    -------
+    dict[str, typing.Any]
+        Fresh decoded accepted source document, including schema and record count.
+    """
     value: dict[str, Any] = json.loads(SOURCE.read_bytes())
     return value
 
@@ -140,6 +203,7 @@ def source() -> dict[str, Any]:
 def test_complete_build_preserves_all_four_accepted_formats(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """All 43 source records produce 30 catalogue entries in four accepted byte-exact formats."""
     original = SOURCE.read_bytes()
     assert len(source()["records"]) == 43
     assert producer.build(source(), tmp_path, retrieved="2026-09-27") == 30
@@ -151,6 +215,7 @@ def test_complete_build_preserves_all_four_accepted_formats(
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_native_offline_build_and_validator(optimize: bool, tmp_path: Path) -> None:
+    """Normal and optimised CLI builds produce TSV accepted by the actual source validator."""
     result = run_cli(SCRIPT, "--output-dir", str(tmp_path), optimize=optimize)
     assert result.returncode == 0, result.stdout + result.stderr
     result = run_cli(
@@ -185,6 +250,7 @@ def test_native_offline_build_and_validator(optimize: bool, tmp_path: Path) -> N
 def test_invalid_real_source_cell_refuses_before_any_output(
     producer: ModuleType, tmp_path: Path, field: str, value: object
 ) -> None:
+    """A malformed consumed GitHub cell raises before the candidate directory is created."""
     loaded = source()
     loaded["records"][0][field] = value
     output = tmp_path / "candidate"
@@ -210,6 +276,7 @@ def test_invalid_real_source_cell_refuses_before_any_output(
 def test_invalid_complete_source_structure_refuses_without_writes(
     producer: ModuleType, tmp_path: Path, corruption: str
 ) -> None:
+    """Schema, count, identity and required-repository defects refuse before output creation."""
     loaded: Any = source()
     if corruption == "schema":
         loaded["schema_version"] = "2.0.0"
@@ -239,6 +306,7 @@ def test_invalid_complete_source_structure_refuses_without_writes(
 def test_nullable_metadata_and_unicode_are_rendered_before_writes(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Null metadata retains explicit absence; an unencodable description refuses before output."""
     loaded = source()
     record = next(r for r in loaded["records"] if r["name"] == "scpn-fusion-core")
     for field in ("description", "language", "license", "topics"):
@@ -259,6 +327,7 @@ def test_nullable_metadata_and_unicode_are_rendered_before_writes(
 def test_invalid_capture_date_refuses_all_outputs(
     producer: ModuleType, tmp_path: Path, capture_date: str
 ) -> None:
+    """Noncanonical or impossible retrieval dates cannot create a candidate directory."""
     with pytest.raises(ValueError):
         producer.build(source(), tmp_path / "candidate", retrieved=capture_date)
     assert not (tmp_path / "candidate").exists()
@@ -267,6 +336,7 @@ def test_invalid_capture_date_refuses_all_outputs(
 def test_input_and_symlink_output_guards_preserve_accepted_bytes(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Output aliases and overlapping inputs refuse while preserving the accepted source bytes."""
     before = SOURCE.read_bytes()
     link = tmp_path / "accepted"
     link.symlink_to(DIRECTORY, target_is_directory=True)
@@ -281,6 +351,7 @@ def test_input_and_symlink_output_guards_preserve_accepted_bytes(
 
 
 def test_custom_source_requires_date_and_native_errors_are_trace_free(tmp_path: Path) -> None:
+    """Custom input requires a date; malformed JSON and UTF-8 return clean CLI errors."""
     custom = tmp_path / "source.json"
     custom.write_bytes(SOURCE.read_bytes())
     output = tmp_path / "candidate"
@@ -310,6 +381,7 @@ def test_custom_source_requires_date_and_native_errors_are_trace_free(tmp_path: 
 def test_inconsistent_refresh_options_refuse_before_creating_output(
     tmp_path: Path, options: list[str]
 ) -> None:
+    """Incomplete online option combinations return failure without creating output."""
     output = tmp_path / "candidate"
     result = run_cli(SCRIPT, "--output-dir", str(output), *options)
     assert result.returncode == 1 and not output.exists()
@@ -318,6 +390,7 @@ def test_inconsistent_refresh_options_refuse_before_creating_output(
 def test_atomic_output_failure_removes_only_its_own_temporary_file(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """An atomic write to a directory raises and preserves the unrelated file and directory."""
     destination = tmp_path / "directory"
     destination.mkdir()
     preserved = tmp_path / "preserved"
@@ -329,6 +402,7 @@ def test_atomic_output_failure_removes_only_its_own_temporary_file(
 
 
 def test_fixture_preserves_every_consumed_cell_and_real_exclusion(producer: ModuleType) -> None:
+    """Fixture hashes bind all 43 records and consumed cells, with 13 genuine exclusions."""
     provenance = json.loads((FIXTURE.parent / "SOURCE.json").read_bytes())
     assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == provenance["source_sha256"]
     assert hashlib.sha256(FIXTURE.read_bytes()).hexdigest() == provenance["fixture_sha256"]
@@ -353,6 +427,7 @@ def test_fixture_preserves_every_consumed_cell_and_real_exclusion(producer: Modu
 def test_complete_trusted_api_acquisition_and_native_online_outputs(
     producer: ModuleType, tmp_path: Path, certificate: tuple[Path, Path], pagination: str
 ) -> None:
+    """Trusted HTTPS pagination preserves all records and builds the complete native snapshot."""
     records = api_records()
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {
         "/repos": (200, {}, api_body(records), 0.0)
@@ -424,6 +499,7 @@ def test_complete_trusted_api_acquisition_and_native_online_outputs(
 def test_real_tls_api_refusals(
     producer: ModuleType, certificate: tuple[Path, Path], case: str
 ) -> None:
+    """Invalid API links, responses, trust and finite limits raise within the allowed request paths."""
     records = api_records()
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {
         "/repos": (200, {}, api_body(records), 0.0)
@@ -476,6 +552,7 @@ def test_real_tls_api_refusals(
 def test_real_http_redirects_are_validated_before_following(
     producer: ModuleType, certificate: tuple[Path, Path], target: str
 ) -> None:
+    """Only the trusted redirect is followed; unsafe or looping targets refuse before a second request."""
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {}
     with api_server(certificate, routes) as (url, requests):
         destinations = {
@@ -507,6 +584,7 @@ def test_real_http_redirects_are_validated_before_following(
     ],
 )
 def test_invalid_source_urls_refuse_before_network(producer: ModuleType, url: str) -> None:
+    """Malformed, credential-bearing or non-HTTPS source URLs fail validation before acquisition."""
     with pytest.raises(ValueError):
         producer.fetch_repositories(url)
 
@@ -524,6 +602,7 @@ def test_invalid_source_urls_refuse_before_network(producer: ModuleType, url: st
 def test_nonpositive_or_unbounded_limits_refuse_before_network(
     producer: ModuleType, options: dict[str, int | float]
 ) -> None:
+    """Invalid timeout, byte or page limits fail validation before acquisition."""
     with pytest.raises(ValueError):
         producer.fetch_repositories(**options)
 
@@ -532,6 +611,7 @@ def test_nonpositive_or_unbounded_limits_refuse_before_network(
 def test_native_online_aliases_refuse_without_touching_inputs(
     certificate: tuple[Path, Path], tmp_path: Path, case: str
 ) -> None:
+    """Online output and snapshot aliases refuse without changing source or certificate bytes."""
     output, snapshot = tmp_path / "candidate", tmp_path / "snapshot.json"
     original = SOURCE.read_bytes()
     cert_before = certificate[0].read_bytes()
@@ -569,6 +649,7 @@ def test_native_online_aliases_refuse_without_touching_inputs(
 def test_native_online_preparation_errors_never_write_snapshot(
     certificate: tuple[Path, Path], tmp_path: Path, mutation: str
 ) -> None:
+    """Invalid dates, encoding, required records or HTTP status produce neither snapshot nor outputs."""
     records = api_records()
     if mutation == "bad-unicode":
         next(r for r in records if r["name"] == "scpn-fusion-core")["description"] = "\ud800"
@@ -599,6 +680,7 @@ def test_native_online_preparation_errors_never_write_snapshot(
 
 @pytest.mark.parametrize("size", [4096, 16384])
 def test_real_file_size_limit_cleans_failed_atomic_temporary(tmp_path: Path, size: int) -> None:
+    """A real 1,024-byte file limit refuses larger writes and preserves the prior candidate alone."""
     destination = tmp_path / "candidate"
     destination.write_bytes(b"previous accepted candidate")
     result = subprocess.run(
@@ -630,6 +712,7 @@ def test_real_file_size_limit_cleans_failed_atomic_temporary(tmp_path: Path, siz
 def test_casefold_identity_collision_is_refused_before_writing(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Case-insensitive duplicate repository identities raise before creating output."""
     records = api_records()
     duplicate = records[0].copy()
     duplicate["name"] = duplicate["name"].swapcase()
@@ -643,6 +726,7 @@ def test_casefold_identity_collision_is_refused_before_writing(
 def test_null_spdx_is_an_observation_without_a_software_licence_claim(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """A null SPDX cell retains licence absence and the original shared-physics evidence boundary."""
     records = api_records()
     next(r for r in records if r["name"] == "scpn-fusion-core")["license"] = {"spdx_id": None}
     producer.build(records, tmp_path, retrieved="2026-09-27")
@@ -655,6 +739,7 @@ def test_null_spdx_is_an_observation_without_a_software_licence_claim(
 def test_native_write_failure_preserves_destination_but_bundle_is_not_transactional(
     tmp_path: Path,
 ) -> None:
+    """A later native write failure preserves its directory while retaining the earlier successful TSV."""
     (tmp_path / "reactor_repositories.json").mkdir()
     result = run_cli(SCRIPT, "--output-dir", str(tmp_path))
     assert result.returncode == 1 and "Traceback" not in result.stderr
@@ -669,6 +754,7 @@ def test_native_write_failure_preserves_destination_but_bundle_is_not_transactio
 
 
 def test_native_snapshot_symlink_to_input_is_refused(tmp_path: Path) -> None:
+    """A snapshot symlink to accepted input refuses while preserving the source and link."""
     before = SOURCE.read_bytes()
     link = tmp_path / "snapshot.json"
     link.symlink_to(SOURCE)

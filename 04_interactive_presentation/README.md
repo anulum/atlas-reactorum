@@ -158,14 +158,77 @@ terms apply to their own records and do not change with hosting.
 ## Files
 
 - `learning-path-catalogue.js`, `learning-paths.js`, `learning-path-controller.js` — authored questions, source-preserving learning contract and actual browser controls;
-- `index.html`, `styles.css`, `app.js` — application;
+- `index.html`, `styles.css`, `app.js` — template, styling, dataset admission and startup wiring;
+- `taxonomy-catalogue-controller.js`, `company-catalogue-controller.js`, `repository-catalogue-controller.js` — original catalogue facets, cards and source-bound taxonomy details;
+- `facility-catalogue-controller.js`, `facility-detail-controller.js` — actual native map/list controls and original sourced facility details;
+- `facility-field-sources.js`, `facility-export.js` — original observation HTML and complete CSV/JSON serialization;
+- `fallback-taxonomy.js` — original authored display fallback, retaining its missing source identity;
+- `presentation-text.js`, `explanatory-panels.js` — original text/link escaping and authored fusion/flow explanations;
+- `page-navigation.js` — actual desktop/mobile section movement, scroll state, keyboard controls and dialog dismissal;
+- `application-data.js` — original dataset shape admission before filter, map, source and card access;
+- `taxonomy-construction.js` — shared authored tuple construction and parent linking for browser and native source readers;
 - `taxonomy-comparison.js`, `taxonomy-comparison-controller.js` — reproducible comparison contract and browser controls;
 - `data/` — generated JSON and offline JavaScript datasets, with JSON Schemas;
 - `SOURCES.tsv` — claim/source map;
 - `ATTRIBUTION.md` — source and licensing boundary;
 - `.nojekyll` — serve static files unchanged;
 
+The application loads these components before binding controls. The fallback
+retains its original display values and supplies no source IDs or review dates;
+the complete source-bound taxonomy remains the normal input. Explanatory panels
+accept only their authored choices, including rejection of inherited prototype
+names. Text and source-link rendering retain original wording, ordering and
+escaping. `tests/presentation_components.test.cjs` qualifies the complete native
+modules at 100 per cent line/branch/function coverage; the real Chrome controls
+are exercised in `tests/test_presentation_components_browser.py`.
+
+Navigation binds the actual page document and HTML controls. Desktop and mobile
+buttons retain the section order and first/last boundary clamps. Arrow, Page,
+Home and End keys request section movement and cancel native page scrolling;
+focused form controls retain ordinary editing. Dialog content clicks retain the
+open dialog; its close button and backdrop dismiss it. Missing controls, absent
+windows, invalid positions and unavailable sections refuse through the public
+navigation API. `tests/test_page_navigation_browser.py` exercises the full page
+in native Chrome and requires every source-exact controller region and function
+to execute. This native measurement is separate from Node branch coverage.
+
 ## Checks
+
+Each catalogue owns its actual controls and source views. `app.js` admits the
+five original input collections, creates those owners and binds page startup.
+The original `openReactor`, `openFacility`, `filteredFacilities`,
+`downloadFacilityData` and mounted `atlasMap` entry points retain their actual
+owner types. Taxonomy parent display uses the supplied parent name or family;
+unattributed fallback rows never acquire another entry's identity as a parent.
+
+Dedicated company, repository, field-source and export native suites require
+100 per cent line/branch/function coverage. Actual browser suites cover the
+complete startup, taxonomy, facility-detail and facility-control sources and
+require every source-exact native execution region and function. The browser
+measurement is distinct from Node branch coverage. Exports still contain all
+selected records and unknown producer cells; the visible 250-card cap remains
+a display limit. Missing optional map namespace/geometry keeps records listed;
+missing required controls refuses. Test candidates alter real source metadata
+or DOM controls without replacing native Window, dialog or canvas behavior.
+
+
+The authored taxonomy loads the shared constructor before its data declarations.
+Native exporters and profile validation use that same constructor. It retains
+the original source lists, entry overrides, default wording and null scores;
+missing, inherited or nontextual source locators refuse before construction.
+`tests/taxonomy_construction.test.cjs` exercises the actual catalogue and source
+defaults, while the complete exporter cohort verifies source/context refusal.
+
+Dataset admission retains the original record objects, order and unknown extra
+producer cells. Consumed text, source arrays, observations and coordinates are
+checked before access; source/profile validators own the separate source,
+rights and scientific-context checks. `tests/application_data.test.cjs` covers
+the complete admission module at 100 per cent line/branch/function coverage.
+Real Chrome missing-source and malformed-input cases are in
+`tests/test_application_data_browser.py`. A missing authored taxonomy leaves its
+31 display fallback rows unattributed, supplies no evidence profile or download
+and remains a failed complete-application CLI check. The other original data
+layers remain available.
 
 Run `./validate.sh` to check JSON, JavaScript syntax, required files and accidental
 non-English UI residue. It runs the map tests and dedicated citation/export tests,
@@ -201,6 +264,21 @@ proposals and decisions to original revisions; `evidence-history-render.js`
 provides escaped timelines and exact links; `evidence-history-controller.js`
 wires the actual controls and local downloads. The native contract suites run
 in `validate.sh`; actual browser cases are in `tests/test_evidence_history_browser.py`.
+The CLI checks complete wire shapes through `tools/evidence_history_inputs.py`
+and the owning evidence-profile schema before native semantic admission. For
+direct commands, `ATLAS_PYTHON` selects Python with the locked build dependencies;
+the default is `python3` on `PATH`. `make build` passes its configured interpreter.
+The Python checker's real producer and refusal cases are in
+`tests/test_evidence_history_inputs.py`.
+
+`browser-elements.js` requires each bound control to have its original HTML
+tag and HTML namespace. History, comparison and learning controllers use this
+reader before binding events; missing, incorrectly tagged or foreign-namespace
+controls refuse startup. Its native cases read
+the actual `index.html`, and Chrome cases exercise the complete controllers.
+`browser-contracts.d.ts` describes the original generated journal/profile
+products using their owning schema types. It supplies compile-time declarations;
+the runtime source and integrity checks continue to admit the actual content.
 
 ## Source-linked learning
 
@@ -242,6 +320,12 @@ coverage. `tests/test_learning_paths_browser.py` exercises the actual complete
 page in native Chrome, including keyboard controls, mobile layout, downloads,
 history and source-version refusals. Its CDP records retain the original
 controller source and native execution ranges; they are a separate measurement.
+The learning model uses concrete authored-path, snapshot, original-bundle and
+source-feedback contracts. Caller versions and submitted answers remain unknown
+until their native checks admit them. An authored answer outside its original
+example set refuses; a submitted form without a selected answer disables the
+obsolete view and exports. The complete original catalogue and both reading
+depths are exercised against source-validated profiles.
 
 
 ### Full-data browser checks

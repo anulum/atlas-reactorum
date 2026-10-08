@@ -31,7 +31,18 @@ REPORTS = (
 
 @pytest.fixture
 def research_copy(tmp_path: Path) -> Path:
-    """Preserve the real base, previous overlays, current registry and sibling generator."""
+    """Copy the complete research catalogue for isolated native report validation.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for the base, prior overlays and current enrichment copy.
+
+    Returns
+    -------
+    Path
+        Round-five directory in the complete copy, excluding bytecode caches.
+    """
     return (
         shutil.copytree(
             DIRECTORY,
@@ -43,6 +54,7 @@ def research_copy(tmp_path: Path) -> Path:
 
 
 def test_actual_round5_generates_identical_reports(research_copy: Path) -> None:
+    """Regenerate exact accepted reports in both CLI modes while preserving original input digests."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     inputs = [
         research_copy / "research_reactor_enrichment_round5.tsv",
@@ -90,6 +102,7 @@ def test_actual_round5_generates_identical_reports(research_copy: Path) -> None:
 def test_round5_bad_facts_refuse_before_report_generation(
     research_copy: Path, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject changed immutable facts, invalid source evidence, dates and power values before creating reports."""
     path = research_copy / "research_reactor_enrichment_round5.tsv"
     fields, rows = read_table(path)
     rows[0][field] = value
@@ -119,6 +132,7 @@ def test_round5_bad_facts_refuse_before_report_generation(
     ],
 )
 def test_round5_integrity_refuses(research_copy: Path, corruption: str) -> None:
+    """Reject malformed overlays, duplicate identities and patches without effective factual changes."""
     path = research_copy / "research_reactor_enrichment_round5.tsv"
     fields, rows = read_table(path)
     base = research_copy.parent / "research_reactors.tsv"
@@ -176,6 +190,7 @@ def test_round5_integrity_refuses(research_copy: Path, corruption: str) -> None:
 
 @pytest.mark.parametrize("date", ["1957", "1957-09", "1957-09-01"])
 def test_round5_preserves_source_date_precision(research_copy: Path, date: str) -> None:
+    """Accept year, month and day precision for published first-criticality dates."""
     path = research_copy / "research_reactor_enrichment_round5.tsv"
     fields, rows = read_table(path)
     rows[0]["first_criticality"] = date
@@ -201,6 +216,7 @@ def test_round5_preserves_source_date_precision(research_copy: Path, date: str) 
     ],
 )
 def test_round5_source_registry_refuses(research_copy: Path, corruption: str) -> None:
+    """Reject malformed registries, excluded references and missing required included-source associations."""
     path = research_copy / "source_registry.tsv"
     fields, rows = read_table(path)
     _, patches = read_table(research_copy / "research_reactor_enrichment_round5.tsv")
@@ -254,6 +270,7 @@ def test_round5_source_registry_refuses(research_copy: Path, corruption: str) ->
     ],
 )
 def test_round5_report_boundary_refuses(research_copy: Path, corruption: str) -> None:
+    """Reject malformed completeness reports, absent prior overlays and unwritable report destinations."""
     country = research_copy / REPORTS[0]
     summary = research_copy / REPORTS[1]
     cf, cr = read_table(country)
@@ -297,6 +314,7 @@ def test_round5_report_boundary_refuses(research_copy: Path, corruption: str) ->
 def test_round5_public_entry_point_checks_existing_reports(
     research_copy: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read complete accepted overlays and check existing report bytes through public main."""
     script = SCRIPT
     spec = importlib.util.spec_from_file_location("atlas_research_round5", script)
     assert spec is not None and spec.loader is not None
@@ -317,6 +335,7 @@ def test_round5_public_entry_point_checks_existing_reports(
 def test_round5_runs_canonical_generator_for_alternate_data_root(
     research_copy: Path,
 ) -> None:
+    """Generate reports with the repository generator when the alternate data root lacks its sibling script."""
     (research_copy / "generate_gap_report.py").unlink()
     result = run_cli(SCRIPT, "--research-root", str(research_copy.parent))
     assert result.returncode == 0, result.stdout + result.stderr
@@ -334,6 +353,7 @@ def test_round5_runs_canonical_generator_for_alternate_data_root(
     ],
 )
 def test_round5_preserves_each_immutable_input(research_copy: Path, relative: str) -> None:
+    """Reject byte drift in each immutable base or prior-overlay input under optimized execution."""
     path = research_copy.parent / relative
     path.write_bytes(path.read_bytes() + b"\n")
     result = run_cli(SCRIPT, "--research-root", str(research_copy.parent), optimize=True)
@@ -342,6 +362,7 @@ def test_round5_preserves_each_immutable_input(research_copy: Path, relative: st
 
 
 def test_round5_refuses_changes_without_a_requested_gap(research_copy: Path) -> None:
+    """Reject a name-only edit that fills none of the requested priority gaps."""
     path = research_copy / "research_reactor_enrichment_round5.tsv"
     fields, rows = read_table(path)
     for field in fields[1:14]:
@@ -357,6 +378,7 @@ def test_round5_refuses_changes_without_a_requested_gap(research_copy: Path) -> 
 def test_round5_public_missing_predicate_matches_actual_type_gaps(
     research_copy: Path,
 ) -> None:
+    """Recognize the generic research-reactor type as a missing specific type observation."""
     spec = importlib.util.spec_from_file_location("atlas_research_round5_missing", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -368,6 +390,7 @@ def test_round5_public_missing_predicate_matches_actual_type_gaps(
 
 @pytest.mark.parametrize("timeout", ["0", "-1", "nan", "inf", "1e308", "3600.0001"])
 def test_round5_invalid_report_deadline_preserves_inputs(research_copy: Path, timeout: str) -> None:
+    """Reject unsupported CLI report deadlines without changing any existing report bytes."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     result = run_cli(
         SCRIPT,
@@ -385,6 +408,7 @@ def test_round5_invalid_report_deadline_preserves_inputs(research_copy: Path, ti
 def test_round5_actual_reporter_timeout_preserves_existing_reports(
     research_copy: Path,
 ) -> None:
+    """Terminate the actual reporter at its tiny deadline and preserve existing reports and source bytes."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     source = research_copy / "research_reactor_enrichment_round5.tsv"
     original = source.read_bytes()

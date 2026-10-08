@@ -39,6 +39,7 @@ REFUSAL = "Historical FusionBenchmark live acquisition is not approved; use the 
     ],
 )
 def test_every_historical_fetch_refuses_before_opening_a_protocol(url: str) -> None:
+    """Require the exact historical-acquisition refusal for every supplied protocol and URL form."""
     module = load_module(
         "05_global_reactor_map/imports/fusion/build_dataset.py", "atlas_historical_acquisition"
     )
@@ -48,6 +49,7 @@ def test_every_historical_fetch_refuses_before_opening_a_protocol(url: str) -> N
 
 
 def test_historical_main_refuses_and_preserves_every_retained_layer() -> None:
+    """Refuse the historical main entry point while preserving every retained fusion TSV hash."""
     module = load_module(
         "05_global_reactor_map/imports/fusion/build_dataset.py", "atlas_historical_acquisition"
     )
@@ -62,6 +64,7 @@ def test_historical_main_refuses_and_preserves_every_retained_layer() -> None:
 def test_actual_historical_cli_refuses_with_authored_exit_and_no_output(
     tmp_path: Path, optimize: bool
 ) -> None:
+    """Return the authored CLI refusal normally and under -O without output or source changes."""
     paths = sorted(SCRIPT.parent.rglob("*.tsv"))
     before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in paths}
     command = [sys.executable, *(["-O"] if optimize else []), str(SCRIPT)]

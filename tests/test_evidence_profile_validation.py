@@ -40,7 +40,18 @@ SNAPSHOT = hashlib.sha256((ROOT / INPUTS["taxonomy_sha256"]).read_bytes()).hexdi
 
 @pytest.fixture
 def candidate(tmp_path: Path) -> Path:
-    """Copy all authentic profile inputs without replacing their source readers."""
+    """Copy every authentic profile input into a pytest-owned candidate.
+
+    Parameters
+    ----------
+    tmp_path
+        Temporary candidate root whose original readers remain production code.
+
+    Returns
+    -------
+    pathlib.Path
+        Root containing all bound input files and the complete profile document.
+    """
     for relative in [*INPUTS.values(), str(PROFILE)]:
         source = ROOT / relative
         target = tmp_path / relative
@@ -50,19 +61,68 @@ def candidate(tmp_path: Path) -> Path:
 
 
 def document(root: Path) -> dict[str, object]:
+    """Decode the candidate's complete profile document for explicit test mutations.
+
+    Parameters
+    ----------
+    root
+        Owned candidate root containing the profile file under its original name.
+
+    Returns
+    -------
+    dict[str, object]
+        Fresh mutable document; this helper performs no replacement validation.
+    """
     value: dict[str, object] = json.loads((root / PROFILE).read_text())
     return value
 
 
 def records(doc: dict[str, object]) -> list[dict[str, object]]:
+    """Expose the existing mutable profile-record array without revalidation.
+
+    Parameters
+    ----------
+    doc
+        Decoded profile document from the original source fixture.
+
+    Returns
+    -------
+    list[dict[str, object]]
+        The same record array held by the document; edits remain in that candidate.
+    """
     return cast(list[dict[str, object]], doc["records"])
 
 
 def write(root: Path, doc: dict[str, object]) -> None:
+    """Serialise an explicitly mutated profile document only in its owned candidate.
+
+    Parameters
+    ----------
+    root
+        Candidate root whose profile file is replaced; accepted inputs stay separate.
+    doc
+        Complete document to encode as UTF-8-compatible JSON with a final newline.
+    """
     (root / PROFILE).write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n")
 
 
 def refresh(root: Path, doc: dict[str, object], field: str) -> None:
+    """Rebind one candidate digest after an explicit source mutation.
+
+    Parameters
+    ----------
+    root
+        Candidate root containing the mutated input under its original relative name.
+    doc
+        Profile document whose input-digest mapping is updated in place.
+    field
+        Existing INPUTS key identifying the source file to hash.
+
+    Notes
+    -----
+    Digest rebinding does not approve the mutation. Original source readers still
+    own semantic, locator, identity and review validation.
+    """
     inputs = cast(dict[str, str], doc["inputs"])
     inputs[field] = hashlib.sha256((root / INPUTS[field]).read_bytes()).hexdigest()
 
@@ -70,6 +130,24 @@ def refresh(root: Path, doc: dict[str, object], field: str) -> None:
 def cli(
     root: Path, *args: str, optimize: bool = False, env: dict[str, str] | None = None
 ) -> subprocess.CompletedProcess[str]:
+    """Run the actual profile CLI against a complete candidate and bound snapshot.
+
+    Parameters
+    ----------
+    root
+        Candidate root passed through the public root option.
+    args
+        Additional public CLI options for migration, selection or refusal tests.
+    optimize
+        Whether to launch the selected Python with optimisation enabled.
+    env
+        Explicit child environment, or inherited selection when None.
+
+    Returns
+    -------
+    subprocess.CompletedProcess[str]
+        Actual return code and decoded diagnostics, bounded by a 40-second timeout.
+    """
     return subprocess.run(
         [
             sys.executable,
@@ -90,6 +168,7 @@ def cli(
 
 
 def test_whole_migration_and_explicit_reader_preserve_all_original_data(candidate: Path) -> None:
+    """All 135 profiles preserve 599 claims, 148 source records, original values, ordering and frozen input bytes."""
     before = {relative: (candidate / relative).read_bytes() for relative in INPUTS.values()}
     doc = validate_profiles(candidate, SNAPSHOT)
     assert migrate_profiles(candidate, SNAPSHOT) == doc
@@ -111,6 +190,7 @@ def test_whole_migration_and_explicit_reader_preserve_all_original_data(candidat
 
 
 def test_native_cli_migration_selection_and_optimized_refusal(candidate: Path) -> None:
+    """Whole migration and selection agree; conflicting modes and forged review status refuse in both Python modes."""
     doc = document(candidate)
     for args in [(), ("--migrate",), ("--entry", "pwr")]:
         result = cli(candidate, *args)
@@ -149,6 +229,7 @@ def test_native_cli_migration_selection_and_optimized_refusal(candidate: Path) -
 def test_no_invalid_last_record_or_source_can_be_partially_read(
     candidate: Path, mutation: str
 ) -> None:
+    """A defect in the last profile or source prevents even a valid first-entry read and emits no CLI payload."""
     doc = document(candidate)
     rows = records(doc)
     last = rows[-1]
@@ -200,6 +281,7 @@ def test_no_invalid_last_record_or_source_can_be_partially_read(
 
 @pytest.mark.parametrize("field", INPUTS)
 def test_stale_input_and_explicit_snapshot_are_refused(candidate: Path, field: str) -> None:
+    """Changed frozen input bytes and a mismatched requested taxonomy digest raise instead of accepting stale profiles."""
     with (candidate / INPUTS[field]).open("ab") as handle:
         handle.write(b"\n")
     with pytest.raises(ProfileError, match="hash is stale"):
@@ -221,6 +303,7 @@ def test_stale_input_and_explicit_snapshot_are_refused(candidate: Path, field: s
     ],
 )
 def test_strict_json_refusal_never_echoes_source_input(candidate: Path, body: bytes) -> None:
+    """Ambiguous, nonfinite or malformed profile JSON refuses without a traceback, source echo or candidate path."""
     (candidate / PROFILE).write_bytes(body)
     result = cli(candidate)
     assert result.returncode == 1 and not result.stdout
@@ -229,6 +312,7 @@ def test_strict_json_refusal_never_echoes_source_input(candidate: Path, body: by
 
 
 def test_unreadable_source_and_profile_are_refused(candidate: Path) -> None:
+    """Missing frozen input and profile files yield their explicit public ProfileError refusals."""
     (candidate / INPUTS["audit_sha256"]).unlink()
     with pytest.raises(ProfileError, match="Frozen input"):
         validate_profiles(candidate, SNAPSHOT)
@@ -243,6 +327,7 @@ def test_unreadable_source_and_profile_are_refused(candidate: Path) -> None:
 def test_original_reader_still_owns_source_and_locator_validation(
     candidate: Path, mutation: str
 ) -> None:
+    """Rebound candidate hashes cannot bypass original source, PDF locator, format or review validation."""
     doc = document(candidate)
     legacy_path = candidate / INPUTS["citations_sha256"]
     legacy = json.loads(legacy_path.read_text())
@@ -265,6 +350,7 @@ def test_original_reader_still_owns_source_and_locator_validation(
 
 
 def test_duplicate_historical_identity_and_missing_native_reader_refuse(candidate: Path) -> None:
+    """Duplicated audit identities refuse, and an unavailable real Node reader is a CLI failure."""
     doc = document(candidate)
     audit = candidate / INPUTS["audit_sha256"]
     with audit.open("a") as handle:
@@ -278,6 +364,7 @@ def test_duplicate_historical_identity_and_missing_native_reader_refuse(candidat
 
 
 def test_known_zero_requires_units_conditions_boundary_and_existing_claim(candidate: Path) -> None:
+    """Metadata zero remains zero with explicit context; missing units or unknown original claim bindings refuse."""
     doc = document(candidate)
     row = records(doc)[0]
     claim = cast(list[dict[str, object]], row["claims"])[0]
@@ -309,6 +396,7 @@ def test_known_zero_requires_units_conditions_boundary_and_existing_claim(candid
 
 
 def test_unknown_last_parent_refuses_whole_public_migration_and_reading(candidate: Path) -> None:
+    """An unknown last-entry parent refuses API and optimised CLI reads while preserving all candidate inputs."""
     taxonomy = candidate / INPUTS["taxonomy_sha256"]
     with taxonomy.open("a") as handle:
         handle.write("window.REACTOR_TAXONOMY[134].parent_id='missing-parent';\n")
@@ -341,6 +429,7 @@ def test_unknown_last_parent_refuses_whole_public_migration_and_reading(candidat
 
 
 def test_unknown_kind_refuses_both_validation_and_whole_migration(candidate: Path) -> None:
+    """An undeclared entity kind refuses validation and migration even after source hashes are rebound."""
     taxonomy = candidate / INPUTS["taxonomy_sha256"]
     with taxonomy.open("a") as handle:
         handle.write("window.REACTOR_TAXONOMY[0].kind='unmapped entity';\n")
@@ -360,6 +449,7 @@ def test_unknown_kind_refuses_both_validation_and_whole_migration(candidate: Pat
 
 
 def test_historical_structure_and_original_context_cannot_be_rewritten(candidate: Path) -> None:
+    """Altered taxonomy context, audit columns or missing legacy inputs cannot be accepted as the original snapshot."""
     doc = document(candidate)
     cast(dict[str, object], records(doc)[-1]["taxonomy_record"])["mode"] = "Invented mode"
     with pytest.raises(ProfileError, match="taxonomy context"):
@@ -376,6 +466,7 @@ def test_historical_structure_and_original_context_cannot_be_rewritten(candidate
 
 
 def test_native_legacy_process_timeout_is_safely_refused(candidate: Path) -> None:
+    """An actual nonterminating taxonomy child is bounded and reported as a public legacy-input refusal."""
     taxonomy = candidate / INPUTS["taxonomy_sha256"]
     with taxonomy.open("a") as handle:
         handle.write("while(true){}\n")
@@ -388,6 +479,7 @@ def test_native_legacy_process_timeout_is_safely_refused(candidate: Path) -> Non
 
 
 def test_concurrent_frozen_input_edit_cannot_return_a_mixed_snapshot(candidate: Path) -> None:
+    """A source edit after the real Node child launches refuses a mixed snapshot and reaps the editor thread."""
     taxonomy = candidate / INPUTS["taxonomy_sha256"]
     with taxonomy.open("a") as handle:
         handle.write("Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,1200);\n")
@@ -405,6 +497,7 @@ def test_concurrent_frozen_input_edit_cannot_return_a_mixed_snapshot(candidate: 
 
     def edit_audit() -> None:
         # Mutate only after this validation's real Node child has launched.
+        """Wait for this validation's real Node child, then record one owned audit mutation."""
         deadline = time.monotonic() + 30
         while time.monotonic() < deadline:
             for pid in set(children.read_text().split()) - previous_children:
@@ -433,6 +526,7 @@ def test_concurrent_frozen_input_edit_cannot_return_a_mixed_snapshot(candidate: 
 def test_in_memory_numeric_input_obeys_the_same_finite_value_contract(
     candidate: Path, value: float | int
 ) -> None:
+    """Nonfinite or unrepresentably large in-memory values refuse under the original finite-parameter contract."""
     doc = document(candidate)
     row = records(doc)[0]
     claim = cast(list[dict[str, object]], row["claims"])[0]

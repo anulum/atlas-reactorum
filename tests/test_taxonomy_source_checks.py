@@ -39,7 +39,19 @@ DATE = "2026-09-30"
 
 
 def taxonomy_pdf(*, empty: bool = False) -> bytes:
-    """Serialize all real snapshot identities as a valid five-page PDF report."""
+    """Encode every historical taxonomy identity into a valid source-bound PDF fixture.
+
+    Parameters
+    ----------
+    empty
+        Whether to leave page text streams empty for the actual extraction control.
+
+    Returns
+    -------
+    bytes
+        PDF 1.4 report with five pages derived from the complete historical snapshot.
+        This is an owned transport fixture, not a publisher's original PDF.
+    """
     rows = read_table(SNAPSHOT)[1]
     pages = [rows[start : start + 25] for start in range(0, len(rows), 25)]
     objects = [
@@ -91,6 +103,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Expose genuine response, redirect, body failure and registration cases."""
 
     def do_GET(self) -> None:
+        """Serve genuine access, registration and PDF controls; delayed responses stall for 0.3 seconds."""
         server = self.server
         assert isinstance(server, TaxonomyServer)
         path = unquote(urlsplit(self.path).path)
@@ -186,6 +199,23 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture(scope="module")
 def https_sources(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str, Path]]:
+    """Serve the complete historical source/registration fixture over real TLS.
+
+    Parameters
+    ----------
+    tmp_path_factory
+        Pytest owner of the module-scoped certificate and key directory.
+
+    Yields
+    ------
+    tuple[str, pathlib.Path]
+        Anonymous local HTTPS origin and its trusted localhost certificate.
+
+    Notes
+    -----
+    PDF text and DOI titles come from retained snapshot observations. Listener
+    cleanup joins the serving thread and restores the original NO_PROXY selection.
+    """
     directory = tmp_path_factory.mktemp("taxonomy-https")
     certificate, key = directory / "certificate.pem", directory / "key.pem"
     openssl = shutil.which("openssl")
@@ -242,7 +272,21 @@ def https_sources(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[st
 
 
 def service_catalogue(directory: Path, base: str) -> tuple[Path, Path, dict[str, str]]:
-    """Map the full real snapshot and replacements to distinct genuine TLS routes."""
+    """Map every historical source and replacement to a distinct real TLS route.
+
+    Parameters
+    ----------
+    directory
+        Owned destination for copied taxonomy and additional-source inputs.
+    base
+        Actual fixture HTTPS origin, preserving anonymous trusted acquisition.
+
+    Returns
+    -------
+    tuple[pathlib.Path, pathlib.Path, dict[str, str]]
+        Copied snapshot, copied supplementary source list and original-to-service
+        URL mapping; accepted source bytes remain separate and unchanged.
+    """
     fields, rows = read_table(SNAPSHOT)
     additional = json.loads(ADDITIONAL.read_text())
     original = sorted(
@@ -267,6 +311,7 @@ def service_catalogue(directory: Path, base: str) -> tuple[Path, Path, dict[str,
 def test_complete_snapshot_native_cli_and_audit_consumer(
     https_sources: tuple[str, Path], tmp_path: Path
 ) -> None:
+    """Normal/optimised CLI transfer and audit consumers preserve 123 historical entries, 68 sources and original inputs."""
     base, certificate = https_sources
     snapshot, additional, mapping = service_catalogue(tmp_path, base)
     original_paths = [
@@ -353,6 +398,7 @@ def test_complete_snapshot_native_cli_and_audit_consumer(
 def test_genuine_redirect_read_and_access_observations(
     https_sources: tuple[str, Path], route: str, access: str
 ) -> None:
+    """Actual redirects, dropped/delayed bodies and access barriers retain explicit observations without approval claims."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     config = module.CheckConfig(
@@ -370,6 +416,7 @@ def test_genuine_redirect_read_and_access_observations(
 
 
 def test_real_certificate_failure_and_refused_socket(https_sources: tuple[str, Path]) -> None:
+    """Untrusted TLS and a closed real socket become request-failed observations with no invented HTTP status."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     assert module.check(base + "/html")["access"] == "request-failed"
@@ -388,6 +435,7 @@ def test_real_certificate_failure_and_refused_socket(https_sources: tuple[str, P
 def test_real_pdf_extraction_and_native_failure_results(
     https_sources: tuple[str, Path], tmp_path: Path, failure: str
 ) -> None:
+    """Real PDF extraction yields bounded source text; disabled, absent, invalid or timed-out extraction retains absence."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     executable = shutil.which("pdftotext")
@@ -436,6 +484,7 @@ def test_real_pdf_extraction_and_native_failure_results(
 def test_registration_requires_matching_work_and_nonempty_titles(
     https_sources: tuple[str, Path], case: str
 ) -> None:
+    """Invalid registration shapes, identities, titles or responses cannot assert DOI registration from an HTML response."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     doi = "10.1063/5.0206222"
@@ -456,6 +505,7 @@ def test_registration_requires_matching_work_and_nonempty_titles(
 def test_registration_transport_failure_and_doi_substring_are_not_identity(
     https_sources: tuple[str, Path],
 ) -> None:
+    """Failed registration transport and an unrelated DOI substring cannot assert a registered work identity."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     config = module.CheckConfig(
@@ -473,6 +523,7 @@ def test_registration_transport_failure_and_doi_substring_are_not_identity(
 def test_doi_host_case_query_and_fragment_do_not_change_work_identity(
     https_sources: tuple[str, Path],
 ) -> None:
+    """Host case, an encoded DOI slash and access/query fragments retain the original registered work identity."""
     base, certificate = https_sources
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_source_checker")
     config = module.CheckConfig(
@@ -518,6 +569,7 @@ def test_doi_host_case_query_and_fragment_do_not_change_work_identity(
 def test_bad_actual_snapshot_refuses_before_transfer_and_preserves_outputs(
     tmp_path: Path, damage: str
 ) -> None:
+    """Malformed snapshot rows or unsafe source URLs refuse before transfer while preserving accepted output copies."""
     path = tmp_path / "snapshot.tsv"
     fields, rows = read_table(SNAPSHOT)
     if damage == "header":
@@ -589,6 +641,7 @@ def test_bad_actual_snapshot_refuses_before_transfer_and_preserves_outputs(
 def test_bad_full_supplementary_envelope_refuses_before_network(
     tmp_path: Path, damage: str
 ) -> None:
+    """Invalid complete supplementary-source envelopes refuse before output creation or network acquisition."""
     document = json.loads(ADDITIONAL.read_text())
     if damage == "version":
         document["schema_version"] = "2.0.0"
@@ -640,6 +693,7 @@ def test_bad_full_supplementary_envelope_refuses_before_network(
 def test_bad_transfer_configuration_refuses_before_network(
     tmp_path: Path, option: str, value: str
 ) -> None:
+    """Invalid finite limits, dates or DOI/registration origins refuse before network work and output creation."""
     output = tmp_path / "output"
     result = run_cli(SCRIPT, option, value, "--output-directory", str(output))
     assert result.returncode == 1 and "CHECK FAILED" in result.stdout
@@ -648,6 +702,7 @@ def test_bad_transfer_configuration_refuses_before_network(
 
 @pytest.mark.parametrize("name", ["url_checks.json", "sources.tsv"])
 def test_maintained_snapshots_and_aliases_are_protected(tmp_path: Path, name: str) -> None:
+    """Accepted snapshot destinations and symlink aliases refuse without changing original source bytes."""
     original = SCRIPT.with_name(name)
     before = original.read_bytes()
     (tmp_path / name).symlink_to(original)
@@ -659,6 +714,7 @@ def test_maintained_snapshots_and_aliases_are_protected(tmp_path: Path, name: st
 
 @pytest.mark.parametrize("option,original", [("--input", SNAPSHOT), ("--additional", ADDITIONAL)])
 def test_outputs_cannot_replace_custom_inputs(tmp_path: Path, option: str, original: Path) -> None:
+    """A custom copied input cannot be overwritten by an output of the same resolved name."""
     path = tmp_path / "url_checks.json"
     shutil.copy2(original, path)
     before = path.read_bytes()
@@ -671,6 +727,7 @@ def test_outputs_cannot_replace_custom_inputs(tmp_path: Path, option: str, origi
 def test_real_output_io_failure_is_controlled(
     https_sources: tuple[str, Path], tmp_path: Path, failure: str
 ) -> None:
+    """Occupied output files or directories produce a controlled native failure without a traceback."""
     base, certificate = https_sources
     snapshot, additional, _ = service_catalogue(tmp_path, base)
     output = tmp_path / "output"
@@ -702,6 +759,7 @@ def test_real_output_io_failure_is_controlled(
 def test_public_import_collection_and_main_preserve_historical_observations(
     https_sources: tuple[str, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Public URL collection and real TLS main retain original bytes/timestamps when PDF tools are unavailable."""
     paths = [SNAPSHOT, ADDITIONAL, SAVED, SCRIPT.with_name("sources.tsv")]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     old_path = os.environ.get("PATH", "")
@@ -755,6 +813,7 @@ def test_public_import_collection_and_main_preserve_historical_observations(
 
 
 def test_destination_must_be_explicit_before_any_network_work() -> None:
+    """The real CLI requires an explicit output destination and refuses missing selection before acquisition."""
     result = run_cli(SCRIPT)
     assert result.returncode == 2 and "--output-directory" in result.stderr
     assert "Traceback" not in result.stderr

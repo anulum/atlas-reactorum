@@ -27,6 +27,7 @@ from ._facility_field_sources import original_source as original_source
 def test_native_validator_is_read_only_and_matches_all_original_values(
     original_source: Path, optimize: bool
 ) -> None:
+    """Validate all 1,631 original assertions through CLI and API without rewriting the dataset."""
     dataset = original_source.parent / "dataset.json"
     build(original_source, dataset)
     before = dataset.read_bytes()
@@ -42,6 +43,7 @@ def test_native_validator_is_read_only_and_matches_all_original_values(
 def test_native_validator_refuses_partial_or_changed_projection_without_writing(
     original_source: Path, failure: str, optimize: bool
 ) -> None:
+    """Reject missing or changed values, order, bindings and counts while preserving candidate bytes."""
     dataset = original_source.parent / "dataset.json"
     build(original_source, dataset)
     body = document(dataset)

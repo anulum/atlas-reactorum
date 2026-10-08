@@ -27,6 +27,7 @@ OUTPUTS = ("audit.tsv", "summary.json")
 
 
 def test_complete_historical_projection_preserves_all_later_editorial_rows(tmp_path: Path) -> None:
+    """Reproduce all 123 historical rows while preserving the maintained 135-row audit and source mtimes."""
     paths = [SNAPSHOT, CHECKS, *[SCRIPT.with_name(name) for name in OUTPUTS]]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     fields, maintained = read_table(SCRIPT.with_name("audit.tsv"))
@@ -72,6 +73,7 @@ def test_complete_historical_projection_preserves_all_later_editorial_rows(tmp_p
     ],
 )
 def test_bad_complete_snapshot_preserves_existing_output(tmp_path: Path, damage: str) -> None:
+    """Reject malformed snapshot rows and identities without replacing existing audit outputs."""
     path = tmp_path / "snapshot.tsv"
     fields, rows = read_table(SNAPSHOT)
     if damage == "header":
@@ -145,6 +147,7 @@ def test_bad_complete_snapshot_preserves_existing_output(tmp_path: Path, damage:
     ],
 )
 def test_bad_saved_url_checks_refuse_before_output(tmp_path: Path, damage: str) -> None:
+    """Reject invalid saved URL-check envelopes, fields and missing observations before writing output."""
     path = tmp_path / "checks.json"
     document = json.loads(CHECKS.read_text())
     records = document["records"]
@@ -213,6 +216,7 @@ def test_bad_saved_url_checks_refuse_before_output(tmp_path: Path, damage: str) 
 
 
 def test_historical_bare_checks_and_absent_optional_title_are_supported(tmp_path: Path) -> None:
+    """Accept legacy bare checks and missing optional titles with exact historical audit facts."""
     records = json.loads(CHECKS.read_text())["records"]
     for record in records:
         if not record["title"]:
@@ -229,6 +233,7 @@ def test_historical_bare_checks_and_absent_optional_title_are_supported(tmp_path
 
 @pytest.mark.parametrize("damage", ["empty", "shape", "duplicate", "missing_check"])
 def test_public_audit_rejects_incomplete_actual_snapshot_or_observations(damage: str) -> None:
+    """Reject incomplete snapshot schemas, duplicate checks and absent required URL observations."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_audit_builder")
     rows = module.read_snapshot(SNAPSHOT)
     checks = module.read_checks(CHECKS)
@@ -250,6 +255,7 @@ def test_public_audit_rejects_incomplete_actual_snapshot_or_observations(damage:
 
 @pytest.mark.parametrize("name", OUTPUTS)
 def test_maintained_audit_is_protected_through_output_symlinks(tmp_path: Path, name: str) -> None:
+    """Refuse symlink destinations that would overwrite either maintained audit artifact."""
     original = SCRIPT.with_name(name)
     before = original.read_bytes()
     (tmp_path / name).symlink_to(original)
@@ -259,6 +265,7 @@ def test_maintained_audit_is_protected_through_output_symlinks(tmp_path: Path, n
 
 
 def test_default_maintained_directory_and_directory_alias_are_refused(tmp_path: Path) -> None:
+    """Refuse direct or aliased maintained audit directories as historical output destinations."""
     alias = tmp_path / "maintained"
     alias.symlink_to(SCRIPT.parent, target_is_directory=True)
     for output in (SCRIPT.parent, alias):
@@ -271,6 +278,7 @@ def test_default_maintained_directory_and_directory_alias_are_refused(tmp_path: 
 def test_historical_output_cannot_replace_either_source(
     tmp_path: Path, source: str, name: str
 ) -> None:
+    """Protect snapshot and saved-check input bytes from output-file aliasing."""
     path = tmp_path / name
     shutil.copy2(SNAPSHOT if source == "--input" else CHECKS, path)
     before = path.read_bytes()
@@ -281,6 +289,7 @@ def test_historical_output_cannot_replace_either_source(
 
 @pytest.mark.parametrize("failure", ["directory", "audit_file", "summary_file"])
 def test_real_output_io_failures_are_controlled(tmp_path: Path, failure: str) -> None:
+    """Report occupied or directory output paths as native build failures without tracebacks."""
     output = tmp_path / "output"
     if failure == "directory":
         output.write_text("existing file\n")
@@ -293,6 +302,7 @@ def test_real_output_io_failures_are_controlled(tmp_path: Path, failure: str) ->
 
 
 def test_explicit_output_is_required_to_avoid_destructive_historical_default() -> None:
+    """Require an explicit native output directory rather than overwriting the maintained audit."""
     result = run_cli(SCRIPT)
     assert result.returncode == 2 and "--output-directory" in result.stderr
     assert "Traceback" not in result.stderr
@@ -301,6 +311,7 @@ def test_explicit_output_is_required_to_avoid_destructive_historical_default() -
 def test_import_and_public_main_use_actual_inputs_without_mutating_maintained_review(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Build original classifications through public entry points while preserving maintained bytes and mtimes."""
     paths = [SNAPSHOT, CHECKS, *[SCRIPT.with_name(name) for name in OUTPUTS]]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_taxonomy_audit_builder")
@@ -325,6 +336,7 @@ def test_import_and_public_main_use_actual_inputs_without_mutating_maintained_re
 def test_non_electrolysis_404_and_just_a_moment_are_observations_not_endorsement(
     tmp_path: Path,
 ) -> None:
+    """Retain broken-link and access-challenge findings without recording them as verified article content."""
     records = json.loads(CHECKS.read_text())
     row = read_table(SNAPSHOT)[1][0]
     url = row["source_urls"].split(" | ")[0]

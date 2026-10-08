@@ -24,6 +24,7 @@ from ._facility_field_sources import original_source as original_source
 
 
 def test_all_wri_fuel_categories_are_whole_plant_assertions(original_source: Path) -> None:
+    """Preserve every published nuclear-plant fuel cell with distinct primary and secondary bases."""
     result = [
         row
         for row in project(original_source)
@@ -54,6 +55,7 @@ def test_all_wri_fuel_categories_are_whole_plant_assertions(original_source: Pat
 def test_native_bioenergy_cells_and_ids_survive_without_feed_inference(
     original_source: Path,
 ) -> None:
+    """Preserve every explicit bioenergy cell and source ID with the exact published basis totals."""
     result = project(original_source)
     for key, native_field in [
         ("agstar-Mixed", "Biogas_End"),
@@ -89,6 +91,7 @@ def test_native_bioenergy_cells_and_ids_survive_without_feed_inference(
 
 
 def test_all_round7_source_labels_and_per_row_provenance_survive(original_source: Path) -> None:
+    """Preserve round-seven labels, dates, licences and target URLs with source-specific field meanings."""
     result = {
         row["target_id"]: row
         for row in project(original_source)
@@ -108,6 +111,7 @@ def test_all_round7_source_labels_and_per_row_provenance_survive(original_source
 
 
 def test_unreviewed_round7_namespace_is_refused(original_source: Path) -> None:
+    """Reject an unreviewed round-seven source namespace before accepting observations."""
     rows = table(original_source, "industrial7")
     rows[0]["source"] = "unreviewed-source"
     replace_table(original_source, "industrial7", rows)
@@ -119,6 +123,7 @@ def test_unreviewed_round7_namespace_is_refused(original_source: Path) -> None:
 def test_absent_published_value_cannot_complete_the_reviewed_projection(
     original_source: Path, source: str
 ) -> None:
+    """Reject absent published feedstock or process labels rather than completing them by inference."""
     if source == "industrial7":
         rows = table(original_source, source)
         rows[0]["source_process_class"] = ""

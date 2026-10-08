@@ -29,6 +29,7 @@ SCRIPT = ROOT / "05_global_reactor_map/imports/industrial_facilities/expansion_r
 def test_native_validation_exercises_all_canonical_previous_layers_without_writes(
     tmp_path: Path, observations: list[dict[str, str]], optimize: bool
 ) -> None:
+    """Validate 421 exact projections against canonical previous layers without changing source bytes."""
     snapshot, dataset = tmp_path / "source.tsv", tmp_path / "product.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     assert BUILD.build(snapshot, dataset) == 421
@@ -53,6 +54,7 @@ def test_native_validation_exercises_all_canonical_previous_layers_without_write
 def test_every_consumer_field_is_checked_against_the_full_source_snapshot(
     tmp_path: Path, observations: list[dict[str, str]], field: str
 ) -> None:
+    """Reject alteration of every consumer field against the full snapshot without rewriting inputs."""
     snapshot, dataset = tmp_path / "source.tsv", tmp_path / "altered.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     records = RECORDS.project_rows(observations)
@@ -68,6 +70,7 @@ def test_every_consumer_field_is_checked_against_the_full_source_snapshot(
 def test_record_count_order_and_duplicates_cannot_pass_cell_parity(
     tmp_path: Path, observations: list[dict[str, str]], failure: str
 ) -> None:
+    """Reject missing, reordered or duplicated consumer rows through the native public validator."""
     snapshot, dataset = tmp_path / "source.tsv", tmp_path / "altered.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     records = RECORDS.project_rows(observations)
@@ -86,6 +89,7 @@ def test_record_count_order_and_duplicates_cannot_pass_cell_parity(
 def test_invalid_previous_layer_or_casefold_collision_is_refused_without_writing(
     tmp_path: Path, observations: list[dict[str, str]], failure: str
 ) -> None:
+    """Refuse previous-layer corruption or casefold identity collisions while retaining source bytes."""
     snapshot, dataset, previous = (
         tmp_path / "source.tsv",
         tmp_path / "product.tsv",
@@ -115,6 +119,7 @@ def test_invalid_previous_layer_or_casefold_collision_is_refused_without_writing
 def test_native_readonly_validator_refuses_changed_product(
     tmp_path: Path, observations: list[dict[str, str]], optimize: bool
 ) -> None:
+    """Reject invented capacity text normally and under -O while preserving the refused product."""
     snapshot, dataset = tmp_path / "source.tsv", tmp_path / "altered.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     records = RECORDS.project_rows(observations)

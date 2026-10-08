@@ -39,6 +39,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Serve actual success, access, redirect and incomplete-transfer responses."""
 
     def do_GET(self) -> None:
+        """Serve real status, redirect, dropped-connection and incomplete-transfer controls."""
         if self.path in {"/stall", "/process-stall"}:
             self.send_response(200)
             self.send_header("Content-Length", "10")
@@ -72,6 +73,22 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture(scope="module")
 def https_source(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str, Path]]:
+    """Run a module-scoped HTTPS listener with an owned, locally trusted certificate.
+
+    Parameters
+    ----------
+    tmp_path_factory : pytest.TempPathFactory
+        Allocator for the certificate and key directory.
+
+    Yields
+    ------
+    tuple[str, Path]
+        Local HTTPS origin and its one-day certificate for native curl.
+
+    Notes
+    -----
+    Close the listener, join its worker and restore the original NO_PROXY value.
+    """
     directory = tmp_path_factory.mktemp("https-source")
     certificate, key = directory / "certificate.pem", directory / "key.pem"
     openssl = shutil.which("openssl")
@@ -122,7 +139,20 @@ def https_source(tmp_path_factory: pytest.TempPathFactory) -> Iterator[tuple[str
 
 
 def service_catalogue(directory: Path, base: str) -> tuple[Path, dict[str, set[str]]]:
-    """Map every actual recorded link to a genuine local HTTPS status endpoint."""
+    """Map every recorded source link to a real local HTTP status control.
+
+    Parameters
+    ----------
+    directory : Path
+        Owned destination for the complete expansion table copy.
+    base : str
+        Origin of the trusted local HTTPS listener.
+
+    Returns
+    -------
+    tuple[Path, dict[str, set[str]]]
+        Copied table path and every distinct local URL's official or independent roles.
+    """
     fields, rows = read_table(SOURCE)
     original = sorted(
         {
@@ -152,6 +182,7 @@ def service_catalogue(directory: Path, base: str) -> tuple[Path, dict[str, set[s
 def test_native_cli_checks_all_actual_links_once(
     https_source: tuple[str, Path], tmp_path: Path
 ) -> None:
+    """Check every distinct recorded link with exact status, roles and dates in both CLI modes."""
     base, certificate = https_source
     source, references = service_catalogue(tmp_path, base)
     output = tmp_path / "checks.tsv"
@@ -199,6 +230,7 @@ def test_native_cli_checks_all_actual_links_once(
 def test_real_tls_redirect_and_transfer_failures_do_not_claim_reachability(
     https_source: tuple[str, Path], route: str, trust: bool, status: str, reachable: str
 ) -> None:
+    """Distinguish successful TLS redirects from downgrade, timeout, disconnect and trust failures."""
     base, certificate = https_source
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     curl = shutil.which("curl")
@@ -217,6 +249,7 @@ def test_real_tls_redirect_and_transfer_failures_do_not_claim_reachability(
 def test_real_connection_refusal_and_missing_executable(
     https_source: tuple[str, Path], tmp_path: Path
 ) -> None:
+    """Record unavailable endpoints and missing curl as unreachable with status 000."""
     base, certificate = https_source
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     curl = shutil.which("curl")
@@ -254,6 +287,7 @@ def test_real_connection_refusal_and_missing_executable(
     ],
 )
 def test_bad_recorded_reference_preserves_existing_snapshot(tmp_path: Path, damage: str) -> None:
+    """Reject malformed source tables and unsafe URLs without replacing the accepted snapshot."""
     path = tmp_path / "source.tsv"
     fields, rows = read_table(SOURCE)
     if damage == "header":
@@ -292,6 +326,7 @@ def test_bad_recorded_reference_preserves_existing_snapshot(tmp_path: Path, dama
 
 @pytest.mark.parametrize("timeout", ["0", "-1", "nan", "inf"])
 def test_invalid_transfer_limit_refuses_before_network(tmp_path: Path, timeout: str) -> None:
+    """Reject nonpositive or non-finite CLI transfer limits before creating output."""
     result = run_cli(SCRIPT, "--timeout", timeout, "--output", str(tmp_path / "checks.tsv"))
     assert result.returncode == 2 and "positive and finite" in result.stderr
     assert not (tmp_path / "checks.tsv").exists()
@@ -299,12 +334,14 @@ def test_invalid_transfer_limit_refuses_before_network(tmp_path: Path, timeout: 
 
 @pytest.mark.parametrize("date", ["2026-02-30", "20260930"])
 def test_invalid_snapshot_date_refuses_before_network(tmp_path: Path, date: str) -> None:
+    """Reject malformed calendar dates without a traceback or output snapshot."""
     result = run_cli(SCRIPT, "--checked-on", date, "--output", str(tmp_path / "checks.tsv"))
     assert result.returncode == 1 and "CHECK FAILED" in result.stdout
     assert "Traceback" not in result.stderr and not (tmp_path / "checks.tsv").exists()
 
 
 def test_output_cannot_replace_source(tmp_path: Path) -> None:
+    """Refuse output aliasing the expansion input and preserve its exact bytes."""
     path = tmp_path / "source.tsv"
     shutil.copy2(SOURCE, path)
     before = path.read_bytes()
@@ -314,6 +351,7 @@ def test_output_cannot_replace_source(tmp_path: Path) -> None:
 
 
 def test_missing_native_curl_is_controlled(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Report absent native curl without creating an output snapshot."""
     monkeypatch.setenv("PATH", str(tmp_path / "no-tools"))
     result = run_cli(SCRIPT, "--output", str(tmp_path / "checks.tsv"))
     assert result.returncode == 1 and "curl not found on PATH" in result.stdout
@@ -321,6 +359,7 @@ def test_missing_native_curl_is_controlled(tmp_path: Path, monkeypatch: pytest.M
 
 
 def test_public_url_check_refuses_unsafe_reference_without_transfer() -> None:
+    """Reject a file URL through the public checker before invoking native curl."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     curl = shutil.which("curl")
     assert curl is not None
@@ -331,6 +370,7 @@ def test_public_url_check_refuses_unsafe_reference_without_transfer() -> None:
 def test_import_collection_and_public_main_use_real_tls_without_touching_saved_snapshot(
     https_source: tuple[str, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Collect recorded links and run main over real TLS while preserving saved bytes and mtimes."""
     paths = [SOURCE, SNAPSHOT]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     original_path = os.environ.get("PATH", "")
@@ -371,6 +411,7 @@ def test_import_collection_and_public_main_use_real_tls_without_touching_saved_s
 def test_output_io_failure_after_real_transfer_is_controlled(
     https_source: tuple[str, Path], tmp_path: Path
 ) -> None:
+    """Report failed output writing after native transfer without populating the directory target."""
     base, certificate = https_source
     source, _references = service_catalogue(tmp_path, base)
     output = tmp_path / "checks.tsv"
@@ -391,6 +432,7 @@ def test_output_io_failure_after_real_transfer_is_controlled(
 def test_public_curl_arguments_preserve_literal_shell_characters(
     https_source: tuple[str, Path], tmp_path: Path
 ) -> None:
+    """Pass shell metacharacters literally to curl without executing their apparent command."""
     base, certificate = https_source
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     curl = shutil.which("curl")
@@ -417,6 +459,7 @@ def test_public_curl_arguments_preserve_literal_shell_characters(
 def test_public_transfer_limit_refuses_before_process_creation(
     tmp_path: Path, timeout: float
 ) -> None:
+    """Reject invalid or unsupported public timeouts before starting a process or writing files."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     with pytest.raises(ValueError, match="positive and finite"):
         module.check_url(
@@ -432,6 +475,7 @@ def test_public_transfer_limit_refuses_before_process_creation(
 def test_stopped_native_curl_is_killed_and_reaped_at_process_deadline(
     https_source: tuple[str, Path],
 ) -> None:
+    """Kill and reap the observed stopped curl child at the operating-system deadline."""
     base, certificate = https_source
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_expansion_url_checker")
     curl = shutil.which("curl")
@@ -441,6 +485,7 @@ def test_stopped_native_curl_is_killed_and_reaped_at_process_deadline(
     errors: list[Exception] = []
 
     def transfer() -> None:
+        """Collect the native curl result or exception for the worker-thread deadline assertion."""
         try:
             results.append(
                 module.check_url(
@@ -458,6 +503,13 @@ def test_stopped_native_curl_is_killed_and_reaped_at_process_deadline(
     worker = threading.Thread(target=transfer, daemon=True)
 
     def owned_curl_child() -> int | None:
+        """Identify only this worker's curl child using its executable and exact URL argument.
+
+        Returns
+        -------
+        int or None
+            Matching child PID, or no child when the worker or process has disappeared.
+        """
         try:
             children = Path(f"/proc/self/task/{worker.native_id}/children").read_text().split()
         except FileNotFoundError:

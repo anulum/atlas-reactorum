@@ -31,6 +31,18 @@ NAMES = [
 
 @pytest.fixture
 def inputs(tmp_path: Path) -> Path:
+    """Copy complete candidate, registry and both protected catalogue tables into owned storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for current and historical company tables.
+
+    Returns
+    -------
+    Path
+        Complete discovery directory also usable as the native audit root.
+    """
     folder = tmp_path / "round2"
     folder.mkdir()
     for name in NAMES:
@@ -40,6 +52,7 @@ def inputs(tmp_path: Path) -> Path:
 
 
 def test_original_discovery_reproduces_golden_report(tmp_path: Path) -> None:
+    """Reproduce exact accepted report bytes in both CLI modes without changing source tables."""
     paths = (
         [SCRIPT.with_name(name) for name in NAMES[:2]]
         + [SCRIPT.parent.parent / name for name in NAMES[2:]]
@@ -59,6 +72,7 @@ def test_original_discovery_reproduces_golden_report(tmp_path: Path) -> None:
     "damage", ["header", "empty", "short", "extra", "quote", "utf8", "missing"]
 )
 def test_bad_source_shape_does_not_replace_report(inputs: Path, name: str, damage: str) -> None:
+    """Reject malformed current or protected tables while preserving the previously written report."""
     path = inputs / name
     fields, rows = read_table(path)
     if damage == "header":
@@ -85,6 +99,7 @@ def test_bad_source_shape_does_not_replace_report(inputs: Path, name: str, damag
 
 @pytest.mark.parametrize("name", NAMES[:2])
 def test_all_mandatory_facts_refuse_blank_values(inputs: Path, name: str) -> None:
+    """Reject a blank value in every candidate and source-registry field."""
     path = inputs / name
     fields, original = read_table(path)
     for field in fields:
@@ -124,6 +139,7 @@ def test_all_mandatory_facts_refuse_blank_values(inputs: Path, name: str) -> Non
     ],
 )
 def test_identity_and_source_association_refusals(inputs: Path, case: str) -> None:
+    """Reject changed 15-candidate identities, 30-source references, dates and protected-name associations."""
     cp, sp = inputs / NAMES[0], inputs / NAMES[1]
     cf, rows = read_table(cp)
     sf, sources = read_table(sp)
@@ -202,6 +218,7 @@ def test_identity_and_source_association_refusals(inputs: Path, case: str) -> No
 def test_invalid_protected_identities_refuse_before_report(
     inputs: Path, name: str, key: str, case: str
 ) -> None:
+    """Reject malformed protected names and aliases before replacing the prior report."""
     path = inputs / name
     fields, rows = read_table(path)
     if case == "duplicate":
@@ -227,6 +244,7 @@ def test_invalid_protected_identities_refuse_before_report(
 def test_provenance_urls_require_https_authority(
     inputs: Path, table: str, field: str, url: str
 ) -> None:
+    """Reject malformed HTTPS references in primary, independent and registry links."""
     path = inputs / table
     fields, rows = read_table(path)
     rows[0][field] = "https://example.org;" + url if field == "independent_urls" else url
@@ -237,6 +255,7 @@ def test_provenance_urls_require_https_authority(
 
 @pytest.mark.parametrize("name", NAMES)
 def test_report_cannot_replace_candidate_or_protected_inputs(inputs: Path, name: str) -> None:
+    """Protect every candidate, registry and historical table from report destination aliasing."""
     path = inputs / name
     before = path.read_bytes()
     result = run_cli(
@@ -247,6 +266,7 @@ def test_report_cannot_replace_candidate_or_protected_inputs(inputs: Path, name:
 
 
 def test_optional_protected_alias_remains_unknown(inputs: Path) -> None:
+    """Accept an absent optional protected alias without filling or inferring an identity."""
     path = inputs / NAMES[2]
     fields, rows = read_table(path)
     rows[0]["aliases"] = ""
@@ -256,6 +276,7 @@ def test_optional_protected_alias_remains_unknown(inputs: Path) -> None:
 
 
 def test_report_directory_failure_is_controlled(inputs: Path) -> None:
+    """Report an unwritable directory destination without a native traceback."""
     result = run_cli(
         SCRIPT, "--directory", str(inputs), "--audit-root", str(inputs), "--report", str(inputs)
     )
@@ -266,6 +287,7 @@ def test_report_directory_failure_is_controlled(inputs: Path) -> None:
 def test_public_read_and_main_use_original_discovery(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read the complete accepted candidate table and validate it through public main."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion2_validator")
     assert (
         module.read(SCRIPT.with_name(NAMES[0]), module.CF)

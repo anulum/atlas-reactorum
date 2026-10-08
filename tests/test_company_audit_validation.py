@@ -38,6 +38,7 @@ REQUIRED = [
 
 
 def test_actual_company_audit_preserves_claims_and_sources() -> None:
+    """Validate the actual 51-row audit normally and under -O without changing its source hash."""
     before = hashlib.sha256(AUDIT.read_bytes()).hexdigest()
     for optimized in (False, True):
         result = run_cli(SCRIPT, optimize=optimized)
@@ -52,6 +53,7 @@ def test_actual_company_audit_preserves_claims_and_sources() -> None:
 def test_required_evidence_fields_refuse_blank_values(
     tmp_path: Path, field: str, value: str
 ) -> None:
+    """Reject blank required evidence cells under -O with the field-specific diagnostic."""
     fields, rows = read_table(AUDIT)
     rows[0][field] = value
     path = tmp_path / "audit.tsv"
@@ -74,6 +76,7 @@ def test_required_evidence_fields_refuse_blank_values(
 def test_company_source_url_refuses_malformed_or_non_https(
     tmp_path: Path, field: str, value: str
 ) -> None:
+    """Reject malformed or non-HTTPS provenance under -O without changing the input bytes."""
     fields, rows = read_table(AUDIT)
     rows[0][field] = value
     path = tmp_path / "audit.tsv"
@@ -106,6 +109,7 @@ def test_company_source_url_refuses_malformed_or_non_https(
 def test_company_audit_structure_identity_and_provenance_refuse(
     tmp_path: Path, corruption: str
 ) -> None:
+    """Refuse damaged table shape, duplicate identities or invalid provenance without a traceback."""
     fields, rows = read_table(AUDIT)
     if corruption == "empty":
         rows.clear()
@@ -149,6 +153,7 @@ def test_company_audit_structure_identity_and_provenance_refuse(
 
 
 def test_independent_sources_can_support_missing_official_site(tmp_path: Path) -> None:
+    """Accept audited independent source URLs when an official site is absent."""
     fields, rows = read_table(AUDIT)
     source = next(row for row in rows if not row["official_url"] and row["independent_urls"])
     assert source["company"]
@@ -163,6 +168,7 @@ def test_independent_sources_can_support_missing_official_site(tmp_path: Path) -
 def test_company_validator_public_read_and_main(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Read the actual audit through the public loader and execute the real validator entry point."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_audit_validator")
     assert module.load(AUDIT) == read_table(AUDIT)[1]
     monkeypatch.setattr(sys, "argv", [str(SCRIPT)])

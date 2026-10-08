@@ -33,6 +33,7 @@ from ._facility_field_sources import original_source as original_source
 def test_complete_projection_is_deterministic_and_all_inputs_stay_unchanged(
     original_source: Path,
 ) -> None:
+    """Project all 1,631 observations deterministically with reviewed target IDs and unchanged inputs."""
     before = {
         str(path.relative_to(original_source)): path.read_bytes()
         for path in original_source.rglob("*")
@@ -60,6 +61,7 @@ def test_complete_projection_is_deterministic_and_all_inputs_stay_unchanged(
 def test_incomplete_or_ambiguous_projection_refuses_acceptance(
     original_source: Path, failure: str
 ) -> None:
+    """Reject duplicate source records, unknown target IDs and missing or blank published cells."""
     if failure == "duplicate":
         rows = table(original_source, "wri")
         rows[1] = dict(rows[0])

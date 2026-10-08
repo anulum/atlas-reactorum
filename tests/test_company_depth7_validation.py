@@ -27,6 +27,18 @@ TABLES = ["enrichment_overlays.tsv", "source_registry.tsv", "gap_closure.tsv"]
 
 @pytest.fixture
 def inputs(tmp_path: Path) -> tuple[Path, Path]:
+    """Copy the complete round-seven inputs and rounds four through six selection history.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for source tables, gap matrix and historical overlays.
+
+    Returns
+    -------
+    tuple[Path, Path]
+        Round-seven directory and gap matrix path; history is a sibling directory.
+    """
     folder = tmp_path / "round7"
     folder.mkdir()
     for name in TABLES:
@@ -45,6 +57,7 @@ def inputs(tmp_path: Path) -> tuple[Path, Path]:
 
 
 def test_original_snapshot_preserves_inputs_and_report(tmp_path: Path) -> None:
+    """Reproduce the exact accepted report in both CLI modes without modifying inputs."""
     before = {
         p: p.read_bytes()
         for p in [GAPS, *[SCRIPT.with_name(n) for n in TABLES], SCRIPT.with_name("validation.json")]
@@ -65,6 +78,7 @@ def test_original_snapshot_preserves_inputs_and_report(tmp_path: Path) -> None:
 def test_structural_input_failures_preserve_previous_report(
     inputs: tuple[Path, Path], name: str, damage: str
 ) -> None:
+    """Reject malformed input tables while preserving the previously written report."""
     folder, gap = inputs
     path = gap if name == "gap_matrix.tsv" else folder / name
     fields, rows = read_table(path)
@@ -114,6 +128,7 @@ def test_structural_input_failures_preserve_previous_report(
     ],
 )
 def test_blank_overlay_facts_are_not_repaired(inputs: tuple[Path, Path], field: str) -> None:
+    """Reject blank enriched observations without repairing the candidate table."""
     folder, gap = inputs
     path = folder / TABLES[0]
     fields, rows = read_table(path)
@@ -159,6 +174,7 @@ def test_blank_overlay_facts_are_not_repaired(inputs: tuple[Path, Path], field: 
     ],
 )
 def test_identity_and_provenance_association_refusals(inputs: tuple[Path, Path], case: str) -> None:
+    """Reject changed target selection, source association or bounded closure with explicit diagnostics."""
     folder, gap = inputs
     op, sp, cp = [folder / name for name in TABLES]
     of, o = read_table(op)
@@ -283,6 +299,7 @@ def test_identity_and_provenance_association_refusals(inputs: tuple[Path, Path],
 def test_each_closure_fact_matches_previous_gaps_and_bounded_overlay(
     inputs: tuple[Path, Path], field: str
 ) -> None:
+    """Reject fabricated closure facts while retaining their exact candidate values."""
     folder, gap = inputs
     path = folder / TABLES[2]
     fields, rows = read_table(path)
@@ -306,6 +323,7 @@ def test_each_closure_fact_matches_previous_gaps_and_bounded_overlay(
 def test_links_require_https_authority(
     inputs: tuple[Path, Path], table: str, field: str, url: str
 ) -> None:
+    """Reject malformed HTTPS links, including an invalid optional second reference."""
     folder, gap = inputs
     path = folder / table
     fields, rows = read_table(path)
@@ -323,6 +341,7 @@ def test_links_require_https_authority(
 
 @pytest.mark.parametrize("name", [*TABLES, "gap_matrix.tsv"])
 def test_report_cannot_replace_inputs(inputs: tuple[Path, Path], name: str) -> None:
+    """Refuse report destinations that alias any current input table."""
     folder, gap = inputs
     target = gap if name == "gap_matrix.tsv" else folder / name
     before = target.read_bytes()
@@ -342,6 +361,7 @@ def test_report_cannot_replace_inputs(inputs: tuple[Path, Path], name: str) -> N
 
 
 def test_report_write_failure_is_controlled(inputs: tuple[Path, Path]) -> None:
+    """Report an unwritable directory destination without a traceback or directory removal."""
     folder, gap = inputs
     result = run_cli(
         SCRIPT,
@@ -359,6 +379,7 @@ def test_report_write_failure_is_controlled(inputs: tuple[Path, Path]) -> None:
 
 
 def test_optional_independent_links_do_not_erase_claim_limits(inputs: tuple[Path, Path]) -> None:
+    """Accept absent optional links while preserving explicit negative findings."""
     folder, gap = inputs
     path = folder / TABLES[0]
     fields, rows = read_table(path)
@@ -381,6 +402,7 @@ def test_optional_independent_links_do_not_erase_claim_limits(inputs: tuple[Path
 def test_public_read_and_main_check_original_snapshot(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read the accepted overlay and validate it through the public main entry point."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth7_validator")
     assert (
         module.read(SCRIPT.with_name(TABLES[0]), module.OVERLAY_FIELDS)
@@ -396,6 +418,7 @@ def test_public_read_and_main_check_original_snapshot(
 def test_historical_selection_inputs_refuse_invalid_identity_or_schema(
     inputs: tuple[Path, Path], index: int, damage: str
 ) -> None:
+    """Reject missing or malformed historical selection inputs before creating a report."""
     folder, gap = inputs
     history = folder.parent / "history"
     path = history / f"depth_round{index}/enrichment_overlays.tsv"
@@ -430,6 +453,7 @@ def test_historical_selection_inputs_refuse_invalid_identity_or_schema(
 def test_ranking_and_gap_accounting_must_be_nonnegative_integers(
     inputs: tuple[Path, Path], field: str, value: str
 ) -> None:
+    """Reject negative or non-integer selection ranks and gap counts."""
     folder, gap = inputs
     path = gap if field in {"priority_score", "source_row"} else folder / TABLES[2]
     fields, rows = read_table(path)
@@ -453,6 +477,7 @@ def test_ranking_and_gap_accounting_must_be_nonnegative_integers(
 def test_gap_totals_and_per_row_counts_are_both_required(
     inputs: tuple[Path, Path], field: str, balanced: bool
 ) -> None:
+    """Reject row-count changes even when totals balance and retain unverified outcome labels."""
     folder, gap = inputs
     path = folder / TABLES[2]
     fields, rows = read_table(path)
@@ -480,6 +505,7 @@ def test_gap_totals_and_per_row_counts_are_both_required(
 
 @pytest.mark.parametrize("index", [4, 5, 6])
 def test_report_cannot_replace_selection_history(inputs: tuple[Path, Path], index: int) -> None:
+    """Protect historical overlays from report destination aliasing."""
     folder, gap = inputs
     history = folder.parent / "history"
     target = history / f"depth_round{index}/enrichment_overlays.tsv"
@@ -500,6 +526,7 @@ def test_report_cannot_replace_selection_history(inputs: tuple[Path, Path], inde
 
 
 def test_selection_retains_descending_priority_then_source_order(inputs: tuple[Path, Path]) -> None:
+    """Reject reordered overlays that violate accepted priority and source order."""
     folder, gap = inputs
     path = folder / TABLES[0]
     fields, rows = read_table(path)

@@ -20,6 +20,7 @@ from .test_ffdb_reader import CAPTURE, SECONDARY, captured_frames, framed, node
 
 
 def test_complete_selection_preserves_every_raw_display_cell_and_origin() -> None:
+    """Retain every registered table and map cell with distinct selection and original hashes."""
     selection = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.selection")
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     before = reader.read_dashboard(CAPTURE)
@@ -34,6 +35,7 @@ def test_complete_selection_preserves_every_raw_display_cell_and_origin() -> Non
 
 
 def test_selection_omits_unrelated_container_members_without_changing_source_cells() -> None:
+    """Omit unrelated renderer configuration without changing any selected publisher data."""
     selection = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.selection")
     frames = captured_frames()
     frames[1]["unrelated_renderer_member"] = {"accessToken": "deliberately invalid test value"}
@@ -44,12 +46,14 @@ def test_selection_omits_unrelated_container_members_without_changing_source_cel
 
 @pytest.mark.parametrize("retrieved", ["", "2026-02-30", "20261002", "2026-10-03"])
 def test_selection_refuses_noncanonical_or_changed_acquisition_date(retrieved: str) -> None:
+    """Reject malformed calendar dates and any acquisition date differing from the selection."""
     selection = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.selection")
     with pytest.raises(selection.DashboardRefused):
         selection.select_visible_data(CAPTURE.read_bytes(), retrieved)
 
 
 def test_unlabelled_frame_is_explicitly_distinguished_from_a_registered_projection() -> None:
+    """Label an unregistered response as a projection while preserving its data and origin hash."""
     selection = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.selection")
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     frames = captured_frames()

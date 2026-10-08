@@ -19,11 +19,22 @@ scope. They provide evidence for that scope, not a whole-candidate verdict.
 
 | Layer | Command | What it establishes |
 | --- | --- | --- |
-| Lint and format | `make lint` | Ruff rules, NumPy docstrings and formatting |
+| Lint and format | `make lint` | Ruff/NumPy contracts, Python formatting, native shell checks and locked ESLint/JSDoc/Prettier |
+| Shell | `make native-shell` | ShellCheck 0.9.0 and shfmt 3.8.0; four-space formatting across tracked and new shell source |
+| HTML/CSS | `make native-web` | HTML-validate 11.16.2 semantic/accessibility contracts, CSS Tree 3.2.1 grammar/resolved values, Prettier 3.9.9 |
+| Notebook source | `make native-notebooks` | Native nbformat schema, Ruff notebook lint/format, nbQA 1.9.1 strict mypy across all cells |
+| Notebook runtime | `make native-notebook-runtime` | Complete unchanged source through Jupyter/nbclient 0.11.0 and ipykernel 7.4.0 in an isolated owned kernel |
+| First source | `make native-languages` | Block unqualified and unknown source/backend formats; route current asset suffixes and named metadata explicitly |
+| Declarations | `make native-js-lint native-js-types native-js-format` | Every current/new `.d.ts` uses native TypeScript parser, documented declarations, strict compiler and formatter |
+| Python interfaces | `make native-python-stubs` | Native generated interface equality and actual runtime `stubtest`; no allowlist or missing-symbol waiver |
+| Foreign interfaces | `make native-ffi` | Direct Python FFI imports bind to exact qualified source; ordinary JavaScript lint refuses unqualified imports/loading |
+| JavaScript syntax | `make native-javascript` | Node 24.21.0 parses tracked and new JS, CJS and MJS source; semantics remain owned by the dedicated native and browser suites |
 | Commit hooks | `make hooks` | The local and CI hook chain; formatters preserve captured and generated data formats |
-| Types | `make typecheck` | Strict mypy across every source directory |
+| Types | `make typecheck` | Strict mypy across every source directory and native strict TypeScript over handwritten JS/CJS/MJS |
+| Dependency locks | `make dependency-audit` | Blocking full Python and npm advisory audits, including development packages and every severity |
 | Python tests | `make test` | Enumerates every production Python source directory; requires 100 % statements and branches |
 | Map engine | `node --test 04_interactive_presentation/map/tests/*.test.js` | Projection, indexing, clustering and rendering behaviour |
+| Map runtime | `make native-map-runtime` | Complete source-bound V8 regions/functions for all nine map modules across genuine DOM/Cairo and Chrome |
 | Taxonomy citations | `make validate` | Complete 135-entry input, 599 statements, exact principle/strength/challenge bindings, real export and detail serializer; 100 % lines, branches and functions for the four owning modules |
 | Presentation | `04_interactive_presentation/validate.sh` | Actual assets, JSON schemas, interface language and native map/citation tests |
 | Learning contract | `04_interactive_presentation/validate.sh` | Six source-bound paths, original answer claims, identical evidence in both depths and dual-hash links; 100 % native lines, branches and functions for the authored catalogue and learning model |
@@ -38,7 +49,60 @@ The locked development environment supplies Python tooling. Native Node,
 Chrome or Chromium, Poppler `pdftotext` and the shell inventory tools are also
 required. The CI test runners install `poppler-utils`; Debian and Ubuntu
 development hosts can install the same package. A missing
-tool or a failed check is a failure, not a pass. Ruff security rules and a
+tool or a failed check is a failure, not a pass. The native shell gate requires
+ShellCheck 0.9.0 and shfmt 3.8.0; Ubuntu 24.04 CI installs
+`shellcheck=0.9.0-1` and `shfmt=3.8.0-1`. The syntax gate requires Node 24.21.0.
+Native discovery uses Git's tracked and new, unignored file set, so source in
+a new directory enters the relevant check without an allowlist update.
+Missing source, symlink source, missing tools and incorrect tool versions fail.
+Run these commands from the repository root with a writable temporary parent
+selected through `TMPDIR`.
+
+The public `package-lock.json` pins the complete JavaScript development graph.
+Install it with `npm ci` using Node24.21.0/npm11.19.0. ESLint10.12.0,
+JSDoc65.1.0, TypeScript6.0.3 and Prettier3.9.9 run through
+`tools/javascript.cjs`; the same native entry points are used by Make,
+pre-commit hooks and CI. Strict type checking uses declarations for dependencies
+and keeps `skipLibCheck=false`; it does not infer third-party JavaScript under
+`node_modules`. Native source syntax and dedicated semantic suites remain
+separate gates.
+
+Six individually named generated data wrappers preserve their source bytes
+and generator contracts instead of entering formatter writes or handwritten
+type inference. Node syntax, owning source/schema validators and the complete
+22-product reproduction still check them. The executable retained taxonomy
+input stays in the native code gates, and new handwritten `data/` source
+does not inherit an exclusion.
+
+`tests/test_javascript_tools.py` runs the real public CLI, unchanged production
+projection and actual locked native graph in owned Git candidates. It checks
+new-root discovery, invalid contracts/types/format, missing or linked source,
+missing or changed tools, unknown commands and new data-directory code.
+Complete-source compiler cases retain precise native coverage of the public
+gate process while its checker children run normally. Separate original
+native controls profile the same child configurations. The scoped loader in
+`tests/native-gate-parent-coverage.cjs` stops coverage propagation after Node
+starts its parent collector; it does not change checker arguments, results,
+source discovery, deadlines or coverage floors. Native failure controls also
+exercise this parent scope for lint, strict types and formatting.
+`tests/test_dependency_audit_policy.py` pins both Make audit commands and
+their required correctness-CI job; advisory handling cannot silently replace
+failure. The separate security workflow audits both complete locks as well.
+
+`node --test tests/taxonomy_citations.test.cjs` exercises the original complete
+taxonomy and citation metadata. Its modules in `tests/taxonomy_citations/`
+separate field bindings, reactor domains, runtime input and damaged source,
+entry and claim contracts. The existing entry point remains enrolled in
+presentation validation. Fixture loading uses the production citation validator
+and verifies that both original input files retain their bytes; unknown retained
+source retrieval dates remain null. Deliberate invalid wire values are tested
+through native mutation operations and must be rejected without rewriting input.
+`tests/taxonomy_claim_sources.test.cjs` follows the same validated claims through
+the actual detail renderer and a native HTML parser. It preserves statement,
+scope, page and retrieval wording, including explicit refusal when a publisher
+claim lacks its required retrieval date.
+
+Ruff security rules and a
 Bandit result are separate evidence; a clean Ruff run does not dispose of
 Bandit findings.
 
@@ -75,6 +139,11 @@ An explicit `ATLAS_PYTHON` setting retains its selector semantics; an unavailabl
 interpreter fails without replacing accepted products. Dedicated real-environment
 regressions put a dependency-free Python on PATH and exercise both public
 entry points with the selected complete development environment.
+
+Installed `node_modules` trees and private project memory are outside library
+counts, duplicate reports and checksums, as in the source-copy rebuild.
+The native inventory regression retains actual installed package files at the
+root and inside the presentation directory and requires unchanged products.
 
 The inventory receipt's recorded UTC timestamp supplies `SOURCE_DATE_EPOCH`
 to the shell builder. This reproduces its existing date exactly; no timestamp
@@ -348,5 +417,23 @@ research reader; all 135 original identities round-trip. The Jupyter notebook
 must execute its real cells against the accepted snapshot and reproduce the
 same result on a second execution. Keep actual executed notebooks and failures
 privately; the public notebook contains input cells without claimed outputs.
+The native admission JSON includes `execution_stdout` from the actual admitted
+kernel result, its original source digest and complete executed-cell count.
+Execution admission preserves each cell's original type as well as its text;
+a code cell relabelled as Markdown in a kernel result is refused.
+`tests/test_notebook_tools.py` exercises the real CLI/Make gates, including
+new-root discovery, source/tool refusal and native kernel failure.
+`tests/test_notebook_cells.py` runs the accepted snapshot and six actual
+input/consumer-state refusal cases in separate native kernels. Each case
+retains all five original code cells. The compiler's cached source, including
+its added final newline, is bound to those cells before combining actual
+coverage arcs. A native frame profiler records the instructions that the
+kernel really compiled; the tests require every emitted source line and both
+outcomes of all six decisions, including manifest-field short circuits.
+Raw coverage.py AST reports remain separate: IPython compiles top-level
+statements in separate frames, so their exit arcs differ from whole-module
+successors, and one AST conditional line has no emitted instruction. These
+reports are retained without adding arcs or excluding lines. This native cell
+evidence does not change the production Python statement/branch floor.
 See [the research contract](examples/research/README.md) for expected hashes,
 canonical input, original rights and interpretation boundaries.

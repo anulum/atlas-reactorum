@@ -27,6 +27,7 @@ LAYERS = ["depth_round4", "depth_round5", "depth_round6"]
 
 
 def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
+    """Reproduce all three reviewed outputs normally and under -O, preserving source bytes."""
     inputs = [MATRIX, *[AUDIT / name / OUTPUTS[0] for name in LAYERS]]
     inputs.extend(SCRIPT.with_name(name) for name in [*OUTPUTS, "validation.json"])
     before = {p: p.read_bytes() for p in inputs}
@@ -67,6 +68,7 @@ def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
     ],
 )
 def test_bad_previous_matrix_preserves_existing_outputs(tmp_path: Path, damage: str) -> None:
+    """Refuse damaged matrix identities, ranking or selection without changing existing outputs."""
     path = tmp_path / "previous.tsv"
     fields, rows = read_table(MATRIX)
     target = next(row for row in rows if row["organization"] == "Marvel Fusion")
@@ -129,6 +131,7 @@ def test_bad_previous_matrix_preserves_existing_outputs(tmp_path: Path, damage: 
 def test_damaged_actual_history_refuses_before_outputs(
     tmp_path: Path, layer: str, damage: str
 ) -> None:
+    """Reject invalid or overlapping prior overlays before creating an output directory."""
     history = tmp_path / "history"
     for name in LAYERS:
         (history / name).mkdir(parents=True)
@@ -166,6 +169,7 @@ def test_damaged_actual_history_refuses_before_outputs(
     ["row_shape", "missing_row", "duplicate", "target", "record_id", "selection", "incomplete"],
 )
 def test_public_closure_refusal_uses_complete_reviewed_tables(damage: str) -> None:
+    """Raise the expected public closure error for corrupted shape, selection or bounded facts."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth7_builder")
     fields, records = read_table(SCRIPT.with_name(OUTPUTS[0]))
     overlays = [[record[field] for field in fields] for record in records]
@@ -200,6 +204,7 @@ def test_public_closure_refusal_uses_complete_reviewed_tables(damage: str) -> No
 
 @pytest.mark.parametrize("name", OUTPUTS)
 def test_output_cannot_replace_previous_matrix(tmp_path: Path, name: str) -> None:
+    """Reject every output filename that aliases the matrix input and preserve its bytes."""
     path = tmp_path / name
     shutil.copy2(MATRIX, path)
     before = path.read_bytes()
@@ -210,6 +215,7 @@ def test_output_cannot_replace_previous_matrix(tmp_path: Path, name: str) -> Non
 
 @pytest.mark.parametrize("layer", LAYERS)
 def test_output_cannot_replace_historical_overlay(tmp_path: Path, layer: str) -> None:
+    """Reject an output directory that would overwrite a historical overlay."""
     history = tmp_path / "history"
     for name in LAYERS:
         (history / name).mkdir(parents=True)
@@ -224,6 +230,7 @@ def test_output_cannot_replace_historical_overlay(tmp_path: Path, layer: str) ->
 
 
 def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
+    """Report a non-directory output destination without changing its existing contents."""
     output = tmp_path / "output"
     output.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(output))
@@ -235,6 +242,7 @@ def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
 def test_public_derivation_and_main_use_actual_reviewed_tables(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Derive 24 bounded gap closures using 19 exclusions and reproduce the three real outputs."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth7_builder")
     fields, records = read_table(SCRIPT.with_name(OUTPUTS[0]))
     overlays = [[record[field] for field in fields] for record in records]

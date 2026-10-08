@@ -27,6 +27,18 @@ SUPPLEMENT = DIRECTORY / "supplements/cnsc_official.tsv"
 
 @pytest.fixture
 def source_partition(tmp_path: Path) -> tuple[Path, Path]:
+    """Partition the accepted catalogue into complete base and regulator supplement copies.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for base and official supplement tables.
+
+    Returns
+    -------
+    tuple[Path, Path]
+        The 161-row base and 11-row supplement, preserving all accepted record cells.
+    """
     fields, rows = read_table(CATALOGUE)
     supplement_fields, supplements = read_table(SUPPLEMENT)
     ids = {row["stable_id"] for row in supplements}
@@ -42,6 +54,7 @@ def source_partition(tmp_path: Path) -> tuple[Path, Path]:
 def test_actual_supplement_merge_reproduces_catalogue(
     source_partition: tuple[Path, Path], tmp_path: Path
 ) -> None:
+    """Rebuild all 172 catalogue rows as exact bytes in both CLI modes without changing source digests."""
     base, supplement = source_partition
     source_hashes = {
         p: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -79,6 +92,7 @@ def test_actual_supplement_merge_reproduces_catalogue(
 def test_corrupt_merge_source_preserves_output(
     source_partition: tuple[Path, Path], tmp_path: Path, target: str, corruption: str
 ) -> None:
+    """Reject malformed base or supplement input while preserving output and leaving no temporary file."""
     base, supplement = source_partition
     path = base if target == "base" else supplement
     fields, rows = read_table(path)
@@ -118,6 +132,7 @@ def test_corrupt_merge_source_preserves_output(
 def test_duplicate_across_sources_preserves_output(
     source_partition: tuple[Path, Path], tmp_path: Path
 ) -> None:
+    """Reject a cross-source duplicate stable ID without replacing the accepted output."""
     base, supplement = source_partition
     fields, rows = read_table(supplement)
     _, original = read_table(base)
@@ -133,6 +148,7 @@ def test_duplicate_across_sources_preserves_output(
 def test_multiple_regulator_supplements_preserve_sort_and_licences(
     source_partition: tuple[Path, Path], tmp_path: Path
 ) -> None:
+    """Merge reversed regulator subsets with exact accepted row ordering and licence cells."""
     base, supplement = source_partition
     fields, rows = read_table(supplement)
     second = tmp_path / "second.tsv"
@@ -148,6 +164,7 @@ def test_multiple_regulator_supplements_preserve_sort_and_licences(
 def test_output_failure_cleans_temporary_file(
     source_partition: tuple[Path, Path], tmp_path: Path, destination: str
 ) -> None:
+    """Handle invalid output destinations without losing existing owner bytes or leaving temporary files."""
     base, supplement = source_partition
     output = (
         tmp_path / "missing/output.tsv"
@@ -170,6 +187,7 @@ def test_output_failure_cleans_temporary_file(
 def test_merge_can_safely_replace_selected_base(
     source_partition: tuple[Path, Path],
 ) -> None:
+    """Atomically replace an explicitly selected owned base with the complete accepted merged catalogue."""
     base, supplement = source_partition
     result = run_cli(SCRIPT, str(base), str(supplement), "--out", str(base))
     assert result.returncode == 0, result.stdout + result.stderr
@@ -179,6 +197,7 @@ def test_merge_can_safely_replace_selected_base(
 def test_merge_public_read_and_default_output(
     source_partition: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read original base records and write the exact default catalogue through public main in an owned cwd."""
     base, supplement = source_partition
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_research_supplement_merge")
     assert module.read(base) == read_table(base)

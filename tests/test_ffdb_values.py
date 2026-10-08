@@ -39,6 +39,11 @@ LAYER = "05_global_reactor_map/imports/fusion/ffdb"
     ],
 )
 def test_real_reader_refuses_wrong_source_json_types(kind: str, value: object) -> None:
+    """Refuse wrong dictionary, container and index types in the complete source-shaped capture.
+
+    Booleans cannot stand in for integers or real values, and duplicate or
+    unknown typed dictionaries cannot reinterpret publisher cells.
+    """
     reader: ModuleType = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     frames = captured_frames()
     columns = cast(list[dict[str, object]], node(frames[1], (*DICTIONARY, "dataColumns")))
@@ -66,6 +71,7 @@ def test_real_reader_refuses_wrong_source_json_types(kind: str, value: object) -
 
 
 def test_valid_json_numeric_overflow_is_refused_at_the_typed_dictionary() -> None:
+    """Reject an overflowing JSON numeric token even when framing lengths remain unchanged."""
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     frames = captured_frames()
     columns = cast(list[dict[str, object]], node(frames[1], (*DICTIONARY, "dataColumns")))

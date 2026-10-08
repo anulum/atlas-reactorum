@@ -38,7 +38,20 @@ BUILD = importlib.import_module(PREFIX + ".build_dataset")
 
 @pytest.fixture
 def frozen_bundle(tmp_path: Path, source_custody: Path) -> Path:
-    """Create all seven artifacts from complete original publisher custody."""
+    """Create the seven complete derived artifacts from original publisher custody.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for the complete new bundle.
+    source_custody : Path
+        Original captured source bodies and acquisition receipts.
+
+    Returns
+    -------
+    Path
+        Bundle directory containing all 421 accepted source-derived observations.
+    """
     output = tmp_path / "bundle"
     assert BUNDLE.create_bundle(source_custody, output) == 421
     return output
@@ -48,6 +61,7 @@ def frozen_bundle(tmp_path: Path, source_custody: Path) -> Path:
 def test_native_complete_bundle_and_original_custody_verification(
     tmp_path: Path, source_custody: Path, optimize: bool
 ) -> None:
+    """Build and verify all seven artifacts with exact receipt hashes, rights labels and unchanged custody bytes."""
     output = tmp_path / "native"
     inputs = {path: path.read_bytes() for path in source_custody.iterdir() if path.is_file()}
     created = run_cli(
@@ -108,6 +122,7 @@ def test_native_complete_bundle_and_original_custody_verification(
 def test_native_offline_reproduction_needs_only_complete_frozen_artifacts(
     tmp_path: Path, frozen_bundle: Path, optimize: bool
 ) -> None:
+    """Reproduce every frozen artifact byte offline in both CLI modes without modifying its source bundle."""
     before = {path.name: path.read_bytes() for path in frozen_bundle.iterdir()}
     output = tmp_path / "reproduced"
     result = run_cli(
@@ -140,6 +155,7 @@ def test_native_offline_reproduction_needs_only_complete_frozen_artifacts(
 def test_any_artifact_byte_drift_cannot_validate_or_reproduce(
     tmp_path: Path, frozen_bundle: Path, artifact: str
 ) -> None:
+    """Reject byte drift in any artifact before publication while preserving the changed candidate bundle."""
     path = frozen_bundle / artifact
     path.write_bytes(path.read_bytes() + b"altered")
     before = {child.name: child.read_bytes() for child in frozen_bundle.iterdir()}
@@ -156,6 +172,7 @@ def test_any_artifact_byte_drift_cannot_validate_or_reproduce(
 def test_incomplete_or_nonregular_bundle_is_refused_before_publication(
     tmp_path: Path, frozen_bundle: Path, failure: str
 ) -> None:
+    """Reject missing, aliased, directory or oversized rights artifacts before accepting a bundle."""
     path = frozen_bundle / "RIGHTS.md"
     original = path.read_bytes()
     path.unlink()
@@ -193,6 +210,7 @@ def test_incomplete_or_nonregular_bundle_is_refused_before_publication(
 def test_reviewed_source_profile_and_grants_are_mandatory(
     frozen_bundle: Path, field: str, value: object
 ) -> None:
+    """Reject changed profile schemas, counts, snapshot bindings and missing source captures or grants."""
     path = frozen_bundle / ARTIFACTS.SOURCE_MANIFEST
     manifest = json.loads(path.read_text())
     manifest[field] = value
@@ -223,6 +241,7 @@ def test_reviewed_source_profile_and_grants_are_mandatory(
 def test_manifest_receipts_cannot_lose_type_hash_origin_or_acquisition_date(
     frozen_bundle: Path, field: str, value: object
 ) -> None:
+    """Reject receipt type, digest, byte-count, TLS, origin and acquisition-time violations."""
     path = frozen_bundle / ARTIFACTS.SOURCE_MANIFEST
     manifest = json.loads(path.read_text())
     manifest["captures"][0][field] = value
@@ -237,6 +256,7 @@ def test_manifest_receipts_cannot_lose_type_hash_origin_or_acquisition_date(
 def test_complete_resource_set_exact_terms_and_utc_dates_are_bound(
     frozen_bundle: Path, failure: str
 ) -> None:
+    """Reject changed capture membership, accepted terms digest and UTC retrieval-date bindings."""
     path = frozen_bundle / ARTIFACTS.SOURCE_MANIFEST
     manifest = json.loads(path.read_text())
     captures = manifest["captures"]
@@ -262,6 +282,7 @@ def test_complete_resource_set_exact_terms_and_utc_dates_are_bound(
 def test_self_consistent_offline_edit_cannot_pass_original_raw_custody(
     tmp_path: Path, frozen_bundle: Path, source_custody: Path
 ) -> None:
+    """Distinguish internally consistent frozen edits from validation against original raw custody."""
     snapshot, manifest, observations = ARTIFACTS.read_bundle(frozen_bundle)
     changed = copy.deepcopy(observations)
     changed[0]["facility_name"] += " changed"
@@ -279,6 +300,7 @@ def test_self_consistent_offline_edit_cannot_pass_original_raw_custody(
 def test_noncanonical_snapshot_cannot_be_relabelled_with_a_matching_digest(
     frozen_bundle: Path,
 ) -> None:
+    """Reject changed snapshot line endings despite an updated matching source-manifest digest."""
     snapshot = frozen_bundle / ARTIFACTS.SNAPSHOT_NAME
     body = snapshot.read_bytes().replace(b"\n", b"\r\n")
     snapshot.write_bytes(body)
@@ -294,6 +316,7 @@ def test_noncanonical_snapshot_cannot_be_relabelled_with_a_matching_digest(
 def test_bundle_outputs_preserve_source_trees_and_existing_state(
     tmp_path: Path, source_custody: Path, failure: str
 ) -> None:
+    """Refuse protected or occupied destinations without changing original source or owner bytes."""
     source = tmp_path / "copied"
     copy_custody(source, source_custody)
     output = tmp_path / "output"
@@ -318,6 +341,7 @@ def test_bundle_outputs_preserve_source_trees_and_existing_state(
 def test_native_bundle_and_validation_refuse_invalid_sources_and_artifacts(
     tmp_path: Path, frozen_bundle: Path, optimize: bool
 ) -> None:
+    """Reject missing captures and damaged derived artifacts through both native CLI modes."""
     result = run_cli(
         SCRIPTS / "bundle.py",
         "--capture-directory",
@@ -350,6 +374,7 @@ def test_native_bundle_and_validation_refuse_invalid_sources_and_artifacts(
     ],
 )
 def test_native_validation_refuses_ambiguous_modes(tmp_path: Path, args: list[str]) -> None:
+    """Refuse mixed validation modes with the native argument-error exit status."""
     result = run_cli(SCRIPTS / "validate.py", *args, cwd=tmp_path)
     assert result.returncode == 2
 
@@ -357,6 +382,7 @@ def test_native_validation_refuses_ambiguous_modes(tmp_path: Path, args: list[st
 def test_verified_pagination_retains_all_page_receipts(
     tmp_path: Path, source_custody: Path
 ) -> None:
+    """Acquire and bind all four real TLS page receipts while preserving 421 accepted observations."""
     layer = json.loads((source_custody / "ARPAE_LAYER.json").read_text())
     layer["maxRecordCount"] = 100
     page = json.loads((source_custody / "ARPAE_COMPLETE.json").read_text())
@@ -386,6 +412,7 @@ def test_verified_pagination_retains_all_page_receipts(
 def test_new_unselected_native_feature_requires_review_of_the_complete_source_count(
     tmp_path: Path, source_custody: Path
 ) -> None:
+    """Reject a changed complete source count even when the added feature is outside the selected process."""
     source = tmp_path / "changed-native-source"
     copy_custody(source, source_custody)
     page = json.loads((source / "ARPAE_COMPLETE.json").read_text())

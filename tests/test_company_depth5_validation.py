@@ -27,6 +27,18 @@ TABLES = ["enrichment_overlays.tsv", "source_registry.tsv", "gap_closure.tsv"]
 
 @pytest.fixture
 def inputs(tmp_path: Path) -> tuple[Path, Path]:
+    """Copy the complete depth tables and original round-four gap matrix into owned storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for overlays, source registry, gap closure and prior gap matrix.
+
+    Returns
+    -------
+    tuple[Path, Path]
+        Current depth-table directory and copied original gap-matrix path.
+    """
     folder = tmp_path / "round5"
     folder.mkdir()
     for name in TABLES:
@@ -37,6 +49,7 @@ def inputs(tmp_path: Path) -> tuple[Path, Path]:
 
 
 def test_original_snapshot_preserves_inputs_and_report(tmp_path: Path) -> None:
+    """Reproduce the exact accepted report in both CLI modes without changing source bytes."""
     before = {
         p: p.read_bytes()
         for p in [GAPS, *[SCRIPT.with_name(n) for n in TABLES], SCRIPT.with_name("validation.json")]
@@ -57,6 +70,7 @@ def test_original_snapshot_preserves_inputs_and_report(tmp_path: Path) -> None:
 def test_structural_input_failures_preserve_previous_report(
     inputs: tuple[Path, Path], name: str, damage: str
 ) -> None:
+    """Reject malformed or missing depth inputs while preserving the previously written report."""
     folder, gap = inputs
     path = gap if name == "gap_matrix.tsv" else folder / name
     fields, rows = read_table(path)
@@ -97,6 +111,7 @@ def test_structural_input_failures_preserve_previous_report(
     ],
 )
 def test_blank_overlay_facts_are_not_repaired(inputs: tuple[Path, Path], field: str) -> None:
+    """Reject blank enriched observations without repairing the candidate overlay."""
     folder, gap = inputs
     path = folder / TABLES[0]
     fields, rows = read_table(path)
@@ -139,6 +154,7 @@ def test_blank_overlay_facts_are_not_repaired(inputs: tuple[Path, Path], field: 
     ],
 )
 def test_identity_and_provenance_association_refusals(inputs: tuple[Path, Path], case: str) -> None:
+    """Reject changed six-target selection, 18-source associations and provenance with explicit diagnostics."""
     folder, gap = inputs
     op, sp, cp = [folder / name for name in TABLES]
     of, o = read_table(op)
@@ -246,6 +262,7 @@ def test_identity_and_provenance_association_refusals(inputs: tuple[Path, Path],
 def test_each_closure_fact_matches_previous_gaps_and_bounded_overlay(
     inputs: tuple[Path, Path], field: str
 ) -> None:
+    """Reject fabricated closure facts while retaining the exact candidate values."""
     folder, gap = inputs
     path = folder / TABLES[2]
     fields, rows = read_table(path)
@@ -269,6 +286,7 @@ def test_each_closure_fact_matches_previous_gaps_and_bounded_overlay(
 def test_links_require_https_authority(
     inputs: tuple[Path, Path], table: str, field: str, url: str
 ) -> None:
+    """Reject malformed HTTPS references, including an invalid optional second independent link."""
     folder, gap = inputs
     path = folder / table
     fields, rows = read_table(path)
@@ -286,6 +304,7 @@ def test_links_require_https_authority(
 
 @pytest.mark.parametrize("name", [*TABLES, "gap_matrix.tsv"])
 def test_report_cannot_replace_inputs(inputs: tuple[Path, Path], name: str) -> None:
+    """Protect every current depth input and the prior gap matrix from report destination aliasing."""
     folder, gap = inputs
     target = gap if name == "gap_matrix.tsv" else folder / name
     before = target.read_bytes()
@@ -297,6 +316,7 @@ def test_report_cannot_replace_inputs(inputs: tuple[Path, Path], name: str) -> N
 
 
 def test_report_write_failure_is_controlled(inputs: tuple[Path, Path]) -> None:
+    """Report an unwritable directory destination without a traceback or directory removal."""
     folder, gap = inputs
     result = run_cli(
         SCRIPT, "--directory", str(folder), "--gap-matrix", str(gap), "--report", str(folder)
@@ -308,6 +328,7 @@ def test_report_write_failure_is_controlled(inputs: tuple[Path, Path]) -> None:
 def test_partial_closure_remains_valid_when_explicit_limitations_are_retained(
     inputs: tuple[Path, Path],
 ) -> None:
+    """Accept partial closure while preserving explicit unresolved findings and absent optional links."""
     folder, gap = inputs
     op, cp = folder / TABLES[0], folder / TABLES[2]
     of, o = read_table(op)
@@ -328,6 +349,7 @@ def test_partial_closure_remains_valid_when_explicit_limitations_are_retained(
 def test_public_read_and_main_check_original_snapshot(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read the complete accepted overlay and validate it through the public main entry point."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth5_validator")
     assert (
         module.read(SCRIPT.with_name(TABLES[0]), module.OVERLAY_FIELDS)

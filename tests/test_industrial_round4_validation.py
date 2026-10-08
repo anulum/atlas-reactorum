@@ -33,11 +33,30 @@ PRIOR = DIRECTORY.parent / "industrial_facilities.tsv"
 
 @pytest.fixture
 def validator() -> ModuleType:
+    """Load the Swiss validator through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Validator exposing the native read-only validation entry points.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round4_validator")
 
 
 @pytest.fixture
 def bundle(tmp_path: Path) -> dict[str, Path]:
+    """Copy all five accepted Swiss tables into the owned test directory.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for data, snapshot, manifest, registry and jurisdiction matrix.
+
+    Returns
+    -------
+    dict[str, Path]
+        Complete table paths indexed by their native CLI argument names.
+    """
     paths = {key: tmp_path / name for key, name in NAMES.items()}
     for key, path in paths.items():
         path.write_bytes((DIRECTORY / NAMES[key]).read_bytes())
@@ -45,13 +64,25 @@ def bundle(tmp_path: Path) -> dict[str, Path]:
 
 
 def arguments(bundle: dict[str, Path]) -> list[str]:
-    """Pass the five complete Swiss source tables to the real read-only CLI."""
+    """Construct native CLI arguments for the complete five-table bundle.
+
+    Parameters
+    ----------
+    bundle : dict[str, Path]
+        Table paths keyed by data, snapshot, manifest, registry and matrix.
+
+    Returns
+    -------
+    list[str]
+        Alternating option names and paths for read-only validation.
+    """
     return [value for key, path in bundle.items() for value in ("--" + key, str(path))]
 
 
 def test_native_complete_validation_preserves_all_layers(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Validate all 93 facilities in both CLI modes and preserve current and prior source tables."""
     before = {key: path.read_bytes() for key, path in bundle.items()}
     prior = {p: p.read_bytes() for p in validator.OTHER_LAYERS}
     for optimize in (False, True):
@@ -84,6 +115,7 @@ def test_native_complete_validation_preserves_all_layers(
     ],
 )
 def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> None:
+    """Reject each blank required observation in optimized mode without changing candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = " "
     write_table(bundle["data"], fields, rows)
@@ -117,6 +149,7 @@ def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> No
 def test_full_data_fact_refusals(
     bundle: dict[str, Path], field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject invalid geography, inferred facts, status overclaims and unsafe provenance URLs."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = value
     write_table(bundle["data"], fields, rows)
@@ -151,6 +184,7 @@ def test_full_data_fact_refusals(
 def test_source_identity_and_provenance_refuse(
     bundle: dict[str, Path], which: str, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject invalid source identity, reporting year, counts, hashes and provenance fields."""
     fields, rows = read_table(bundle[which])
     rows[0][field] = value
     write_table(bundle[which], fields, rows)
@@ -173,6 +207,7 @@ def test_source_identity_and_provenance_refuse(
     ],
 )
 def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: str) -> None:
+    """Reject altered historical counts and empty or duplicate identities without tracebacks."""
     which = (
         "data"
         if corruption in {"duplicate_data", "empty_id", "data_count"}
@@ -207,6 +242,7 @@ def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: s
     "corruption", ["header", "empty", "extra", "short", "quote", "utf8", "missing"]
 )
 def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corruption: str) -> None:
+    """Reject malformed or missing input for every one of the five native tables."""
     path = bundle[which]
     fields, rows = read_table(path)
     if corruption == "header":
@@ -232,6 +268,7 @@ def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corrup
 def test_actual_prior_layers_must_be_readable_and_disjoint(
     tmp_path: Path, bundle: dict[str, Path], corruption: str
 ) -> None:
+    """Reject unreadable, malformed or overlapping prior layers without modifying their bytes."""
     fields, rows = read_table(PRIOR)
     path = tmp_path / "prior.tsv"
     if corruption == "overlap":
@@ -254,6 +291,7 @@ def test_actual_prior_layers_must_be_readable_and_disjoint(
 def test_real_native_rebuild_failure_mismatch_and_deadline(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Reject actual rebuild mismatches, invalid snapshots and expired or invalid time limits."""
     fields, rows = read_table(bundle["data"])
     rows[0]["facility_name"] += " changed"
     write_table(bundle["data"], fields, rows)
@@ -279,6 +317,7 @@ def test_real_native_rebuild_failure_mismatch_and_deadline(
 def test_public_runtime_schema_and_prior_layer_contract(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Require complete string schemas and a readable prior layer for stable-ID checking."""
     tables = [read_table(bundle[k])[1] for k in NAMES]
     assert validator.validate_records(*tables) == []
     broken = json.loads(json.dumps(tables))
@@ -304,6 +343,7 @@ def test_public_runtime_schema_and_prior_layer_contract(
 def test_complete_jurisdiction_matrix_mutations(
     bundle: dict[str, Path], field: str, value: str, message: str
 ) -> None:
+    """Reject invalid coverage, import decisions, dates and URLs in the complete jurisdiction matrix."""
     fields, rows = read_table(bundle["matrix"])
     # First original jurisdiction is not Switzerland; each case preserves the complete matrix.
     rows[0][field] = value
@@ -314,6 +354,7 @@ def test_complete_jurisdiction_matrix_mutations(
 
 
 def test_jurisdiction_duplicate_and_import_refusal(bundle: dict[str, Path]) -> None:
+    """Reject duplicate jurisdictions and the absence of the sole Swiss import decision."""
     fields, rows = read_table(bundle["matrix"])
     rows.append(rows[0].copy())
     write_table(bundle["matrix"], fields, rows)
@@ -336,6 +377,7 @@ def test_jurisdiction_duplicate_and_import_refusal(bundle: dict[str, Path]) -> N
     ],
 )
 def test_original_lv95_scope(bundle: dict[str, Path], field: str, value: str, message: str) -> None:
+    """Reject out-of-scope or non-finite original Swiss LV95 coordinates."""
     fields, rows = read_table(bundle["snapshot"])
     rows[0][field] = value
     write_table(bundle["snapshot"], fields, rows)

@@ -26,6 +26,7 @@ OUTPUTS = ["audited_companies.tsv", "summary.json"]
 
 
 def test_original_review_and_summary_are_byte_exact(tmp_path: Path) -> None:
+    """Reproduce and validate reviewed tables normally and under -O without source changes."""
     paths = [SOURCE, *[SCRIPT.with_name(name) for name in OUTPUTS]]
     before = {path: path.read_bytes() for path in paths}
     for optimized in (False, True):
@@ -58,6 +59,7 @@ def test_original_review_and_summary_are_byte_exact(tmp_path: Path) -> None:
     ],
 )
 def test_bad_discovery_preserves_existing_review_outputs(tmp_path: Path, damage: str) -> None:
+    """Refuse corrupted discovery data under -O without replacing either existing audit output."""
     path = tmp_path / "discovery.tsv"
     fields, rows = read_table(SOURCE)
     if damage == "header":
@@ -103,6 +105,7 @@ def test_bad_discovery_preserves_existing_review_outputs(tmp_path: Path, damage:
 def test_blank_required_discovery_context_refuses_before_outputs(
     tmp_path: Path, field: str
 ) -> None:
+    """Refuse blank required claim context before creating the audit output directory."""
     path = tmp_path / "discovery.tsv"
     fields, rows = read_table(SOURCE)
     rows[0][field] = " "
@@ -115,6 +118,7 @@ def test_blank_required_discovery_context_refuses_before_outputs(
 
 @pytest.mark.parametrize("damage", ["empty", "row_shape", "duplicate", "padded", "blank_context"])
 def test_public_projection_refuses_damaged_complete_discovery_records(damage: str) -> None:
+    """Raise the expected public projection error for schema, identity or claim-context damage."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_audit_builder")
     rows = read_table(SOURCE)[1]
     if damage == "empty":
@@ -138,6 +142,7 @@ def test_public_projection_refuses_damaged_complete_discovery_records(damage: st
 
 @pytest.mark.parametrize("name", OUTPUTS)
 def test_output_cannot_replace_discovery_input(tmp_path: Path, name: str) -> None:
+    """Reject each output filename that aliases discovery input and preserve the source bytes."""
     path = tmp_path / name
     shutil.copy2(SOURCE, path)
     before = path.read_bytes()
@@ -147,6 +152,7 @@ def test_output_cannot_replace_discovery_input(tmp_path: Path, name: str) -> Non
 
 
 def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
+    """Report a non-directory audit destination without replacing its existing contents."""
     output = tmp_path / "output"
     output.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(output))
@@ -157,6 +163,7 @@ def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
 def test_public_derivation_summary_and_main_preserve_imported_outputs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Derive the actual 51-row audit and summary while preserving imported bytes and mtimes."""
     paths = [SOURCE, *[SCRIPT.with_name(name) for name in OUTPUTS]]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_audit_builder")

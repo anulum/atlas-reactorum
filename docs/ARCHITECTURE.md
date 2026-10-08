@@ -63,12 +63,13 @@ refactor that changes behaviour.
 
 ## The map engine
 
-`04_interactive_presentation/map/` — seven single-responsibility modules,
+`04_interactive_presentation/map/` — nine shared modules,
 loaded as classic scripts because ES modules are blocked over `file://`.
 Equal Earth is the default projection because it is equal-area: visual density
 on the map is honest density on the globe. Coastline geometry is recovered by
 inverting the bundled plate carrée basemap, so reprojection needs no additional
-data and introduces no third-party licence. See `map/README.md`.
+data and introduces no third-party licence. Interaction and accessible source-row controls have separate owners; the engine
+coordinates projection, indexes, viewport and raster. See `map/README.md`.
 
 ## Evidence model
 
@@ -82,7 +83,7 @@ vessel.
 
 `validate.sh` checks the presentation and runs the map engine's tests.
 `tools/preflight.py` checks public documentation and script headers, and uses
-`tools/rebuild.py` to rebuild all 18 offline release products in a fresh external
+`tools/rebuild.py` to rebuild all 22 offline release products in a fresh external
 source tree. It runs the actual Python, Node and shell producers without writing
 the accepted candidate. The shell inventory uses its recorded UTC epoch for
 byte-identical receipts. Frozen upstream tables and editorial audits remain

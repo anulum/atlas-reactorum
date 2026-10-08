@@ -66,7 +66,22 @@ FACILITY_HEADER = "\t".join(FACILITY_COLUMNS) + "\n"
 
 
 def facility_row(identifier: str, url: str = "https://example.org/record", **overrides: str) -> str:
-    """Build one facility source row using the production column set."""
+    """Serialize one facility row in the production column order.
+
+    Parameters
+    ----------
+    identifier : str
+        Facility ID, also used to construct the default display name.
+    url : str
+        Provenance URL to place in the source row.
+    **overrides : str
+        Source cells that replace the default values for a guard scenario.
+
+    Returns
+    -------
+    str
+        Tab-separated row, including its trailing newline; the header is separate.
+    """
     values = dict.fromkeys(FACILITY_COLUMNS, "")
     values.update(DEFAULTS)
     values["id"] = identifier
@@ -78,10 +93,22 @@ def facility_row(identifier: str, url: str = "https://example.org/record", **ove
 
 @pytest.fixture
 def tree(tmp_path: Path) -> Iterator[Path]:
-    """Yield a real source tree carrying only the mandatory inputs.
+    """Yield an owned source tree with mandatory inputs and no optional layers.
 
-    Optional layers are absent, which is what a partially fetched checkout
-    looks like, and drives the builder's skip branches honestly.
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Parent of the temporary source root and sibling output directory.
+
+    Yields
+    ------
+    pathlib.Path
+        Source root carrying the real company catalogue. Its sibling data directory
+        contains an empty supplemental document, so missing layers add no records.
+
+    Notes
+    -----
+    The source tree is removed after the test; repository catalogues are copied only.
     """
     root = tmp_path / "source"
     (root / FACILITY_RELATIVE.parent).mkdir(parents=True)
@@ -139,7 +166,18 @@ def run_builder(tree: Path, rows: str, *flags: str) -> subprocess.CompletedProce
 
 
 def built_records(tree: Path) -> list[dict[str, object]]:
-    """Return the facility records the build produced."""
+    """Read facility records from this test's generated output document.
+
+    Parameters
+    ----------
+    tree : pathlib.Path
+        Owned source root whose sibling data directory holds the builder outputs.
+
+    Returns
+    -------
+    list of dict
+        Records loaded from global_reactors.sample.json.
+    """
     document = json.loads(
         (tree.parent / "data" / "global_reactors.sample.json").read_text(encoding="utf-8")
     )
@@ -151,11 +189,13 @@ class TestOptionalLayersAreSkipped:
     """A missing optional layer is skipped, never fabricated."""
 
     def test_build_succeeds_with_only_the_base_layer(self, tree: Path) -> None:
+        """Build exactly two base facilities when every optional facility layer is absent."""
         result = run_builder(tree, FACILITY_HEADER + facility_row("a1") + facility_row("a2"))
         assert result.returncode == 0, result.stderr[-2000:]
         assert len(built_records(tree)) == 2
 
     def test_absent_layers_contribute_nothing(self, tree: Path) -> None:
+        """Keep only the supplied base facility when optional layers are absent."""
         result = run_builder(tree, FACILITY_HEADER + facility_row("solo"))
         assert result.returncode == 0, result.stderr[-2000:]
         records = built_records(tree)
@@ -167,11 +207,13 @@ class TestFailClosedGuards:
     """An invariant violation must fail the build, including under ``-O``."""
 
     def test_duplicate_facility_identifier_is_rejected(self, tree: Path) -> None:
+        """Fail the real build with the duplicate-facility identifier diagnostic."""
         result = run_builder(tree, FACILITY_HEADER + facility_row("dup-1") + facility_row("dup-1"))
         assert result.returncode != 0
         assert "Duplicate facility ID" in result.stderr
 
     def test_non_http_source_url_is_rejected(self, tree: Path) -> None:
+        """Reject an FTP provenance URL with the HTTP diagnostic."""
         rows = FACILITY_HEADER + facility_row("ok1") + facility_row("bad1", url="ftp://x/y")
         result = run_builder(tree, rows)
         assert result.returncode != 0
@@ -189,6 +231,7 @@ class TestFailClosedGuards:
     def test_coordinate_outside_the_globe_is_rejected(
         self, tree: Path, field: str, value: str
     ) -> None:
+        """Reject each latitude or longitude outside its geographic bounds."""
         result = run_builder(tree, FACILITY_HEADER + facility_row("bad", **{field: value}))
         assert result.returncode != 0
         assert "coordinate out of range" in result.stderr
@@ -196,6 +239,7 @@ class TestFailClosedGuards:
     def test_guards_survive_optimised_bytecode(self, tree: Path) -> None:
         # `assert` is stripped by -O. Running the real builder under -O with a
         # duplicate proves the guards are statements, not assertions.
+        """Reject duplicate facility identifiers when the real builder runs under -O."""
         result = run_builder(
             tree, FACILITY_HEADER + facility_row("dup-2") + facility_row("dup-2"), "-O"
         )
@@ -204,7 +248,22 @@ class TestFailClosedGuards:
 
 
 def _one_row(path: Path, columns: list[str], sample: dict[str, str]) -> Path:
-    """Write a single-row catalogue using the production column set."""
+    """Write one source row and header using the production column order.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Owned catalogue destination; missing parent directories are created.
+    columns : list of str
+        Ordered source columns for the selected catalogue layer.
+    sample : dict of str to str
+        Sample cells; absent column values serialize as empty strings.
+
+    Returns
+    -------
+    pathlib.Path
+        The written catalogue path.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     header = "\t".join(columns) + "\n"
     row = "\t".join(sample.get(column, "") for column in columns) + "\n"
@@ -223,6 +282,7 @@ class TestPartialCheckout:
     """
 
     def test_base_layers_build_without_their_enrichment_rounds(self, tree: Path) -> None:
+        """Retain base, fusion and research rows without optional enrichment directories."""
         _one_row(
             tree / "05_global_reactor_map/imports/fusion/fusion_facilities.tsv",
             FUSION_COLUMNS,
@@ -246,6 +306,7 @@ class TestSupplementalLayerForms:
     def test_a_bare_array_supplemental_is_still_read(self, tree: Path) -> None:
         # Datasets published before the object wrapper are plain arrays. A
         # checkout carrying one must still build rather than crash.
+        """Accept an empty legacy supplemental array and retain the single base facility."""
         (tree.parent / "data" / "facilities-supplemental.json").write_text(
             json.dumps([]) + "\n", encoding="utf-8"
         )
@@ -258,6 +319,7 @@ class TestCompanyGuards:
     """Company records must stay individually addressable."""
 
     def test_duplicate_company_name_is_rejected(self, tree: Path) -> None:
+        """Reject duplicated company source rows with the duplicate-name diagnostic."""
         columns = COMPANY_COLUMNS
         header = "\t".join(columns) + "\n"
         duplicated = dict(COMPANY_SAMPLE_ROW)

@@ -18,7 +18,6 @@ const INDEX = path.join(__dirname, "..", "..", "index.html");
 
 /**
  * Extract the shipped basemap path data from the production index page.
- *
  * @returns {string} The land path's ``d`` attribute.
  */
 function shippedPathData() {
@@ -28,6 +27,10 @@ function shippedPathData() {
   return match[1];
 }
 
+/**
+ * Parse the shipped land path into more than 100 rings with at least three vertices each.
+ * @returns {void}
+ */
 test("the shipped basemap parses into rings", () => {
   const rings = coastline.parsePath(shippedPathData());
   assert.ok(rings.length > 100, `expected many rings, got ${rings.length}`);
@@ -36,6 +39,10 @@ test("the shipped basemap parses into rings", () => {
   }
 });
 
+/**
+ * Keep every recovered geographic extent within the longitude and latitude domain tolerances.
+ * @returns {void}
+ */
 test("recovered coordinates lie inside the geographic domain", () => {
   const rings = coastline.parsePath(shippedPathData());
   const b = coastline.boundsOf(rings);
@@ -45,6 +52,10 @@ test("recovered coordinates lie inside the geographic domain", () => {
   assert.ok(b.maxLat <= 90.001, `max lat ${b.maxLat}`);
 });
 
+/**
+ * Require the shipped basemap to extend north, south, east and west beyond the asserted limits.
+ * @returns {void}
+ */
 test("recovered coastline spans both hemispheres", () => {
   // A sign error in the vertical inversion would collapse the map into one
   // hemisphere while still producing in-range coordinates, so the range is
@@ -56,6 +67,10 @@ test("recovered coastline spans both hemispheres", () => {
   assert.ok(b.maxLon > 100, `eastern extent only reaches ${b.maxLon}`);
 });
 
+/**
+ * Require northern European vertices to outnumber the corresponding southern region by more than three.
+ * @returns {void}
+ */
 test("latitude is not inverted — land sits where land actually is", () => {
   // Greenwich at 51.5N is land; the same longitude at 51.5S is open ocean.
   // An inverted vertical axis would swap these, which bounds checks miss.
@@ -74,29 +89,51 @@ test("latitude is not inverted — land sits where land actually is", () => {
   );
 });
 
+/**
+ * Invert the default viewBox corners and center to their exact geographic coordinate pairs.
+ * @returns {void}
+ */
 test("corner mapping matches the plate carrée graticule exactly", () => {
   assert.deepEqual(coastline.toGeographic(0, 0), [-180, 90]);
   assert.deepEqual(coastline.toGeographic(1000, 500), [180, -90]);
   assert.deepEqual(coastline.toGeographic(500, 250), [0, 0]);
 });
 
+/**
+ * Invert both corners of the explicitly supplied 360 by 180 viewBox.
+ * @returns {void}
+ */
 test("custom view dimensions are honoured", () => {
   assert.deepEqual(coastline.toGeographic(0, 0, 360, 180), [-180, 90]);
   assert.deepEqual(coastline.toGeographic(360, 180, 360, 180), [180, -90]);
 });
 
+/**
+ * Recover two absolute move/line/close paths and verify the first ring and center coordinate.
+ * @returns {void}
+ */
 test("simple paths parse into the expected rings", () => {
-  const rings = coastline.parsePath("M500,250L600,250L600,300Z M0,0L100,0L100,50Z");
+  const rings = coastline.parsePath(
+    "M500,250L600,250L600,300Z M0,0L100,0L100,50Z",
+  );
   assert.equal(rings.length, 2);
   assert.equal(rings[0].length, 3);
   assert.deepEqual(rings[0][0], [0, 0]);
 });
 
+/**
+ * Discard the two-vertex path while retaining the adjacent three-vertex coastline ring.
+ * @returns {void}
+ */
 test("degenerate rings are discarded", () => {
   const rings = coastline.parsePath("M500,250L600,250Z M0,0L100,0L100,50Z");
   assert.equal(rings.length, 1, "two-point ring should not survive");
 });
 
+/**
+ * Refuse empty, non-string, unsupported-curve and line-before-move inputs with their specific errors.
+ * @returns {void}
+ */
 test("malformed and unsupported input is rejected, not silently mangled", () => {
   assert.throws(() => coastline.parsePath(""), /empty path data/);
   assert.throws(() => coastline.parsePath("   "), /empty path data/);
@@ -113,23 +150,49 @@ test("malformed and unsupported input is rejected, not silently mangled", () => 
   );
 });
 
+/**
+ * Read shipped geometry through the existing DOM-like adapter and refuse its absent-land-path case.
+ * @returns {void}
+ */
 test("fromDocument reads a basemap out of a DOM-like document", () => {
   const data = shippedPathData();
   const fakeDoc = {
+    /**
+     * Select the shipped land path for the existing document-access boundary test.
+     * @param {string} selector Selector supplied by the production coastline reader.
+     * @returns {{getAttribute: () => string}|null} Captured land data only for the expected selector.
+     */
     querySelector(selector) {
       return selector === "path.land"
-        ? { getAttribute: () => data }
+        ? {
+            /**
+             * Return the path attribute read from the shipped index page.
+             * @returns {string} Original land geometry captured before document lookup.
+             */
+            getAttribute: () => data,
+          }
         : null;
     },
   };
   const rings = coastline.fromDocument(fakeDoc);
   assert.ok(rings.length > 100);
   assert.throws(
-    () => coastline.fromDocument({ querySelector: () => null }),
+    () =>
+      coastline.fromDocument({
+        /**
+         * Report the absence of a land path to exercise the production reader's refusal.
+         * @returns {null} Missing selected node.
+         */
+        querySelector: () => null,
+      }),
     /basemap path not found/,
   );
 });
 
+/**
+ * Round-trip the first twenty shipped rings through Plate carrée within 1e-10 degrees.
+ * @returns {void}
+ */
 test("round-trip through the projection preserves the coastline", () => {
   // Recovering geography then reprojecting must be lossless, otherwise the
   // reprojected basemap would drift away from the facility points drawn on it.
@@ -141,7 +204,11 @@ test("round-trip through the projection preserves the coastline", () => {
     for (const [lon, lat] of ring) {
       const xy = p.forward(lon, lat);
       const back = p.inverse(xy.x, xy.y);
-      worst = Math.max(worst, Math.abs(back.lon - lon), Math.abs(back.lat - lat));
+      worst = Math.max(
+        worst,
+        Math.abs(back.lon - lon),
+        Math.abs(back.lat - lat),
+      );
     }
   }
   assert.ok(worst < 1e-10, `coastline round-trip drifted by ${worst}`);

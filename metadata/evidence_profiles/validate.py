@@ -57,8 +57,11 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = process.argv[1];
 const window = {};
+const construction = require(path.resolve(path.dirname(process.argv[2]),
+  '../taxonomy-construction.js'));
 vm.runInNewContext(fs.readFileSync(path.join(root,
-  '04_interactive_presentation/data/taxonomy-expanded.js'), 'utf8'), {window});
+  '04_interactive_presentation/data/taxonomy-expanded.js'), 'utf8'),
+  {window, AtlasTaxonomyConstruction: construction});
 const rows = JSON.parse(JSON.stringify(window.REACTOR_TAXONOMY));
 const {readCitations} = require(process.argv[2]);
 readCitations(root, rows);

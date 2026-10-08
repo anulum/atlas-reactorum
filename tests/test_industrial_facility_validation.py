@@ -25,6 +25,7 @@ SOURCE = DIRECTORY / "industrial_facilities.tsv"
 
 
 def test_full_industrial_catalogue_native_and_optimized() -> None:
+    """Validate the exact 6,550-site discovery summary normally and under -O without source changes."""
     before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
     for optimize in (False, True):
         result = run_cli(SCRIPT, optimize=optimize)
@@ -55,6 +56,7 @@ def test_full_industrial_catalogue_native_and_optimized() -> None:
     ],
 )
 def test_required_observations_refuse_full_copy(tmp_path: Path, field: str) -> None:
+    """Reject each blank required observation in the full copied source catalogue under -O."""
     fields, rows = read_table(SOURCE)
     rows[0][field] = "   "
     path = tmp_path / "changed.tsv"
@@ -87,6 +89,7 @@ def test_required_observations_refuse_full_copy(tmp_path: Path, field: str) -> N
 def test_corrupt_facts_refuse_full_copy(
     tmp_path: Path, field: str, value: str, diagnostic: str
 ) -> None:
+    """Refuse corrupt coordinates, provenance, dates or inferred reactor types with specific diagnostics."""
     fields, rows = read_table(SOURCE)
     assert rows[0]["stable_id"].startswith("eea-")
     rows[0][field] = value
@@ -113,6 +116,7 @@ def test_corrupt_facts_refuse_full_copy(
     ],
 )
 def test_table_integrity_refuses(tmp_path: Path, corruption: str) -> None:
+    """Reject duplicate, malformed or unreadable source tables under -O without a traceback."""
     fields, rows = read_table(SOURCE)
     path = tmp_path / "changed.tsv"
     if corruption == "duplicate":
@@ -142,6 +146,7 @@ def test_table_integrity_refuses(tmp_path: Path, corruption: str) -> None:
 def test_public_runtime_api_preserves_scope(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """Validate the complete public API schema, optional absences and inclusive coordinate boundaries."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_validator")
     assert capsys.readouterr().out == ""
     rows = module.read_rows(SOURCE)
@@ -168,6 +173,7 @@ def test_public_runtime_api_preserves_scope(
 def test_many_errors_keep_original_console_limit(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """Limit 150 source errors to the original 100 displayed diagnostics and one failure line."""
     fields, rows = read_table(SOURCE)
     for row in rows[:150]:
         row["facility_name"] = ""

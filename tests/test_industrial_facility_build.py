@@ -38,11 +38,24 @@ NAMES = ("EEA", "Mixed", "Cattle", "Poultry", "Swine", "Dairy")
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the actual six-source industrial producer in its own module namespace.
+
+    Returns
+    -------
+    types.ModuleType
+        Production source, pagination, row construction and native CLI API.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_producer")
 
 
 def sources() -> dict[str, Any]:
-    """Read every captured original source cell and its independent count."""
+    """Reload every captured industrial source cell and its separate source count.
+
+    Returns
+    -------
+    dict[str, typing.Any]
+        Fresh complete six-source envelope with its original fixture capture date.
+    """
     return {
         "schema_version": "1.0.0",
         "captured_at": "2026-09-30",
@@ -51,7 +64,20 @@ def sources() -> dict[str, Any]:
 
 
 def source_file(tmp_path: Path, document: object | None = None) -> Path:
-    """Save a complete source copy with an explicit corruption when requested."""
+    """Write an owned complete source envelope with an explicit mutation when selected.
+
+    Parameters
+    ----------
+    tmp_path
+        Pytest-owned directory for the source copy.
+    document
+        Explicit response mutation, or the complete genuine envelope when None.
+
+    Returns
+    -------
+    pathlib.Path
+        UTF-8 JSON source-copy path supplied to the actual offline CLI.
+    """
     path = tmp_path / "source.json"
     path.write_text(json.dumps(sources() if document is None else document), encoding="utf-8")
     return path
@@ -62,7 +88,23 @@ def service_routes(
     document: dict[str, Any],
     page_size: int = 1000,
 ) -> dict[str, tuple[int, dict[str, str], bytes, float]]:
-    """Serve genuine source/count payloads at the exact public query URLs."""
+    """Bind genuine source counts and pages to the exact production query paths.
+
+    Parameters
+    ----------
+    producer
+        Actual module supplying source-specific selection and field contracts.
+    document
+        Complete captured count/record envelope for all six services.
+    page_size
+        Maximum source records per served page; defaults to 1,000 records.
+
+    Returns
+    -------
+    dict[str, tuple[int, dict[str, str], bytes, float]]
+        Real HTTPS paths mapped to status, headers, body bytes and delay in seconds.
+        Counts, offset ordering and transfer-limit flags come from captured rows.
+    """
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {}
     for name, source in document["sources"].items():
         path = "/eea/query" if name == "EEA" else f"/epa/{name}/FeatureServer/0/query"
@@ -103,6 +145,7 @@ def service_routes(
 def test_complete_sources_reproduce_every_historical_byte(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """All six fixture hashes and 6,550 source records reproduce the accepted industrial table byte-for-byte."""
     document = sources()
     assert sum(row["count"] for row in document["sources"].values()) == 6550
     metadata = json.loads((FIXTURE / "SOURCE.json").read_bytes())
@@ -118,6 +161,7 @@ def test_complete_sources_reproduce_every_historical_byte(
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_native_offline_reproduction_and_real_validator(tmp_path: Path, optimize: bool) -> None:
+    """Normal/optimised offline builds reproduce every accepted byte and pass the actual dataset validator."""
     path = source_file(tmp_path)
     output = tmp_path / "candidate.tsv"
     result = run_cli(
@@ -140,6 +184,7 @@ def test_native_offline_reproduction_and_real_validator(tmp_path: Path, optimize
     "case", ["default-date", "bad-json", "bad-utf8", "missing-source", "bad-date"]
 )
 def test_native_source_and_date_handling(tmp_path: Path, case: str) -> None:
+    """The default date comes from capture metadata; malformed, missing or wrongly dated input refuses without output."""
     path = source_file(tmp_path)
     if case == "bad-json":
         path.write_bytes(b"{")
@@ -183,6 +228,7 @@ def test_native_source_and_date_handling(tmp_path: Path, case: str) -> None:
 def test_corrupt_source_envelope_refuses_every_output(
     producer: ModuleType, tmp_path: Path, case: str
 ) -> None:
+    """Invalid complete source/count structure raises before creating any candidate output."""
     document: Any = sources()
     if case == "scalar":
         document = 1
@@ -241,6 +287,7 @@ def test_corrupt_real_source_cells_refuse_without_writes(
     field: str,
     value: object,
 ) -> None:
+    """Invalid consumed identities, observations or coordinates refuse before creating output."""
     document = sources()
     document["sources"][name]["records"][0][field] = value
     with pytest.raises((ValueError, RuntimeError)):
@@ -254,6 +301,7 @@ def test_corrupt_real_source_cells_refuse_without_writes(
 def test_source_identity_and_schema_integrity(
     producer: ModuleType, tmp_path: Path, case: str
 ) -> None:
+    """Missing required cells, duplicate object/site identities or absent site names cannot form an accepted build."""
     document = sources()
     records = document["sources"]["EEA"]["records"]
     if case == "record-scalar":
@@ -274,6 +322,7 @@ def test_source_identity_and_schema_integrity(
 def test_unknown_optional_observations_and_source_ranges_are_preserved(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Optional absence, an unknown country code and a source capacity range survive without inferred device facts."""
     document = sources()
     eea = document["sources"]["EEA"]["records"][0]
     eea.update(
@@ -321,11 +370,13 @@ def test_unknown_optional_observations_and_source_ranges_are_preserved(
 def test_inconsistent_native_options_refuse_without_outputs(
     tmp_path: Path, options: list[str]
 ) -> None:
+    """Incomplete acquisition options return native failure without creating candidate output."""
     result = run_cli(SCRIPT, "--output", str(tmp_path / "candidate"), *options)
     assert result.returncode == 1 and not (tmp_path / "candidate").exists()
 
 
 def test_real_output_alias_and_atomic_failures(producer: ModuleType, tmp_path: Path) -> None:
+    """Accepted-file aliases, input overlap and directory targets refuse without changing accepted data or leaving residue."""
     before = ACCEPTED.read_bytes()
     link = tmp_path / "accepted"
     link.symlink_to(ACCEPTED)
@@ -345,6 +396,7 @@ def test_real_output_alias_and_atomic_failures(producer: ModuleType, tmp_path: P
 def test_real_buffered_and_direct_write_failures_clean_only_owned_temporaries(
     tmp_path: Path, size: int
 ) -> None:
+    """A real 1,024-byte file-size limit preserves the previous candidate after both buffered and direct write failures."""
     target = tmp_path / "candidate"
     target.write_bytes(b"previous")
     result = subprocess.run(
@@ -375,6 +427,7 @@ def test_complete_trusted_tls_native_refresh_and_paginated_sources(
     certificate: tuple[Path, Path],
     tmp_path: Path,
 ) -> None:
+    """Real trusted count/page acquisition preserves all source cells and reproduces accepted native refresh bytes."""
     document = sources()
     routes = service_routes(producer, document)
     with api_server(certificate, routes) as (base, requests):
@@ -439,6 +492,7 @@ def test_real_tls_source_count_page_and_transport_refusals(
     certificate: tuple[Path, Path],
     case: str,
 ) -> None:
+    """Malformed source counts/pages, trust, transfer flags or finite transport limits refuse within the source query path."""
     document = sources()
     routes = service_routes(producer, document)
     count_path = next(
@@ -512,6 +566,7 @@ def test_paginated_count_completion_at_last_permitted_page(
     size: int,
     max_pages: int,
 ) -> None:
+    """The complete real EEA record count succeeds at the last permitted source page."""
     routes = service_routes(producer, sources(), size)
     with api_server(certificate, routes) as (base, _requests):
         found = producer.query_all(
@@ -529,6 +584,7 @@ def test_empty_real_selection_and_query_parameter_joining(
     producer: ModuleType,
     certificate: tuple[Path, Path],
 ) -> None:
+    """A genuine zero-count response stays empty and extra query parameters join the original endpoint correctly."""
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {
         "/eea/query?f=json&where=1%3D0&returnCountOnly=true": (200, {}, b'{"count":0}', 0.0),
         "/eea?mirror=yes&f=json": (200, {}, api_body(sources()["sources"]["EEA"]), 0.0),
@@ -551,6 +607,7 @@ def test_real_redirect_destination_validation(
     certificate: tuple[Path, Path],
     target: str,
 ) -> None:
+    """Only the valid trusted redirect is followed; downgrade, credentials and loops refuse before a second request."""
     routes: dict[str, tuple[int, dict[str, str], bytes, float]] = {}
     with api_server(certificate, routes) as (base, requests):
         destinations = {
@@ -587,6 +644,7 @@ def test_real_redirect_destination_validation(
 def test_invalid_request_limits_refuse_before_network(
     producer: ModuleType, options: dict[str, int | float]
 ) -> None:
+    """Invalid timeout, byte, page-size and page-count limits raise before acquisition."""
     with pytest.raises(ValueError):
         producer.query_all(producer.EEA_LAYER, producer.EEA_WHERE, producer.EEA_FIELDS, **options)
 
@@ -604,6 +662,7 @@ def test_invalid_request_limits_refuse_before_network(
     ],
 )
 def test_invalid_source_urls_refuse_before_network(producer: ModuleType, url: str) -> None:
+    """Unsafe or malformed source URLs refuse before the real JSON request API performs acquisition."""
     with pytest.raises(ValueError):
         producer.request_json(url, {"f": "json"})
 
@@ -627,6 +686,7 @@ def test_native_refresh_preparation_and_path_errors_never_write(
     tmp_path: Path,
     case: str,
 ) -> None:
+    """Acquisition preparation and input/output aliases refuse while retaining accepted data and certificate bytes."""
     document = sources()
     if case == "unicode":
         document["sources"]["EEA"]["records"][0]["siteName"] = "\ud800"

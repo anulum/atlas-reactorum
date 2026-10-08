@@ -60,7 +60,19 @@ def run(script: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
 
 @pytest.fixture(scope="module")
 def rebuilt(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    """Build the datasets once, from the real sources, into a fresh directory."""
+    """Build datasets once from canonical sources into an owned output directory.
+
+    Parameters
+    ----------
+    tmp_path_factory : pytest.TempPathFactory
+        Allocator for this module's dataset output directory.
+
+    Returns
+    -------
+    pathlib.Path
+        Output directory after the real builder succeeds, using a verbatim copy
+        of the published supplemental document as its required input.
+    """
     out = tmp_path_factory.mktemp("rebuilt")
     # The supplemental layer is read from the output directory, so the real one
     # is copied in: this is the production input, not a stand-in.
@@ -74,7 +86,18 @@ def rebuilt(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 @pytest.fixture(scope="module")
 def coverage_out(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    """Run the coverage builder once into a fresh directory."""
+    """Build the coverage audit once into an owned output directory.
+
+    Parameters
+    ----------
+    tmp_path_factory : pytest.TempPathFactory
+        Allocator for this module's coverage output directory.
+
+    Returns
+    -------
+    pathlib.Path
+        Directory populated by a successful canonical coverage-builder process.
+    """
     out = tmp_path_factory.mktemp("coverage")
     result = run(COVERAGE_BUILDER, "--out-dir", str(out))
     assert result.returncode == 0, result.stderr[-3000:]
@@ -86,6 +109,7 @@ class TestDatasetBuildReproduces:
 
     @pytest.mark.parametrize("name", ["global_reactors.sample", "fusion_companies.sample"])
     def test_json_output_is_byte_identical_to_published(self, rebuilt: Path, name: str) -> None:
+        """Compare rebuilt and published JSON as decoded UTF-8 text."""
         assert (rebuilt / f"{name}.json").read_text(encoding="utf-8") == (
             PUBLISHED / f"{name}.json"
         ).read_text(encoding="utf-8")
@@ -94,16 +118,19 @@ class TestDatasetBuildReproduces:
     def test_javascript_output_is_byte_identical_to_published(
         self, rebuilt: Path, name: str
     ) -> None:
+        """Compare rebuilt and published JavaScript wrappers as decoded UTF-8 text."""
         assert (rebuilt / f"{name}.js").read_text(encoding="utf-8") == (
             PUBLISHED / f"{name}.js"
         ).read_text(encoding="utf-8")
 
     def test_record_count_matches_the_records_it_carries(self, rebuilt: Path) -> None:
+        """Require the declared facility count to equal the actual 13,459 generated records."""
         document = json.loads((rebuilt / "global_reactors.sample.json").read_text(encoding="utf-8"))
         assert document["record_count"] == len(document["records"])
         assert document["record_count"] == 13459
 
     def test_every_built_record_carries_provenance(self, rebuilt: Path) -> None:
+        """Require nonempty generated records with a source URL beginning with http."""
         records: list[dict[str, Any]] = json.loads(
             (rebuilt / "global_reactors.sample.json").read_text(encoding="utf-8")
         )["records"]
@@ -113,6 +140,7 @@ class TestDatasetBuildReproduces:
     def test_all_depth_profiles_keep_current_fields_and_display_aliases_together(
         self, rebuilt: Path
     ) -> None:
+        """Keep 39 depth overlays consistent with display aliases, source dates and ordered URLs."""
         document = json.loads((rebuilt / "fusion_companies.sample.json").read_text())
         records = {row["name"]: row for row in document["records"]}
         count = 0
@@ -159,6 +187,7 @@ class TestDatasetBuildReproduces:
     def test_round8_preserves_actual_source_roles_and_unknown_prototype_fuel(
         self, rebuilt: Path
     ) -> None:
+        """Preserve round-8 facts, prototype uncertainties and the distinction from replication."""
         document = json.loads((rebuilt / "fusion_companies.sample.json").read_text())
         records = {row["name"]: row for row in document["records"]}
         assert document["record_count"] == 98
@@ -198,11 +227,13 @@ class TestCoverageBuildReproduces:
     """The coverage audit must reproduce its published report."""
 
     def test_coverage_report_reproduces(self, coverage_out: Path) -> None:
+        """Compare the complete rebuilt coverage JSON object with the published object."""
         produced = json.loads((coverage_out / "coverage.json").read_text(encoding="utf-8"))
         shipped = json.loads((COVERAGE_DIR / "coverage.json").read_text(encoding="utf-8"))
         assert produced == shipped
 
     def test_coverage_markdown_reproduces(self, coverage_out: Path) -> None:
+        """Compare rebuilt and published coverage Markdown as decoded UTF-8 text."""
         assert (coverage_out / "COVERAGE.md").read_text(encoding="utf-8") == (
             COVERAGE_DIR / "COVERAGE.md"
         ).read_text(encoding="utf-8")
@@ -210,5 +241,6 @@ class TestCoverageBuildReproduces:
     def test_coverage_counts_agree_with_the_dataset(
         self, coverage_out: Path, facilities: list[dict[str, Any]]
     ) -> None:
+        """Check that facility-count digits occur in serialized coverage, without field equality."""
         report = json.loads((coverage_out / "coverage.json").read_text(encoding="utf-8"))
         assert str(len(facilities)) in json.dumps(report)

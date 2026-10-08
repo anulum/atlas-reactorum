@@ -33,6 +33,7 @@ dev = [
   "jsonschema==4.26.0",
   "types-jsonschema==4.26.0.20260518",
   "types-requests==2.33.0.20260906",
+  "types-PyYAML==6.0.12.20260906",
   "types-beautifulsoup4==4.12.0.20250516",
   "types-openpyxl==3.1.5.20260827",
   "pre-commit==4.6.2",
@@ -45,6 +46,10 @@ dev = [
   "requests==2.34.2",
   "openpyxl==3.1.5",
   "websocket-client==1.9.2",
+  "nbclient==0.11.0",
+  "nbformat==5.11.1",
+  "ipykernel==7.4.0",
+  "nbqa==1.9.1",
 ]
 
 [project.urls]
@@ -116,16 +121,11 @@ ignore = [
 convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
-# Assertions are the point of a test file. A test's name is its specification;
-# a docstring restating that name is the generic filler the docstring rules
-# exist to prevent, so D102 is not required on test methods. Module and class
-# docstrings, which carry the reasoning, remain mandatory.
-# D103 joins D102 for the same reason: a test function's name states what it
-# asserts, and a docstring repeating it is filler. S603 covers the entry-point
-# tests, which run the build scripts via [sys.executable, <repo-relative
-# constant>]; no argument derives from untrusted input.
-"**/tests/**" = ["S101", "D102", "D103", "S603"]
-"**/test_*.py" = ["S101", "D102", "D103", "S603"]
+# Test assertions and native CLI invocations are intentional. The latter use
+# the selected interpreter and repository-owned script paths. Documentation
+# requirements apply to test methods, fixtures and functions as well as source.
+"**/tests/**" = ["S101", "S603"]
+"**/test_*.py" = ["S101", "S603"]
 # Dataset validators assert invariants as their entire purpose; they are
 # standalone scripts, never imported, and are never run under -O.
 "**/validate*.py" = ["S101"]
@@ -171,6 +171,12 @@ sigterm = true
 # Subprocess coverage drags in the interpreter's own sitecustomize hook. It is
 # not repository code and must not dilute the project's coverage figure.
 omit = ["/etc/*", "*/sitecustomize.py", "*/.venv/*"]
+
+[tool.coverage.paths]
+# Native damaged-source cases execute this same complete tool in a real source
+# tree. The case requires byte equality before execution; retain those actual
+# regions under their owning module when subprocess data are combined.
+history_input = ["tools", "*/test_real_candidate_with_unava*/tools"]
 
 [tool.coverage.report]
 # 100 per cent, and never lowered. Anything below the line is coverage debt:

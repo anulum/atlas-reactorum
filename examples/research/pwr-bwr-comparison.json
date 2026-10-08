@@ -3,10 +3,10 @@
   "metadata_license": "AGPL-3.0-or-later",
   "source_rights": "catalogue-only; original not redistributed",
   "snapshot": {
-    "profile_sha256": "6b9dc7c94cbf537518001ebf239ad0a03fee796199a21a5ada2c0610d85f9666",
+    "profile_sha256": "f7bf904d911e8da745d80d647cb544b5ef3c11bb69a91ce4cd6381edc908c8c2",
     "inputs": {
-      "taxonomy_sha256": "88ef46ebb4a9f5682e77620d524f1a8de4bcd371dcb6c99c2b16aa1eb53dc0a4",
-      "citations_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7",
+      "taxonomy_sha256": "1020bc26e2ad0db174ec8b963be052eb41256fbda301b11235d29b6ea2424750",
+      "citations_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c",
       "audit_sha256": "2bf1eed42222d5b094dff2fdd5028c721ab8b70527f1cb05e794586f9e7faa84"
     }
   },
@@ -210,7 +210,7 @@
             "pwr:challenge:1",
             "pwr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -444,7 +444,7 @@
             "bwr:challenge:1",
             "bwr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",

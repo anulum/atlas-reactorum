@@ -31,7 +31,18 @@ REPORTS = (
 
 @pytest.fixture
 def research_copy(tmp_path: Path) -> Path:
-    """Preserve the real base, previous overlays, current registry and sibling generator."""
+    """Copy the complete research catalogue into the caller's temporary directory.
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        Owned directory for the base, earlier overlays, registry and round-4 reports.
+
+    Returns
+    -------
+    pathlib.Path
+        Round-4 directory within the copied catalogue; canonical sources stay untouched.
+    """
     return (
         shutil.copytree(
             DIRECTORY,
@@ -43,6 +54,7 @@ def research_copy(tmp_path: Path) -> Path:
 
 
 def test_actual_round4_generates_identical_reports(research_copy: Path) -> None:
+    """Reproduce all three reports normally and under -O without changing input hashes."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     inputs = [
         research_copy / "research_reactor_enrichment_round4.tsv",
@@ -90,6 +102,7 @@ def test_actual_round4_generates_identical_reports(research_copy: Path) -> None:
 def test_round4_bad_facts_refuse_before_report_generation(
     research_copy: Path, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject the corrupted fact under -O with its diagnostic and no generated reports."""
     path = research_copy / "research_reactor_enrichment_round4.tsv"
     fields, rows = read_table(path)
     rows[0][field] = value
@@ -119,6 +132,7 @@ def test_round4_bad_facts_refuse_before_report_generation(
     ],
 )
 def test_round4_integrity_refuses(research_copy: Path, corruption: str) -> None:
+    """Reject malformed, duplicate, absent or ineffective overlay data without a traceback."""
     path = research_copy / "research_reactor_enrichment_round4.tsv"
     fields, rows = read_table(path)
     base = research_copy.parent / "research_reactors.tsv"
@@ -158,6 +172,7 @@ def test_round4_integrity_refuses(research_copy: Path, corruption: str) -> None:
 
 @pytest.mark.parametrize("date", ["1957", "1957-09", "1957-09-01"])
 def test_round4_preserves_source_date_precision(research_copy: Path, date: str) -> None:
+    """Accept year, month and full-date precision for the source criticality date."""
     path = research_copy / "research_reactor_enrichment_round4.tsv"
     fields, rows = read_table(path)
     rows[0]["first_criticality"] = date
@@ -183,6 +198,7 @@ def test_round4_preserves_source_date_precision(research_copy: Path, date: str) 
     ],
 )
 def test_round4_source_registry_refuses(research_copy: Path, corruption: str) -> None:
+    """Refuse corrupted or excluded provenance registry entries under optimized execution."""
     path = research_copy / "source_registry.tsv"
     fields, rows = read_table(path)
     _, patches = read_table(research_copy / "research_reactor_enrichment_round4.tsv")
@@ -233,6 +249,7 @@ def test_round4_source_registry_refuses(research_copy: Path, corruption: str) ->
     ],
 )
 def test_round4_report_boundary_refuses(research_copy: Path, corruption: str) -> None:
+    """Refuse malformed existing reports or a missing prior overlay through the CLI."""
     country = research_copy / REPORTS[0]
     summary = research_copy / REPORTS[1]
     cf, cr = read_table(country)
@@ -269,6 +286,7 @@ def test_round4_report_boundary_refuses(research_copy: Path, corruption: str) ->
 def test_round4_public_entry_point_checks_existing_reports(
     research_copy: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Load the real overlay through the public API and check reports without rewriting them."""
     script = SCRIPT
     spec = importlib.util.spec_from_file_location("atlas_research_round4", script)
     assert spec is not None and spec.loader is not None
@@ -289,6 +307,7 @@ def test_round4_public_entry_point_checks_existing_reports(
 def test_round4_runs_canonical_generator_for_alternate_data_root(
     research_copy: Path,
 ) -> None:
+    """Generate reports with the canonical script when the copied generator is absent."""
     (research_copy / "generate_completeness_report.py").unlink()
     result = run_cli(SCRIPT, "--research-root", str(research_copy.parent))
     assert result.returncode == 0, result.stdout + result.stderr
@@ -297,6 +316,7 @@ def test_round4_runs_canonical_generator_for_alternate_data_root(
 
 @pytest.mark.parametrize("timeout", ["0", "-1", "nan", "inf", "1e308", "3600.0001"])
 def test_round4_invalid_report_deadline_preserves_inputs(research_copy: Path, timeout: str) -> None:
+    """Reject unsupported deadlines as CLI errors while preserving existing report bytes."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     result = run_cli(
         SCRIPT,
@@ -314,6 +334,7 @@ def test_round4_invalid_report_deadline_preserves_inputs(research_copy: Path, ti
 def test_round4_actual_reporter_timeout_preserves_existing_reports(
     research_copy: Path,
 ) -> None:
+    """Time out the real reporter normally and under -O without changing reports or source."""
     before = {name: (research_copy / name).read_bytes() for name in REPORTS}
     source = research_copy / "research_reactor_enrichment_round4.tsv"
     original = source.read_bytes()

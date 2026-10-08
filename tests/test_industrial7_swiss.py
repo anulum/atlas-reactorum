@@ -29,7 +29,24 @@ FIXTURE = ROOT / "tests/data/industrial_round7/SFOE_ORIGINAL.csv.zip"
 
 
 def revised_archive(directory: Path, member: str, field: str, value: str) -> Path:
-    """Modify one real native cell, preserving every other plant and member."""
+    """Copy the complete Swiss archive while altering one native source cell.
+
+    Parameters
+    ----------
+    directory : pathlib.Path
+        Owned destination directory for mutated.zip.
+    member : str
+        Archive member whose first data row contains the cell to alter.
+    field : str
+        CSV header identifying the selected cell.
+    value : str
+        Replacement text, serialized in the original Latin-1 encoding.
+
+    Returns
+    -------
+    pathlib.Path
+        New archive retaining all other members and plant rows.
+    """
     target = directory / "mutated.zip"
     with zipfile.ZipFile(FIXTURE) as original, zipfile.ZipFile(target, "w") as changed:
         for name in original.namelist():
@@ -45,6 +62,7 @@ def revised_archive(directory: Path, member: str, field: str, value: str) -> Pat
 
 
 def test_all_original_cells_and_date_semantics_are_retained() -> None:
+    """Retain 153 plants, original source cells, date roles, coordinate caveats and archive hash."""
     rows = SWISS.read_swiss(FIXTURE, retrieved="2026-09-30", source_date="2020-12-31")
     native = SWISS.read_archive(FIXTURE)
     assert len(rows) == len(native["BiogasPlant.csv"]) == 153
@@ -101,12 +119,14 @@ def test_all_original_cells_and_date_semantics_are_retained() -> None:
 def test_invalid_native_cells_are_refused(
     tmp_path: Path, member: str, field: str, value: str, message: str
 ) -> None:
+    """Raise the expected reader error for one corrupted cell in the complete Swiss archive."""
     target = revised_archive(tmp_path, member, field, value)
     with pytest.raises(ValueError, match=message):
         SWISS.read_swiss(target, retrieved="2026-09-30", source_date="2020-12-31")
 
 
 def test_documented_nonblank_upgrading_catalogue_join(tmp_path: Path) -> None:
+    """Resolve a valid upgrading-technology identifier to its native catalogue label."""
     archive = SWISS.read_archive(FIXTURE)
     key = archive["UpgradingTechnologyCatalogue.csv"][0]["idTechnology"]
     target = revised_archive(tmp_path, "BiogasPlant.csv", "UpgradingTechnology", key)
@@ -119,12 +139,14 @@ def test_documented_nonblank_upgrading_catalogue_join(tmp_path: Path) -> None:
 
 @pytest.mark.parametrize("date", ["invalid", "2020-99-31"])
 def test_reference_dates_are_not_relabelled(date: str) -> None:
+    """Refuse invalid source-reference dates through the public Swiss reader."""
     with pytest.raises(ValueError, match="reference date"):
         SWISS.read_swiss(FIXTURE, retrieved="2026-09-30", source_date=date)
 
 
 @pytest.mark.parametrize("failure", ["missing", "symlink", "oversized", "invalid_zip"])
 def test_archive_file_boundaries(tmp_path: Path, failure: str) -> None:
+    """Refuse missing, symlink, oversized or invalid archive files through the public reader."""
     target = tmp_path / "archive.zip"
     if failure == "symlink":
         target.symlink_to(FIXTURE)
@@ -154,6 +176,7 @@ def test_archive_file_boundaries(tmp_path: Path, failure: str) -> None:
     ],
 )
 def test_complete_archive_relations_are_checked(tmp_path: Path, failure: str) -> None:
+    """Refuse damaged archive membership, table shape or catalogue and annual relations."""
     target = tmp_path / "broken.zip"
     with zipfile.ZipFile(FIXTURE) as original, zipfile.ZipFile(target, "w") as changed:
         for name in original.namelist():
@@ -198,6 +221,7 @@ def test_complete_archive_relations_are_checked(tmp_path: Path, failure: str) ->
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_native_cli_other_working_directory(tmp_path: Path, optimize: bool) -> None:
+    """Read 153 plants from another cwd and report missing-input failure normally and under -O."""
     result = run_cli(
         SCRIPT,
         "--archive",

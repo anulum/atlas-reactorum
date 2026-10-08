@@ -18,6 +18,10 @@ const DEG = Math.PI / 180;
 const LATS = [-89.9, -75, -45, -23.5, 0, 23.5, 45, 66.5, 75, 89.9];
 const LONS = [-179.9, -120, -60, -1, 0, 1, 60, 120, 179.9];
 
+/**
+ * Round-trip the complete latitude/longitude grid within 1e-12 degrees.
+ * @returns {void}
+ */
 test("plate carrée is exactly invertible", () => {
   const p = projection.plateCarree;
   for (const lat of LATS) {
@@ -30,6 +34,10 @@ test("plate carrée is exactly invertible", () => {
   }
 });
 
+/**
+ * Round-trip the same geographic grid through Equal Earth within 1e-9 degrees.
+ * @returns {void}
+ */
 test("equal earth round-trips to double precision", () => {
   const p = projection.equalEarth;
   for (const lat of LATS) {
@@ -42,6 +50,10 @@ test("equal earth round-trips to double precision", () => {
   }
 });
 
+/**
+ * Compare the finite-difference area Jacobian with cosine latitude across the graticule.
+ * @returns {void}
+ */
 test("equal earth preserves area — Jacobian equals cos(lat) everywhere", () => {
   // The defining property of an equal-area projection: the determinant of the
   // Jacobian d(x,y)/d(lon,lat) must equal cos(lat) at every point. This is the
@@ -65,14 +77,25 @@ test("equal earth preserves area — Jacobian equals cos(lat) everywhere", () =>
       worst = Math.max(worst, Math.abs(jacobian - expected));
     }
   }
-  assert.ok(worst < 1e-6, `worst Jacobian deviation ${worst} exceeds tolerance`);
+  assert.ok(
+    worst < 1e-6,
+    `worst Jacobian deviation ${worst} exceeds tolerance`,
+  );
 });
 
+/**
+ * Keep the two public area-preservation flags consistent with their projection roles.
+ * @returns {void}
+ */
 test("plate carrée is declared non-equal-area and equal earth equal-area", () => {
   assert.equal(projection.plateCarree.equalArea, false);
   assert.equal(projection.equalEarth.equalArea, true);
 });
 
+/**
+ * Show the equirectangular Jacobian differs from equal-area behavior at 60 degrees north.
+ * @returns {void}
+ */
 test("plate carrée is NOT equal-area — guards against a mislabelled projection", () => {
   // Confirms the equalArea flags above are describing real behaviour rather
   // than being decorative metadata that could drift from the maths.
@@ -93,6 +116,10 @@ test("plate carrée is NOT equal-area — guards against a mislabelled projectio
   );
 });
 
+/**
+ * Preserve north/south and east/west symmetry at the sampled geographic coordinates.
+ * @returns {void}
+ */
 test("equal earth is symmetric about equator and prime meridian", () => {
   const p = projection.equalEarth;
   for (const lat of [10, 40, 70]) {
@@ -107,6 +134,10 @@ test("equal earth is symmetric about equator and prime meridian", () => {
   }
 });
 
+/**
+ * Map the equator and prime meridian to the corresponding plane axes.
+ * @returns {void}
+ */
 test("equator maps to y = 0 and prime meridian to x = 0", () => {
   for (const p of [projection.plateCarree, projection.equalEarth]) {
     assert.ok(Math.abs(p.forward(45, 0).y) < 1e-15, `${p.id} equator`);
@@ -114,6 +145,10 @@ test("equator maps to y = 0 and prime meridian to x = 0", () => {
   }
 });
 
+/**
+ * Require finite nondegenerate bounds containing every sampled coordinate for both projections.
+ * @returns {void}
+ */
 test("bounds cover the whole graticule and are finite", () => {
   for (const p of [projection.plateCarree, projection.equalEarth]) {
     const b = projection.bounds(p, 5);
@@ -124,26 +159,69 @@ test("bounds cover the whole graticule and are finite", () => {
     for (const lat of LATS) {
       for (const lon of LONS) {
         const q = p.forward(lon, lat);
-        assert.ok(q.x >= b.minX - 1e-9 && q.x <= b.maxX + 1e-9, `${p.id} x out`);
-        assert.ok(q.y >= b.minY - 1e-9 && q.y <= b.maxY + 1e-9, `${p.id} y out`);
+        assert.ok(
+          q.x >= b.minX - 1e-9 && q.x <= b.maxX + 1e-9,
+          `${p.id} x out`,
+        );
+        assert.ok(
+          q.y >= b.minY - 1e-9 && q.y <= b.maxY + 1e-9,
+          `${p.id} y out`,
+        );
       }
     }
   }
 });
 
+/**
+ * Keep sampled Equal Earth world bounds within the established aspect-ratio interval.
+ * @returns {void}
+ */
 test("equal earth is wider than tall, as the published projection is", () => {
   const b = projection.bounds(projection.equalEarth, 5);
   const ratio = (b.maxX - b.minX) / (b.maxY - b.minY);
   assert.ok(ratio > 1.8 && ratio < 2.1, `unexpected aspect ratio ${ratio}`);
 });
 
+/**
+ * Resolve both registered IDs and require the authored unknown-projection error.
+ * @returns {void}
+ */
 test("get resolves registered projections and rejects unknown ones", () => {
   assert.equal(projection.get("equal-earth").id, "equal-earth");
   assert.equal(projection.get("plate-carree").id, "plate-carree");
   assert.throws(() => projection.get("mercator"), /unknown projection/);
 });
 
+/**
+ * Require enumeration to contain exactly the two registered projection identifiers.
+ * @returns {void}
+ */
 test("list exposes every registered projection", () => {
-  const ids = projection.list().map((p) => p.id).sort();
+  const ids = projection
+    .list()
+    .map(
+      /**
+       * Read the stable identifier from a registered projection.
+       * @param {typeof projection.plateCarree} p Registered projection.
+       * @returns {string} Stable identifier used to compare the complete registry.
+       */
+      (p) => p.id,
+    )
+    .sort();
   assert.deepEqual(ids, ["equal-earth", "plate-carree"]);
+});
+
+/**
+ * Refuse every inherited Object prototype name without changing either registered projection.
+ * @returns {void}
+ */
+test("get refuses inherited names absent from the projection registry", () => {
+  for (const id of Object.getOwnPropertyNames(Object.prototype)) {
+    assert.throws(() => projection.get(id), {
+      name: "Error",
+      message: `unknown projection: ${id}`,
+    });
+  }
+  assert.strictEqual(projection.get("equal-earth"), projection.equalEarth);
+  assert.strictEqual(projection.get("plate-carree"), projection.plateCarree);
 });

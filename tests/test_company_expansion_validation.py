@@ -28,6 +28,7 @@ REPORT = DIRECTORY / "expansion_validation.json"
 
 
 def test_actual_company_expansion_reproduces_report(tmp_path: Path) -> None:
+    """Reproduce golden report bytes normally and under -O while preserving source hashes."""
     before = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in (EXPANSION, AUDIT, REPORT)}
     report = tmp_path / "validation.json"
     for optimized in (False, True):
@@ -60,6 +61,7 @@ def test_actual_company_expansion_reproduces_report(tmp_path: Path) -> None:
     ],
 )
 def test_company_expansion_identity_and_sources_refuse(tmp_path: Path, corruption: str) -> None:
+    """Reject identity or URL corruption under -O, reporting errors without changing input."""
     fields, rows = read_table(EXPANSION)
     _, audited = read_table(AUDIT)
     if corruption == "blank":
@@ -121,6 +123,7 @@ def test_company_expansion_identity_and_sources_refuse(tmp_path: Path, corruptio
 def test_company_expansion_bad_tables_preserve_report(
     tmp_path: Path, target: str, corruption: str
 ) -> None:
+    """Refuse malformed expansion or audit tables without replacing the existing report."""
     source = EXPANSION if target == "expansion" else AUDIT
     fields, rows = read_table(source)
     if corruption == "empty":
@@ -152,6 +155,7 @@ def test_company_expansion_bad_tables_preserve_report(
 
 @pytest.mark.parametrize("target", ["expansion", "audit"])
 def test_company_expansion_report_cannot_replace_input(tmp_path: Path, target: str) -> None:
+    """Reject report destinations that alias either input and preserve its source bytes."""
     path = tmp_path / "input.tsv"
     source = EXPANSION if target == "expansion" else AUDIT
     path.write_bytes(source.read_bytes())
@@ -162,6 +166,7 @@ def test_company_expansion_report_cannot_replace_input(tmp_path: Path, target: s
 
 
 def test_company_expansion_output_failure_preserves_directory(tmp_path: Path) -> None:
+    """Report output failure without replacing the directory or its existing JSON document."""
     report = tmp_path / "report.json"
     report.mkdir()
     (report / "existing.json").write_bytes(REPORT.read_bytes())
@@ -174,6 +179,7 @@ def test_company_expansion_output_failure_preserves_directory(tmp_path: Path) ->
 def test_company_expansion_public_api_and_entrypoint(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Load canonical expansion rows through the public API and reproduce the golden report."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_expansion_validator")
     assert module.load(EXPANSION, module.EXPECTED) == read_table(EXPANSION)[1]
     report = tmp_path / "validation.json"
@@ -186,6 +192,7 @@ def test_company_expansion_public_api_and_entrypoint(
     "corruption", ["blank_company", "punctuation_company", "duplicate_company"]
 )
 def test_protected_audit_requires_valid_unique_identities(tmp_path: Path, corruption: str) -> None:
+    """Refuse invalid audited identities while preserving the existing validation report."""
     fields, rows = read_table(AUDIT)
     if corruption == "blank_company":
         rows[0]["company"] = ""
@@ -203,6 +210,7 @@ def test_protected_audit_requires_valid_unique_identities(tmp_path: Path, corrup
 
 
 def test_protected_audit_optional_alias_can_remain_unknown(tmp_path: Path) -> None:
+    """Accept an empty optional audited alias and reproduce the unchanged golden report."""
     fields, rows = read_table(AUDIT)
     rows[0]["aliases"] = ""
     audit, report = tmp_path / "audit.tsv", tmp_path / "report.json"
@@ -213,6 +221,7 @@ def test_protected_audit_optional_alias_can_remain_unknown(tmp_path: Path) -> No
 
 
 def test_cross_identity_error_report_is_deterministic(tmp_path: Path) -> None:
+    """Report both alias collisions with identical report bytes normally and under -O."""
     fields, rows = read_table(EXPANSION)
     rows[2]["aliases"] = rows[0]["organization"] + "; " + rows[1]["organization"]
     path = tmp_path / "candidates.tsv"

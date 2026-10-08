@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "maxNodeModuleJsDepth": 0,
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["**/*.js", "**/*.cjs", "**/*.mjs", "**/*.d.ts"],
+  "exclude": [
+    "node_modules",
+    ".venv",
+    ".pytest-scratch",
+    "docs/internal",
+    "agentic_project_memory",
+    "BACKUP",
+    "ARCHIVE",
+    "04_interactive_presentation/data/anulum_reactor_repos.js",
+    "04_interactive_presentation/data/evidence-history.js",
+    "04_interactive_presentation/data/fusion_companies.sample.js",
+    "04_interactive_presentation/data/global_reactors.sample.js",
+    "04_interactive_presentation/data/taxonomy-audit.js",
+    "04_interactive_presentation/data/taxonomy-evidence-profiles.js"
+  ]
+}

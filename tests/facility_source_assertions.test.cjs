@@ -13,14 +13,49 @@ const path = require("node:path");
 const test = require("node:test");
 const vm = require("node:vm");
 const root = path.resolve(__dirname, "..");
-const file = path.join(root, "04_interactive_presentation/facility-source-assertions.js");
-const api = require(file);
-const records = JSON.parse(fs.readFileSync(path.join(root, "04_interactive_presentation/data/global_reactors.sample.json"), "utf8")).records;
-const original = records.flatMap(row => row.research_field_origins || []);
+const file = path.join(
+  root,
+  "04_interactive_presentation/facility-source-assertions.js",
+);
+const api = require("../04_interactive_presentation/facility-source-assertions.js");
+/** @type {unknown} */
+const document = JSON.parse(
+  fs.readFileSync(
+    path.join(
+      root,
+      "04_interactive_presentation/data/global_reactors.sample.json",
+    ),
+    "utf8",
+  ),
+);
+assert.ok(
+  document &&
+    typeof document === "object" &&
+    "records" in document &&
+    Array.isArray(document.records),
+);
+const candidates = /** @type {unknown[]} */ (document.records);
+const records = candidates.map((row) => {
+  assert.ok(row && typeof row === "object" && !Array.isArray(row));
+  const origins =
+    "research_field_origins" in row ? row.research_field_origins : [];
+  assert.ok(Array.isArray(origins));
+  assert.notEqual(
+    api.render(origins),
+    '<p role="status">Research field sources are unavailable.</p>',
+  );
+  return {
+    research_field_origins:
+      /** @type {import("../04_interactive_presentation/facility-source-assertions.js").FacilityFieldOrigin[]} */ (
+        origins
+      ),
+  };
+});
+const original = records.flatMap((row) => row.research_field_origins || []);
 
 test("every actual accepted assertion keeps its source meaning and original bytes", () => {
-  assert.ok(original.some(origin => origin.field === "first_criticality"));
-  assert.ok(original.some(origin => origin.selection === "superseded"));
+  assert.ok(original.some((origin) => origin.field === "first_criticality"));
+  assert.ok(original.some((origin) => origin.selection === "superseded"));
   for (const row of records) {
     const origins = row.research_field_origins || [];
     const html = api.render(origins);
@@ -28,27 +63,76 @@ test("every actual accepted assertion keeps its source meaning and original byte
     for (const origin of origins) {
       assert.ok(html.includes(origin.source_sha256));
       assert.ok(html.includes(origin.source_dataset));
-      assert.ok(html.includes(origin.selection === "selected" ? "Selected value" : "Previous source assertion"));
+      assert.ok(
+        html.includes(
+          origin.selection === "selected"
+            ? "Selected value"
+            : "Previous source assertion",
+        ),
+      );
     }
   }
 });
 
 test("browser script exports the same real renderer", () => {
-  const context = {URL};
-  vm.runInNewContext(fs.readFileSync(file, "utf8"), context, {filename: file});
-  assert.equal(context.FacilitySourceAssertions.render(original), api.render(original));
+  const context = {
+    URL,
+    FacilitySourceAssertions: /** @type {typeof api|undefined} */ (undefined),
+  };
+  vm.runInNewContext(fs.readFileSync(file, "utf8"), context, {
+    filename: file,
+  });
+  assert.ok(context.FacilitySourceAssertions);
+  assert.equal(
+    context.FacilitySourceAssertions.render(original),
+    api.render(original),
+  );
 });
 
 test("malformed actual assertions refuse without interpreter or URL diagnostics", () => {
-  const refusal = '<p role="status">Research field sources are unavailable.</p>';
-  for (const value of [null, {}, "unbound original", [null], [true], [{...original[0], extra: "unbound"}]]) assert.equal(api.render(value), refusal);
-  for (const field of Object.keys(original[0])) assert.equal(api.render([{...original[0], [field]: null}]), refusal);
-  for (const change of [{field: "unbound field"}, {value: ""}, {source_sha256: "changed"}, {selection: "unreviewed"}, {source_dataset: ""}]) assert.equal(api.render([{...original[0], ...change}]), refusal);
-  for (const source_url of ["javascript:alert(1)", "http://example.org/", "https://user@example.org/", "https://user:secret@example.org/", "https://:secret@example.org/", "https:///no-host", "https://[invalid/", "relative/source"]) assert.equal(api.render([{...original[0], source_url}]), refusal);
+  const refusal =
+    '<p role="status">Research field sources are unavailable.</p>';
+  for (const value of [
+    null,
+    {},
+    "unbound original",
+    [null],
+    [true],
+    [{ ...original[0], extra: "unbound" }],
+  ])
+    assert.equal(api.render(value), refusal);
+  for (const field of Object.keys(original[0]))
+    assert.equal(api.render([{ ...original[0], [field]: null }]), refusal);
+  for (const change of [
+    { field: "unbound field" },
+    { value: "" },
+    { source_sha256: "changed" },
+    { selection: "unreviewed" },
+    { source_dataset: "" },
+  ])
+    assert.equal(api.render([{ ...original[0], ...change }]), refusal);
+  for (const source_url of [
+    "javascript:alert(1)",
+    "http://example.org/",
+    "https://user@example.org/",
+    "https://user:secret@example.org/",
+    "https://:secret@example.org/",
+    "https:///no-host",
+    "https://[invalid/",
+    "relative/source",
+  ])
+    assert.equal(api.render([{ ...original[0], source_url }]), refusal);
 });
 
 test("source text remains text and absent metadata stays explicitly unknown", () => {
-  const row = {...original[0], value: "<&>\"'", source_role: "", source_capture_date: "", license: "", scope: ""};
+  const row = {
+    ...original[0],
+    value: "<&>\"'",
+    source_role: "",
+    source_capture_date: "",
+    license: "",
+    scope: "",
+  };
   const html = api.render([row]);
   assert.ok(html.includes("&lt;&amp;&gt;&quot;&#39;"));
   assert.ok(html.includes("Source role not specified"));

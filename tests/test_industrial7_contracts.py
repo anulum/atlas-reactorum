@@ -28,7 +28,13 @@ FIXTURES = ROOT / "tests/data/industrial_round7"
 
 @pytest.fixture
 def observations() -> list[dict[str, str]]:
-    """Read both complete native sources, never substituting miniature records."""
+    """Read complete Swiss and Italian source fixtures through their native readers.
+
+    Returns
+    -------
+    list[dict[str, str]]
+        Both full source observation sets with their accepted retrieval dates.
+    """
     rows: list[dict[str, str]] = SWISS.read_swiss(
         FIXTURES / "SFOE_ORIGINAL.csv.zip", retrieved="2026-09-30", source_date="2020-12-31"
     )
@@ -45,6 +51,7 @@ def observations() -> list[dict[str, str]]:
 
 
 def test_complete_source_observations_are_valid(observations: list[dict[str, str]]) -> None:
+    """Accept all 421 source observations and inclusive zero-to-one quantity boundaries."""
     assert len(observations) == 421
     CONTRACTS.check_observations(observations)
     assert CONTRACTS.object_fields({"source": "actual"}) == {"source": "actual"}
@@ -55,12 +62,14 @@ def test_complete_source_observations_are_valid(observations: list[dict[str, str
 
 @pytest.mark.parametrize("value", [None, [], "not an object", {1: "nonstring key"}])
 def test_nonobjects_are_refused(value: object) -> None:
+    """Reject absent or non-object values and objects with non-string keys."""
     with pytest.raises(ValueError, match="object"):
         CONTRACTS.object_fields(value)
 
 
 @pytest.mark.parametrize("value", [None, [], "not an array", [None]])
 def test_nonarrays_and_nonobject_rows_are_refused(value: object) -> None:
+    """Reject absent, empty or non-array row collections and non-object members."""
     with pytest.raises(ValueError):
         CONTRACTS.object_rows(value)
 
@@ -69,6 +78,7 @@ def test_nonarrays_and_nonobject_rows_are_refused(value: object) -> None:
     "value", [True, None, [], "", "not numeric", float("nan"), float("inf"), -1, 2, 10**1000]
 )
 def test_quantities_are_not_coerced_or_filled(value: object) -> None:
+    """Reject boolean, missing, non-finite, oversized or out-of-range source quantities."""
     with pytest.raises(ValueError, match="quantity"):
         CONTRACTS.quantity(value, minimum=0, maximum=1)
 
@@ -94,6 +104,7 @@ def test_quantities_are_not_coerced_or_filled(value: object) -> None:
 def test_complete_set_preserves_source_contract(
     observations: list[dict[str, str]], field: str, value: str
 ) -> None:
+    """Reject changed source identity, rights, dates, coordinates and source-specific capacity fields."""
     changed = copy.deepcopy(observations)
     changed[0][field] = value
     with pytest.raises(ValueError):
@@ -106,6 +117,7 @@ def test_complete_set_preserves_source_contract(
 def test_missing_sets_duplicate_ids_and_source_only_fields(
     observations: list[dict[str, str]], mutation: str
 ) -> None:
+    """Reject incomplete schemas, case-insensitive duplicate IDs and unsupported Italian capacities."""
     changed = copy.deepcopy(observations)
     if mutation == "empty":
         changed = []
@@ -134,6 +146,7 @@ def test_missing_sets_duplicate_ids_and_source_only_fields(
     ],
 )
 def test_bounded_native_json_reader(tmp_path: Path, failure: str) -> None:
+    """Reject missing, aliased, oversized, malformed or non-object native JSON captures."""
     path = tmp_path / "capture.json"
     if failure == "symlink":
         path.symlink_to(FIXTURES / "ARPAE_COUNT.json")
@@ -155,6 +168,7 @@ def test_bounded_native_json_reader(tmp_path: Path, failure: str) -> None:
 
 
 def test_real_source_json_reader() -> None:
+    """Read the exact accepted Italian source count of 330 from its original capture."""
     assert CONTRACTS.read_json(FIXTURES / "ARPAE_COUNT.json")["count"] == 330
 
 
@@ -165,6 +179,7 @@ def test_real_source_json_reader() -> None:
 def test_complete_table_schema_is_required(
     tmp_path: Path, observations: list[dict[str, str]], failure: str
 ) -> None:
+    """Reject absent, aliased, oversized or malformed observation tables before accepting rows."""
     path = tmp_path / "snapshot.tsv"
     if failure == "symlink":
         path.symlink_to(FIXTURES / "ARPAE_IDS.json")
@@ -189,6 +204,7 @@ def test_complete_table_schema_is_required(
 def test_complete_round_trip_and_native_readonly_cli(
     tmp_path: Path, observations: list[dict[str, str]], optimize: bool
 ) -> None:
+    """Round-trip all 421 observations and refuse incorrect licence values in both CLI modes."""
     path = tmp_path / "snapshot.tsv"
     write_table(path, CONTRACTS.SNAPSHOT_FIELDS, observations)
     before = path.read_bytes()

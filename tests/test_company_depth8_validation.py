@@ -35,6 +35,7 @@ PRODUCTS = [
 def test_actual_persisted_products_reject_change_without_rebuild(
     tmp_path: Path, name: str, damage: str
 ) -> None:
+    """Reject product drift under -O, preserving inputs and old reports on structural failure."""
     output = tmp_path / "output"
     output.mkdir()
     for product in [*PRODUCTS, "validation.json"]:
@@ -69,6 +70,7 @@ def test_actual_persisted_products_reject_change_without_rebuild(
     "input_name", ["reviewed_profiles.tsv", "reviewed_sources.tsv", "field_source_bindings.tsv"]
 )
 def test_report_never_replaces_actual_reviewed_inputs(tmp_path: Path, input_name: str) -> None:
+    """Reject report aliases of each reviewed input and preserve its actual source bytes."""
     path = INPUTS / input_name
     before = path.read_bytes()
     result = run_cli(SCRIPT, "--report", str(path), cwd=tmp_path)
@@ -78,6 +80,7 @@ def test_report_never_replaces_actual_reviewed_inputs(tmp_path: Path, input_name
 
 @pytest.mark.parametrize("name", PRODUCTS)
 def test_report_never_replaces_actual_persisted_product(name: str) -> None:
+    """Reject report aliases of each persisted product and preserve its actual source bytes."""
     path = ROUND / name
     before = path.read_bytes()
     result = run_cli(SCRIPT, "--report", str(path))
@@ -87,6 +90,7 @@ def test_report_never_replaces_actual_persisted_product(name: str) -> None:
 
 @pytest.mark.parametrize("kind", ["missing_parent", "directory", "symlink"])
 def test_report_write_refusal_is_controlled_and_preserves_proofs(tmp_path: Path, kind: str) -> None:
+    """Refuse invalid report destinations without traceback or alteration of the owned proof."""
     report = tmp_path / "report"
     victim = tmp_path / "victim"
     victim.write_text("owned proof\n")
@@ -104,6 +108,7 @@ def test_report_write_refusal_is_controlled_and_preserves_proofs(tmp_path: Path,
 def test_public_validation_entry_point_checks_real_full_products(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Validate all real products with exact counts and retain the physical-closure limitation."""
     import sys
 
     from .conftest import load_module

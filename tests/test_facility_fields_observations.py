@@ -24,6 +24,7 @@ from ._facility_field_sources import original_source as original_source
 
 
 def test_every_observation_carries_original_byte_and_cell_bindings(original_source: Path) -> None:
+    """Bind each observation to source and target hashes while omitting absent Dairy end-use cells."""
     result = project(original_source)
     for row in result:
         assert (
@@ -52,6 +53,7 @@ def test_every_observation_carries_original_byte_and_cell_bindings(original_sour
 def test_invalid_publisher_identity_refuses_complete_projection(
     original_source: Path, value: object
 ) -> None:
+    """Reject boolean, fractional, missing or blank publisher record identities."""
     key = "agstar-Mixed"
     body = document(original_source / str(specification(original_source, key)["path"]))
     original_rows(body["records"])[0]["OBJECTID"] = value
@@ -66,6 +68,7 @@ def test_invalid_publisher_identity_refuses_complete_projection(
 def test_present_original_scalars_are_not_coerced(
     original_source: Path, field: str, value: object
 ) -> None:
+    """Reject non-string end-use cells or blank identities instead of coercing source values."""
     body = document(original_source / str(specification(original_source, "agstar-Mixed")["path"]))
     original_rows(body["records"])[0][field] = value
     replace_input(original_source, "agstar-Mixed", json.dumps(body).encode())
@@ -76,6 +79,7 @@ def test_present_original_scalars_are_not_coerced(
 def test_text_identifiers_retain_published_value_and_original_whitespace(
     original_source: Path,
 ) -> None:
+    """Preserve literal whitespace in accepted text identities and their published end-use values."""
     body = document(original_source / str(specification(original_source, "agstar-Mixed")["path"]))
     row = original_rows(body["records"])[0]
     original = row["Biogas_End"]

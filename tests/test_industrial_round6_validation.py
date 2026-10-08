@@ -33,11 +33,30 @@ PRIOR = DIRECTORY.parent / "industrial_facilities.tsv"
 
 @pytest.fixture
 def validator() -> ModuleType:
+    """Load the process-specific industrial validator through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Validator exposing native read-only validation entry points.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round6_validator")
 
 
 @pytest.fixture
 def bundle(tmp_path: Path) -> dict[str, Path]:
+    """Copy all five accepted process-specific tables into owned test storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for data, snapshot, manifest, registry and source-gap matrix.
+
+    Returns
+    -------
+    dict[str, Path]
+        Complete table paths indexed by their native CLI option names.
+    """
     paths = {key: tmp_path / name for key, name in NAMES.items()}
     for key, path in paths.items():
         path.write_bytes((DIRECTORY / NAMES[key]).read_bytes())
@@ -45,13 +64,25 @@ def bundle(tmp_path: Path) -> dict[str, Path]:
 
 
 def arguments(bundle: dict[str, Path]) -> list[str]:
-    """Pass the four complete process-specific source tables to the real read-only CLI."""
+    """Construct native CLI arguments for the complete five-table bundle.
+
+    Parameters
+    ----------
+    bundle : dict[str, Path]
+        Data, snapshot, manifest, registry and source-gap matrix paths.
+
+    Returns
+    -------
+    list[str]
+        Alternating native option names and paths for read-only validation.
+    """
     return [value for key, path in bundle.items() for value in ("--" + key, str(path))]
 
 
 def test_native_complete_validation_preserves_all_layers(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Validate all 1,131 facilities in both CLI modes while preserving current and prior table bytes."""
     before = {key: path.read_bytes() for key, path in bundle.items()}
     prior = {p: p.read_bytes() for p in validator.OTHER_LAYERS}
     for optimize in (False, True):
@@ -84,6 +115,7 @@ def test_native_complete_validation_preserves_all_layers(
     ],
 )
 def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> None:
+    """Reject blank required observations in optimized mode without changing candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = " "
     write_table(bundle["data"], fields, rows)
@@ -121,6 +153,7 @@ def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> No
 def test_full_data_fact_refusals(
     bundle: dict[str, Path], field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject invalid coordinates, invented reactor facts, status overclaims and unsafe provenance URLs."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = value
     write_table(bundle["data"], fields, rows)
@@ -154,6 +187,7 @@ def test_full_data_fact_refusals(
 def test_source_identity_and_provenance_refuse(
     bundle: dict[str, Path], which: str, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject changed source identities, counts, hashes, dates and missing provenance observations."""
     fields, rows = read_table(bundle[which])
     rows[0][field] = value
     write_table(bundle[which], fields, rows)
@@ -177,6 +211,7 @@ def test_source_identity_and_provenance_refuse(
     ],
 )
 def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: str) -> None:
+    """Reject altered accepted counts and empty or duplicate identities without tracebacks."""
     which = (
         "data"
         if corruption in {"duplicate_data", "empty_id", "data_count"}
@@ -211,6 +246,7 @@ def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: s
     "corruption", ["header", "empty", "extra", "short", "quote", "utf8", "missing"]
 )
 def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corruption: str) -> None:
+    """Reject malformed or missing input for each of the five native table roles."""
     path = bundle[which]
     fields, rows = read_table(path)
     if corruption == "header":
@@ -236,6 +272,7 @@ def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corrup
 def test_actual_prior_layers_must_be_readable_and_disjoint(
     tmp_path: Path, bundle: dict[str, Path], corruption: str
 ) -> None:
+    """Reject unreadable, malformed or overlapping prior layers without modifying their bytes."""
     fields, rows = read_table(PRIOR)
     path = tmp_path / "prior.tsv"
     if corruption == "overlap":
@@ -258,6 +295,7 @@ def test_actual_prior_layers_must_be_readable_and_disjoint(
 def test_real_native_rebuild_failure_mismatch_and_deadline(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Reject actual rebuild mismatches, invalid snapshots and expired or invalid time limits."""
     fields, rows = read_table(bundle["data"])
     rows[0]["facility_name"] += " changed"
     write_table(bundle["data"], fields, rows)
@@ -283,6 +321,7 @@ def test_real_native_rebuild_failure_mismatch_and_deadline(
 def test_public_runtime_schema_and_prior_layer_contract(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Require complete string schemas and at least one readable prior layer for stable-ID checking."""
     tables = [read_table(bundle[k])[1] for k in NAMES]
     assert validator.validate_records(*tables) == []
     broken = json.loads(json.dumps(tables))
@@ -298,6 +337,7 @@ def test_public_runtime_schema_and_prior_layer_contract(
 
 @pytest.mark.parametrize("corruption", ["duplicate", "empty_id", "imports", "theme", "date", "url"])
 def test_complete_process_gap_matrix_refusals(bundle: dict[str, Path], corruption: str) -> None:
+    """Reject changed matrix identities, import decisions, themes, dates and unsafe source URLs."""
     fields, rows = read_table(bundle["matrix"])
     if corruption == "duplicate":
         rows.append(rows[0].copy())
@@ -342,6 +382,7 @@ def test_complete_process_gap_matrix_refusals(bundle: dict[str, Path], corruptio
 def test_actual_specific_layer_policy(
     bundle: dict[str, Path], which: str, source: str, field: str, value: str
 ) -> None:
+    """Reject source-specific changes to geography, rights, identity and status caveats."""
     fields, rows = read_table(bundle[which])
     key = "stable_id" if which == "data" else "source" if which == "snapshot" else "source_id"
     next(r for r in rows if r[key].startswith(source))[field] = value
@@ -353,6 +394,7 @@ def test_actual_specific_layer_policy(
 def test_rights_document_and_service_row_identity(
     bundle: dict[str, Path], validator: ModuleType, tmp_path: Path
 ) -> None:
+    """Require accepted rights-review phrases and distinct service-row IDs through the native validator."""
     rights = tmp_path / "RIGHTS.md"
     rights.write_bytes((DIRECTORY / "RIGHTS.md").read_bytes())
     assert validator.validate_rights(rights.read_text()) == []

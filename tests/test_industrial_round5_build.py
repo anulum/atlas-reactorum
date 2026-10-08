@@ -42,11 +42,24 @@ REFERENCES = SOURCE.parent / "projection_reference.json"
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the actual UK/French process producer in its own module namespace.
+
+    Returns
+    -------
+    types.ModuleType
+        Production projection, snapshot, build and HTTPS acquisition API.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round5_build")
 
 
 def raw_records() -> tuple[list[str], list[dict[str, str]]]:
-    """Read every actual selected raw record and its genuine exclusion control."""
+    """Read all captured UK source rows, including their genuine exclusion control.
+
+    Returns
+    -------
+    tuple[list[str], list[dict[str, str]]]
+        Original CSV field order and Windows-1252-decoded mutable source rows.
+    """
     with SOURCE.open(encoding="windows-1252", newline="") as handle:
         reader = csv.DictReader(handle)
         assert reader.fieldnames is not None
@@ -54,7 +67,20 @@ def raw_records() -> tuple[list[str], list[dict[str, str]]]:
 
 
 def raw_payload(fields: list[str], rows: list[dict[str, str]]) -> bytes:
-    """Serialize complete source copies without changing unmutated source cells."""
+    """Encode explicit CSV fixture mutations without changing other source cells.
+
+    Parameters
+    ----------
+    fields
+        Complete original source header in its accepted order.
+    rows
+        Complete source rows with only the test-selected cells changed.
+
+    Returns
+    -------
+    bytes
+        Windows-1252 CSV body with the original column contract.
+    """
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(stream, fieldnames=fields)
     writer.writeheader()
@@ -63,6 +89,7 @@ def raw_payload(fields: list[str], rows: list[dict[str, str]]) -> bytes:
 
 
 def test_actual_raw_selection_equals_complete_snapshot(producer: ModuleType) -> None:
+    """Complete raw UK/French selection reproduces all 393 snapshot records apart from the two declared French capture fields."""
     selected, uk_count, fr_count = producer.select_sources(
         SOURCE.read_bytes(),
         ADEME.read_bytes(),
@@ -83,6 +110,7 @@ def test_actual_raw_selection_equals_complete_snapshot(producer: ModuleType) -> 
 
 
 def test_all_original_points_against_independent_projection(producer: ModuleType) -> None:
+    """All 362 grid conversions agree with stored references within 0.001 metre; the faulty baseline exceeds 100 metres."""
     references = json.loads(REFERENCES.read_text())["records"]
     assert len(references) == 362
     for record in references:
@@ -124,6 +152,7 @@ def test_all_original_points_against_independent_projection(producer: ModuleType
 def test_native_full_rebuild_preserves_historical_bytes(
     tmp_path: Path, producer: ModuleType
 ) -> None:
+    """API and normal/optimised CLI builds reproduce all 393 accepted rows without changing source snapshot bytes."""
     before = SNAPSHOT.read_bytes(), DATA.read_bytes()
     for optimize in (False, True):
         output = tmp_path / f"built-{optimize}.tsv"
@@ -136,6 +165,7 @@ def test_native_full_rebuild_preserves_historical_bytes(
 
 
 def test_actual_raw_refresh_is_isolated(tmp_path: Path, producer: ModuleType) -> None:
+    """Raw refresh writes only owned snapshot/manifest/output files and reproduces the complete accepted table."""
     snapshot, manifest = tmp_path / "snapshot.tsv", tmp_path / "manifest.tsv"
     counts = producer.refresh_snapshot(
         SOURCE.read_bytes(),
@@ -196,6 +226,7 @@ def test_actual_raw_refresh_is_isolated(tmp_path: Path, producer: ModuleType) ->
 def test_full_snapshot_mutations_refuse(
     tmp_path: Path, source: str, field: str, value: str
 ) -> None:
+    """Invalid selected-source identity, location or process cells refuse before creating the optimised CLI output."""
     fields, rows = read_table(SNAPSHOT)
     next(r for r in rows if r["source"] == source)[field] = value
     path = tmp_path / "changed.tsv"
@@ -211,6 +242,7 @@ def test_full_snapshot_mutations_refuse(
     "corruption", ["empty", "header", "extra", "short", "quote", "utf8", "duplicate", "missing"]
 )
 def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
+    """Malformed, incomplete, duplicate or unavailable snapshot tables return trace-free native failures."""
     fields, rows = read_table(SNAPSHOT)
     path = tmp_path / "changed.tsv"
     if corruption == "empty":
@@ -235,6 +267,7 @@ def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
 
 
 def test_original_optional_activity_and_public_schema(producer: ModuleType) -> None:
+    """Additional source status wording survives, while missing required string cells and empty selection refuse."""
     rows = producer.read_snapshot(SNAPSHOT)
     next(r for r in rows if r["source"] == "fr-ademe-h2")["status"] = (
         "source-specific additional status"
@@ -256,6 +289,7 @@ def test_original_optional_activity_and_public_schema(producer: ModuleType) -> N
     "corruption", ["header", "empty", "extra", "short", "no_selection", "empty_id", "duplicate"]
 )
 def test_actual_raw_boundaries_refuse(producer: ModuleType, corruption: str) -> None:
+    """Source header, shape, selection and identity defects refuse through the actual raw selector."""
     fields, rows = raw_records()
     fr = json.loads(ADEME.read_text())
     if corruption == "header":
@@ -304,6 +338,7 @@ def test_actual_raw_boundaries_refuse(producer: ModuleType, corruption: str) -> 
     ],
 )
 def test_complete_ademe_response_refusals(producer: ModuleType, corruption: str) -> None:
+    """Malformed French envelopes or invalid megawatt values refuse without silently replacing source observations."""
     body = json.loads(ADEME.read_text())
     if corruption == "root":
         body = []
@@ -341,12 +376,14 @@ def test_complete_ademe_response_refusals(producer: ModuleType, corruption: str)
     ],
 )
 def test_actual_metadata_contract_refusals(producer: ModuleType, value: object) -> None:
+    """Missing or noncanonical timezone-qualified metadata update dates cannot supply a valid source date."""
     with pytest.raises(ValueError):
         producer.metadata_date(json.dumps(value).encode())
 
 
 @pytest.mark.parametrize("date", ["20260928", "2026-02-30"])
 def test_exact_retrieval_dates_required(tmp_path: Path, producer: ModuleType, date: str) -> None:
+    """Noncanonical or impossible dates refuse row conversion, selection and isolated refresh."""
     with pytest.raises(ValueError):
         producer.rows_from_snapshot(producer.read_snapshot(SNAPSHOT), retrieved=date)
     with pytest.raises(ValueError):
@@ -363,6 +400,7 @@ def test_exact_retrieval_dates_required(tmp_path: Path, producer: ModuleType, da
 
 
 def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: ModuleType) -> None:
+    """Input aliases, unwritable destinations and unencodable output preserve accepted data and remove temporary residue."""
     before = DATA.read_bytes(), SNAPSHOT.read_bytes()
     for target in [DATA, SNAPSHOT, tmp_path / "link.tsv"]:
         if target.name == "link.tsv":
@@ -386,6 +424,7 @@ def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: Mod
 
 
 def test_cli_refresh_refuses_bad_configuration(tmp_path: Path, producer: ModuleType) -> None:
+    """Incomplete refresh options, overlapping outputs and absent source files return failure through the real CLI."""
     assert (
         producer.main(
             ["--output", str(tmp_path / "out.tsv"), "--manifest", str(tmp_path / "m.tsv")]
@@ -436,6 +475,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Provide real HTTP response, redirect and timeout controls."""
 
     def do_GET(self) -> None:
+        """Serve the selected real body, status or redirect; the stall control delays its body by 0.2 seconds."""
         server = self.server
         assert isinstance(server, SourceServer)
         if self.path in {"/redirect", "/downgrade", "/credentials", "/loop"}:
@@ -468,6 +508,27 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture
 def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
+    """Serve captured UK, French and metadata responses on a real trusted TLS socket.
+
+    Parameters
+    ----------
+    tmp_path
+        Pytest-owned certificate and key directory.
+
+    Yields
+    ------
+    tuple[str, pathlib.Path]
+        Anonymous local HTTPS origin and the certificate trusted by the real client.
+
+    Raises
+    ------
+    RuntimeError
+        OpenSSL is unavailable; native TLS conformance cannot be reported as passing.
+
+    Notes
+    -----
+    The listener and owned serving thread are shut down when the fixture closes.
+    """
     ca, key = tmp_path / "ca.pem", tmp_path / "key.pem"
     openssl = shutil.which("openssl")
     if openssl is None:
@@ -517,6 +578,7 @@ def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
 def test_real_tls_and_complete_native_refresh(
     tmp_path: Path, producer: ModuleType, tls_source: tuple[str, Path]
 ) -> None:
+    """Trusted real HTTPS refresh emits 393 rows and rejects output aliasing the trusted certificate."""
     url, ca = tls_source
     assert producer.download(url + "/redirect", ca_file=ca) == SOURCE.read_bytes()
     result = run_cli(
@@ -566,6 +628,7 @@ def test_real_tls_and_complete_native_refresh(
 def test_native_transport_refusals(
     producer: ModuleType, tls_source: tuple[str, Path], path: str
 ) -> None:
+    """Unsafe redirects, invalid HTTP statuses and a real delayed body refuse with their actual transport errors."""
     url, ca = tls_source
     with pytest.raises((ValueError, HTTPError, URLError, TimeoutError)):
         producer.download(url + path, ca_file=ca, timeout=0.03 if path == "/stall" else 5)
@@ -574,6 +637,7 @@ def test_native_transport_refusals(
 def test_real_certificate_trust_and_limits(
     producer: ModuleType, tls_source: tuple[str, Path]
 ) -> None:
+    """Untrusted TLS, responses over ten bytes, invalid finite limits and unsafe endpoint URLs refuse."""
     url, ca = tls_source
     with pytest.raises(URLError):
         producer.download(url + "/csv")
@@ -595,6 +659,7 @@ def test_real_certificate_trust_and_limits(
 
 
 def test_explicit_optional_capacity_and_operator_fields(producer: ModuleType) -> None:
+    """Absent source capacities remain blank and an absent French operator keeps the explicit not-provided marker."""
     fields, rows = raw_records()
     original_id = rows[0]["Ref ID"]
     rows[0]["Installed Capacity (MWelec)"] = "Not set"

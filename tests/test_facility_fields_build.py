@@ -29,6 +29,7 @@ from ._facility_field_sources import original_source as original_source
 def test_native_producer_rebuilds_complete_original_assertions(
     original_source: Path, optimize: bool
 ) -> None:
+    """Rebuild exactly 1,631 assertions through CLI and API without leaving temporary output."""
     output = original_source.parent / "native.json"
     result = run_cli("build", original_source, "--output", str(output), optimize=optimize)
     assert result.returncode == 0, result.stdout + result.stderr
@@ -59,6 +60,7 @@ def test_native_producer_rebuilds_complete_original_assertions(
 def test_native_destination_refusals_preserve_complete_inputs(
     original_source: Path, failure: str, optimize: bool
 ) -> None:
+    """Refuse protected or invalid destinations in both CLI modes while preserving input bytes."""
     output = original_source.parent / "output.json"
     source = original_source / "metadata/facility_fields/source_pins.json"
     if failure == "existing":
@@ -100,6 +102,7 @@ def test_native_destination_refusals_preserve_complete_inputs(
 def test_native_partial_input_refusal_leaves_no_output(
     original_source: Path, optimize: bool
 ) -> None:
+    """Refuse a missing native source member without publishing partial or temporary output."""
     path = original_source / "tests/data/industrial_base/Dairy.json"
     path.rename(path.with_suffix(".unavailable"))
     output = original_source.parent / "output.json"
@@ -110,6 +113,7 @@ def test_native_partial_input_refusal_leaves_no_output(
 
 
 def test_original_pin_change_during_native_io_refuses_publication(original_source: Path) -> None:
+    """Observe actual source opening and reject changed pins before publishing any output."""
     library = ctypes.CDLL(None, use_errno=True)
     library.inotify_init1.argtypes = [ctypes.c_int]
     library.inotify_init1.restype = ctypes.c_int

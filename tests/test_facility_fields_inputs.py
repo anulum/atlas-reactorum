@@ -38,6 +38,7 @@ from ._facility_field_sources import original_source as original_source
     ],
 )
 def test_reviewed_source_byte_drift_refuses_projection(original_source: Path, key: str) -> None:
+    """Reject byte drift in every parameterized reviewed publisher source."""
     path = original_source / str(specification(original_source, key)["path"])
     with path.open("ab") as stream:
         stream.write(b"\n")
@@ -47,6 +48,7 @@ def test_reviewed_source_byte_drift_refuses_projection(original_source: Path, ke
 
 @pytest.mark.parametrize("key", ["wri", "agstar", "industrial6", "industrial7"])
 def test_reviewed_target_byte_drift_refuses_projection(original_source: Path, key: str) -> None:
+    """Reject byte drift in each reviewed target dataset before projecting observations."""
     path = original_source / str(specification(original_source, key, target=True)["path"])
     path.write_bytes(path.read_bytes() + b"\n")
     with pytest.raises(ValueError, match="digest"):
@@ -76,6 +78,7 @@ def test_reviewed_target_byte_drift_refuses_projection(original_source: Path, ke
     ],
 )
 def test_complete_ledger_contract_is_enforced(original_source: Path, failure: str) -> None:
+    """Reject invalid ledger schemas, scopes, formats, row counts and escaping source paths."""
     pins = document(original_source / PINS)
     source = mapping(mapping(pins["sources"])["wri"])
     if failure == "schema":
@@ -126,6 +129,7 @@ def test_complete_ledger_contract_is_enforced(original_source: Path, failure: st
 def test_native_source_aliases_and_missing_members_are_refused(
     original_source: Path, failure: str
 ) -> None:
+    """Reject symlink roots, ancestors and members together with missing or directory inputs."""
     source = original_source / str(specification(original_source, "wri")["path"])
     if failure in {"root_alias", "root_ancestor_alias"}:
         alias = original_source.parent / "alias"
@@ -174,6 +178,7 @@ def test_native_source_aliases_and_missing_members_are_refused(
 def test_damaged_native_envelopes_never_create_partial_projection(
     original_source: Path, failure: str
 ) -> None:
+    """Reject malformed source envelopes, wrong row widths and oversized source bytes."""
     key = "agstar-Mixed"
     body = document(original_source / str(specification(original_source, key)["path"]))
     if failure == "object":

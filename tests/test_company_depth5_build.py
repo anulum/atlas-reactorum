@@ -25,6 +25,7 @@ OUTPUTS = ["enrichment_overlays.tsv", "source_registry.tsv", "gap_closure.tsv"]
 
 
 def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
+    """Reproduce six reviewed overlays and validate their closure reports normally and under -O."""
     before = {p: p.read_bytes() for p in [MATRIX, *[SCRIPT.with_name(name) for name in OUTPUTS]]}
     for optimized in (False, True):
         output = tmp_path / f"output-{optimized}"
@@ -56,6 +57,7 @@ def test_real_curated_outputs_reproduce_every_byte(tmp_path: Path) -> None:
     ],
 )
 def test_bad_previous_matrix_preserves_existing_outputs(tmp_path: Path, damage: str) -> None:
+    """Refuse malformed or incompatible prior matrices without replacing the reviewed outputs."""
     path = tmp_path / "previous.tsv"
     fields, rows = read_table(MATRIX)
     target = next(row for row in rows if row["organization"] == "Alpha Ring")
@@ -115,6 +117,7 @@ def test_bad_previous_matrix_preserves_existing_outputs(tmp_path: Path, damage: 
     ["row_shape", "missing_row", "duplicate_target", "missing_target", "record_id", "priority"],
 )
 def test_public_closure_derivation_refuses_damaged_reviewed_rows(damage: str) -> None:
+    """Raise the expected public closure error for damaged six-row reviewed overlays or targets."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth5_builder")
     fields, records = read_table(SCRIPT.with_name(OUTPUTS[0]))
     overlays = [[record[field] for field in fields] for record in records]
@@ -143,6 +146,7 @@ def test_public_closure_derivation_refuses_damaged_reviewed_rows(damage: str) ->
 
 
 def test_partial_closure_retains_every_negative_finding(tmp_path: Path) -> None:
+    """Retain an unavailable measurement as a negative finding in a validated partial closure."""
     path = tmp_path / "previous.tsv"
     fields, rows = read_table(MATRIX)
     target = next(row for row in rows if row["organization"] == "Alpha Ring")
@@ -166,6 +170,7 @@ def test_partial_closure_retains_every_negative_finding(tmp_path: Path) -> None:
 
 @pytest.mark.parametrize("name", OUTPUTS)
 def test_output_cannot_replace_previous_input_matrix(tmp_path: Path, name: str) -> None:
+    """Reject output aliases of the prior matrix while preserving the input bytes."""
     path = tmp_path / name
     shutil.copy2(MATRIX, path)
     before = path.read_bytes()
@@ -175,6 +180,7 @@ def test_output_cannot_replace_previous_input_matrix(tmp_path: Path, name: str) 
 
 
 def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
+    """Report a non-directory output destination without replacing its existing contents."""
     output = tmp_path / "output"
     output.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(output))
@@ -186,6 +192,7 @@ def test_output_directory_failure_is_controlled(tmp_path: Path) -> None:
 def test_public_derivation_and_main_use_actual_reviewed_tables(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Derive reviewed closure rows through the public API and reproduce all outputs through main."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth5_builder")
     fields, records = read_table(SCRIPT.with_name(OUTPUTS[0]))
     overlays = [[record[field] for field in fields] for record in records]

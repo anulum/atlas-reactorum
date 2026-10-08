@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess  # nosec B404 # Only the fixed local Node reader is invoked with a finite deadline.
@@ -52,6 +53,12 @@ def restore_comparison(
     ComparisonError
         A source, file, digest, whole profile or native comparison contract is unavailable
         or inconsistent. Current data never replace an unavailable selected snapshot.
+
+    Notes
+    -----
+    The native wire checker uses an explicit nonempty ATLAS_PYTHON selection,
+    otherwise this interpreter. The whole-source validation above that native
+    check remains required; wire-shape admission alone does not bind sources.
     """
     if not all(re.fullmatch(r"[a-f0-9]{64}", value) for value in (profile_sha256, bundle_sha256)):
         raise ComparisonError("Explicit lowercase SHA-256 digests are required.")
@@ -81,6 +88,7 @@ def restore_comparison(
             encoding="utf-8",
             timeout=30,
             check=False,
+            env={**os.environ, "ATLAS_PYTHON": os.environ.get("ATLAS_PYTHON") or sys.executable},
         )
         if result.returncode:
             raise ComparisonError("Native comparison source binding was refused.")

@@ -287,15 +287,21 @@ def test_real_consumer_runs_without_any_original_preparation_fixture(
     node_script = r"""
 const fs = require('node:fs'), vm = require('node:vm'), assert = require('node:assert/strict');
 const data = process.argv[1], application = process.argv[2];
-const context = {window: {}, URL};
+const {JSDOM} = require('jsdom');
+const dom = new JSDOM('<!doctype html><html><body></body></html>', {runScripts:'outside-only'});
+const context = dom.getInternalVMContext();
+const applicationRoot = require('node:path').dirname(application);
+require(applicationRoot + '/presentation-text.js');
+require(applicationRoot + '/application-data.js');
+const admission = globalThis.AtlasApplicationData;
+const fieldSources = require(applicationRoot + '/facility-field-sources.js');
 for (const [file, key] of [['global_reactors.sample','REACTOR_FACILITIES'],['fusion_companies.sample','FUSION_COMPANIES']]) {
   vm.runInNewContext(fs.readFileSync(data + '/' + file + '.js', 'utf8'), context);
   assert.deepEqual(JSON.parse(JSON.stringify(context.window[key])), JSON.parse(fs.readFileSync(data + '/' + file + '.json','utf8')));
 }
-const declarations = fs.readFileSync(application, 'utf8').split('document.addEventListener("DOMContentLoaded"')[0];
-vm.runInNewContext(declarations, context);
+context.window.REACTOR_FACILITIES = admission.facilities(context.window.REACTOR_FACILITIES);
 for (const record of context.window.REACTOR_FACILITIES) {
-  const html = context.facilityFieldSources(record);
+  const html = fieldSources.render(record);
   if (!record.field_observations) { assert.equal(html, ''); continue; }
   assert.ok(html.includes('Source field assertions'));
   for (const row of record.field_observations) {
@@ -307,7 +313,8 @@ for (const record of context.window.REACTOR_FACILITIES) {
 const original = context.window.REACTOR_FACILITIES.find(r => r.field_observations);
 const damaged = JSON.parse(JSON.stringify(original));
 damaged.field_observations[0].value += '<script>alert(1)</script>';
-assert.ok(!context.facilityFieldSources(damaged).includes('<script>'));
+assert.ok(!fieldSources.render(damaged).includes('<script>'));
+dom.window.close();
 process.stdout.write('complete JSON/JavaScript parity and public field HTML serialization; no browser acceptance claimed');
 """
     native = subprocess.run(

@@ -24,6 +24,7 @@ SNAPSHOT = SCRIPT.with_name("reactor_repositories.tsv")
 
 
 def test_actual_public_repository_snapshot_stays_unchanged() -> None:
+    """Validate the frozen 30-repository snapshot normally and under -O without changing its hash."""
     before = hashlib.sha256(SNAPSHOT.read_bytes()).hexdigest()
     for optimized in (False, True):
         result = run_cli(SCRIPT, optimize=optimized)
@@ -58,6 +59,7 @@ def test_actual_public_repository_snapshot_stays_unchanged() -> None:
 def test_snapshot_bad_metadata_refuses_under_optimization(
     tmp_path: Path, field: str, value: str, diagnostic: str
 ) -> None:
+    """Reject altered metadata under -O with a specific diagnostic and unchanged input bytes."""
     fields, rows = read_table(SNAPSHOT)
     rows[0][field] = value
     path = tmp_path / "snapshot.tsv"
@@ -86,6 +88,7 @@ def test_snapshot_bad_metadata_refuses_under_optimization(
     ],
 )
 def test_snapshot_identity_count_and_reads_refuse(tmp_path: Path, corruption: str) -> None:
+    """Refuse damaged table structure, repository identity or the frozen snapshot count."""
     fields, rows = read_table(SNAPSHOT)
     if corruption == "count":
         rows.pop()
@@ -121,6 +124,7 @@ def test_snapshot_identity_count_and_reads_refuse(tmp_path: Path, corruption: st
 def test_public_repository_validator_api_and_entrypoint(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Read the complete frozen snapshot through the public loader and run its validator entry point."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_public_repository_validator")
     assert module.load(SNAPSHOT) == read_table(SNAPSHOT)[1]
     monkeypatch.setattr(sys, "argv", [str(SCRIPT)])

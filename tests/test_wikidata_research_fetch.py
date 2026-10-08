@@ -36,29 +36,85 @@ FIXTURE = ROOT / "tests/data/research_reactors_wikidata"
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the actual Wikidata fetcher in an isolated module namespace.
+
+    Returns
+    -------
+    types.ModuleType
+        Production API exercised through captured source, CLI and real HTTPS paths.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_research_fetcher")
 
 
 def sources() -> dict[str, Any]:
-    """Read the complete captured discovery/core/reference source envelope."""
+    """Reload the complete captured discovery, core and reference envelope.
+
+    Returns
+    -------
+    dict[str, typing.Any]
+        Fresh mutable cache document, preserving original source cells and dates.
+    """
     document: dict[str, Any] = json.loads((FIXTURE / "cache.json").read_bytes())
     return document
 
 
 def rows(body: bytes) -> list[dict[str, str]]:
-    """Decode the actual generated table with its published TSV header."""
+    """Decode generated UTF-8 TSV bytes using the actual published header.
+
+    Parameters
+    ----------
+    body
+        Complete generated table bytes from the production renderer or CLI.
+
+    Returns
+    -------
+    list[dict[str, str]]
+        Rows indexed by published column names; absent cells remain empty strings.
+    """
     return list(csv.DictReader(io.StringIO(body.decode()), delimiter="\t"))
 
 
 def first_claim(document: dict[str, Any], prop: str) -> dict[str, Any]:
-    """Find an existing captured claim for an explicit source-cell mutation."""
+    """Locate a captured property claim for an explicit fixture mutation.
+
+    Parameters
+    ----------
+    document
+        Fresh source envelope containing the complete core entity mapping.
+    prop
+        Wikidata property identifier whose existing claim is selected.
+
+    Returns
+    -------
+    dict[str, typing.Any]
+        First matching mutable claim in the original source iteration order.
+
+    Raises
+    ------
+    StopIteration
+        No core entity has a claim for the selected property.
+    """
     return next(c for e in document["core"].values() for c in e["claims"].get(prop, []))
 
 
 def routes(
     producer: ModuleType, document: dict[str, Any]
 ) -> dict[str, tuple[int, dict[str, str], bytes, float]]:
-    """Expose every complete genuine batch at the production API query paths."""
+    """Bind complete genuine batches to the producer's real query endpoints.
+
+    Parameters
+    ----------
+    producer
+        Actual production module supplying the original discovery query.
+    document
+        Captured discovery response, core entities and referenced label entities.
+
+    Returns
+    -------
+    dict[str, tuple[int, dict[str, str], bytes, float]]
+        Request paths mapped to status, headers, JSON body and delay in seconds.
+        Entity IDs are ordered numerically and served in batches of at most 50.
+    """
     result: dict[str, tuple[int, dict[str, str], bytes, float]] = {
         "/query?" + urllib.parse.urlencode({"query": producer.QUERY, "format": "json"}): (
             200,
@@ -93,6 +149,7 @@ def routes(
 
 
 def test_every_captured_cell_and_historical_row(producer: ModuleType, tmp_path: Path) -> None:
+    """Captured hashes bind all 161 source entities; rendering, supplement merge and validation reproduce accepted rows."""
     metadata = json.loads((FIXTURE / "SOURCE.json").read_bytes())
     assert (
         hashlib.sha256((FIXTURE / "cache.json").read_bytes()).hexdigest()
@@ -133,6 +190,7 @@ def test_every_captured_cell_and_historical_row(producer: ModuleType, tmp_path: 
 def test_native_offline_complete_cache(
     producer: ModuleType, tmp_path: Path, optimized: bool
 ) -> None:
+    """Normal and optimised CLI replay retain the cache capture date on every output row."""
     output = tmp_path / "candidate.tsv"
     result = subprocess.run(
         [
@@ -156,6 +214,7 @@ def test_native_offline_complete_cache(
 def test_actual_tls_full_refresh(
     producer: ModuleType, tmp_path: Path, certificate: tuple[Path, Path], native: bool
 ) -> None:
+    """The real seven-request HTTPS refresh preserves all core and label cells in both API and CLI modes."""
     document = sources()
     with api_server(certificate, routes(producer, document)) as (base, requests):
         host = base.removesuffix("/repos")
@@ -202,6 +261,7 @@ def test_actual_tls_full_refresh(
     ],
 )
 def test_status_is_explicit_source_label(producer: ModuleType, label: str, status: str) -> None:
+    """Each status derives from its explicit source label, with the original label retained in notes."""
     document = sources()
     reactor = next(
         e
@@ -249,6 +309,7 @@ def test_status_is_explicit_source_label(producer: ModuleType, label: str, statu
 def test_complete_source_corruption_refused_before_write(
     producer: ModuleType, tmp_path: Path, corruption: str
 ) -> None:
+    """Malformed identities, claims, coordinates or dates raise while preserving the previous candidate alone."""
     document = sources()
     entity = next(iter(document["core"].values()))
     if corruption == "version":
@@ -310,6 +371,7 @@ def test_complete_source_corruption_refused_before_write(
 def test_real_response_failures(
     producer: ModuleType, certificate: tuple[Path, Path], body: bytes, status: int
 ) -> None:
+    """Invalid JSON, response shape or HTTP status refuses; only the retryable 503 makes two requests."""
     with api_server(certificate, {"/repos": (status, {}, body, 0.0)}) as (url, requests):
         with pytest.raises((ValueError, RuntimeError)):
             producer.get_json(url, ca_file=certificate[0], attempts=2, backoff=0)
@@ -319,6 +381,7 @@ def test_real_response_failures(
 def test_real_certificate_and_byte_limits(
     producer: ModuleType, certificate: tuple[Path, Path]
 ) -> None:
+    """Untrusted TLS sends no request; a trusted response exceeding four bytes refuses after one request."""
     with api_server(certificate, {"/repos": (200, {}, b'{"value":12}', 0.0)}) as (url, requests):
         with pytest.raises(RuntimeError):
             producer.get_json(url, attempts=1)
@@ -341,12 +404,14 @@ def test_real_certificate_and_byte_limits(
 def test_native_mode_requires_explicit_inputs(
     producer: ModuleType, tmp_path: Path, arguments: list[str]
 ) -> None:
+    """Incomplete cache or refresh option combinations return failure without creating output."""
     output = tmp_path / "candidate.tsv"
     assert producer.main(["--out", str(output), *arguments]) == 1
     assert not output.exists()
 
 
 def test_protect_input_and_library(producer: ModuleType, tmp_path: Path) -> None:
+    """Input aliases and accepted-library destinations refuse without changing captured source bytes."""
     source = tmp_path / "cache.json"
     source.write_bytes((FIXTURE / "cache.json").read_bytes())
     original = source.read_bytes()
@@ -357,7 +422,20 @@ def test_protect_input_and_library(producer: ModuleType, tmp_path: Path) -> None
 
 
 def synchronize_reference_cache(producer: ModuleType, document: dict[str, Any]) -> None:
-    """Retain the captured labels still consumed after an explicit cell mutation."""
+    """Retain the captured labels required after an explicit source-cell mutation.
+
+    Parameters
+    ----------
+    producer
+        Actual discovery and reference-selection API.
+    document
+        Mutable complete source envelope whose label map is updated in place.
+
+    Notes
+    -----
+    Existing mutated labels are preserved. Missing referenced labels come only
+    from the unchanged captured envelope, rather than a live or inferred lookup.
+    """
     expected = producer.referenced_ids(producer.discover(document["discovery"]), document["core"])
     original = sources()
     document["labels"] = {
@@ -381,6 +459,7 @@ def synchronize_reference_cache(producer: ModuleType, document: dict[str, Any]) 
 def test_source_rank_absence_and_ambiguity_preserve_unknown(
     producer: ModuleType, change: str
 ) -> None:
+    """Claim rank, absence, coarse dates and conflicting labels retain explicit unknown output cells."""
     document = sources()
     entity = next(
         e
@@ -443,6 +522,7 @@ def test_source_rank_absence_and_ambiguity_preserve_unknown(
     ],
 )
 def test_source_urls_refused_before_network(producer: ModuleType, url: str) -> None:
+    """Non-HTTPS, credential-bearing, fragmented or malformed endpoints refuse before acquisition."""
     with pytest.raises(ValueError):
         producer.get_json(url)
 
@@ -464,6 +544,7 @@ def test_source_urls_refused_before_network(producer: ModuleType, url: str) -> N
 def test_request_limits_refuse_unbounded_settings(
     producer: ModuleType, limits: dict[str, Any]
 ) -> None:
+    """Invalid retry, timeout, byte and backoff limits raise before any network request."""
     with pytest.raises(ValueError):
         producer.get_json("https://localhost/repos", **limits)
 
@@ -472,6 +553,7 @@ def test_request_limits_refuse_unbounded_settings(
 def test_actual_server_redirect_validation(
     producer: ModuleType, certificate: tuple[Path, Path], redirect: str
 ) -> None:
+    """A relative trusted HTTPS redirect is followed; an insecure target refuses after the first request."""
     location = "/target" if redirect == "relative" else "http://localhost/target"
     with api_server(
         certificate,
@@ -500,6 +582,7 @@ def test_actual_server_redirect_validation(
 def test_incomplete_discovery_refused(
     producer: ModuleType, tmp_path: Path, payload: object
 ) -> None:
+    """Missing, empty or non-entity discovery results raise before the candidate file is created."""
     document = sources()
     document["discovery"] = payload
     with pytest.raises(ValueError):
@@ -509,11 +592,13 @@ def test_incomplete_discovery_refused(
 
 @pytest.mark.parametrize("size", [0, 51])
 def test_public_entity_batch_bounds(producer: ModuleType, size: int) -> None:
+    """Batch sizes outside the inclusive 1-to-50 entity bound raise through the actual chunk API."""
     with pytest.raises(ValueError):
         list(producer.chunks(list(sources()["core"]), size))
 
 
 def test_public_entity_identity_acquisition_refusal(producer: ModuleType) -> None:
+    """A malformed entity identifier refuses before the fetch API starts acquisition."""
     identities = set(sources()["core"])
     identities.add("bad")
     with pytest.raises(ValueError):
@@ -523,6 +608,7 @@ def test_public_entity_identity_acquisition_refusal(producer: ModuleType) -> Non
 def test_missing_claim_value_and_noncanonical_row_date(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Absent referenced claim values and noncanonical retrieval dates cannot produce a valid build."""
     document = sources()
     first_claim(document, "P17")["mainsnak"]["datavalue"]["value"] = None
     with pytest.raises(ValueError):
@@ -534,6 +620,7 @@ def test_missing_claim_value_and_noncanonical_row_date(
 def test_actual_socket_timeout_is_bounded(
     producer: ModuleType, certificate: tuple[Path, Path]
 ) -> None:
+    """A real delayed HTTPS response exhausts the single 0.01-second request and raises cleanly."""
     with api_server(certificate, {"/repos": (200, {}, b"{}", 0.1)}) as (url, requests):
         with pytest.raises(RuntimeError):
             producer.get_json(url, ca_file=certificate[0], attempts=1, timeout=0.01)
@@ -544,6 +631,7 @@ def test_actual_socket_timeout_is_bounded(
 def test_actual_partial_batch_refused_before_either_output(
     producer: ModuleType, tmp_path: Path, certificate: tuple[Path, Path], part: str
 ) -> None:
+    """A missing core or label entity in a real HTTPS batch produces neither candidate nor cache."""
     document = sources()
     served = routes(producer, document)
     key = next(
@@ -586,6 +674,7 @@ def test_actual_partial_batch_refused_before_either_output(
 def test_full_utf8_preparation_precedes_destination_change(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """An unencodable captured label raises while preserving the prior candidate and creating no temporary residue."""
     document = sources()
     entity = next(iter(document["core"].values()))
     entity["labels"] = {"en": {"value": "\ud800"}}
@@ -601,6 +690,7 @@ def test_full_utf8_preparation_precedes_destination_change(
 def test_native_resolved_input_and_snapshot_aliases(
     producer: ModuleType, tmp_path: Path, alias: str
 ) -> None:
+    """Resolved source, snapshot and certificate aliases refuse while retaining original cache bytes."""
     source = tmp_path / "cache.json"
     source.write_bytes((FIXTURE / "cache.json").read_bytes())
     output = tmp_path / "candidate.tsv"
@@ -626,6 +716,7 @@ def test_native_resolved_input_and_snapshot_aliases(
 
 @pytest.mark.parametrize("size", [4096, 16384])
 def test_real_atomic_write_and_close_failures_clean_temporary(tmp_path: Path, size: int) -> None:
+    """A real 1,024-byte file-size limit refuses larger writes and retains the previous candidate alone."""
     output = tmp_path / "candidate.tsv"
     output.write_bytes(b"previous candidate")
     result = subprocess.run(
@@ -654,6 +745,7 @@ def test_real_atomic_write_and_close_failures_clean_temporary(tmp_path: Path, si
 
 
 def test_native_replace_failure_keeps_existing_directory(tmp_path: Path) -> None:
+    """A native replace failure returns a trace-free error and preserves the existing destination directory."""
     output = tmp_path / "candidate.tsv"
     output.mkdir()
     result = subprocess.run(

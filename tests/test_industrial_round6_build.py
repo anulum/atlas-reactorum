@@ -39,10 +39,18 @@ SOURCES = ("br-epe-ethanol", "br-epe-biodiesel", "br-epe-biomethane", "us-epa-lm
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the Brazil/EPA process producer through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Producer exposing native selection, refresh and build entry points.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round6_build")
 
 
 def test_all_genuine_sources_equal_every_historical_cell(producer: ModuleType) -> None:
+    """Select all 1,131 source records with exact snapshot and dataset cell equality."""
     rows = []
     manifest = read_table(DIRECTORY / "source_snapshot_manifest.tsv")[1]
     for source in SOURCES:
@@ -65,6 +73,7 @@ def test_all_genuine_sources_equal_every_historical_cell(producer: ModuleType) -
 
 
 def test_full_native_build_and_refresh_are_isolated(tmp_path: Path, producer: ModuleType) -> None:
+    """Rebuild and refresh complete owned copies while preserving accepted dataset and snapshot bytes."""
     before = DATA.read_bytes(), SNAPSHOT.read_bytes()
     for optimize in (False, True):
         result = run_cli(SCRIPT, "--output", str(tmp_path / "offline.tsv"), optimize=optimize)
@@ -127,6 +136,7 @@ def test_full_native_build_and_refresh_are_isolated(tmp_path: Path, producer: Mo
     ],
 )
 def test_complete_genuine_source_refusals(producer: ModuleType, corruption: str) -> None:
+    """Reject malformed service envelopes, incomplete pages, invalid geometry and non-finite capacities."""
     payload = json.loads(SOURCE.read_text())
     count = json.loads((FIXTURES / "br-epe-ethanol-count.json").read_text())
     feature = payload["features"][0]
@@ -211,6 +221,7 @@ def test_complete_genuine_source_refusals(producer: ModuleType, corruption: str)
 def test_full_snapshot_mutations_refuse(
     tmp_path: Path, source: str, field: str, value: str
 ) -> None:
+    """Reject changed country, status, identity and coordinates without publishing partial output."""
     fields, rows = read_table(SNAPSHOT)
     next(r for r in rows if r["source"] == source)[field] = value
     changed = tmp_path / "changed.tsv"
@@ -226,6 +237,7 @@ def test_full_snapshot_mutations_refuse(
 
 
 def test_public_schema_and_actual_mapping_boundaries(producer: ModuleType, tmp_path: Path) -> None:
+    """Reject incomplete schemas, duplicate row IDs, unknown sources and invalid conversion inputs."""
     rows = producer.read_snapshot(SNAPSHOT)
     with pytest.raises(ValueError):
         producer.rows_from_snapshot([])
@@ -272,6 +284,7 @@ def test_public_schema_and_actual_mapping_boundaries(producer: ModuleType, tmp_p
 def test_native_cli_configuration_refuses_without_writes(
     producer: ModuleType, tmp_path: Path
 ) -> None:
+    """Reject incomplete refresh options, malformed source URLs and path aliases without output writes."""
     output = tmp_path / "out.tsv"
     for extra in [
         ["--refresh"],
@@ -306,6 +319,7 @@ def test_native_cli_configuration_refuses_without_writes(
     "corruption", ["empty", "header", "extra", "short", "quote", "utf8", "duplicate", "missing"]
 )
 def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
+    """Reject malformed, duplicate or missing snapshots through the native CLI without tracebacks."""
     fields, rows = read_table(SNAPSHOT)
     path = tmp_path / "changed.tsv"
     if corruption == "empty":
@@ -330,6 +344,7 @@ def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
 
 
 def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: ModuleType) -> None:
+    """Protect accepted source files and preserve prior output when atomic serialization fails."""
     before = DATA.read_bytes(), SNAPSHOT.read_bytes()
     for target in [DATA, SNAPSHOT, tmp_path / "link.tsv"]:
         if target.name == "link.tsv":
@@ -353,7 +368,7 @@ def test_historical_protection_and_atomic_failures(tmp_path: Path, producer: Mod
 
 
 class SourceServer(ThreadingHTTPServer):
-    """Serve the complete genuine UK selection over a real trusted TLS socket."""
+    """Serve complete Brazil/EPA source and count payloads through a trusted TLS socket."""
 
     bodies: dict[str, bytes]
 
@@ -362,6 +377,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Provide real HTTP response, redirect and timeout controls."""
 
     def do_GET(self) -> None:
+        """Serve source or count captures with redirect, non-200 and delayed-response controls."""
         server = self.server
         assert isinstance(server, SourceServer)
         path = urlsplit(self.path).path
@@ -395,6 +411,27 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture
 def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
+    """Serve all four original source and count fixtures over a trusted local TLS listener.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for the one-day certificate and private key.
+
+    Yields
+    ------
+    tuple[str, Path]
+        Local HTTPS origin and certificate path for the native downloader.
+
+    Raises
+    ------
+    RuntimeError
+        If the required OpenSSL executable is unavailable.
+
+    Notes
+    -----
+    Shut down and close the listener and join its worker after the test.
+    """
     ca, key = tmp_path / "ca.pem", tmp_path / "key.pem"
     openssl = shutil.which("openssl")
     if openssl is None:
@@ -447,6 +484,7 @@ def tls_source(tmp_path: Path) -> Iterator[tuple[str, Path]]:
 def test_native_transport_refusals(
     producer: ModuleType, tls_source: tuple[str, Path], path: str
 ) -> None:
+    """Reject unsafe redirects, non-200 statuses and the actual delayed-response timeout."""
     url, ca = tls_source
     with pytest.raises((ValueError, HTTPError, URLError, TimeoutError)):
         producer.download(url + path, ca_file=ca, timeout=0.03 if path == "/stall" else 5)
@@ -455,6 +493,7 @@ def test_native_transport_refusals(
 def test_real_certificate_trust_and_limits(
     producer: ModuleType, tls_source: tuple[str, Path]
 ) -> None:
+    """Reject untrusted TLS, response byte limits, invalid transfer limits and unsafe URLs."""
     url, ca = tls_source
     with pytest.raises(URLError):
         producer.download(url + "/csv")
@@ -478,6 +517,7 @@ def test_real_certificate_trust_and_limits(
 def test_real_tls_complete_four_source_refresh(
     producer: ModuleType, tmp_path: Path, tls_source: tuple[str, Path]
 ) -> None:
+    """Refresh all four complete sources over trusted TLS while protecting the certificate from output aliasing."""
     url, ca = tls_source
     assert producer.download(url + "/redirect", ca_file=ca) == SOURCE.read_bytes()
     args = [
@@ -510,6 +550,7 @@ def test_real_tls_complete_four_source_refresh(
 def test_full_source_missing_optional_capacity_and_authorization(
     producer: ModuleType, source: str
 ) -> None:
+    """Keep absent biodiesel capacities and biomethane authorization observations unknown."""
     payload = json.loads((FIXTURES / (source + ".json")).read_text())
     identifier = str(payload["features"][0]["attributes"]["OBJECTID"])
     if source == "br-epe-biodiesel":

@@ -31,6 +31,7 @@ PRODUCTS = [
 
 
 def test_whole_native_products_reproduce_from_another_cwd(tmp_path: Path) -> None:
+    """Reproduce four validated products from another cwd while preserving sources and limitations."""
     protected = [
         *INPUTS.glob("*.tsv"),
         *[
@@ -59,6 +60,7 @@ def test_whole_native_products_reproduce_from_another_cwd(tmp_path: Path) -> Non
 
 @pytest.mark.parametrize("name", PRODUCTS)
 def test_matrix_alias_cannot_be_replaced(tmp_path: Path, name: str) -> None:
+    """Reject every product destination aliasing the prior matrix without staging temporary files."""
     matrix = tmp_path / name
     shutil.copy2(ROUND.parent / "depth_round4/gap_matrix.tsv", matrix)
     before = matrix.read_bytes()
@@ -74,6 +76,7 @@ def test_matrix_alias_cannot_be_replaced(tmp_path: Path, name: str) -> None:
 def test_nonregular_and_source_alias_targets_refuse_before_any_write(
     tmp_path: Path, name: str, kind: str
 ) -> None:
+    """Refuse symlink or directory product targets without writing other products or changing a victim."""
     output = tmp_path / "output"
     output.mkdir()
     target = output / name
@@ -95,6 +98,7 @@ def test_nonregular_and_source_alias_targets_refuse_before_any_write(
 
 
 def test_output_directory_failure_preserves_existing_file(tmp_path: Path) -> None:
+    """Fail an output-directory path occupied by a file while preserving that file."""
     target = tmp_path / "output"
     target.write_text("existing non-directory\n")
     result = run_cli(SCRIPT, "--output-directory", str(target))
@@ -103,6 +107,7 @@ def test_output_directory_failure_preserves_existing_file(tmp_path: Path) -> Non
 
 
 def test_malformed_review_does_not_create_output(tmp_path: Path) -> None:
+    """Refuse mismatched reviewed identity before creating the output directory."""
     source = tmp_path / "inputs"
     shutil.copytree(INPUTS, source)
     fields, rows = read_table(source / "reviewed_profiles.tsv")
@@ -114,6 +119,7 @@ def test_malformed_review_does_not_create_output(tmp_path: Path) -> None:
 
 
 def test_atomic_replacement_keeps_hardlinked_real_input_intact(tmp_path: Path) -> None:
+    """Replace a hardlinked product atomically without changing the real source inode contents."""
     import os
 
     output = tmp_path / "output"

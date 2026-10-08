@@ -39,6 +39,7 @@ SCRIPTS = [
 
 @pytest.mark.parametrize("script", SCRIPTS, ids=lambda p: p.name)
 def test_script_exits_cleanly_when_run_as_a_command(script: Path) -> None:
+    """Require each canonical build script to exit successfully as a real subprocess."""
     result = subprocess.run(
         [sys.executable, str(script)],
         cwd=ROOT,
@@ -54,6 +55,7 @@ def test_script_exits_cleanly_when_run_as_a_command(script: Path) -> None:
 def test_script_defines_main_before_its_entry_point_guard(script: Path) -> None:
     # A guard placed above the definition raises NameError at run time while
     # every import-based test still passes.
+    """Require each build script to define main before the last executable entry-point guard."""
     source = script.read_text(encoding="utf-8")
     guard = source.rindex('if __name__ == "__main__":')
     definition = source.index("def main(")
@@ -64,6 +66,7 @@ def test_rebuilding_a_deleted_output_actually_regenerates_it() -> None:
     # The decisive check: remove a published artefact and require the script to
     # recreate it byte for byte. A script that silently does nothing fails here,
     # where a plain checksum comparison would still have passed.
+    """Delete the published facility JSON and require the real builder to recreate identical bytes."""
     target = DATA / "global_reactors.sample.json"
     original = target.read_bytes()
     backup = target.with_suffix(".json.entrypointtest")

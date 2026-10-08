@@ -33,11 +33,30 @@ PRIOR = DIRECTORY.parent / "industrial_facilities.tsv"
 
 @pytest.fixture
 def validator() -> ModuleType:
+    """Load the actual process-specific validator in an isolated namespace.
+
+    Returns
+    -------
+    types.ModuleType
+        Production read-only table, source, prior-layer and deterministic-rebuild API.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round5_validator")
 
 
 @pytest.fixture
 def bundle(tmp_path: Path) -> dict[str, Path]:
+    """Copy all five complete process/source/provenance tables into an owned candidate.
+
+    Parameters
+    ----------
+    tmp_path
+        Pytest-owned parent for independent mutation cases.
+
+    Returns
+    -------
+    dict[str, pathlib.Path]
+        Data, snapshot, manifest, registry and gap-matrix paths with original bytes.
+    """
     paths = {key: tmp_path / name for key, name in NAMES.items()}
     for key, path in paths.items():
         path.write_bytes((DIRECTORY / NAMES[key]).read_bytes())
@@ -45,13 +64,25 @@ def bundle(tmp_path: Path) -> dict[str, Path]:
 
 
 def arguments(bundle: dict[str, Path]) -> list[str]:
-    """Pass the four complete process-specific source tables to the real read-only CLI."""
+    """Bind every copied process table to the real read-only CLI.
+
+    Parameters
+    ----------
+    bundle
+        Complete mapping of the five candidate table roles to their owned paths.
+
+    Returns
+    -------
+    list[str]
+        Ordered option/path pairs preserving every table's original role.
+    """
     return [value for key, path in bundle.items() for value in ("--" + key, str(path))]
 
 
 def test_native_complete_validation_preserves_all_layers(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Normal/optimised CLI and API validate all 393 rows without altering this bundle or any prior import layer."""
     before = {key: path.read_bytes() for key, path in bundle.items()}
     prior = {p: p.read_bytes() for p in validator.OTHER_LAYERS}
     for optimize in (False, True):
@@ -84,6 +115,7 @@ def test_native_complete_validation_preserves_all_layers(
     ],
 )
 def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> None:
+    """A blank required observation refuses in optimised mode while preserving the changed candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = " "
     write_table(bundle["data"], fields, rows)
@@ -121,6 +153,7 @@ def test_required_observations_refuse(bundle: dict[str, Path], field: str) -> No
 def test_full_data_fact_refusals(
     bundle: dict[str, Path], field: str, value: str, diagnostic: str
 ) -> None:
+    """Invalid coordinates, inferred facts, source dates or unsafe URLs yield the expected trace-free native refusal."""
     fields, rows = read_table(bundle["data"])
     rows[0][field] = value
     write_table(bundle["data"], fields, rows)
@@ -154,6 +187,7 @@ def test_full_data_fact_refusals(
 def test_source_identity_and_provenance_refuse(
     bundle: dict[str, Path], which: str, field: str, value: str, diagnostic: str
 ) -> None:
+    """Invalid snapshot keys, manifest bindings or registry rights/identity cells cannot pass read-only validation."""
     fields, rows = read_table(bundle[which])
     rows[0][field] = value
     write_table(bundle[which], fields, rows)
@@ -177,6 +211,7 @@ def test_source_identity_and_provenance_refuse(
     ],
 )
 def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: str) -> None:
+    """Changed complete counts or duplicate/empty source identities return a native validation failure."""
     which = (
         "data"
         if corruption in {"duplicate_data", "empty_id", "data_count"}
@@ -211,6 +246,7 @@ def test_historical_counts_and_ids_refuse(bundle: dict[str, Path], corruption: s
     "corruption", ["header", "empty", "extra", "short", "quote", "utf8", "missing"]
 )
 def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corruption: str) -> None:
+    """Each of the five tables refuses malformed headers, rows, encoding or missing input in optimised mode."""
     path = bundle[which]
     fields, rows = read_table(path)
     if corruption == "header":
@@ -236,6 +272,7 @@ def test_all_table_boundaries_refuse(bundle: dict[str, Path], which: str, corrup
 def test_actual_prior_layers_must_be_readable_and_disjoint(
     tmp_path: Path, bundle: dict[str, Path], corruption: str
 ) -> None:
+    """Unreadable, malformed or overlapping prior identities refuse without editing the prior layer."""
     fields, rows = read_table(PRIOR)
     path = tmp_path / "prior.tsv"
     if corruption == "overlap":
@@ -258,6 +295,7 @@ def test_actual_prior_layers_must_be_readable_and_disjoint(
 def test_real_native_rebuild_failure_mismatch_and_deadline(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Real rebuild mismatch, invalid source and finite deadline exhaustion refuse while preserving candidate bytes."""
     fields, rows = read_table(bundle["data"])
     rows[0]["facility_name"] += " changed"
     write_table(bundle["data"], fields, rows)
@@ -283,6 +321,7 @@ def test_real_native_rebuild_failure_mismatch_and_deadline(
 def test_public_runtime_schema_and_prior_layer_contract(
     bundle: dict[str, Path], validator: ModuleType
 ) -> None:
+    """Complete runtime tables pass, but missing string cells or missing required prior-layer comparison refuse."""
     tables = [read_table(bundle[k])[1] for k in NAMES]
     assert validator.validate_records(*tables) == []
     broken = json.loads(json.dumps(tables))
@@ -310,6 +349,7 @@ def test_public_runtime_schema_and_prior_layer_contract(
 def test_real_source_specific_snapshot_rules(
     bundle: dict[str, Path], source: str, field: str, value: str, message: str
 ) -> None:
+    """UK process selection and finite British National Grid bounds retain their exact source-specific refusals."""
     fields, rows = read_table(bundle["snapshot"])
     next(r for r in rows if r["source"] == source)[field] = value
     write_table(bundle["snapshot"], fields, rows)
@@ -328,6 +368,7 @@ def test_real_source_specific_snapshot_rules(
 def test_source_specific_data_rules(
     bundle: dict[str, Path], source: str, field: str, value: str, message: str
 ) -> None:
+    """UK country/type observations and French stable-ID prefixes must retain their declared source semantics."""
     fields, rows = read_table(bundle["data"])
     next(r for r in rows if r["stable_id"].startswith(source))[field] = value
     write_table(bundle["data"], fields, rows)
@@ -337,6 +378,7 @@ def test_source_specific_data_rules(
 
 @pytest.mark.parametrize("corruption", ["duplicate", "empty_id", "imports", "theme", "date", "url"])
 def test_complete_process_gap_matrix_refusals(bundle: dict[str, Path], corruption: str) -> None:
+    """Gap-matrix identities, import decisions, themes, capture dates and official URLs remain explicitly constrained."""
     fields, rows = read_table(bundle["matrix"])
     if corruption == "duplicate":
         rows.append(rows[0].copy())

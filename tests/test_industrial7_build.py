@@ -29,6 +29,7 @@ SCRIPT = (
 
 
 def test_projection_preserves_complete_source_values(observations: list[dict[str, str]]) -> None:
+    """Project all 421 source observations deterministically while retaining zeros, warnings and caveats."""
     original = copy.deepcopy(observations)
     records = RECORDS.project_rows(observations)
     assert observations == original
@@ -78,6 +79,7 @@ def test_projection_preserves_complete_source_values(observations: list[dict[str
 def test_projection_refuses_incomplete_or_ambiguous_identity(
     observations: list[dict[str, str]], failure: str
 ) -> None:
+    """Reject incomplete observations or ambiguous source identities through the public projector."""
     changed = copy.deepcopy(observations)
     if failure == "count":
         changed.pop()
@@ -99,6 +101,7 @@ def test_projection_refuses_incomplete_or_ambiguous_identity(
 def test_native_builder_complete_products_are_reproducible_and_inputs_unchanged(
     tmp_path: Path, observations: list[dict[str, str]], optimize: bool
 ) -> None:
+    """Reproduce complete CLI and API output without source changes and refuse a second publication."""
     snapshot = tmp_path / "source.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     before = snapshot.read_bytes()
@@ -150,6 +153,7 @@ def test_native_builder_complete_products_are_reproducible_and_inputs_unchanged(
 def test_builder_refusals_preserve_inputs_and_existing_destinations(
     tmp_path: Path, observations: list[dict[str, str]], failure: str
 ) -> None:
+    """Refuse unsafe or invalid destinations while preserving input and existing output bytes."""
     snapshot = tmp_path / "source.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations)
     before = snapshot.read_bytes()
@@ -182,6 +186,7 @@ def test_builder_refusals_preserve_inputs_and_existing_destinations(
 
 
 def test_table_encoder_preserves_quoted_cells_and_enforces_readable_size(tmp_path: Path) -> None:
+    """Round-trip quoted source text and reject a table exceeding the native readable-size bound."""
     rows = [{"original": 'text\twith\n"quotation" and trailing '}]
     output = tmp_path / "quoted.tsv"
     BUILD.write_output(output, BUILD.table_bytes(["original"], rows), inputs=())
@@ -194,6 +199,7 @@ def test_table_encoder_preserves_quoted_cells_and_enforces_readable_size(tmp_pat
 def test_native_builder_rejects_incomplete_source_before_writing(
     tmp_path: Path, observations: list[dict[str, str]], optimize: bool
 ) -> None:
+    """Reject an incomplete source snapshot normally and under -O before creating output."""
     snapshot = tmp_path / "incomplete.tsv"
     write_table(snapshot, CONTRACTS.SNAPSHOT_FIELDS, observations[:-1])
     output = tmp_path / "must_not_exist.tsv"

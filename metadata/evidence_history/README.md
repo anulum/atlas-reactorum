@@ -17,6 +17,14 @@ earlier revisions or use source acquisition dates as Atlas observations.
 The source document describes third-party works and retains their source rights.
 The journal redistributes catalogue metadata, not the original publications.
 
+The 7 October 2026 code-only constructor migration retains the complete initial
+snapshot and its original observation. Its new observation is
+`2026-10-07T16:13:40.463Z`. All original taxonomy rows, source locators, claims,
+capture/inspection dates, review decisions and null numeric scores are retained;
+the complete profile version changes because its constructor/citation byte
+bindings changed. This is a new Atlas observation, not a new source inspection,
+publication date or independent review.
+
 Open the history workspace within the presentation's taxonomy section. Choose
 an entry, a claim and an Atlas observation to inspect its original wording,
 source locator, support boundary and source metadata. A source or claim change
@@ -37,6 +45,21 @@ and JavaScript are generated outputs. The native CLI accepts UTF-8 JSON in its
 canonical two-space representation with a final newline; member order is
 retained. Noncanonical inputs and duplicate keys are refused. All imports and
 decisions use a new, nonexistent output path, preserving input custody.
+
+The CLI requires Python 3.12 or newer with the locked `jsonschema` build
+dependency. Set `ATLAS_PYTHON` to that environment's interpreter for direct
+commands; otherwise the CLI uses `python3` on `PATH`. `make build` passes its
+configured `ATLAS_PYTHON` to both exporters. The native
+`tools/evidence_history_inputs.py` checker validates the complete profile,
+journal or pending-proposal shape against the original evidence-profile
+schema before the JavaScript model admits it. Missing interpreters,
+dependencies or schemas refuse the command without creating an output.
+Journal hashes, chronology, claim/source binding and curator eligibility
+remain separately enforced by the native history and correction models.
+The shared `04_interactive_presentation/scripts/canonical_json.cjs` reader
+retains fatal UTF-8 decoding, canonical member order and the original refusal
+messages for history and research callers. Research profile inputs use the
+same owning wire check before comparison reconstruction.
 
 After a separately reviewed source edit, regenerate current profiles and import
 them using the actual UTC observation timestamp, with milliseconds:
@@ -114,3 +137,7 @@ coverage. The actual Chrome cases exercise retained imports, removals/returns,
 versioned navigation, local proposal custody, concurrent selections, mobile
 keyboard/source disclosure and actual downloaded files. Coverage uses the
 served controller's original native regions and function identities.
+`tests/test_evidence_history_inputs.py` exercises the native Python checker
+with actual producer packets, malformed wire cells, unavailable dependencies
+and missing original schemas. Its checks preserve the complete original input;
+schema admission alone does not establish scientific acceptance.

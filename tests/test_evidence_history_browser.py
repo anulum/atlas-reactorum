@@ -18,6 +18,7 @@ import shutil
 import subprocess
 import time
 from collections.abc import Iterator
+from datetime import datetime, timedelta
 from itertools import pairwise
 from pathlib import Path
 from typing import cast
@@ -230,7 +231,9 @@ def retained_changes(tmp_path_factory: pytest.TempPathFactory) -> dict[str, obje
     cli = ROOT / "04_interactive_presentation/scripts/evidence_history.cjs"
     node = shutil.which("node")
     assert node is not None
-    for index, mode in enumerate(("changed", "removed", "returned"), 4):
+    retained = json.loads(journal.read_text())
+    last_observation = datetime.fromisoformat(retained["imports"][-1]["observed_at"])
+    for index, mode in enumerate(("changed", "removed", "returned"), 1):
         updated = json.loads(json.dumps(profiles))
         if mode == "changed":
             updated["records"][0]["claims"][0]["original_statement"] += (
@@ -252,7 +255,9 @@ def retained_changes(tmp_path_factory: pytest.TempPathFactory) -> dict[str, obje
                 "--import",
                 str(journal),
                 str(source),
-                f"2026-10-{index:02d}T07:20:00.000Z",
+                (last_observation + timedelta(days=index))
+                .isoformat(timespec="milliseconds")
+                .replace("+00:00", "Z"),
                 str(successor),
             ],
             capture_output=True,
@@ -438,6 +443,36 @@ def test_missing_initial_retained_journal_refuses_without_source_substitution(
     settle(browser, "This historical revision could not be restored.")
     assert browser.evaluate("historyView.children.length") == 0
     assert browser.evaluate("historyDownload.hasAttribute('href')") is False
+
+
+@pytest.mark.parametrize("wrong_tag", [False, True])
+def test_actual_controller_refuses_missing_or_wrong_template_control(
+    browser: Browser, wrong_tag: bool
+) -> None:
+    """Refuse actual damaged DOM controls before registering history event handlers."""
+    original = download_value(browser)
+    result = browser.evaluate(
+        "(async wrongTag => {const original=document.getElementById('historyEntry');"
+        "const replacement=document.createElement('p');"
+        "if(wrongTag) replacement.id='historyEntry'; original.replaceWith(replacement);"
+        "try {await AtlasEvidenceHistoryController.start(); return 'unexpected success';}"
+        "catch(error) {return error.message;}"
+        "finally {replacement.replaceWith(original);}})(" + json.dumps(wrong_tag) + ")"
+    )
+    assert result == "Required Atlas control is unavailable: historyEntry"
+    assert download_value(browser) == original
+
+
+def test_actual_submit_without_current_revision_cannot_prepare_a_proposal(browser: Browser) -> None:
+    """Refuse a real submitted event after invalid selection clears its original revision."""
+    before = browser.evaluate("JSON.stringify(window.REACTOR_EVIDENCE_HISTORY)")
+    change(browser, "historyEntry", "")
+    settle(browser, "This historical revision could not be restored.")
+    browser.evaluate("correctionForm.dispatchEvent(new Event('submit', {cancelable:true}))")
+    proposal_settle(browser, "The correction proposal could not be prepared.")
+    assert browser.evaluate("correctionDownload.hasAttribute('href')") is False
+    assert browser.evaluate("correctionFields.disabled") is True
+    assert browser.evaluate("JSON.stringify(window.REACTOR_EVIDENCE_HISTORY)") == before
 
 
 def test_mobile_keyboard_disclosure_and_actual_pending_download(

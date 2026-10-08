@@ -2,8 +2,8 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
   "schema_version": "1.0.0",
   "record_count": 135,
   "inputs": {
-    "taxonomy_sha256": "88ef46ebb4a9f5682e77620d524f1a8de4bcd371dcb6c99c2b16aa1eb53dc0a4",
-    "citations_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7",
+    "taxonomy_sha256": "1020bc26e2ad0db174ec8b963be052eb41256fbda301b11235d29b6ea2424750",
+    "citations_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c",
     "audit_sha256": "2bf1eed42222d5b094dff2fdd5028c721ab8b70527f1cb05e794586f9e7faa84"
   },
   "sources": [
@@ -1830,7 +1830,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pwr:challenge:1",
             "pwr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -2072,7 +2072,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "integral-pwr:challenge:1",
             "integral-pwr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -2306,7 +2306,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "bwr:challenge:1",
             "bwr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -2501,7 +2501,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "phwr-candu:strength:1",
             "phwr-candu:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -2672,7 +2672,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "heavy-water-pressure-vessel-reactor:strength:1",
             "heavy-water-pressure-vessel-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -2861,7 +2861,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "magnox-gas-cooled-reactor:strength:1",
             "magnox-gas-cooled-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3035,7 +3035,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "advanced-gas-cooled-reactor-agr:strength:1",
             "advanced-gas-cooled-reactor-agr:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3221,7 +3221,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "rbmk-pressure-tube-reactor:strength:1",
             "rbmk-pressure-tube-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3385,7 +3385,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "prismatic-htgr:strength:1",
             "prismatic-htgr:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3551,7 +3551,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pebble-bed-htgr:strength:1",
             "pebble-bed-htgr:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3719,7 +3719,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "sodium-fast-reactor:strength:1",
             "sodium-fast-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -3881,7 +3881,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "lead-fast-reactor:strength:1",
             "lead-fast-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4043,7 +4043,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "lead-bismuth-fast-reactor:strength:1",
             "lead-bismuth-fast-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4207,7 +4207,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "gas-cooled-fast-reactor:strength:1",
             "gas-cooled-fast-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4353,7 +4353,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "supercritical-water-reactor:strength:1",
             "supercritical-water-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4502,7 +4502,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "very-high-temperature-reactor-vhtr:strength:1",
             "very-high-temperature-reactor-vhtr:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4672,7 +4672,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "thermal-liquid-fuel-molten-salt-reactor:strength:1",
             "thermal-liquid-fuel-molten-salt-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -4850,7 +4850,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fast-liquid-fuel-molten-salt-reactor:strength:1",
             "fast-liquid-fuel-molten-salt-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5038,7 +5038,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fluoride-salt-cooled-high-temperature-reactor:challenge:1",
             "fluoride-salt-cooled-high-temperature-reactor:fuel-state-classification:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5202,7 +5202,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "breed-and-burn-reactor:strength:1",
             "breed-and-burn-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5391,7 +5391,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "traveling-wave-reactor:strength:1",
             "traveling-wave-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5555,7 +5555,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "standing-wave-breed-and-burn-reactor:strength:1",
             "standing-wave-breed-and-burn-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5746,7 +5746,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pool-type-research-reactor:strength:1",
             "pool-type-research-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -5935,7 +5935,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "tank-type-research-reactor:strength:1",
             "tank-type-research-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -6122,7 +6122,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "tank-in-pool-research-reactor:strength:1",
             "tank-in-pool-research-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -6328,7 +6328,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "aqueous-homogeneous-reactor:strength:1",
             "aqueous-homogeneous-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -6512,7 +6512,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "critical-assembly:strength:1",
             "critical-assembly:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -6697,7 +6697,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "subcritical-assembly:strength:1",
             "subcritical-assembly:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -6875,7 +6875,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pulsed-research-reactor:strength:1",
             "pulsed-research-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -7086,7 +7086,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "tokamak:challenge:1",
             "tokamak:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -7275,7 +7275,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "spherical-tokamak:strength:1",
             "spherical-tokamak:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -7463,7 +7463,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "reversed-field-pinch:strength:1",
             "reversed-field-pinch:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -7696,7 +7696,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "stellarator:challenge:2",
             "stellarator:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -7907,7 +7907,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "heliotron-torsatron:challenge:1",
             "heliotron-torsatron:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -8149,7 +8149,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "optimised-modular-stellarator:challenge:1",
             "optimised-modular-stellarator:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -8357,7 +8357,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "magnetic-mirror:challenge:1",
             "magnetic-mirror:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -8565,7 +8565,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "tandem-mirror:challenge:1",
             "tandem-mirror:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -8771,7 +8771,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "gas-dynamic-mirror:challenge:1",
             "gas-dynamic-mirror:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -8951,7 +8951,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "magnetic-cusp-confinement:strength:1",
             "magnetic-cusp-confinement:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -9196,7 +9196,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "levitated-dipole:challenge:2",
             "levitated-dipole:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -9444,7 +9444,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "field-reversed-configuration-frc:challenge:2",
             "field-reversed-configuration-frc:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -9696,7 +9696,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "spheromak:challenge:2",
             "spheromak:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -9883,7 +9883,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "z-pinch:strength:1",
             "z-pinch:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -10148,7 +10148,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "sheared-flow-stabilised-z-pinch:challenge:2",
             "sheared-flow-stabilised-z-pinch:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -10359,7 +10359,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "theta-pinch:challenge:1",
             "theta-pinch:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -10675,7 +10675,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "dense-plasma-focus:challenge:2",
             "dense-plasma-focus:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -10915,7 +10915,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "laser-direct-drive-icf:challenge:2",
             "laser-direct-drive-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -11188,7 +11188,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "laser-indirect-drive-icf:challenge:2",
             "laser-indirect-drive-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -11424,7 +11424,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fast-ignition-icf:challenge:2",
             "fast-ignition-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -11641,7 +11641,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "shock-ignition-icf:challenge:1",
             "shock-ignition-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -11886,7 +11886,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "heavy-ion-driven-icf:challenge:2",
             "heavy-ion-driven-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -12156,7 +12156,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "impact-driven-inertial-fusion:challenge:2",
             "impact-driven-inertial-fusion:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -12379,7 +12379,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "z-pinch-driven-indirect-icf:challenge:1",
             "z-pinch-driven-indirect-icf:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -12625,7 +12625,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "maglif:challenge:2",
             "maglif:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -12837,7 +12837,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solid-liner-magnetised-target-fusion:challenge:1",
             "solid-liner-magnetised-target-fusion:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -13046,7 +13046,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "liquid-liner-magnetised-target-fusion:challenge:1",
             "liquid-liner-magnetised-target-fusion:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -13255,7 +13255,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "plasma-jet-driven-magneto-inertial-fusion:challenge:1",
             "plasma-jet-driven-magneto-inertial-fusion:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -13476,7 +13476,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pulsed-frc-compression:challenge:1",
             "pulsed-frc-compression:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -13721,7 +13721,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "gridded-inertial-electrostatic-confinement:challenge:2",
             "gridded-inertial-electrostatic-confinement:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -13943,7 +13943,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "polywell:challenge:1",
             "polywell:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -14204,7 +14204,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "accelerator-beam-target-fusion-neutron-generator:challenge:2",
             "accelerator-beam-target-fusion-neutron-generator:historical-operation:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -14403,7 +14403,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "batch-reactor:challenge:1",
             "batch-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -14597,7 +14597,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "semi-batch-reactor:strength:2",
             "semi-batch-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -14843,7 +14843,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "continuous-stirred-tank-reactor-cstr:challenge:1",
             "continuous-stirred-tank-reactor-cstr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -15069,7 +15069,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "plug-flow-tubular-reactor:challenge:1",
             "plug-flow-tubular-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -15305,7 +15305,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "cstr-cascade:challenge:1",
             "cstr-cascade:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -15518,7 +15518,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fixed-packed-bed-reactor:challenge:1",
             "fixed-packed-bed-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -15736,7 +15736,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "moving-bed-reactor:challenge:1",
             "moving-bed-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -15898,7 +15898,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "bubbling-fluidised-bed-reactor:strength:1",
             "bubbling-fluidised-bed-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16093,7 +16093,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "circulating-fluidised-bed-reactor:challenge:1",
             "circulating-fluidised-bed-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16266,7 +16266,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "trickle-bed-reactor:challenge:1",
             "trickle-bed-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16446,7 +16446,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "slurry-stirred-tank-reactor:challenge:1",
             "slurry-stirred-tank-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16615,7 +16615,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "bubble-column-reactor:strength:1",
             "bubble-column-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16784,7 +16784,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "airlift-reactor:strength:1",
             "airlift-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -16943,7 +16943,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "catalytic-membrane-reactor:strength:1",
             "catalytic-membrane-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -17107,7 +17107,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "microchannel-flow-reactor:challenge:1",
             "microchannel-flow-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -17310,7 +17310,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "segmented-flow-reactor:challenge:2",
             "segmented-flow-reactor:classification:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -17490,7 +17490,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "alkaline-water-electrolyser:strength:1",
             "alkaline-water-electrolyser:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -17666,7 +17666,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pem-water-electrolyser:strength:1",
             "pem-water-electrolyser:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -17853,7 +17853,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solid-oxide-electrolyser:strength:1",
             "solid-oxide-electrolyser:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18035,7 +18035,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "anion-exchange-membrane-electrolyser:strength:1",
             "anion-exchange-membrane-electrolyser:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18217,7 +18217,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pem-fuel-cell:strength:1",
             "pem-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18393,7 +18393,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "alkaline-fuel-cell:strength:1",
             "alkaline-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18577,7 +18577,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "phosphoric-acid-fuel-cell:strength:1",
             "phosphoric-acid-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18755,7 +18755,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "molten-carbonate-fuel-cell:strength:1",
             "molten-carbonate-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -18933,7 +18933,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solid-oxide-fuel-cell:strength:1",
             "solid-oxide-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19076,7 +19076,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "homogeneous-photochemical-flow-reactor:strength:1",
             "homogeneous-photochemical-flow-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19259,7 +19259,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "slurry-photocatalytic-reactor:challenge:1",
             "slurry-photocatalytic-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19442,7 +19442,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "immobilised-photocatalytic-reactor:challenge:1",
             "immobilised-photocatalytic-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19614,7 +19614,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "dielectric-barrier-discharge-reactor:challenge:1",
             "dielectric-barrier-discharge-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19760,7 +19760,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "microwave-plasma-reactor:strength:1",
             "microwave-plasma-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -19927,7 +19927,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "gliding-arc-plasma-reactor:challenge:1",
             "gliding-arc-plasma-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20113,7 +20113,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "thermal-plasma-arc-reactor:strength:1",
             "thermal-plasma-arc-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20277,7 +20277,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "bulk-polymerisation-reactor:strength:1",
             "bulk-polymerisation-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20441,7 +20441,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solution-polymerisation-reactor:strength:1",
             "solution-polymerisation-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20626,7 +20626,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "suspension-polymerisation-reactor:challenge:1",
             "suspension-polymerisation-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20829,7 +20829,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "emulsion-polymerisation-reactor:challenge:1",
             "emulsion-polymerisation-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -20990,7 +20990,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "moving-fixed-bed-gasifier:strength:1",
             "moving-fixed-bed-gasifier:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -21148,7 +21148,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fluidised-bed-gasifier:strength:1",
             "fluidised-bed-gasifier:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -21355,7 +21355,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "entrained-flow-gasifier:challenge:1",
             "entrained-flow-gasifier:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -21560,7 +21560,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fast-pyrolysis-reactor:challenge:1",
             "fast-pyrolysis-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -21745,7 +21745,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "supercritical-water-gasification-reactor:challenge:1",
             "supercritical-water-gasification-reactor:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -21888,7 +21888,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "chemical-looping-reactor-system:strength:1",
             "chemical-looping-reactor-system:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22071,7 +22071,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "sequencing-batch-reactor:strength:1",
             "sequencing-batch-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22280,7 +22280,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "stirred-tank-fermenter:challenge:2",
             "stirred-tank-fermenter:challenge:3"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22439,7 +22439,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fed-batch-bioreactor:strength:1",
             "fed-batch-bioreactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22614,7 +22614,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "chemostat:challenge:1",
             "chemostat:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22757,7 +22757,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "cell-retention-perfusion-bioreactor:strength:1",
             "cell-retention-perfusion-bioreactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -22943,7 +22943,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "complete-mix-anaerobic-digester:strength:1",
             "complete-mix-anaerobic-digester:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -23119,7 +23119,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "plug-flow-anaerobic-digester:strength:1",
             "plug-flow-anaerobic-digester:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -23301,7 +23301,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "covered-anaerobic-lagoon:strength:1",
             "covered-anaerobic-lagoon:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -23465,7 +23465,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "upflow-anaerobic-sludge-blanket-reactor:strength:1",
             "upflow-anaerobic-sludge-blanket-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -23641,7 +23641,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fixed-film-anaerobic-reactor:strength:1",
             "fixed-film-anaerobic-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -23832,7 +23832,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fusion-fission-hybrid-energy-multiplier:strength:1",
             "fusion-fission-hybrid-energy-multiplier:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -24021,7 +24021,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fusion-driven-transmutation-system:strength:1",
             "fusion-driven-transmutation-system:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -24206,7 +24206,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fusion-fission-breeder:strength:1",
             "fusion-fission-breeder:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -24422,7 +24422,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "accelerator-driven-subcritical-system-ads:challenge:1",
             "accelerator-driven-subcritical-system-ads:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -24644,7 +24644,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "nuclear-renewable-hybrid-energy-system:challenge:1",
             "nuclear-renewable-hybrid-energy-system:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -24866,7 +24866,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "nuclear-heat-coupled-to-hydrogen-production:challenge:1",
             "nuclear-heat-coupled-to-hydrogen-production:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -25065,7 +25065,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "muon-catalysed-fusion:strength:1",
             "muon-catalysed-fusion:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -25287,7 +25287,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "lattice-confinement-fusion:strength:1",
             "lattice-confinement-fusion:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -25460,7 +25460,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "electrochemically-loaded-beam-target-fusion:strength:1",
             "electrochemically-loaded-beam-target-fusion:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -25657,7 +25657,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "pyroelectric-fusion-source:strength:1",
             "pyroelectric-fusion-source:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -25958,7 +25958,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "palladium-deuterium-electrochemical-lenr:challenge:2",
             "palladium-deuterium-electrochemical-lenr:challenge:3"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -26192,7 +26192,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "gas-loaded-metal-hydrogen-lenr:challenge:1",
             "gas-loaded-metal-hydrogen-lenr:challenge:2"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -26413,7 +26413,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "cavitation-bubble-fusion:strength:1",
             "cavitation-bubble-fusion:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -26610,7 +26610,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solid-core-nuclear-thermal-rocket:strength:1",
             "solid-core-nuclear-thermal-rocket:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -26806,7 +26806,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "fission-fragment-propulsion-reactor:strength:1",
             "fission-fragment-propulsion-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27002,7 +27002,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "antiproton-catalysed-microfission-fusion:strength:1",
             "antiproton-catalysed-microfission-fusion:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27201,7 +27201,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "direct-fusion-drive:strength:1",
             "direct-fusion-drive:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27399,7 +27399,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "solar-thermochemical-redox-reactor:strength:1",
             "solar-thermochemical-redox-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27603,7 +27603,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "plasma-catalytic-reactor:strength:1",
             "plasma-catalytic-reactor:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27813,7 +27813,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "photovoltaic-photothermal-artificial-photosynthesis:strength:1",
             "photovoltaic-photothermal-artificial-photosynthesis:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -27980,7 +27980,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "microbial-fuel-cell:strength:1",
             "microbial-fuel-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",
@@ -28147,7 +28147,7 @@ window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = {
             "microbial-electrolysis-cell:strength:1",
             "microbial-electrolysis-cell:challenge:1"
           ],
-          "source_snapshot_sha256": "7b3f4edb6ac757ea9a0cdac06dfce4350c6b0297676c275365b1f92abc1764d7"
+          "source_snapshot_sha256": "93476835aa6b688942b71427d00b0a4dd2356657e29e921afa3970ed19373b1c"
         },
         "classification": {
           "state": "open",

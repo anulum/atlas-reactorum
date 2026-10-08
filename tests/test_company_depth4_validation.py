@@ -43,6 +43,18 @@ COLUMNS = [
 
 @pytest.fixture
 def outputs(tmp_path: Path) -> Path:
+    """Copy all six accepted depth-matrix and summary tables into owned storage.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for independently mutated persisted table copies.
+
+    Returns
+    -------
+    Path
+        Complete output directory for the native validator.
+    """
     folder = tmp_path / "outputs"
     folder.mkdir()
     for name in TABLES:
@@ -53,6 +65,7 @@ def outputs(tmp_path: Path) -> Path:
 def test_original_corrected_matrix_reproduces_report_without_mutating_inputs(
     tmp_path: Path,
 ) -> None:
+    """Reproduce exact report bytes in both CLI modes without changing persisted inputs."""
     before = {
         p: p.read_bytes()
         for p in [*[SCRIPT.with_name(name) for name in TABLES], SCRIPT.with_name("validation.json")]
@@ -72,6 +85,7 @@ def test_original_corrected_matrix_reproduces_report_without_mutating_inputs(
 def test_invalid_persisted_structure_preserves_report(
     outputs: Path, name: str, damage: str
 ) -> None:
+    """Reject malformed or missing persisted tables while preserving the existing report."""
     path = outputs / name
     fields, rows = read_table(path)
     if damage == "schema":
@@ -110,6 +124,7 @@ def test_invalid_persisted_structure_preserves_report(
     ],
 )
 def test_entire_matrix_matches_actual_source_derivation(outputs: Path, field: str) -> None:
+    """Reject changed matrix facts without repairing the candidate table."""
     path = outputs / TABLES[0]
     fields, rows = read_table(path)
     rows[0][field] = "wrong persisted value"
@@ -145,6 +160,7 @@ def test_entire_matrix_matches_actual_source_derivation(outputs: Path, field: st
     ],
 )
 def test_record_and_evidence_refusals(outputs: Path, case: str) -> None:
+    """Reject invalid identities, overlay associations, dates and evidence references."""
     paths = [outputs / name for name in TABLES[:3]]
     mf, m = read_table(paths[0])
     of, o = read_table(paths[1])
@@ -217,6 +233,7 @@ def test_record_and_evidence_refusals(outputs: Path, case: str) -> None:
 @pytest.mark.parametrize("name", TABLES[3:])
 @pytest.mark.parametrize("field", COLUMNS)
 def test_every_summary_count_matches_derived_rows(outputs: Path, name: str, field: str) -> None:
+    """Reject each changed summary count for country, identity and evidence-tier groups."""
     path = outputs / name
     fields, rows = read_table(path)
     rows[0][field] = str(int(rows[0][field]) + 1)
@@ -227,6 +244,7 @@ def test_every_summary_count_matches_derived_rows(outputs: Path, name: str, fiel
 
 @pytest.mark.parametrize("case", ["duplicate", "missing", "foreign", "negative", "nonnumeric"])
 def test_summary_groupings_and_numeric_refusals(outputs: Path, case: str) -> None:
+    """Reject duplicate, missing or foreign groups and negative or nonnumeric summary counts."""
     path = outputs / TABLES[3]
     fields, rows = read_table(path)
     if case == "duplicate":
@@ -259,6 +277,7 @@ def test_summary_groupings_and_numeric_refusals(outputs: Path, case: str) -> Non
 def test_source_links_require_https_authority(
     outputs: Path, table: str, field: str, url: str
 ) -> None:
+    """Reject malformed HTTPS links in official, independent and registry references."""
     path = outputs / table
     fields, rows = read_table(path)
     rows[0][field] = "https://example.org;" + url if field == "enriched_independent_urls" else url
@@ -269,6 +288,7 @@ def test_source_links_require_https_authority(
 
 @pytest.mark.parametrize("name", TABLES)
 def test_report_cannot_replace_persisted_input(outputs: Path, name: str) -> None:
+    """Protect each persisted input table from report destination aliasing."""
     path = outputs / name
     before = path.read_bytes()
     result = run_cli(SCRIPT, "--directory", str(outputs), "--report", str(path))
@@ -277,6 +297,7 @@ def test_report_cannot_replace_persisted_input(outputs: Path, name: str) -> None
 
 
 def test_source_audit_read_failure_and_protection(outputs: Path, tmp_path: Path) -> None:
+    """Preserve the prior report on audit read failure and protect the accepted source audit."""
     root = tmp_path / "audit"
     root.mkdir()
     report = outputs / "validation.json"
@@ -292,6 +313,7 @@ def test_source_audit_read_failure_and_protection(outputs: Path, tmp_path: Path)
 
 
 def test_report_directory_failure_is_controlled(outputs: Path) -> None:
+    """Report an unwritable directory destination without a native traceback."""
     result = run_cli(SCRIPT, "--directory", str(outputs), "--report", str(outputs))
     assert result.returncode == 1 and "cannot write report" in result.stdout
     assert "Traceback" not in result.stderr
@@ -300,6 +322,7 @@ def test_report_directory_failure_is_controlled(outputs: Path) -> None:
 def test_public_read_and_main_use_persisted_inputs(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """Read the complete accepted matrix and validate it through the public main entry point."""
     module = load_module(str(SCRIPT.relative_to(ROOT)), "atlas_company_depth4_validator")
     assert (
         module.read(SCRIPT.with_name(TABLES[0]), module.MATRIX_FIELDS)
@@ -313,6 +336,7 @@ def test_public_read_and_main_use_persisted_inputs(
 def test_source_matching_cannot_accept_blank_required_matrix_facts(
     outputs: Path, tmp_path: Path
 ) -> None:
+    """Reject a blank required source fact even when the native matrix rebuild matches."""
     audit = tmp_path / "audit"
     names = [
         "audited_companies.tsv",
@@ -338,6 +362,7 @@ def test_source_matching_cannot_accept_blank_required_matrix_facts(
 
 
 def test_data_directory_cannot_supply_executable_builder(outputs: Path) -> None:
+    """Validate using the repository builder despite an executable-looking file in the data directory."""
     (outputs / "build.py").write_text(
         "raise RuntimeError('data directory is not executable code')\n"
     )

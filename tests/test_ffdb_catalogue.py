@@ -23,10 +23,23 @@ CAPTURE = ROOT / "tests/data/fusion_ffdb/visible_data.frames"
 
 @pytest.fixture
 def catalogue() -> ModuleType:
+    """Load the real standalone catalogue namespace without substituting its source parser.
+
+    Returns
+    -------
+    types.ModuleType
+        Production catalogue builder and its source-bound refusal contract.
+    """
     return importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.catalogue")
 
 
 def test_all_source_records_and_absences_are_preserved(catalogue: ModuleType) -> None:
+    """Preserve all 174 identities, 137 coordinate pairs and absent operating dates.
+
+    Original source names, organisations and device fields remain unchanged;
+    the catalogue does not confer scientific approval or reconstruct the
+    historical 146-record import.
+    """
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     dashboard = reader.read_dashboard(CAPTURE)
     product = catalogue.build_catalogue(dashboard, "2026-10-02")
@@ -57,6 +70,7 @@ def test_all_source_records_and_absences_are_preserved(catalogue: ModuleType) ->
 def test_all_cell_provenance_is_bound_and_display_precision_is_separate(
     catalogue: ModuleType,
 ) -> None:
+    """Bind every catalogue cell to its source hash, tuple and separate raw/display precision."""
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     dashboard = reader.read_dashboard(CAPTURE)
     product = catalogue.build_catalogue(dashboard, "2026-10-02")
@@ -78,12 +92,14 @@ def test_all_cell_provenance_is_bound_and_display_precision_is_separate(
 
 @pytest.mark.parametrize("retrieved", ["", "2026-02-30", "20261002", "2026-W40-5"])
 def test_noncanonical_capture_dates_refuse(catalogue: ModuleType, retrieved: str) -> None:
+    """Require an actual ISO calendar date rather than empty, impossible or week-date forms."""
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     with pytest.raises(catalogue.DashboardRefused, match="ISO calendar date"):
         catalogue.build_catalogue(reader.read_dashboard(CAPTURE), retrieved)
 
 
 def test_catalogue_cannot_change_selected_source_acquisition_date(catalogue: ModuleType) -> None:
+    """Refuse a catalogue request that would relabel the registered selection's retrieval date."""
     reader = importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.reader")
     with pytest.raises(catalogue.DashboardRefused, match="differs from its source selection"):
         catalogue.build_catalogue(reader.read_dashboard(CAPTURE), "2026-10-03")

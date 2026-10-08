@@ -42,7 +42,11 @@ jobs:
         run: |
           python -m venv .venv
           .venv/bin/python -m pip install --require-hashes --no-deps -r requirements-dev.txt
-      - run: .venv/bin/python -m bandit -r . -x ./.venv,./tests
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "24.21.0"
+      - run: npm audit --include=dev
+      - run: .venv/bin/python -m bandit -r . -x ./.venv,./tests,./node_modules
       - run: .venv/bin/python tools/preflight.py --check secrets
       - run: .venv/bin/python -m pip_audit --require-hashes -r requirements-dev.txt
       - run: .venv/bin/reuse lint

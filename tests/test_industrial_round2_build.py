@@ -38,11 +38,31 @@ FIXTURES = ROOT / "tests/data/industrial_round2"
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the Canadian and Australian producer through its repository module path.
+
+    Returns
+    -------
+    ModuleType
+        Producer exposing native source selection, refresh and build entry points.
+    """
     return load_module(str(SCRIPT.relative_to(ROOT)), "atlas_industrial_round2_build")
 
 
 def source_csv(path: Path, changes: dict[str, str] | None = None) -> bytes:
-    """Serialize the complete real selected raw input after one explicit mutation."""
+    """Serialize a complete raw source copy with optional first-row field mutations.
+
+    Parameters
+    ----------
+    path : Path
+        Canadian windows-1252 or Australian UTF-8 with BOM source fixture.
+    changes : dict[str, str] or None
+        Field replacements applied only to the first copied row.
+
+    Returns
+    -------
+    bytes
+        Complete CSV encoded like the selected source; the original remains untouched.
+    """
     encoding = "windows-1252" if path.name == "canada.csv" else "utf-8-sig"
     with path.open(encoding=encoding, newline="") as handle:
         reader = csv.DictReader(handle)
@@ -58,6 +78,7 @@ def source_csv(path: Path, changes: dict[str, str] | None = None) -> bytes:
 
 
 def test_complete_actual_sources_equal_historical_snapshot(producer: ModuleType) -> None:
+    """Select both complete source fixtures with exact accepted snapshot equality."""
     canada = (FIXTURES / "canada.csv").read_bytes()
     australia = (FIXTURES / "australia.csv").read_bytes()
     assert producer.select_sources(canada, australia) == producer.read_snapshot(SNAPSHOT)
@@ -65,6 +86,7 @@ def test_complete_actual_sources_equal_historical_snapshot(producer: ModuleType)
 
 
 def test_full_native_build_matches_original_bytes(tmp_path: Path, producer: ModuleType) -> None:
+    """Rebuild all 1,776 facilities as exact historical bytes through both CLI modes and API."""
     before = SNAPSHOT.read_bytes(), DATA.read_bytes()
     for optimize in (False, True):
         output = tmp_path / f"built-{optimize}.tsv"
@@ -77,6 +99,7 @@ def test_full_native_build_matches_original_bytes(tmp_path: Path, producer: Modu
 
 
 def test_genuine_raw_refresh_is_isolated_and_exact(tmp_path: Path, producer: ModuleType) -> None:
+    """Refresh 908 Canadian and 868 Australian rows into owned copies through API and main."""
     canada, australia = (
         (FIXTURES / "canada.csv").read_bytes(),
         (FIXTURES / "australia.csv").read_bytes(),
@@ -112,6 +135,7 @@ def test_genuine_raw_refresh_is_isolated_and_exact(tmp_path: Path, producer: Mod
 
 
 def test_original_field_fallbacks_remain_source_based(producer: ModuleType) -> None:
+    """Preserve source-based name and URL fallbacks without inventing missing observations."""
     snapshot = producer.read_snapshot(SNAPSHOT)
     ca = next(r for r in snapshot if r["source"] == "canada-npri")
     au = next(r for r in snapshot if r["source"] == "australia-npi")
@@ -151,6 +175,7 @@ def test_original_field_fallbacks_remain_source_based(producer: ModuleType) -> N
 def test_full_snapshot_mutations_refuse(
     tmp_path: Path, producer: ModuleType, field: str, value: str
 ) -> None:
+    """Reject invalid Australian and Canadian facts through the native CLI and public conversion."""
     fields, rows = read_table(SNAPSHOT)
     assert rows[0]["source"] == "australia-npi"
     rows[0][field] = value
@@ -178,6 +203,7 @@ def test_full_snapshot_mutations_refuse(
     "corruption", ["empty", "header", "extra", "short", "quote", "utf8", "duplicate", "missing"]
 )
 def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
+    """Reject malformed, duplicate or absent snapshots without a native CLI traceback."""
     fields, rows = read_table(SNAPSHOT)
     snapshot = tmp_path / "changed.tsv"
     if corruption == "empty":
@@ -202,6 +228,7 @@ def test_snapshot_integrity_refuses(tmp_path: Path, corruption: str) -> None:
 
 
 def test_raw_table_boundaries_and_unknowns_refuse(producer: ModuleType) -> None:
+    """Reject malformed raw CSV, empty selections and non-string public snapshot schemas."""
     ca, au = (FIXTURES / "canada.csv").read_bytes(), (FIXTURES / "australia.csv").read_bytes()
     body = ca.decode("windows-1252")
     with pytest.raises(ValueError, match="columns"):
@@ -245,6 +272,7 @@ def test_raw_table_boundaries_and_unknowns_refuse(producer: ModuleType) -> None:
 
 @pytest.mark.parametrize("date", ["20260927", "2026-02-30"])
 def test_exact_retrieval_date_required(tmp_path: Path, producer: ModuleType, date: str) -> None:
+    """Reject compact or impossible calendar dates in conversion and snapshot refresh."""
     with pytest.raises(ValueError):
         producer.rows_from_snapshot(producer.read_snapshot(SNAPSHOT), retrieved=date)
     with pytest.raises(ValueError):
@@ -260,6 +288,7 @@ def test_exact_retrieval_date_required(tmp_path: Path, producer: ModuleType, dat
 def test_historical_input_and_atomic_output_protection(
     tmp_path: Path, producer: ModuleType
 ) -> None:
+    """Protect accepted inputs and preserve prior output when atomic Unicode serialization fails."""
     before = DATA.read_bytes(), SNAPSHOT.read_bytes()
     for target in (DATA, SNAPSHOT, tmp_path / "link.tsv"):
         if target.name == "link.tsv":
@@ -284,6 +313,7 @@ def test_historical_input_and_atomic_output_protection(
 
 
 def test_cli_refresh_options_cannot_overwrite_inputs(tmp_path: Path, producer: ModuleType) -> None:
+    """Refuse incomplete refresh arguments, path aliases and absent raw source files."""
     assert (
         producer.main(
             ["--output", str(tmp_path / "out.tsv"), "--manifest", str(tmp_path / "m.tsv")]
@@ -336,6 +366,7 @@ class SourceHandler(BaseHTTPRequestHandler):
     """Provide actual payloads and native redirects, errors and deadlines."""
 
     def do_GET(self) -> None:
+        """Serve complete Canadian or Australian payloads with redirect, error and delay controls."""
         server = self.server
         assert isinstance(server, SourceServer)
         if self.path in {"/redirect", "/downgrade", "/credentials", "/loop"}:
@@ -368,6 +399,27 @@ class SourceHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture
 def tls_sources(tmp_path: Path) -> Iterator[tuple[str, Path]]:
+    """Serve both original source fixtures over an owned, locally trusted TLS listener.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Owned directory for a one-day certificate and private key.
+
+    Yields
+    ------
+    tuple[str, Path]
+        Local HTTPS origin and certificate path for the native downloader.
+
+    Raises
+    ------
+    RuntimeError
+        If OpenSSL is unavailable.
+
+    Notes
+    -----
+    Shut down and close the listener and join its worker after the test.
+    """
     ca, key = tmp_path / "ca.pem", tmp_path / "key.pem"
     openssl = shutil.which("openssl")
     if openssl is None:
@@ -414,6 +466,7 @@ def tls_sources(tmp_path: Path) -> Iterator[tuple[str, Path]]:
 def test_native_tls_download_and_full_cli_refresh(
     tmp_path: Path, producer: ModuleType, tls_sources: tuple[str, Path]
 ) -> None:
+    """Refresh all 1,776 facilities from trusted native TLS with exact snapshot preservation."""
     url, ca = tls_sources
     assert (
         producer.download(url + "/redirect", ca_file=ca) == (FIXTURES / "canada.csv").read_bytes()
@@ -446,6 +499,7 @@ def test_native_tls_download_and_full_cli_refresh(
 def test_native_transport_refusals(
     producer: ModuleType, tls_sources: tuple[str, Path], path: str
 ) -> None:
+    """Reject unsafe redirects, non-200 responses and the actual response timeout."""
     url, ca = tls_sources
     with pytest.raises((ValueError, HTTPError, URLError, TimeoutError)):
         producer.download(url + path, ca_file=ca, timeout=0.03 if path == "/stall" else 5)
@@ -454,6 +508,7 @@ def test_native_transport_refusals(
 def test_native_transport_trust_and_limits(
     producer: ModuleType, tls_sources: tuple[str, Path]
 ) -> None:
+    """Protect the trust certificate and reject untrusted TLS, byte limits and unsafe URLs."""
     url, ca = tls_sources
     before = ca.read_bytes()
     assert (

@@ -30,11 +30,23 @@ CAPTURE = ROOT / "tests/data/fusion_ffdb/visible_data.frames"
 
 @pytest.fixture
 def producer() -> ModuleType:
+    """Load the actual pinned producer's public command implementation.
+
+    Returns
+    -------
+    types.ModuleType
+        Standalone FFDB producer with its normal source-validation imports.
+    """
     return importlib.import_module("05_global_reactor_map.imports.fusion.ffdb.build_from_ffdb")
 
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_real_cli_reproduces_both_source_bound_products(tmp_path: Path, optimize: bool) -> None:
+    """Reproduce both registered products twice through normal and optimised native CLI runs.
+
+    All 174 identities and 137 map points remain present, and source-bound
+    product bytes agree with the checkout without promoting scientific approval.
+    """
     output = tmp_path / "first"
     result = run_cli(SCRIPT, "--output", str(output), optimize=optimize)
     assert result.returncode == 0, result.stderr
@@ -58,6 +70,7 @@ def test_real_cli_reproduces_both_source_bound_products(tmp_path: Path, optimize
 def test_real_cli_refuses_changed_source_without_creating_output(
     tmp_path: Path, optimize: bool
 ) -> None:
+    """Refuse changed capture bytes before creating the requested output directory."""
     source = tmp_path / "changed.raw"
     source.write_bytes(CAPTURE.read_bytes() + b" ")
     output = tmp_path / "output"
@@ -71,6 +84,7 @@ def test_real_cli_refuses_changed_source_without_creating_output(
 def test_real_cli_refuses_integer_decoder_limit_without_output_or_traceback(
     tmp_path: Path, optimize: bool
 ) -> None:
+    """Convert oversized-integer decoding failure into a bounded CLI refusal without output."""
     first = '{"oversized_integer":' + "1" * 5000 + "}"
     payload = f"{len(first)};{first}2;{{}}".encode()
     source = tmp_path / "oversized_integer.frames"
@@ -98,6 +112,7 @@ def test_real_cli_refuses_integer_decoder_limit_without_output_or_traceback(
 
 @pytest.mark.parametrize("optimize", [False, True])
 def test_real_cli_preserves_existing_directory(tmp_path: Path, optimize: bool) -> None:
+    """Preserve an existing directory's sentinel and refuse creating source products within it."""
     sentinel = tmp_path / "original.txt"
     sentinel.write_text("owner original", encoding="utf-8")
     result = run_cli(SCRIPT, "--output", str(tmp_path), optimize=optimize)
@@ -121,6 +136,7 @@ def test_real_cli_preserves_existing_directory(tmp_path: Path, optimize: bool) -
     ],
 )
 def test_real_cli_refuses_invalid_registry(tmp_path: Path, field: str, value: object) -> None:
+    """Reject malformed source identity and registry fields without leaking URLs or tracebacks."""
     registry = json.loads((LAYER / "source_manifest.json").read_text())
     registry[field] = value
     manifest = tmp_path / "source.json"
@@ -133,6 +149,7 @@ def test_real_cli_refuses_invalid_registry(tmp_path: Path, field: str, value: ob
 
 @pytest.mark.parametrize("body", [b"{", b"\xff"])
 def test_real_cli_refuses_malformed_registry(tmp_path: Path, body: bytes) -> None:
+    """Report invalid JSON or UTF-8 in the registry through the producer's public CLI error."""
     manifest = tmp_path / "source.json"
     manifest.write_bytes(body)
     result = run_cli(SCRIPT, "--manifest", str(manifest))
@@ -143,6 +160,7 @@ def test_real_cli_refuses_malformed_registry(tmp_path: Path, body: bytes) -> Non
 def test_producer_api_checks_pinned_inputs_before_writing(
     producer: ModuleType, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """Bind a successful producer API summary to the actual capture's SHA-256 digest."""
     assert producer.main([]) == 0
     summary = json.loads(capsys.readouterr().out)
     assert summary["source_sha256"] == hashlib.sha256(CAPTURE.read_bytes()).hexdigest()
@@ -152,6 +170,7 @@ def test_producer_api_checks_pinned_inputs_before_writing(
 def test_real_cli_refuses_registry_and_artifact_acquisition_disagreement(
     tmp_path: Path, change: str
 ) -> None:
+    """Refuse mismatched acquisition metadata even when the altered artifact digest is repinned."""
     from .test_ffdb_reader import captured_frames, framed
 
     registry = json.loads((LAYER / "source_manifest.json").read_text())
