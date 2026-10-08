@@ -12,8 +12,10 @@ from __future__ import annotations
 
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
+import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -84,12 +86,19 @@ def run_steps(job: dict[str, object]) -> list[str]:
     return commands
 
 
-def test_make_audits_both_complete_locks_without_suppression() -> None:
-    """The real Make recipe uses both full advisory audits with no weakened flags."""
+@pytest.mark.parametrize("environment", [".venv", str(Path(sys.executable).parent.parent)])
+def test_make_audits_both_complete_locks_without_suppression(environment: str) -> None:
+    """Require both full audits through the explicitly selected Make environment.
+
+    Parameters
+    ----------
+    environment : str
+        Default repository environment or the actual running development environment.
+    """
     make = shutil.which("make")
     assert make is not None
     result = subprocess.run(
-        [make, "--no-print-directory", "-n", "dependency-audit"],
+        [make, "--no-print-directory", "-n", "dependency-audit", f"VENV={environment}"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -97,7 +106,7 @@ def test_make_audits_both_complete_locks_without_suppression() -> None:
         timeout=30,
     )
     assert result.stdout.splitlines() == [
-        ".venv/bin/python -m pip_audit --require-hashes -r requirements-dev.txt",
+        f"{environment}/bin/python -m pip_audit --require-hashes -r requirements-dev.txt",
         "npm audit --include=dev",
     ]
 

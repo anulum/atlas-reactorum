@@ -89,6 +89,9 @@ Swiss terms-page acceptance binds the complete HTML to explicitly reviewed
 SHA-256 versions. The version reviewed on 2026-10-04 changes only the unrelated
 footer dataset count from 16,528 to 16,529; every other byte matches the
 previously reviewed capture. This does not broaden the resource-specific grant.
+The page retrieved on 2026-10-08 changes that footer counter to 16,560;
+every other byte matches the original reviewed page. Its exact SHA-256 is
+accepted separately, without changing any rights wording or grant scope.
 Any other page hash still requires a new source-specific review. Original HTML
 and dated retrieval receipts remain in private custody.
 
