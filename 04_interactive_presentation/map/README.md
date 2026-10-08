@@ -152,3 +152,10 @@ facility rows, retain their identities through index queries and verify density
 counts. Canvas defaults produce identical PNG bytes, and invalid graticule
 spacing refuses without changing the raster. Actual missing module, document,
 canvas capability and source-coordinate cases exercise refusal boundaries.
+
+Country borders use the complete pinned Natural Earth 1:50 million land-boundary
+layer. `renderer.countryBorders` admits the generated packet; `drawBorders`
+projects every retained line through the engine's current projection and viewport.
+International boundaries are thin solid lines; other original classifications
+are dashed. Canvas state is restored, and facility glyphs paint above the borders.
+See [source, rights and reproduction](../../metadata/map_basemap/README.md).

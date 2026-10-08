@@ -62,6 +62,8 @@ declare global {
   var AtlasMap: import("./map/engine.js").EngineGlobal["AtlasMap"];
   /** Generated or original dataset cells remain unknown until actual application admission. */
   var REACTOR_FACILITIES: unknown;
+  /** Bundled Natural Earth packet before geographic-coordinate admission. */
+  var ATLAS_COUNTRY_BOUNDARIES: unknown;
   /** Company claims retain their producer fields before actual display admission. */
   var FUSION_COMPANIES: unknown;
   /** Original authored taxonomy before complete shape admission. */

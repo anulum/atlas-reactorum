@@ -12,6 +12,8 @@ ATLAS REACTORUM — public documentation
 
 ![Atlas Reactorum logo](docs/assets/atlas-reactorum-logo.png)
 
+The interactive facility map includes country borders from Natural Earth, with disputed or uncertain boundary segments drawn as dashed lines. [Basemap provenance](metadata/map_basemap/README.md).
+
 An English-first, source-aware atlas and research library of reactor
 technology: nuclear fission, plasma and alternative fusion, chemical and
 biochemical reactors, hybrid systems, and explicitly labelled speculative

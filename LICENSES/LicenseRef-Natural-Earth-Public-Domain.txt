@@ -1,0 +1,11 @@
+Natural Earth public-domain data
+
+Source: https://www.naturalearthdata.com/about/terms-of-use/
+Observed: 2026-10-08
+
+Natural Earth places all versions of its raster and vector map data in the
+public domain. Permission is given for use, modification and distribution,
+including commercial use, without asking for permission. Attribution is
+requested as a courtesy. Natural Earth provides the data without a warranty.
+This file records the upstream public-domain terms; it does not relicense
+Atlas original code or imply that mapped boundaries are politically definitive.

@@ -87,6 +87,7 @@ done
 test -s "$root_dir/data/evidence-history.json"
 node --check "$root_dir/data/taxonomy-evidence-profiles.js"
 node --check "$root_dir/data/taxonomy-expanded.js"
+node --check "$root_dir/data/country-boundaries.js"
 node --check "$root_dir/data/taxonomy-audit.js"
 node --check "$root_dir/data/global_reactors.sample.js"
 node --check "$root_dir/data/fusion_companies.sample.js"

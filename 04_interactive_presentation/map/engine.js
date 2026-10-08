@@ -58,7 +58,7 @@
 /**
  * Constructor options for a native DOM host and its original-row callbacks.
  * @template {FacilityRow} Row
- * @typedef {{container?:EngineContainer,document?:EngineDocument,projection?:string,rings?:[number,number][][],maxZoom?:number,reducedMotion?:boolean,onSelect?:(row:Row,point:FacilityPoint<Row>)=>void,onViewChange?:(view:ViewReport)=>void}} EngineOptions
+ * @typedef {{container?:EngineContainer,document?:EngineDocument,projection?:string,rings?:[number,number][][],borders?:import("./renderer.js").CountryBorder[],maxZoom?:number,reducedMotion?:boolean,onSelect?:(row:Row,point:FacilityPoint<Row>)=>void,onViewChange?:(view:ViewReport)=>void}} EngineOptions
  */
 
 /**
@@ -218,6 +218,7 @@
         function () {};
       this.projection = projection.get(opts.projection || "equal-earth");
       this.rings = opts.rings || [];
+      this.borders = opts.borders || [];
       /** @type {Row[]} */
       this.rows = [];
       /** @type {FacilityPoint<Row>[]} */
@@ -419,6 +420,7 @@
       renderer.drawBackground(ctx, this.viewport);
       renderer.drawGraticule(ctx, this.viewport, this.projection);
       renderer.drawLand(ctx, this.viewport, this.projection, this.rings);
+      renderer.drawBorders(ctx, this.viewport, this.projection, this.borders);
 
       var visible = this.tree
         ? this.tree.query(this.viewport.visibleWorld(40))

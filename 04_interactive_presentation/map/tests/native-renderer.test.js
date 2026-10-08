@@ -97,3 +97,104 @@ test("native graticule defaults are pixel-identical and invalid spacing refuses 
     assert.equal(canvas.toDataURL(), reference);
   }
 });
+test("complete Natural Earth boundaries draw through native Cairo in every projection and viewport", (context) => {
+  const fs = require("node:fs"),
+    path = require("node:path");
+  const packet = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, "../../data/country-boundaries.json"),
+      "utf8",
+    ),
+  );
+  const before = JSON.stringify(packet),
+    borders = renderer.countryBorders(packet);
+  assert.equal(borders.length, 393);
+  assert.equal(
+    borders.reduce((count, border) => count + border.points.length, 0),
+    19859,
+  );
+  const { canvas, engine, rows } = mount(context, { borders });
+  const ctx = canvas.getContext("2d");
+  assert.ok(ctx);
+  ctx.setLineDash([7, 2]);
+  ctx.strokeStyle = "#123456";
+  ctx.lineWidth = 5;
+  engine.setData(rows);
+  engine.draw();
+  const full = canvas.toDataURL();
+  const original = engine.borders;
+  engine.borders = [];
+  engine.draw();
+  assert.notEqual(canvas.toDataURL(), full);
+  engine.borders = original;
+  engine.draw();
+  assert.equal(canvas.toDataURL(), full);
+  assert.deepEqual(ctx.getLineDash(), [7, 2]);
+  assert.equal(ctx.strokeStyle, "#123456");
+  assert.equal(ctx.lineWidth, 5);
+  for (const name of ["plate-carree", "equal-earth"]) {
+    engine.setProjection(name);
+    engine.viewport.zoomAbout(3, 480, 240);
+    engine.viewport.panBy(160, -40);
+    engine.draw();
+    const painted = canvas.toDataURL();
+    engine.borders = [];
+    engine.draw();
+    assert.notEqual(canvas.toDataURL(), painted);
+    engine.borders = original;
+    assert.equal(engine.rows[0], rows[0]);
+  }
+  assert.equal(JSON.stringify(packet), before);
+  assert.deepEqual(renderer.countryBorders({ borders: [] }), []);
+});
+test("country geometry admission refuses malformed complete packets and coordinates", () => {
+  for (const packet of [
+    undefined,
+    null,
+    0,
+    "",
+    {},
+    { borders: null },
+    { borders: [null] },
+    { borders: [7] },
+  ])
+    assert.throws(() => renderer.countryBorders(packet), TypeError);
+  const classification = "International boundary (verify)";
+  for (const entry of [
+    {},
+    {
+      classification: "unknown",
+      points: [
+        [0, 0],
+        [1, 1],
+      ],
+    },
+    { classification, points: null },
+    { classification, points: [] },
+    ...[
+      null,
+      [],
+      [0],
+      [0, 0, 0],
+      ["0", 0],
+      [0, "0"],
+      [NaN, 0],
+      [0, NaN],
+      [181, 0],
+      [0, 91],
+      [Infinity, 0],
+      [0, -Infinity],
+    ].map(
+      /**
+       * Place a malformed source coordinate inside an otherwise complete line.
+       * @param {unknown} coordinate Candidate coordinate requiring refusal.
+       * @returns {{classification:string,points:unknown[]}} Original malformed admission input.
+       */
+      (coordinate) => ({ classification, points: [[0, 0], coordinate] }),
+    ),
+  ])
+    assert.throws(
+      () => renderer.countryBorders({ borders: [entry] }),
+      TypeError,
+    );
+});

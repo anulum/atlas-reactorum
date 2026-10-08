@@ -151,9 +151,9 @@ def test_actual_optional_map_and_missing_controls_keep_explicit_boundaries(
 ) -> None:
     """Use missing namespace/host/basemap states and preserve the real source list or refusal."""
     result = browser.evaluate(
-        "(()=>{const namespace=window.AtlasMap;const outcomes=[];try{for(const altered of [undefined,{...namespace,MapEngine:undefined},{...namespace,coastline:undefined}]){window.AtlasMap=altered;const owner=AtlasFacilityCatalogue.create(document,REACTOR_FACILITIES);owner.start();outcomes.push(owner.map===null&&owner.filtered().length===13459);}return outcomes;}finally{window.AtlasMap=namespace;}})()"
+        "(()=>{const namespace=window.AtlasMap;const outcomes=[];try{for(const altered of [undefined,{...namespace,MapEngine:undefined},{...namespace,coastline:undefined},{...namespace,renderer:undefined}]){window.AtlasMap=altered;const owner=AtlasFacilityCatalogue.create(document,REACTOR_FACILITIES);owner.start();outcomes.push(owner.map===null&&owner.filtered().length===13459);}return outcomes;}finally{window.AtlasMap=namespace;}})()"
     )
-    assert result == [True, True, True]
+    assert result == [True, True, True, True]
     result = browser.evaluate(
         "(()=>{const host=mapHost;host.remove();const owner=AtlasFacilityCatalogue.create(document,REACTOR_FACILITIES);owner.start();return owner.map===null&&owner.filtered().length===13459;})()"
     )
@@ -180,3 +180,61 @@ def test_actual_missing_basemap_and_unrecognised_dataset_do_not_invent_labels(
         "(()=>{const rows=AtlasApplicationData.facilities([{...REACTOR_FACILITIES[0],dataset_source:'toString'},{...REACTOR_FACILITIES[1],dataset_source:undefined,record_kind:undefined}]);const owner=AtlasFacilityCatalogue.create(document,rows);owner.start();return document.querySelector('#facilityDataset option[value=toString]').textContent;})()"
     )
     assert result == "toString"
+
+
+def test_actual_country_lines_follow_projection_zoom_pan_and_preserve_source_rows(
+    browser: Browser,
+) -> None:
+    """Exercise the actual page's original engine and canvas with its complete geographic packet."""
+    result = browser.evaluate("""(() => {
+      const map = window.atlasMap;
+      const canvas = document.querySelector('#mapHost canvas');
+      const original = map.borders;
+      const row = map.rows[0];
+      const results = [];
+      for (const projection of ['equal-earth', 'plate-carree']) {
+        map.setProjection(projection);
+        map.viewport.zoomAbout(2, 400, 200);
+        map.viewport.panBy(90, -20);
+        map.draw();
+        const borders = canvas.toDataURL();
+        map.borders = [];
+        map.draw();
+        results.push(borders !== canvas.toDataURL());
+        map.borders = original;
+      }
+      map.setProjection('equal-earth');
+      map.viewport.reset();
+      map.draw();
+      return {lines: original.length, vertices: original.reduce((n,b) => n+b.points.length,0),
+        raster: results, preserved: map.rows[0] === row,
+        attribution: document.querySelector('.map-hint').textContent.includes('Natural Earth')};
+    })()""")
+    assert result == {
+        "lines": 393,
+        "vertices": 19859,
+        "raster": [True, True],
+        "preserved": True,
+        "attribution": True,
+    }
+
+
+def test_actual_missing_country_packet_keeps_records_and_reports_basemap_failure(
+    browser: Browser,
+) -> None:
+    """Reject missing geographic data in the real viewer while keeping the complete original catalogue."""
+    result = browser.evaluate("""(() => {
+      const original = window.ATLAS_COUNTRY_BOUNDARIES;
+      try {
+        window.ATLAS_COUNTRY_BOUNDARIES = null;
+        const owner = AtlasFacilityCatalogue.create(document, REACTOR_FACILITIES);
+        owner.start();
+        return {missing: owner.map === null, count: owner.filtered().length,
+          message: mapHost.textContent};
+      } finally { window.ATLAS_COUNTRY_BOUNDARIES = original; }
+    })()""")
+    assert result == {
+        "missing": True,
+        "count": 13459,
+        "message": "Basemap geometry unavailable; records remain listed below.",
+    }

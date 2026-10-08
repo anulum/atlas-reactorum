@@ -83,7 +83,7 @@ vessel.
 
 `validate.sh` checks the presentation and runs the map engine's tests.
 `tools/preflight.py` checks public documentation and script headers, and uses
-`tools/rebuild.py` to rebuild all 22 offline release products in a fresh external
+`tools/rebuild.py` to rebuild all 24 offline release products in a fresh external
 source tree. It runs the actual Python, Node and shell producers without writing
 the accepted candidate. The shell inventory uses its recorded UTC epoch for
 byte-identical receipts. Frozen upstream tables and editorial audits remain

@@ -330,3 +330,15 @@ path = ["05_global_reactor_map/imports/research_reactors/official_source_enrichm
 precedence = "override"
 SPDX-FileCopyrightText = ["Source publishers and individual field origins in 04_interactive_presentation/data/source_rights.json", "2026 Miroslav Šotek, selection and editorial scope"]
 SPDX-License-Identifier = "AGPL-3.0-or-later AND CC0-1.0 AND CC-BY-4.0 AND OGL-Canada-2.0 AND OGL-UK-3.0 AND LicenseRef-US-Public-Domain"
+
+[[annotations]]
+path = "metadata/map_basemap/ne_50m_admin_0_boundary_lines_land.geojson"
+precedence = "override"
+SPDX-FileCopyrightText = "Natural Earth contributors"
+SPDX-License-Identifier = "LicenseRef-Natural-Earth-Public-Domain"
+
+[[annotations]]
+path = ["04_interactive_presentation/data/country-boundaries.json", "04_interactive_presentation/data/country-boundaries.js"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Natural Earth contributors", "2026 Miroslav Šotek, packaging"]
+SPDX-License-Identifier = "AGPL-3.0-or-later AND LicenseRef-Natural-Earth-Public-Domain"

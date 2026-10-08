@@ -180,7 +180,7 @@ var AtlasFacilityCatalogue = (() => {
      * Create the canvas map engine, replacing the former SVG point layer.
      *
      * The coastline is recovered from the bundled basemap path, so switching
-     * projection needs no additional geometry and introduces no new data licence.
+     * projection reuses the bundled geometry. Natural Earth borders share that viewport.
      * @returns {void} The native map is mounted or its original optional-basemap status is shown.
      */
     function initMapEngine() {
@@ -188,10 +188,15 @@ var AtlasFacilityCatalogue = (() => {
       const namespace = window.AtlasMap;
       const Engine = namespace?.MapEngine;
       const coastline = namespace?.coastline;
-      if (!host || !Engine || !coastline || atlasMap) return;
+      if (!host || !Engine || !coastline || !namespace.renderer || atlasMap)
+        return;
       let rings;
+      let borders;
       try {
         rings = coastline.fromDocument(document, "#worldMap path.land");
+        borders = namespace.renderer.countryBorders(
+          window.ATLAS_COUNTRY_BOUNDARIES,
+        );
       } catch {
         // A missing basemap must not take the rest of the section down with it.
         host.textContent =
@@ -202,6 +207,7 @@ var AtlasFacilityCatalogue = (() => {
         container: host,
         document: document,
         rings: rings,
+        borders: borders,
         projection: "equal-earth",
         /**
          * Open the unchanged original facility emitted by native map selection.

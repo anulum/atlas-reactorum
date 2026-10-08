@@ -124,6 +124,7 @@ build:  ## Verify pinned FFDB and regenerate offline exports and inventory
 	ATLAS_PYTHON="$(ATLAS_PYTHON)" node 04_interactive_presentation/scripts/export_taxonomy.cjs
 	ATLAS_PYTHON="$(ATLAS_PYTHON)" node 04_interactive_presentation/scripts/evidence_history.cjs --build .
 	$(VENV)/bin/python 04_interactive_presentation/scripts/build_datasets.py
+	$(VENV)/bin/python metadata/map_basemap/build.py
 	$(VENV)/bin/python metadata/coverage_audit/build_coverage.py
 	./metadata/build_inventory.sh
 

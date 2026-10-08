@@ -58,6 +58,8 @@ PRODUCTS = tuple(
         f"{DATA}/fusion_companies.sample.json",
         f"{DATA}/fusion_companies.sample.js",
         f"{DATA}/dataset-inventory.json",
+        f"{DATA}/country-boundaries.json",
+        f"{DATA}/country-boundaries.js",
         "metadata/coverage_audit/coverage.json",
         "metadata/coverage_audit/COVERAGE.md",
         "metadata/all_sources.tsv",
@@ -223,6 +225,7 @@ def reproduce(root: Path, workspace: Path | None = None, *, timeout: float = 180
                     "datasets",
                     [sys.executable, "04_interactive_presentation/scripts/build_datasets.py"],
                 ),
+                ("borders", [sys.executable, "metadata/map_basemap/build.py"]),
                 ("coverage", [sys.executable, "metadata/coverage_audit/build_coverage.py"]),
                 ("inventory", ["bash", "metadata/build_inventory.sh"]),
             )

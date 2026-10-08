@@ -70,7 +70,7 @@ separate gates.
 Six individually named generated data wrappers preserve their source bytes
 and generator contracts instead of entering formatter writes or handwritten
 type inference. Node syntax, owning source/schema validators and the complete
-22-product reproduction still check them. The executable retained taxonomy
+24-product reproduction still check them. The executable retained taxonomy
 input stays in the native code gates, and new handwritten `data/` source
 does not inherit an exclusion.
 
@@ -126,7 +126,7 @@ inventory's empty-file report.
 ## Reproducibility and selected sources
 
 `preflight.py` copies public source files into a fresh external temporary
-tree, omitting all 22 expected offline release products. It runs the native
+tree, omitting all 24 expected offline release products. It runs the native
 Node taxonomy exporter, retained-history builder, Python dataset integrator, Python coverage report and
 shell inventory builder, in that order. Every output must be created and
 match its accepted bytes; staged inputs must remain intact, and undeclared

@@ -38,7 +38,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
     Returns
     -------
     pathlib.Path
-        Baseline whose five native producers succeeded with a fixed inventory
+        Baseline whose six native producers succeeded with a fixed inventory
         epoch and whose eleven presentation payloads match the checkout.
     """
     root = tmp_path_factory.mktemp("atlas-release") / "source"
@@ -48,6 +48,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
         ["node", "04_interactive_presentation/scripts/export_taxonomy.cjs"],
         ["node", "04_interactive_presentation/scripts/evidence_history.cjs", "--build", "."],
         [sys.executable, "04_interactive_presentation/scripts/build_datasets.py"],
+        [sys.executable, "metadata/map_basemap/build.py"],
         [sys.executable, "metadata/coverage_audit/build_coverage.py"],
         ["/usr/bin/bash", "metadata/build_inventory.sh"],
     ):
@@ -429,7 +430,7 @@ def test_installed_node_dependencies_are_not_library_content(
     The installed package contains an empty Markdown file which the library
     report must not label as missing source content. A copy of the accepted
     public README also exercises the duplicate boundary in the same native run.
-    All 22 accepted products and owned source bytes must remain identical.
+    All 24 accepted products and owned source bytes must remain identical.
 
     Parameters
     ----------

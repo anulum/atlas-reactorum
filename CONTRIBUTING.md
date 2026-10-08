@@ -236,7 +236,7 @@ whose retrieval date is unknown; an inspection date must not fill that gap.
 
 Preflight requires Python, Node and the shell inventory tools used by `make
 build`. Run `python tools/preflight.py --check reproducibility --workspace
-/absolute/external/workspace` to rebuild all 22 release products in a newly
+/absolute/external/workspace` to rebuild all 24 release products in a newly
 owned temporary tree. The workspace must already exist outside the candidate;
 the default is the operating system temporary directory. `--timeout` bounds
 each builder (1,800 seconds by default). `--root` selects another complete

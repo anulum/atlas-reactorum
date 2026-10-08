@@ -27,6 +27,7 @@
     "04_interactive_presentation/data/fusion_companies.sample.js",
     "04_interactive_presentation/data/global_reactors.sample.js",
     "04_interactive_presentation/data/taxonomy-audit.js",
-    "04_interactive_presentation/data/taxonomy-evidence-profiles.js"
+    "04_interactive_presentation/data/taxonomy-evidence-profiles.js",
+    "04_interactive_presentation/data/country-boundaries.js"
   ]
 }

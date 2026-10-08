@@ -8,7 +8,12 @@
 
 /**
  * Canvas operations and state touched by the renderer; a real 2D context satisfies this contract.
- * @typedef {Pick<CanvasRenderingContext2D, "save"|"restore"|"fillRect"|"beginPath"|"moveTo"|"lineTo"|"stroke"|"closePath"|"fill"|"arc"|"fillText"|"fillStyle"|"strokeStyle"|"lineWidth"|"globalAlpha"|"font"|"textAlign"|"textBaseline">} DrawingContext
+ * @typedef {Pick<CanvasRenderingContext2D, "save"|"restore"|"fillRect"|"beginPath"|"moveTo"|"lineTo"|"stroke"|"closePath"|"fill"|"arc"|"fillText"|"fillStyle"|"strokeStyle"|"lineWidth"|"globalAlpha"|"font"|"textAlign"|"textBaseline"|"setLineDash">} DrawingContext
+ */
+
+/**
+ * Original Natural Earth classification and an open geographic polyline.
+ * @typedef {{classification:string,points:[number,number][]}} CountryBorder
  */
 
 /**
@@ -52,7 +57,7 @@
     // the same visual system rather than becoming a foreign component.
     /**
      * API types derived from the actual palette and functions in this factory.
-     * @typedef {{THEME: typeof THEME, domainColour: typeof domainColour, drawBackground: typeof drawBackground, drawGraticule: typeof drawGraticule, drawLand: typeof drawLand, drawClusters: typeof drawClusters, drawClusterLabels: typeof drawClusterLabels, drawFocus: typeof drawFocus, formatCount: typeof formatCount}} RendererAPI
+     * @typedef {{THEME: typeof THEME, domainColour: typeof domainColour, drawBackground: typeof drawBackground, drawGraticule: typeof drawGraticule, drawLand: typeof drawLand, countryBorders: typeof countryBorders, drawBorders: typeof drawBorders, drawClusters: typeof drawClusters, drawClusterLabels: typeof drawClusterLabels, drawFocus: typeof drawFocus, formatCount: typeof formatCount}} RendererAPI
      */
     var THEME = {
       ocean: "#10231f",
@@ -176,6 +181,98 @@
       }
       ctx.fill("evenodd");
       ctx.stroke();
+      ctx.restore();
+    }
+
+    /**
+     * Admit the bundled country-boundary packet before drawing any geometry.
+     * @param {unknown} packet Complete generated Natural Earth packet.
+     * @returns {CountryBorder[]} Complete polylines with their original classifications.
+     * @throws {TypeError} If the packet, classification or geographic coordinate is malformed.
+     */
+    function countryBorders(packet) {
+      if (
+        typeof packet !== "object" ||
+        packet === null ||
+        !Array.isArray(Reflect.get(packet, "borders"))
+      ) {
+        throw new TypeError("Country boundary geometry unavailable");
+      }
+      /** @type {unknown[]} */
+      var records = Reflect.get(packet, "borders");
+      /** @type {CountryBorder[]} */
+      var result = [];
+      for (var record of records) {
+        if (typeof record !== "object" || record === null) {
+          throw new TypeError("Invalid country boundary record");
+        }
+        var classification = Reflect.get(record, "classification");
+        var points = Reflect.get(record, "points");
+        if (
+          ![
+            "International boundary (verify)",
+            "Disputed (please verify)",
+            "Indefinite (please verify)",
+            "Line of control (please verify)",
+            "Indeterminant frontier",
+          ].includes(classification) ||
+          !Array.isArray(points) ||
+          points.length < 2
+        ) {
+          throw new TypeError(
+            "Invalid country boundary classification or line",
+          );
+        }
+        /** @type {[number,number][]} */
+        var line = [];
+        for (var coordinate of points) {
+          if (
+            !Array.isArray(coordinate) ||
+            coordinate.length !== 2 ||
+            typeof coordinate[0] !== "number" ||
+            typeof coordinate[1] !== "number" ||
+            !Number.isFinite(coordinate[0]) ||
+            !Number.isFinite(coordinate[1]) ||
+            Math.abs(coordinate[0]) > 180 ||
+            Math.abs(coordinate[1]) > 90
+          ) {
+            throw new TypeError("Invalid country boundary coordinate");
+          }
+          line.push([coordinate[0], coordinate[1]]);
+        }
+        result.push({ classification: classification, points: line });
+      }
+      return result;
+    }
+
+    /**
+     * Draw country boundaries beneath facility glyphs in the current geographic view.
+     * @param {DrawingContext} ctx Actual native 2D drawing context.
+     * @param {import("./cluster.js").ScreenTransform} viewport Current world-to-screen conversion.
+     * @param {Pick<import("./projection.js").Projection,"forward">} proj Current geographic projection.
+     * @param {CountryBorder[]} borders Complete admitted source lines.
+     * @returns {void} Thin solid or dashed country boundaries are painted with canvas state restored.
+     */
+    function drawBorders(ctx, viewport, proj, borders) {
+      if (borders.length === 0) return;
+      ctx.save();
+      ctx.strokeStyle = "#c3d4bd";
+      ctx.lineWidth = 0.8;
+      for (var border of borders) {
+        ctx.setLineDash(
+          border.classification === "International boundary (verify)"
+            ? []
+            : [3, 3],
+        );
+        ctx.beginPath();
+        for (var i = 0; i < border.points.length; i += 1) {
+          var world = proj.forward(border.points[i][0], border.points[i][1]);
+          var screen = viewport.toScreen(world.x, world.y);
+          if (i === 0) ctx.moveTo(screen.x, screen.y);
+          else ctx.lineTo(screen.x, screen.y);
+        }
+        ctx.stroke();
+      }
       ctx.restore();
     }
 
@@ -313,6 +410,8 @@
       drawBackground: drawBackground,
       drawGraticule: drawGraticule,
       drawLand: drawLand,
+      countryBorders: countryBorders,
+      drawBorders: drawBorders,
       drawClusters: drawClusters,
       drawClusterLabels: drawClusterLabels,
       drawFocus: drawFocus,
