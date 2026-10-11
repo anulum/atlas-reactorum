@@ -50,7 +50,7 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - name: Install immutable native JavaScript graph
         run: npm ci
       - run: make lint typecheck
@@ -81,7 +81,7 @@ jobs:
         with:
           node-version: "24.21.0"
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - name: Install native PDF extraction and shell gates
         run: |
           sudo apt-get update
@@ -109,7 +109,7 @@ jobs:
         with:
           node-version: "24.21.0"
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - name: Install verified development graph
         run: |
           python -m venv .venv
@@ -137,7 +137,7 @@ jobs:
         with:
           node-version: "24.21.0"
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - name: Install verified audit tools
         run: |
           python -m venv .venv

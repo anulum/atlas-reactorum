@@ -60,14 +60,17 @@ selected through `TMPDIR`.
 
 The public `package-lock.json` pins the complete JavaScript development graph.
 Install it with `npm ci` using Node24.21.0/npm12.2.0. ESLint10.12.0,
-JSDoc65.2.4, TypeScript6.0.3 and Prettier3.9.10 run through
+JSDoc65.3.0, TypeScript6.0.3 and Prettier3.9.10 run through
 `tools/javascript.cjs`; the same native entry points are used by Make,
 pre-commit hooks and CI. Strict type checking uses declarations for dependencies
 and keeps `skipLibCheck=false`; it does not infer third-party JavaScript under
 `node_modules`. Native source syntax and dedicated semantic suites remain
 separate gates.
 
-The npm12 installation policy approves only the exact canvas3.2.3 lifecycle
+The CI package-manager bootstrap verifies the complete npm12.2.0 archive
+against its published SHA-512 before executing it; an existing destination
+refuses rather than replacing an earlier tool. The npm12 installation policy
+approves only the exact canvas3.2.3 lifecycle
 script required by the native renderer. All other dependency scripts retain
 the package manager's default refusal. TypeScript6.0.3 matches the native
 parser's declared `>=4.8.4 <6.1.0` peer range; TypeScript7 is outside it.

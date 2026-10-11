@@ -131,6 +131,7 @@ def test_actual_whole_projection_and_refusals_match_node(candidate: Path, fault:
             ("phwr-candu", "name", "Pressure-tube PHWR including CANDU"),
             ("heavy-water-pressure-vessel-reactor", "maturity", "deployed"),
             ("magnox-gas-cooled-reactor", "maturity", "deployed"),
+            ("prismatic-htgr", "maturity", "deployed"),
             ("lead-bismuth-fast-reactor", "maturity", "deployed"),
             (
                 "nuclear-heat-coupled-to-hydrogen-production",

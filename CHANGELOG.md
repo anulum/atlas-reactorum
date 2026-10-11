@@ -17,6 +17,13 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ### Fixed — 2026-10-11
 
+- Keep navigation evidence in one freshly created Chrome target, capturing every
+  original controller region before closing it. Exercise explicit garbage collection.
+- Preserve the seven source-supported taxonomy corrections in the Python/Node
+  projection checks and cover the exporter's explicit review-file selector.
+- Verify the npm bootstrap archive against its published SHA-512 before executing
+  the pinned package manager in CI.
+
 - Cover refusal of asserted current operation in a completed author review, retaining
   unknown activity and independent-review boundaries.
 - Accept the separately inspected Swiss terms-page capture whose only changes

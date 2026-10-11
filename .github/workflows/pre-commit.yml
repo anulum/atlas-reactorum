@@ -46,7 +46,7 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - name: Install immutable native JavaScript graph
         run: npm ci
       - name: Install pinned native shell tools

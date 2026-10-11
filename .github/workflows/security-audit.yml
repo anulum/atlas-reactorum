@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: "24.21.0"
       - name: Install pinned native package manager
-        run: npm install --global npm@12.2.0
+        run: bash tools/setup-npm.sh "$RUNNER_TEMP"
       - run: npm audit --include=dev
       - run: .venv/bin/python -m bandit -r . -x ./.venv,./tests,./node_modules
       - run: .venv/bin/python tools/preflight.py --check secrets

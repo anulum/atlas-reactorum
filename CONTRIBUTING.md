@@ -93,10 +93,12 @@ Python source, test, fixture and stub directory, including new roots.
 
 Run `npm ci` with Node24.21.0 and npm12.2.0 to install the immutable native
 JavaScript development graph. Install the package manager with
-`npm install --global npm@12.2.0` first. Only canvas3.2.3 has an explicitly
+`npm install --global npm@12.2.0` first. CI instead uses
+`tools/setup-npm.sh` to verify the published archive SHA-512 before adding its
+executables to PATH. Only canvas3.2.3 has an explicitly
 approved native installation script. TypeScript6.0.3 remains within the native
 parser's declared `>=4.8.4 <6.1.0` peer range. `make lint` includes ESLint10.12.0,
-JSDoc65.2.4 and Prettier3.9.10; `make typecheck` includes TypeScript6.0.3
+JSDoc65.3.0 and Prettier3.9.10; `make typecheck` includes TypeScript6.0.3
 with `allowJs`, `checkJs`, `strict` and declaration checking. The same
 commands run from the installed pre-commit hooks and hosted correctness CI.
 Tracked and new JS, CJS and MJS files enter native discovery, including new

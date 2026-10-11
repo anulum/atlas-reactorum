@@ -26,7 +26,7 @@ from .conftest import load_module
 from .test_browser_checks import BrowserEndpoints
 from .test_browser_checks import native_browser as native_browser
 from .test_evidence_profiles_browser import Browser, press
-from .test_taxonomy_comparison_browser import NativeScript, native_count, reload_page
+from .test_taxonomy_comparison_browser import NativeScript, native_count
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTROLLER = ROOT / "04_interactive_presentation/page-navigation.js"
@@ -164,6 +164,7 @@ def test_actual_empty_jump_and_null_focus_refuse_without_invented_targets(browse
         "finally{document.documentElement.append(body);pageNavigation.update();}})()"
     )
     assert result is True
+    browser.command("HeapProfiler.collectGarbage")
 
 
 def test_actual_viewport_without_scroll_range_has_zero_progress(browser: Browser) -> None:
@@ -228,7 +229,22 @@ def evidence_directory(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Pat
 def browser(
     native_browser: BrowserEndpoints, request: pytest.FixtureRequest, evidence_directory: Path
 ) -> Iterator[Browser]:
-    """Capture source-exact CDP coverage while exercising the actual navigation page."""
+    """Profile one new blank target before its first load of the complete Atlas page.
+
+    Parameters
+    ----------
+    native_browser : BrowserEndpoints
+        Owned Chrome origin and actual complete application URL.
+    request : pytest.FixtureRequest
+        Current case identity for the owned target and source evidence.
+    evidence_directory : pathlib.Path
+        Complete source-exact native controller receipt destination.
+
+    Yields
+    ------
+    Browser
+        Live application target, closed after its original source evidence is captured.
+    """
     module = load_module("04_interactive_presentation/browser-check.py", "atlas_navigation_browser")
     with requests.get(native_browser["endpoint"] + "/json/list", timeout=5) as response:
         response.raise_for_status()
@@ -244,45 +260,48 @@ def browser(
         and urlsplit(target["url"])[:3] == baseline[:3]
     ]
     assert len(pages) == 1, targets
-    with module.BrowserSession(native_browser["endpoint"], pages[0]) as session:
-        active = cast(Browser, session)
-        active.wait_ready()
-        active.command("Debugger.enable")
-        active.command("Profiler.enable")
-        active.command("Profiler.startPreciseCoverage", {"callCount": True, "detailed": True})
-        active.evaluate(
-            "history.replaceState(null, '', " + json.dumps(native_browser["page"]) + ")"
-        )
-        reload_page(active)
-        active.wait_ready()
+    with module.BrowserSession(native_browser["endpoint"], pages[0]) as original:
+        blank = "about:blank#atlas-navigation-" + request.node.name
+        target = original.command("Target.createTarget", {"url": blank})["targetId"]
+        assert isinstance(target, str)
         try:
-            yield active
+            with module.BrowserSession(native_browser["endpoint"], blank) as session:
+                active = cast(Browser, session)
+                active.command("Debugger.enable")
+                active.command("Profiler.enable")
+                active.command(
+                    "Profiler.startPreciseCoverage", {"callCount": True, "detailed": True}
+                )
+                active.command("Page.navigate", {"url": native_browser["page"]})
+                active.wait_ready()
+                try:
+                    yield active
+                finally:
+                    results = active.command("Profiler.takePreciseCoverage")["result"]
+                    assert isinstance(results, list)
+                    owned = []
+                    for script in results:
+                        if isinstance(script, dict) and str(script.get("url", "")).endswith(
+                            "/page-navigation.js"
+                        ):
+                            source = active.command(
+                                "Debugger.getScriptSource", {"scriptId": script["scriptId"]}
+                            )
+                            assert source["scriptSource"] == CONTROLLER.read_text()
+                            owned.append(script)
+                    assert owned
+                    report = {
+                        "controller_path": str(CONTROLLER),
+                        "controller_sha256": hashlib.sha256(CONTROLLER.read_bytes()).hexdigest(),
+                        "case": request.node.name,
+                        "raw_native_script_coverage": owned,
+                        "native_source_equal": True,
+                    }
+                    with (evidence_directory / (request.node.name + ".json")).open("x") as handle:
+                        handle.write(json.dumps(report, indent=2) + "\n")
+                    active.command("Profiler.stopPreciseCoverage")
+                    active.command("Profiler.disable")
+                    active.command("Debugger.disable")
         finally:
-            results = active.command("Profiler.takePreciseCoverage")["result"]
-            assert isinstance(results, list)
-            owned = []
-            for script in results:
-                if isinstance(script, dict) and str(script.get("url", "")).endswith(
-                    "/page-navigation.js"
-                ):
-                    source = active.command(
-                        "Debugger.getScriptSource", {"scriptId": script["scriptId"]}
-                    )
-                    assert source["scriptSource"] == CONTROLLER.read_text()
-                    owned.append(script)
-            assert owned
-            report = {
-                "controller_path": str(CONTROLLER),
-                "controller_sha256": hashlib.sha256(CONTROLLER.read_bytes()).hexdigest(),
-                "case": request.node.name,
-                "raw_native_script_coverage": owned,
-                "native_source_equal": True,
-            }
-            with (evidence_directory / (request.node.name + ".json")).open("x") as handle:
-                handle.write(json.dumps(report, indent=2) + "\n")
-            active.command("Profiler.stopPreciseCoverage")
-            active.command("Profiler.disable")
-            active.command("Debugger.disable")
-            active.evaluate(
-                "history.replaceState(null, '', " + json.dumps(native_browser["page"]) + ")"
-            )
+            result = original.command("Target.closeTarget", {"targetId": target})
+            assert result["success"] is True

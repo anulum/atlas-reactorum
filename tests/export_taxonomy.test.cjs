@@ -219,6 +219,20 @@ test("native CLI resolves an explicit candidate from another directory and refus
   assert.equal(result.status, 0, result.stdout + result.stderr);
   assert.equal(objectCell(JSON.parse(result.stdout)).entries, 135);
   const first = productBytes(dir);
+  const explicit = spawnSync(
+    process.execPath,
+    [
+      script,
+      "--root",
+      dir,
+      "--reviews",
+      path.join(dir, "metadata/evidence_profiles/author_reviews.json"),
+    ],
+    { cwd: os.tmpdir(), encoding: "utf8", timeout: 15000 },
+  );
+  assert.equal(explicit.status, 0, explicit.stdout + explicit.stderr);
+  assert.equal(objectCell(JSON.parse(explicit.stdout)).entries, 135);
+  assert.deepEqual(productBytes(dir), first);
   for (const args of [
     ["--unknown"],
     ["--other", dir],
