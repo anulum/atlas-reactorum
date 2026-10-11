@@ -15,6 +15,13 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Added — 2026-10-12
+
+- Complete 930-field review of the original GEM power unit gaps, with 54 qualified fills, 35 held and 841 bounded unknown outcomes. Preserve original source bytes and known values.
+- Explicit historical, intended, designated and licensed roles plus documentary dates, scope observations and capture refusals in actual map details and standalone downloads. Independent review remains null.
+- Offline hash-bound producer, matching Python/Node/browser admission and facility schema 1.4.0. CSV adds class, model, original tracker stage and complete decision JSON.
+
+
 ### Fixed — 2026-10-11
 
 - Keep navigation evidence in one freshly created Chrome target, capturing every

@@ -38,7 +38,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
     Returns
     -------
     pathlib.Path
-        Baseline whose six native producers succeeded with a fixed inventory
+        Baseline whose seven native producers succeeded with a fixed inventory
         epoch and whose thirteen presentation payloads match the checkout.
     """
     root = tmp_path_factory.mktemp("atlas-release") / "source"
@@ -47,6 +47,12 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
     for command in (
         ["node", "04_interactive_presentation/scripts/export_taxonomy.cjs"],
         ["node", "04_interactive_presentation/scripts/evidence_history.cjs", "--build", "."],
+        [
+            sys.executable,
+            "05_global_reactor_map/imports/power_units/official_source_enrichment/build_power_projection.py",
+            "05_global_reactor_map/imports/power_units/power_reactor_units.tsv",
+            "05_global_reactor_map/imports/power_units/official_source_enrichment",
+        ],
         [sys.executable, "04_interactive_presentation/scripts/build_datasets.py"],
         [sys.executable, "metadata/map_basemap/build.py"],
         [sys.executable, "metadata/coverage_audit/build_coverage.py"],

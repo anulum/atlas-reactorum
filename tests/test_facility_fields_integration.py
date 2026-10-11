@@ -271,7 +271,7 @@ def test_real_consumer_runs_without_any_original_preparation_fixture(
     assert result.returncode == 0, result.stdout + result.stderr
     assert not (source / "tests").exists()
     dataset = document(data / "global_reactors.sample.json")
-    assert dataset["schema_version"] == "1.3.0"
+    assert dataset["schema_version"] == "1.4.0"
     assert dataset["record_count"] == 13459
     inventory = document(data / "dataset-inventory.json")
     assert inventory["facility_field_assertions"] == 1631

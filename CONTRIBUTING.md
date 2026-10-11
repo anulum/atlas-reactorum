@@ -376,3 +376,5 @@ its own interpreter and honours an explicit nonempty `ATLAS_PYTHON` selection.
 Whole original source validation remains required above that wire check.
 History and research share the canonical UTF-8 reader; qualify both native
 caller suites and its whole line/branch/function coverage when changing it.
+
+Power-unit documentary changes must reconstruct the entire original gap set against the pinned TSV and both producer inputs. Keep source periods and operator/design roles explicit, and retain held/unknown decisions without scalar fills. Run the actual producer `--check`, preserve original bytes, exercise matching Python and Node refusal cases plus actual detail/download consumers, and regenerate facility schema 1.4.0 products. The [power source contract](05_global_reactor_map/imports/power_units/official_source_enrichment/README.md) defines rights and source custody.

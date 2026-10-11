@@ -13,10 +13,17 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import importlib
 import math
+import sys
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlparse
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
+POWER_REVIEW = importlib.import_module(
+    "05_global_reactor_map.imports.power_units.official_source_enrichment.power_bundle"
+)
 
 FIELDS = [
     "stable_id",
@@ -154,6 +161,13 @@ def main() -> None:
     for stable_id, count in ids.items():
         if not stable_id or count != 1:
             errors.append(f"stable_id {stable_id!r} occurs {count} times")
+    try:
+        projection = POWER_REVIEW.load_projection(
+            args.dataset, args.dataset.parent / "official_source_enrichment"
+        )
+    except (OSError, UnicodeError, csv.Error, ValueError):
+        errors.append("documentary power bundle is incomplete or inconsistent")
+        projection = None
     if errors:
         print("VALIDATION FAILED")
         print("\n".join(errors[:100]))
@@ -171,6 +185,8 @@ def main() -> None:
     print(f"unit_designator_blank\t{sum(not r['unit_name'] for r in rows)}")
     print(f"operator_blank\t{sum(not r['operator'] for r in rows)}")
     print(f"owner_blank\t{sum(not r['owner'] for r in rows)}")
+    if projection is not None:
+        print(f"documentary_decisions\t{len(projection.decisions)}")
 
 
 if __name__ == "__main__":

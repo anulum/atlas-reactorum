@@ -13,7 +13,8 @@
     "schema_version": {
       "enum": [
         "1.2.0",
-        "1.3.0"
+        "1.3.0",
+        "1.4.0"
       ]
     },
     "record_count": {
@@ -375,6 +376,107 @@
               }
             },
             "description": "Complete primary source decisions for originally blank cells. Held and no-fill decisions remain evidence without supplying scalar values; source dates are distinct from event precision."
+          },
+          "power_field_decisions": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Complete original blank-field decisions. Qualified historical, intended and licensed roles retain their documentary scope; held and unknown remain unfilled. Semantic admission is shared by the Python producer and browser/Node PowerFieldContract.",
+            "items": {
+              "type": "object",
+              "required": [
+                "stable_id",
+                "field",
+                "original_value",
+                "original_context",
+                "disposition",
+                "value",
+                "role",
+                "basis",
+                "scope",
+                "citations",
+                "observations",
+                "author_review",
+                "independent_review",
+                "rights_scope"
+              ],
+              "properties": {
+                "stable_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "field": {
+                  "enum": [
+                    "operator",
+                    "reactor_type"
+                  ]
+                },
+                "original_value": {
+                  "const": ""
+                },
+                "original_context": {
+                  "type": "object",
+                  "required": [
+                    "unit_name",
+                    "plant_name",
+                    "country",
+                    "status",
+                    "lat",
+                    "lon",
+                    "model",
+                    "owner",
+                    "nameplate_mw",
+                    "operator",
+                    "reactor_type"
+                  ],
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "disposition": {
+                  "enum": [
+                    "qualified",
+                    "held",
+                    "unknown"
+                  ]
+                },
+                "value": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "basis": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "scope": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "observations": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "author_review": {
+                  "const": "completed"
+                },
+                "independent_review": {
+                  "type": "null"
+                },
+                "rights_scope": {
+                  "const": "citation_and_factual_metadata_only"
+                }
+              }
+            }
           }
         }
       }
@@ -395,6 +497,29 @@
             "items": {
               "properties": {
                 "research_primary_assertions": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "enum": [
+              "1.2.0",
+              "1.3.0"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "records": {
+            "items": {
+              "properties": {
+                "power_field_decisions": false
               }
             }
           }

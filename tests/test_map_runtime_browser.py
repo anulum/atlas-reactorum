@@ -232,6 +232,8 @@ def test_real_legacy_map_cases_refuse_malformed_original_dataset(tmp_path: Path)
     root = tmp_path / "candidate"
     modules = (
         ROOT / "04_interactive_presentation/application-data.js",
+        ROOT / "04_interactive_presentation/power-source-contract.js",
+        ROOT / "04_interactive_presentation/power-field-contract.js",
         *MODULES,
         *(
             ROOT / "04_interactive_presentation/map/tests" / (name + ".test.js")

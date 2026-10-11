@@ -27,8 +27,8 @@ Fuel/feed availability includes publisher classifications; it does not establish
 | Field | Missing records |
 |---|---:|
 | coordinates | 102 |
-| type | 177 |
-| operator or organization | 1,008 |
+| type | 166 |
+| operator or organization | 967 |
 | purpose | 12,016 |
 | fuel or feed | 12,926 |
 | start or criticality date | 13,221 |

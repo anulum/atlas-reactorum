@@ -55,6 +55,7 @@ PRODUCTS = tuple(
         f"{DATA}/taxonomy-reviewed-profiles.js",
         f"{DATA}/evidence-history.json",
         f"{DATA}/evidence-history.js",
+        "05_global_reactor_map/imports/power_units/official_source_enrichment/primary-projection.json",
         f"{DATA}/global_reactors.sample.json",
         f"{DATA}/global_reactors.sample.js",
         f"{DATA}/fusion_companies.sample.json",
@@ -221,6 +222,15 @@ def reproduce(root: Path, workspace: Path | None = None, *, timeout: float = 180
                         "04_interactive_presentation/scripts/evidence_history.cjs",
                         "--build",
                         ".",
+                    ],
+                ),
+                (
+                    "power",
+                    [
+                        sys.executable,
+                        "05_global_reactor_map/imports/power_units/official_source_enrichment/build_power_projection.py",
+                        "05_global_reactor_map/imports/power_units/power_reactor_units.tsv",
+                        "05_global_reactor_map/imports/power_units/official_source_enrichment",
                     ],
                 ),
                 (

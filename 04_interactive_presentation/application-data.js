@@ -7,6 +7,8 @@
 // Atlas Reactorum — admission of original dataset cells consumed by the application.
 "use strict";
 
+if (typeof require !== "undefined") require("./power-field-contract.js");
+
 /**
  * Original source-field observation; source binding remains owned by its producer.
  * @typedef {object} ApplicationFieldObservation
@@ -30,7 +32,8 @@
  * id:string,name:string,country:string,domain:string,type:string,status:string,
  * evidence:string,completeness:string,source_url:string,lat:number|null,lon:number|null,
  * record_kind?:string,dataset_source?:string,source_urls?:string[],
- * field_observations?:ApplicationFieldObservation[]
+ * field_observations?:ApplicationFieldObservation[],
+ * power_field_decisions?:import("./power-field-contract.js").PresentedPowerDecision[]
  * }} ApplicationFacility
  */
 /**
@@ -164,6 +167,11 @@ var AtlasApplicationData = (() => {
           throw new Error("Atlas facility coordinate is unavailable: " + field);
       }
       sourceLists(row);
+      if (row.power_field_decisions !== undefined)
+        globalThis.PowerFieldContract.admitPresentation(
+          row.power_field_decisions,
+          row,
+        );
       if (row.field_observations !== undefined) {
         if (!Array.isArray(row.field_observations))
           throw new Error("Atlas facility observations must be an array");

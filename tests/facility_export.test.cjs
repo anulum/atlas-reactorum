@@ -26,11 +26,11 @@ test("complete JSON export retains all13459 source records, ordering and every u
   assert.deepEqual(JSON.parse(encoded), rows);
   assert.equal(JSON.stringify(rows), before);
 });
-test("complete CSV uses the original22 columns and quotes retained nested source arrays", () => {
+test("complete CSV uses the source columns and complete power decisions and quotes retained nested source arrays", () => {
   const encoded = api.serialize(rows, "csv");
   assert.ok(
     encoded.startsWith(
-      "id,name,country,domain,record_kind,type,status,lat,lon,operator,organization,purpose,process_or_activity,fuel_or_feed,first_criticality,research_field_origins,research_primary_assertions,field_observations,source_urls,source_url,dataset_source,data_caveat\n",
+      "id,name,country,domain,record_kind,type,status,lat,lon,operator,reactor_type,model,source_status,power_field_decisions,organization,purpose,process_or_activity,fuel_or_feed,first_criticality,research_field_origins,research_primary_assertions,field_observations,source_urls,source_url,dataset_source,data_caveat\n",
     ),
   );
   const row = rows.find((value) => value.field_observations?.length);
@@ -45,6 +45,8 @@ test("complete CSV uses the original22 columns and quotes retained nested source
 test("real classic-script and native export consumers return identical whole JSON bytes", (context) => {
   const dom = actualPage(context);
   loadScripts(dom, [
+    "power-source-contract.js",
+    "power-field-contract.js",
     "application-data.js",
     "data/global_reactors.sample.js",
     "facility-export.js",

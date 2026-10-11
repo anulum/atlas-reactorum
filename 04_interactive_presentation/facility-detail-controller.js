@@ -38,7 +38,10 @@ var AtlasFacilityDetails = (() => {
         fields = [
           ["Country", x.country],
           ["Plant / parent site", x.plant_name],
-          ["Type", x.type],
+          [
+            globalThis.PowerFieldAssertions.label(x, "reactor_type", "Type"),
+            x.type,
+          ],
           ["Sector", x.sector],
           ["Process / activity", x.process_or_activity],
           ["Status", x.status],
@@ -52,7 +55,14 @@ var AtlasFacilityDetails = (() => {
           ["Published purpose / use", x.purpose],
           ["Published fuel / feed classification", x.fuel_or_feed],
           ["Product / reporting context", x.pollutant_or_product_context],
-          ["Operator / organisation", x.operator || x.organization],
+          [
+            globalThis.PowerFieldAssertions.label(
+              x,
+              "operator",
+              "Operator / organisation",
+            ),
+            x.operator || x.organization,
+          ],
           ["Owner", x.owner],
           ["Construction start", x.construction_start],
           ["First criticality", x.first_criticality],
@@ -76,7 +86,7 @@ var AtlasFacilityDetails = (() => {
           .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
           .join(
             "",
-          )}</dl>${globalThis.AtlasFacilityFieldSources.render(x)}${window.FacilitySourceAssertions.render(x.research_field_origins || [])}${window.PrimaryResearchAssertions.render(x.research_primary_assertions || [])}<div class="detail-sources">${sourceLinks(x.source_urls || [x.source_url])}</div></div>`;
+          )}</dl>${globalThis.AtlasFacilityFieldSources.render(x)}${globalThis.PowerFieldAssertions.render(x)}${window.FacilitySourceAssertions.render(x.research_field_origins || [])}${window.PrimaryResearchAssertions.render(x.research_primary_assertions || [])}<div class="detail-sources">${sourceLinks(x.source_urls || [x.source_url])}</div></div>`;
       elements.requireElement(document, "reactorDialog", "dialog").showModal();
     }
     return Object.freeze({ open: openFacility });

@@ -35,6 +35,10 @@ var AtlasFacilityExport = (() => {
         "lat",
         "lon",
         "operator",
+        "reactor_type",
+        "model",
+        "source_status",
+        "power_field_decisions",
         "organization",
         "purpose",
         "process_or_activity",
@@ -59,6 +63,7 @@ var AtlasFacilityExport = (() => {
                     csvCell(
                       [
                         "field_observations",
+                        "power_field_decisions",
                         "research_field_origins",
                         "research_primary_assertions",
                         "source_urls",

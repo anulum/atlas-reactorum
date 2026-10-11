@@ -19,6 +19,10 @@ python3 scripts/build_from_gem.py --source source_data/gnpt_map_2026-08.geojson 
 python3 scripts/validate.py power_reactor_units.tsv
 ```
 
+## Documentary field decisions
+
+The [complete source review](official_source_enrichment/README.md) examines all 930 originally blank operator/class cells. Its separate projection adds 54 qualified values while retaining 35 held and 841 bounded unknown outcomes, explicit historical/intended/licensed roles, source dates, capture attempts and null independent review. The raw TSV stays unchanged; map details and CSV/JSON downloads carry the complete decisions.
+
 ## Interpretation limits
 
 - GEM calls its capacity field unit **nameplate capacity**. It is preserved as `nameplate_mw`; it is not relabelled as net or gross electrical power.

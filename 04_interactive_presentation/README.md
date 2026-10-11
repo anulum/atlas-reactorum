@@ -380,3 +380,5 @@ whole-profile snapshot hash from a trusted manifest. The
 [research notebook and reader](../examples/research/README.md) restore the same
 selection, claims, sources and missing values outside the browser. The reader
 refuses changed source content rather than substituting a newer snapshot.
+
+Power-unit details and downloads use the [documentary projection](../05_global_reactor_map/imports/power_units/official_source_enrichment/README.md). All 930 original gap decisions remain available, including 54 qualified fills, 35 held and 841 unknown outcomes. `power-source-contract.js` and `power-field-contract.js` share native and classic-script admission; `power-field-assertions.js` renders scoped roles and retained refusals. Facility schema 1.4.0 carries `power_field_decisions`; CSV includes that array as JSON alongside class, model and original source stage.

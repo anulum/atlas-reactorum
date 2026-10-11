@@ -1,4 +1,9 @@
 {
+  "power_field_decisions": {
+    "qualified": 54,
+    "held": 35,
+    "unknown": 841
+  },
   "research_primary_decisions": {
     "selected": 275,
     "held": 53,
@@ -182,6 +187,9 @@
     "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv": "51681d32fc6c1462d21a84a4213baff56d5e825c50d1b03d09b8c10c9c1b6919",
     "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-baseline.json": "ea8943ca6aade386328c6eec455e7317c60e1ef8d0912f94a901e02c9c1ef551",
     "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-fields.tsv": "90f8574380eb7751a59287c72d8ee054c65fad4d8871072248da9dff71e4a751",
-    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json": "cea2b191b5635104bb75f24cb5a495fc6f395e77af9e8566e9e0e07a63f7ee2a"
+    "05_global_reactor_map/imports/research_reactors/official_source_enrichment/primary-projection.json": "cea2b191b5635104bb75f24cb5a495fc6f395e77af9e8566e9e0e07a63f7ee2a",
+    "05_global_reactor_map/imports/power_units/official_source_enrichment/primary-sources.json": "28f2fc20ec096dcea737346ab8345491c8f7f365d26824d1431fd6b7484bac8f",
+    "05_global_reactor_map/imports/power_units/official_source_enrichment/primary-fields.json": "f53ad0e820646326c3f49c746461fd33a4daedf0605442ad82e0d48b9bf0af6e",
+    "05_global_reactor_map/imports/power_units/official_source_enrichment/primary-projection.json": "8f99562e407f964d031326d152934f0878568608cac1796224c58cfc75c4661b"
   }
 }

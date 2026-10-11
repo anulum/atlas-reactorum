@@ -204,7 +204,7 @@ for 1,342 records and fuel/feed classifications for 533 records. Six secondary
 WRI categories remain classifications of whole plants. Per-field provenance
 records the original cell, source identifier, capture date, licence and hash;
 unknown reactor composition and current physical operation remain unknown.
-The current facility dataset uses schema 1.3.0. Search, facility details and filtered
+The current facility dataset uses schema 1.4.0. Search, facility details and filtered
 CSV/JSON retain these fields, and CSV carries the assertion array as JSON.
 
 Research records also retain 172 original operator, purpose and first-criticality
@@ -232,3 +232,5 @@ source locators, original claims and missing parameter reasons.
 Support development through GitHub Sponsors or the other destinations in
 [the funding metadata](.github/FUNDING.yml). Sponsorship does not affect source
 review or the evidence assigned to a record.
+
+The [power-unit source review](05_global_reactor_map/imports/power_units/official_source_enrichment/README.md) covers all 930 originally blank operator/class fields: 54 qualified fills, 35 held candidates and 841 bounded unknowns. Map details and exports retain documentary role, period, scope and failed capture attempts. Historical, intended and licensed roles do not imply current generation; independent review remains unrecorded.

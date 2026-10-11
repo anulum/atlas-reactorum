@@ -68,7 +68,7 @@ additional source-specific coverage remains necessary.
 - Extend source-supported purpose/process and fuel/feed coverage in the integrated facility
   schema, only where the upstream source actually supplies them. The present
   missing-field counts deliberately expose that weakness rather than hiding it.
-- Reconcile power-reactor operator and type gaps against national regulators.
+- Power operator/class reconciliation completed for all 930 original blank fields: 54 qualified fills, 35 held candidates and 841 bounded unknowns. Further enrichment requires new qualified unit-specific sources; see the [source contract](05_global_reactor_map/imports/power_units/official_source_enrichment/README.md).
 - Deepen chemical-reactor literature for multiphase, photobioreactor,
   electrochemical stack, dynamic-operation and process-safety coverage.
 

@@ -91,6 +91,12 @@ RESEARCH_ENRICHMENT_ROUND5_SOURCE = (
     / "05_global_reactor_map/imports/research_reactors/enrichment_round5/research_reactor_enrichment_round5.tsv"
 )
 POWER_UNIT_SOURCE = LIBRARY / "05_global_reactor_map/imports/power_units/power_reactor_units.tsv"
+POWER_REVIEW = importlib.import_module(
+    "05_global_reactor_map.imports.power_units.official_source_enrichment.power_bundle"
+)
+POWER_PRESENTATION = importlib.import_module(
+    "05_global_reactor_map.imports.power_units.official_source_enrichment.power_presentation"
+)
 INDUSTRIAL_SOURCE = (
     LIBRARY / "05_global_reactor_map/imports/industrial_facilities/industrial_facilities.tsv"
 )
@@ -303,7 +309,7 @@ def emit(
         Directory to write into. Defaults to the configured output directory.
 
     schema_version : str
-        Record-shape revision; complete primary research uses 1.3.0, historical
+        Record-shape revision; power source decisions use 1.4.0, complete primary research uses 1.3.0, historical
         research without the bundle uses 1.2.0, and companies retain 1.0.0.
 
     Notes
@@ -667,10 +673,28 @@ def build_power_unit_facilities(source: Path) -> list[dict[str, Any]]:
     """
     records: list[dict[str, Any]] = []
     if source.exists():
-        for row in read_tsv(source):
+        projection = POWER_REVIEW.load_projection(
+            source, source.parent / "official_source_enrichment"
+        )
+        decisions = POWER_PRESENTATION.presentation_decisions(projection) if projection else {}
+        rows = projection.rows if projection else read_tsv(source)
+        for row in rows:
             opt_lat = nullable_number(row.get("lat") or row.get("latitude"))
             opt_lon = nullable_number(row.get("lon") or row.get("longitude"))
             source_urls = [url.strip() for url in row["source_url"].split("|") if url.strip()]
+            field_decisions = decisions.get(row["stable_id"], [])
+            source_urls = list(
+                dict.fromkeys(
+                    [
+                        *source_urls,
+                        *(
+                            citation["url"]
+                            for decision in field_decisions
+                            for citation in decision["citations"]
+                        ),
+                    ]
+                )
+            )
             records.append(
                 {
                     **row,
@@ -692,6 +716,7 @@ def build_power_unit_facilities(source: Path) -> list[dict[str, Any]]:
                     "source_urls": source_urls,
                     "source_checked": row.get("retrieved") or row.get("retrieved_date"),
                     "dataset_source": "05_global_reactor_map/imports/power_units/power_reactor_units.tsv",
+                    **({"power_field_decisions": field_decisions} if field_decisions else {}),
                     "data_caveat": row.get("verification_notes")
                     or "Open unit-level discovery record; verify current status and technical values against the regulator and operator.",
                 }
@@ -1147,7 +1172,20 @@ def write_dataset_manifest(
         for member in PRIMARY_RESEARCH.MEMBERS
         if (RESEARCH_SOURCE.parent / "official_source_enrichment" / member).exists()
     )
+    input_paths.extend(
+        POWER_UNIT_SOURCE.parent / "official_source_enrichment" / member
+        for member in POWER_REVIEW.MEMBERS
+        if (POWER_UNIT_SOURCE.parent / "official_source_enrichment" / member).exists()
+    )
     inventory = {
+        "power_field_decisions": {
+            disposition: sum(
+                decision["disposition"] == disposition
+                for record in facilities
+                for decision in record.get("power_field_decisions", [])
+            )
+            for disposition in ("qualified", "held", "unknown")
+        },
         "research_primary_decisions": {
             decision: sum(
                 assertion["selection"] == decision
@@ -1349,7 +1387,13 @@ def main(argv: list[str] | None = None) -> None:
         facilities: list[dict[str, Any]] = build_base_facilities(FACILITY_SOURCE)
         facilities.extend(fusion_facilities)
         facilities.extend(research_facilities)
-        facilities.extend(build_power_unit_facilities(POWER_UNIT_SOURCE))
+        try:
+            facilities.extend(build_power_unit_facilities(POWER_UNIT_SOURCE))
+        except (OSError, UnicodeError, csv.Error, ValueError):
+            parser.exit(
+                2,
+                "Primary power inputs refused; check original sources and complete field review.\n",
+            )
         facilities.extend(
             build_industrial_facilities(
                 (
@@ -1375,7 +1419,9 @@ def main(argv: list[str] | None = None) -> None:
             "global_reactors.sample",
             "REACTOR_FACILITIES",
             facilities,
-            schema_version="1.3.0"
+            schema_version="1.4.0"
+            if any(row.get("power_field_decisions") for row in facilities)
+            else "1.3.0"
             if any(row.get("research_primary_assertions") for row in facilities)
             else "1.2.0",
         )

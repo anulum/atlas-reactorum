@@ -48,6 +48,12 @@ node --test --test-concurrency=1 --experimental-test-coverage \
     "$root_dir/../tests/repository_catalogue.test.cjs" \
     "$root_dir/../tests/facility_field_sources.test.cjs" \
     "$root_dir/../tests/facility_export.test.cjs"
+node --test --test-concurrency=1 --experimental-test-coverage \
+    --test-coverage-include="$root_dir/power-source-contract.js" \
+    --test-coverage-include="$root_dir/power-field-contract.js" \
+    --test-coverage-include="$root_dir/power-field-assertions.js" \
+    --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \
+    "$root_dir/../tests/power_fields.test.cjs"
 node --check "$root_dir/facility-source-assertions.js"
 node --check "$root_dir/research-primary-assertions.js"
 node --test --experimental-test-coverage \

@@ -1,0 +1,847 @@
+{
+  "cases": [
+    {
+      "name": "ledger:[0, 'stable_id']:set:absent",
+      "root": "ledger",
+      "path": [
+        0,
+        "stable_id"
+      ],
+      "op": "set",
+      "value": "absent",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'stable_id']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "stable_id"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'field']:set:owner",
+      "root": "ledger",
+      "path": [
+        0,
+        "field"
+      ],
+      "op": "set",
+      "value": "owner",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'field']:set:reactor_type",
+      "root": "ledger",
+      "path": [
+        0,
+        "field"
+      ],
+      "op": "set",
+      "value": "reactor_type",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'original_value']:set:known",
+      "root": "ledger",
+      "path": [
+        0,
+        "original_value"
+      ],
+      "op": "set",
+      "value": "known",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'original_context']:set:{}",
+      "root": "ledger",
+      "path": [
+        0,
+        "original_context"
+      ],
+      "op": "set",
+      "value": {},
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'original_context']:set:None",
+      "root": "ledger",
+      "path": [
+        0,
+        "original_context"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'disposition']:set:pending",
+      "root": "ledger",
+      "path": [
+        0,
+        "disposition"
+      ],
+      "op": "set",
+      "value": "pending",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'disposition']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "disposition"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'value']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "value"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'role']:set:owner",
+      "root": "ledger",
+      "path": [
+        0,
+        "role"
+      ],
+      "op": "set",
+      "value": "owner",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'role']:set:historical_design",
+      "root": "ledger",
+      "path": [
+        0,
+        "role"
+      ],
+      "op": "set",
+      "value": "historical_design",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'basis']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "basis"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'basis']:set:False",
+      "root": "ledger",
+      "path": [
+        0,
+        "basis"
+      ],
+      "op": "set",
+      "value": false,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'scope']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "scope"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations']:set:[]",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations"
+      ],
+      "op": "set",
+      "value": [],
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations']:set:None",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'author_review']:set:pending",
+      "root": "ledger",
+      "path": [
+        0,
+        "author_review"
+      ],
+      "op": "set",
+      "value": "pending",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'independent_review']:set:True",
+      "root": "ledger",
+      "path": [
+        0,
+        "independent_review"
+      ],
+      "op": "set",
+      "value": true,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'rights_scope']:set:redistribute",
+      "root": "ledger",
+      "path": [
+        0,
+        "rights_scope"
+      ],
+      "op": "set",
+      "value": "redistribute",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations']:set:[]",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations"
+      ],
+      "op": "set",
+      "value": [],
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations']:set:None",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'original_context', 'status']:set:operating-now",
+      "root": "ledger",
+      "path": [
+        0,
+        "original_context",
+        "status"
+      ],
+      "op": "set",
+      "value": "operating-now",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'independent_review']:delete:None",
+      "root": "ledger",
+      "path": [
+        0,
+        "independent_review"
+      ],
+      "op": "delete",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'basis']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "basis"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'scope']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "scope"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'candidate_value']:set:False",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "candidate_value"
+      ],
+      "op": "set",
+      "value": false,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'citations']:set:[]",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "citations"
+      ],
+      "op": "set",
+      "value": [],
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'capture_attempts']:set:['missing']",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "capture_attempts"
+      ],
+      "op": "set",
+      "value": [
+        "missing"
+      ],
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'observations', 0, 'capture_attempts']:set:[False]",
+      "root": "ledger",
+      "path": [
+        0,
+        "observations",
+        0,
+        "capture_attempts"
+      ],
+      "op": "set",
+      "value": [
+        false
+      ],
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'url']:set:False",
+      "root": "sources",
+      "path": [
+        0,
+        "url"
+      ],
+      "op": "set",
+      "value": false,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'url']:set:http://example.org",
+      "root": "sources",
+      "path": [
+        0,
+        "url"
+      ],
+      "op": "set",
+      "value": "http://example.org",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'url']:set:https://user:pass@example.org",
+      "root": "sources",
+      "path": [
+        0,
+        "url"
+      ],
+      "op": "set",
+      "value": "https://user:pass@example.org",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'requested_url']:set:ftp://example.org",
+      "root": "sources",
+      "path": [
+        0,
+        "requested_url"
+      ],
+      "op": "set",
+      "value": "ftp://example.org",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'captured_at']:set:2026-10-11",
+      "root": "sources",
+      "path": [
+        0,
+        "captured_at"
+      ],
+      "op": "set",
+      "value": "2026-10-11",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'captured_at']:set:2026-02-30T10:00:00Z",
+      "root": "sources",
+      "path": [
+        0,
+        "captured_at"
+      ],
+      "op": "set",
+      "value": "2026-02-30T10:00:00Z",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'captured_at']:set:0000-01-01T10:00:00Z",
+      "root": "sources",
+      "path": [
+        0,
+        "captured_at"
+      ],
+      "op": "set",
+      "value": "0000-01-01T10:00:00Z",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'captured_at']:set:2026-10-11T10:00:00+01:00",
+      "root": "sources",
+      "path": [
+        0,
+        "captured_at"
+      ],
+      "op": "set",
+      "value": "2026-10-11T10:00:00+01:00",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'eligible_for_selection']:set:1",
+      "root": "sources",
+      "path": [
+        0,
+        "eligible_for_selection"
+      ],
+      "op": "set",
+      "value": 1,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'eligible_for_selection']:set:False",
+      "root": "sources",
+      "path": [
+        0,
+        "eligible_for_selection"
+      ],
+      "op": "set",
+      "value": false,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_complete']:set:1",
+      "root": "sources",
+      "path": [
+        0,
+        "body_complete"
+      ],
+      "op": "set",
+      "value": 1,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_complete']:set:False",
+      "root": "sources",
+      "path": [
+        0,
+        "body_complete"
+      ],
+      "op": "set",
+      "value": false,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:True",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": true,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:99",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": 99,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:600",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": 600,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:200.5",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": 200.5,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:404",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": 404,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:None",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:True",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": true,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:-1",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": -1,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:1.5",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": 1.5,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:9007199254740992",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": 9007199254740992,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:0",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": 0,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:None",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_sha256']:set:",
+      "root": "sources",
+      "path": [
+        0,
+        "body_sha256"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_sha256']:set:BAD",
+      "root": "sources",
+      "path": [
+        0,
+        "body_sha256"
+      ],
+      "op": "set",
+      "value": "BAD",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_state']:set:unknown",
+      "root": "sources",
+      "path": [
+        0,
+        "body_state"
+      ],
+      "op": "set",
+      "value": "unknown",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_state']:set:context_only",
+      "root": "sources",
+      "path": [
+        0,
+        "body_state"
+      ],
+      "op": "set",
+      "value": "context_only",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_state']:set:capture_attempt",
+      "root": "sources",
+      "path": [
+        0,
+        "body_state"
+      ],
+      "op": "set",
+      "value": "capture_attempt",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'native_class']:set:screenshot",
+      "root": "sources",
+      "path": [
+        0,
+        "native_class"
+      ],
+      "op": "set",
+      "value": "screenshot",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'rights_scope']:set:redistribute",
+      "root": "sources",
+      "path": [
+        0,
+        "rights_scope"
+      ],
+      "op": "set",
+      "value": "redistribute",
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:delete:None",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "delete",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:delete:None",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "delete",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'source_id']:set:missing",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "source_id"
+      ],
+      "op": "set",
+      "value": "missing",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'locator']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "locator"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'date_basis']:set:",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "date_basis"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'document_date']:set:2001-02-29",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "document_date"
+      ],
+      "op": "set",
+      "value": "2001-02-29",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'date_precision']:set:constructor",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "date_precision"
+      ],
+      "op": "set",
+      "value": "constructor",
+      "accepted": false
+    },
+    {
+      "name": "ledger:[0, 'citations', 0, 'date_precision']:set:invalid",
+      "root": "ledger",
+      "path": [
+        0,
+        "citations",
+        0,
+        "date_precision"
+      ],
+      "op": "set",
+      "value": "invalid",
+      "accepted": false
+    },
+    {
+      "name": "baseline:[0, 'stable_id']:set:",
+      "root": "baseline",
+      "path": [
+        0,
+        "stable_id"
+      ],
+      "op": "set",
+      "value": "",
+      "accepted": false
+    },
+    {
+      "name": "baseline:[0, 'model']:set:None",
+      "root": "baseline",
+      "path": [
+        0,
+        "model"
+      ],
+      "op": "set",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "baseline:[0, 'owner']:delete:None",
+      "root": "baseline",
+      "path": [
+        0,
+        "owner"
+      ],
+      "op": "delete",
+      "value": null,
+      "accepted": false
+    },
+    {
+      "name": "sources:[0, 'http_status']:set:200.0",
+      "root": "sources",
+      "path": [
+        0,
+        "http_status"
+      ],
+      "op": "set",
+      "value": 200.0,
+      "accepted": true
+    },
+    {
+      "name": "sources:[0, 'body_bytes']:set:500.0",
+      "root": "sources",
+      "path": [
+        0,
+        "body_bytes"
+      ],
+      "op": "set",
+      "value": 500.0,
+      "accepted": true
+    }
+  ]
+}

@@ -177,8 +177,8 @@
     "unknown_or_nonasserted_status": 9014,
     "missing_fields": {
       "coordinates": 102,
-      "type": 177,
-      "operator_or_organization": 1008,
+      "type": 166,
+      "operator_or_organization": 967,
       "purpose": 12016,
       "fuel_or_feed": 12926,
       "start_or_criticality_date": 13221,
@@ -228,8 +228,8 @@
       "power reactor unit": {
         "records": 1823,
         "coordinates": 0,
-        "type": 177,
-        "operator_or_organization": 737,
+        "type": 166,
+        "operator_or_organization": 696,
         "purpose": 1823,
         "fuel_or_feed": 1823,
         "start_or_criticality_date": 1823,

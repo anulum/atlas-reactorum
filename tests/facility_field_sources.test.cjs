@@ -48,6 +48,8 @@ test("actual classic-script consumer agrees with native serialization without a 
   const dom = actualPage(context);
   loadScripts(dom, [
     "presentation-text.js",
+    "power-source-contract.js",
+    "power-field-contract.js",
     "application-data.js",
     "data/global_reactors.sample.js",
     "facility-field-sources.js",
