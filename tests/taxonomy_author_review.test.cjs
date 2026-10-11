@@ -66,6 +66,7 @@ for (const fault of [
   "order",
   "original-value",
   "unknown-claim",
+  "unknown-source",
   "missing-source",
   "editorial-science",
   "false-score",
@@ -85,6 +86,8 @@ for (const fault of [
       row.fields.principle.original_value = "changed source statement";
     else if (fault === "unknown-claim")
       row.fields.principle.claim_ids = ["absent:principle:1"];
+    else if (fault === "unknown-source")
+      row.fields.principle.source_ids = ["absent-source"];
     else if (fault === "missing-source") row.fields.principle.source_ids = [];
     else if (fault === "editorial-science")
       row.fields.principle.disposition = "editorial";
@@ -244,12 +247,23 @@ test("inherited wire members and nonobject collections refuse through the real r
 });
 
 test("incomplete original baseline and future source inspection refuse before admission", () => {
-  for (const fault of ["count", "future-inspection"]) {
+  for (const fault of [
+    "version",
+    "empty",
+    "count",
+    "missing-review",
+    "future-inspection",
+  ]) {
     const baseline = structuredClone(fixture.baseline);
-    if (fault === "count") baseline.record_count--;
+    const review = structuredClone(fixture.review);
+    if (fault === "version")
+      Object.assign(baseline, { schema_version: "unknown" });
+    else if (fault === "empty") baseline.records = [];
+    else if (fault === "count") baseline.record_count--;
+    else if (fault === "missing-review") review.records.pop();
     else baseline.records[0].claims[0].citation.reviewed_on = "2030-01-01";
     assert.throws(
-      () => api.read(fixture.review, baseline),
+      () => api.read(review, baseline),
       /complete catalogue|source inspection/,
     );
   }
