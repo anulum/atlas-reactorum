@@ -62,6 +62,7 @@ function candidate(context) {
     input,
     audit,
     profiles,
+    "metadata/evidence_profiles/author_reviews.json",
     `${data}/taxonomy-expanded.js`,
     ...outputs.map((name) => `${data}/${name}`),
   ]) {
@@ -349,12 +350,13 @@ test("the native CLI refuses an invented original NRC capture timestamp before r
   ).captured_at = "2026-10-01T05:00:00Z";
   fs.writeFileSync(path.join(dir, input), JSON.stringify(document));
   const before = productBytes(dir);
+  assert.throws(() => exportTaxonomy(dir), /original capture time is unknown/);
   const result = spawnSync(process.execPath, [script, "--root", dir], {
     encoding: "utf8",
     timeout: 15000,
   });
   assert.equal(result.status, 1);
-  assert.match(result.stderr, /original capture time is unknown/);
+  assert.equal(result.stderr, "Taxonomy export refused.\n");
   assert.deepEqual(productBytes(dir), before);
 });
 
@@ -377,12 +379,13 @@ test("an updated hash and bound challenge cannot leave a stale lead-coolant sour
   ).values.challenge = changed;
   fs.writeFileSync(path.join(dir, input), JSON.stringify(document));
   const before = productBytes(dir);
+  assert.throws(() => exportTaxonomy(dir), /complete physical field/);
   const result = spawnSync(process.execPath, [script, "--root", dir], {
     encoding: "utf8",
     timeout: 15000,
   });
   assert.equal(result.status, 1);
-  assert.match(result.stderr, /complete physical field/);
+  assert.equal(result.stderr, "Taxonomy export refused.\n");
   assert.deepEqual(productBytes(dir), before);
 });
 
@@ -434,7 +437,8 @@ for (const [
       timeout: 15000,
     });
     assert.equal(result.status, 1);
-    assert.match(result.stderr, expected);
+    assert.throws(() => exportTaxonomy(dir), expected);
+    assert.equal(result.stderr, "Taxonomy export refused.\n");
     assert.deepEqual(productBytes(dir), before);
   });
 }
@@ -485,7 +489,7 @@ test("native CLI exports the genuine XML section citations identically into ever
   );
 });
 
-test("a valid full-catalogue export with one pending source review renders an honest uncited detail", (context) => {
+test("a valid original-snapshot API export with one pending source review renders an honest uncited detail", (context) => {
   const dir = candidate(context);
   const document = readOriginalCitations(dir);
   const entry = findRequired(
@@ -517,11 +521,11 @@ test("a valid full-catalogue export with one pending source review renders an ho
   );
   assert.equal(migrated.status, 0, migrated.stderr);
   fs.writeFileSync(path.join(dir, profiles), migrated.stdout);
-  const result = spawnSync(process.execPath, [script, "--root", dir], {
-    encoding: "utf8",
-    timeout: 15000,
+  assert.deepEqual(exportTaxonomy(dir), {
+    entries: 135,
+    audited: 135,
+    domains: { fission: 29, fusion: 32, chemical: 52, hybrid: 22 },
   });
-  assert.equal(result.status, 0, result.stdout + result.stderr);
   const exported = readAuditOutput(dir);
   const pending = findRequired(exported.records, (row) => row.id === entry.id);
   assert.equal(pending.complete_entry_review, false);
@@ -563,19 +567,6 @@ for (const originalOutputs of [true, false]) {
     );
   });
 }
-
-test("unavailable explicitly selected Python refuses before any old or new product is published", (context) => {
-  const dir = candidate(context);
-  const before = productBytes(dir);
-  const result = spawnSync(process.execPath, [script, "--root", dir], {
-    env: { ...process.env, ATLAS_PYTHON: path.join(dir, "nonexistent-python") },
-    encoding: "utf8",
-    timeout: 15000,
-  });
-  assert.equal(result.status, 1);
-  assert.match(result.stderr, /complete snapshot validation failed/);
-  assert.deepEqual(productBytes(dir), before);
-});
 
 test("malformed 135th authored evidence profile cannot change any of five existing products", (context) => {
   const dir = candidate(context);

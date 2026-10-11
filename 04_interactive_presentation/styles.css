@@ -1646,17 +1646,20 @@ dialog::backdrop {
   }
 }
 /* Evidence profiles keep historic questions separate from current support. */
-.evidence-profile details {
+.evidence-profile details,
+.author-assessment details {
   margin-block: 1rem;
   padding: 1rem;
   border: 1px solid var(--line, #536070);
   border-radius: 0.5rem;
 }
-.evidence-profile summary {
+.evidence-profile summary,
+.author-assessment summary {
   cursor: pointer;
   font-weight: 600;
 }
 .evidence-profile summary:focus-visible,
+.author-assessment summary:focus-visible,
 .profile-download:focus-visible {
   outline: 3px solid var(--accent, #93c5fd);
   outline-offset: 4px;
@@ -2016,4 +2019,8 @@ dialog::backdrop {
     font-size: 0.65rem;
     line-height: 1.3;
   }
+}
+
+.author-assessment p {
+  overflow-wrap: anywhere;
 }

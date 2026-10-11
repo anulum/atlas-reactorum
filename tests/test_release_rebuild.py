@@ -39,7 +39,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
     -------
     pathlib.Path
         Baseline whose six native producers succeeded with a fixed inventory
-        epoch and whose eleven presentation payloads match the checkout.
+        epoch and whose thirteen presentation payloads match the checkout.
     """
     root = tmp_path_factory.mktemp("atlas-release") / "source"
     copy_source(ROOT, root)
@@ -55,7 +55,7 @@ def release_baseline(tmp_path_factory: pytest.TempPathFactory) -> Path:
         result = subprocess.run(command, cwd=root, env=env, capture_output=True, timeout=60)
         assert result.returncode == 0, result.stderr.decode()
     # Only the provenance label was stale: actual record payloads remain exact.
-    for product in PRODUCTS[:11]:
+    for product in PRODUCTS[:13]:
         assert (root / product).read_bytes() == (ROOT / product).read_bytes()
     return root
 
@@ -430,7 +430,7 @@ def test_installed_node_dependencies_are_not_library_content(
     The installed package contains an empty Markdown file which the library
     report must not label as missing source content. A copy of the accepted
     public README also exercises the duplicate boundary in the same native run.
-    All 24 accepted products and owned source bytes must remain identical.
+    All 26 accepted products and owned source bytes must remain identical.
 
     Parameters
     ----------

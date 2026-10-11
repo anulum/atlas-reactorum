@@ -77,6 +77,14 @@ def test_actual_facets_cards_detail_and_absent_selection(browser: Browser) -> No
     assert browser.evaluate("dialogBody.textContent.includes('Taxonomy audit')") is True
     browser.evaluate("reactorDialog.close();openReactor('not an original source entry')")
     assert browser.evaluate("reactorDialog.open") is False
+    browser.evaluate("openReactor('Continuous stirred-tank reactor (CSTR)')")
+    assert (
+        browser.evaluate(
+            "dialogBody.querySelector('.dialog-meta').textContent.includes('maturity claim unqualified')"
+        )
+        is True
+    )
+    browser.evaluate("reactorDialog.close()")
     for index in range(5):
         browser.evaluate(f"document.querySelectorAll('#domainFilters .chip')[{index}].click()")
         assert (
@@ -147,3 +155,17 @@ def test_actual_missing_source_retains_families_without_inventing_parent_identit
         server.server_close()
         thread.join(timeout=5)
         assert not thread.is_alive()
+
+
+def test_actual_selected_cells_and_identity_require_current_profile(browser: Browser) -> None:
+    """Refuse altered caller-supplied source cells and unknown stable IDs before display."""
+    for change in ["row.principle='Altered source principle'", "row.id='unknown-source-id'"]:
+        result = browser.evaluate(
+            "(()=>{const row=structuredClone(taxonomyRows[0]);"
+            + change
+            + ";const before=dialogBody.innerHTML;"
+            + "const owner=AtlasTaxonomyCatalogue.create(document,[row],taxonomyAuditRows);"
+            + "try{owner.open(row.name);return false;}"
+            + "catch{return before===dialogBody.innerHTML && !reactorDialog.open;}})()"
+        )
+        assert result is True

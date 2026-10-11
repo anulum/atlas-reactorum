@@ -51,6 +51,8 @@ PRODUCTS = tuple(
         f"{DATA}/taxonomy-audit.js",
         f"{DATA}/taxonomy-evidence-profiles.json",
         f"{DATA}/taxonomy-evidence-profiles.js",
+        f"{DATA}/taxonomy-reviewed-profiles.json",
+        f"{DATA}/taxonomy-reviewed-profiles.js",
         f"{DATA}/evidence-history.json",
         f"{DATA}/evidence-history.js",
         f"{DATA}/global_reactors.sample.json",
@@ -169,7 +171,7 @@ def copy_source(root: Path, destination: Path) -> None:
 
 
 def reproduce(root: Path, workspace: Path | None = None, *, timeout: float = 1800) -> list[str]:
-    """Execute all five offline release build steps without writing the candidate.
+    """Execute all offline release build steps without writing the candidate.
 
     The taxonomy validator receives this process's interpreter by default.
     An explicitly supplied ATLAS_PYTHON selector retains its original semantics.

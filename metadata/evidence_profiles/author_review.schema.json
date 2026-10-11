@@ -1,0 +1,620 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atlas Reactorum completed source-bound author review 1.1.0",
+  "description": "Completed review of all original fields against selected sources. Unknown and unsupported outcomes remain explicit; author completion does not establish independent acceptance, present activity or hardware qualification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "author",
+    "reviewed_on",
+    "baseline_inputs",
+    "additional_sources",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "atlas-author-review-1.1.0"
+    },
+    "author": {
+      "const": "Arcane Sapience"
+    },
+    "reviewed_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "baseline_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taxonomy_sha256", "citations_sha256", "audit_sha256"],
+      "properties": {
+        "taxonomy_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "citations_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "audit_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "additional_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "date": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "precision"],
+          "properties": {
+            "value": {
+              "type": "null"
+            },
+            "precision": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "precision"],
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^\\d{4}$"
+            },
+            "precision": {
+              "const": "year"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "precision"],
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}$"
+            },
+            "precision": {
+              "const": "month"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "precision"],
+          "properties": {
+            "value": {
+              "type": "string",
+              "format": "date"
+            },
+            "precision": {
+              "const": "day"
+            }
+          }
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "sha256",
+        "captured_at",
+        "capture_method",
+        "format",
+        "page_count",
+        "access"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+/\\S*$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "captured_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "capture_method": {
+          "enum": ["publisher-tls", "retained-source-review"]
+        },
+        "format": {
+          "enum": ["pdf", "html", "xml"]
+        },
+        "page_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "access": {
+          "const": "catalogue-only; original not redistributed"
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_value",
+        "disposition",
+        "assessment",
+        "claim_ids",
+        "source_ids"
+      ],
+      "properties": {
+        "original_value": {},
+        "disposition": {
+          "enum": [
+            "editorial",
+            "source-qualified",
+            "correction-required",
+            "unsupported",
+            "unscored",
+            "context-only"
+          ]
+        },
+        "assessment": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source_id",
+        "topic",
+        "statement",
+        "scope",
+        "section",
+        "pdf_pages",
+        "printed_pages",
+        "event_date",
+        "published_date",
+        "temporal_role",
+        "evidence_object"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "topic": {
+          "enum": [
+            "classification",
+            "maturity",
+            "evidence",
+            "source-consistency"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "section": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "pdf_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "printed_pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          }
+        },
+        "event_date": {
+          "$ref": "#/$defs/date"
+        },
+        "published_date": {
+          "$ref": "#/$defs/date"
+        },
+        "temporal_role": {
+          "enum": ["attained", "publication", "forecast", "unspecified"]
+        },
+        "evidence_object": {
+          "enum": [
+            "experiment",
+            "simulation",
+            "operation",
+            "publication",
+            "proposal"
+          ]
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "entity_category",
+        "fields",
+        "observations",
+        "current_activity",
+        "complete_entry_review",
+        "independent_review",
+        "facets",
+        "development_assessments",
+        "revisions",
+        "review_scope",
+        "review_basis"
+      ],
+      "properties": {
+        "entry_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "entity_category": {
+          "enum": [
+            "architecture",
+            "subtype",
+            "development-class",
+            "geometry",
+            "configuration",
+            "operating-mode",
+            "ignition-scheme",
+            "device",
+            "process-class",
+            "system-integration",
+            "application-architecture",
+            "reaction-mechanism",
+            "claim-class"
+          ]
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "name",
+            "domain",
+            "family",
+            "parent",
+            "kind",
+            "maturity",
+            "evidence",
+            "principle",
+            "strength",
+            "challenge",
+            "temp",
+            "mode",
+            "evidence_scope",
+            "reviewed_on",
+            "source_audit",
+            "scale",
+            "control",
+            "source_ids",
+            "source_urls",
+            "parent_id"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/field"
+            },
+            "name": {
+              "$ref": "#/$defs/field"
+            },
+            "domain": {
+              "$ref": "#/$defs/field"
+            },
+            "family": {
+              "$ref": "#/$defs/field"
+            },
+            "parent": {
+              "$ref": "#/$defs/field"
+            },
+            "kind": {
+              "$ref": "#/$defs/field"
+            },
+            "maturity": {
+              "$ref": "#/$defs/field"
+            },
+            "evidence": {
+              "$ref": "#/$defs/field"
+            },
+            "principle": {
+              "$ref": "#/$defs/field"
+            },
+            "strength": {
+              "$ref": "#/$defs/field"
+            },
+            "challenge": {
+              "$ref": "#/$defs/field"
+            },
+            "temp": {
+              "$ref": "#/$defs/field"
+            },
+            "mode": {
+              "$ref": "#/$defs/field"
+            },
+            "evidence_scope": {
+              "$ref": "#/$defs/field"
+            },
+            "reviewed_on": {
+              "$ref": "#/$defs/field"
+            },
+            "source_audit": {
+              "$ref": "#/$defs/field"
+            },
+            "scale": {
+              "$ref": "#/$defs/field"
+            },
+            "control": {
+              "$ref": "#/$defs/field"
+            },
+            "source_ids": {
+              "$ref": "#/$defs/field"
+            },
+            "source_urls": {
+              "$ref": "#/$defs/field"
+            },
+            "parent_id": {
+              "$ref": "#/$defs/field"
+            }
+          }
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/observation"
+          }
+        },
+        "current_activity": {
+          "const": "unknown"
+        },
+        "complete_entry_review": {
+          "const": true,
+          "description": "Author review of every original field and the selected source evidence is complete at the recorded scope; this is distinct from independent acceptance."
+        },
+        "independent_review": {
+          "type": "null"
+        },
+        "facets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/facet"
+          }
+        },
+        "development_assessments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/development"
+          }
+        },
+        "revisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revision"
+          }
+        },
+        "review_scope": {
+          "const": "all-original-fields-and-selected-sources"
+        },
+        "review_basis": {
+          "const": "author-source-inspection"
+        }
+      }
+    },
+    "facet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axis",
+        "value",
+        "assessment",
+        "scope",
+        "claim_ids",
+        "observation_ids"
+      ],
+      "properties": {
+        "axis": {
+          "enum": [
+            "entity-role",
+            "reaction",
+            "geometry",
+            "fuel-state",
+            "coolant",
+            "moderator",
+            "circulation",
+            "confinement",
+            "drive",
+            "process",
+            "application",
+            "integration"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "assessment": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        },
+        "observation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "development": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "stage",
+        "evidence_object",
+        "assessment",
+        "scope",
+        "claim_ids",
+        "observation_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "stage": {
+          "enum": ["laboratory", "pilot", "industrial"]
+        },
+        "evidence_object": {
+          "enum": ["experiment", "simulation", "operation"]
+        },
+        "assessment": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        },
+        "claim_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        },
+        "observation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\t\\r\\n]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "value"],
+      "properties": {
+        "field": {
+          "enum": [
+            "name",
+            "kind",
+            "maturity",
+            "evidence",
+            "principle",
+            "strength",
+            "challenge",
+            "temp",
+            "mode",
+            "evidence_scope"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\t\\r\\n]+$"
+        }
+      }
+    }
+  }
+}

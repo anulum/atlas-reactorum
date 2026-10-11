@@ -100,9 +100,10 @@ Tracked and new JS, CJS and MJS files enter native discovery, including new
 directories. Missing source, symlink source, unavailable tools and changed tool
 versions refuse rather than becoming a pass.
 
-Six literal presentation wrappers remain owned by their source-bound
+Generated presentation wrappers remain owned by their source-bound
 generators: repository catalogue, retained evidence history, facilities,
-companies, taxonomy audit and evidence profiles. Their output bytes are
+companies, taxonomy audit, original and reviewed evidence profiles, and country
+boundaries. Their output bytes are
 checked by Node syntax, source/schema consumers and offline reproduction.
 They are not handwritten modules for TypeScript inference or formatter writes.
 The retained `taxonomy-expanded.js` editorial input contains executable
@@ -115,8 +116,8 @@ Retain prior history snapshots and append an actual Atlas observation for the
 new complete profile version. Generate current examples through the native
 exporter and retain their explicit version hashes; an old version cannot become
 an implicit alias for current data. Run the whole constructor/exporter coverage
-cohort and actual five-producer reproduction before accepting these changes.
-The exclusions name the six products individually; a new handwritten file
+cohort and all six owning build steps before accepting these changes.
+The exclusions name each generated wrapper individually; a new handwritten file
 under `data/` still enters the native checks.
 
 `make dependency-audit` audits both complete dependency locks through
@@ -236,7 +237,7 @@ whose retrieval date is unknown; an inspection date must not fill that gap.
 
 Preflight requires Python, Node and the shell inventory tools used by `make
 build`. Run `python tools/preflight.py --check reproducibility --workspace
-/absolute/external/workspace` to rebuild all 24 release products in a newly
+/absolute/external/workspace` to rebuild all 26 release products in a newly
 owned temporary tree. The workspace must already exist outside the candidate;
 the default is the operating system temporary directory. `--timeout` bounds
 each builder (1,800 seconds by default). `--root` selects another complete
@@ -323,7 +324,7 @@ admission; it exercises real producer packets and native safe refusals.
 
 A new bulk source needs, before any record is merged: publisher, licence,
 retrieval date, selection rule, coordinate semantics, status semantics, and an
-explicit statement of what its records do *not* establish. Where redistribution
+explicit statement of what its records do _not_ establish. Where redistribution
 is restricted, a catalogue-only record is the correct outcome.
 
 Each layer ships its own builder, source registry, rights note and validator,

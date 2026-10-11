@@ -19,6 +19,10 @@ const { publishProducts } = require("./taxonomy_export_products.cjs");
 const { spawnSync } = require("node:child_process");
 const { createHash } = require("node:crypto");
 const { readCitations } = require("./taxonomy_citations.cjs");
+const { reviewedProducts } = require("./taxonomy_reviewed_products.cjs");
+
+/** CLI argument refusal with a deliberately authored usage response. */
+class ExportUsageError extends Error {}
 
 /**
  * Native complete export counts; domain values count actual original rows.
@@ -26,14 +30,15 @@ const { readCitations } = require("./taxonomy_citations.cjs");
  */
 
 /**
- * Rebuild all five taxonomy products from one complete, source-bound candidate.
+ * Rebuild original taxonomy products and explicitly selected reviewed profiles.
  * Input checks finish before any product is written. Historical audit fields are
  * preserved; partial citations never establish complete scientific review.
  * @param {string} repositoryRoot Candidate root, including taxonomy and audit metadata.
+ * @param {string} [reviewsFile] Complete author input; omission retains the original-snapshot API contract.
  * @returns {ExportSummary} Entry, historical audit and per-domain counts.
  * @throws {Error} When catalogue identities, references or citations are invalid.
  */
-function exportTaxonomy(repositoryRoot) {
+function exportTaxonomy(repositoryRoot, reviewsFile) {
   const root = path.join(repositoryRoot, "04_interactive_presentation");
   const catalogue = readCatalogue(repositoryRoot);
   const audits = readHistoricalAudit(repositoryRoot);
@@ -142,6 +147,17 @@ function exportTaxonomy(repositoryRoot) {
       `window.REACTOR_TAXONOMY_EVIDENCE_PROFILES = ${serializedProfiles.trimEnd()};\n`,
     ],
   ]);
+  if (reviewsFile !== undefined) {
+    const reviewed = reviewedProducts(
+      repositoryRoot,
+      snapshot,
+      /** @type {import("../taxonomy-evidence-profile.js").AtlasEvidenceDocument} */ (
+        profileDocument
+      ),
+      reviewsFile,
+    );
+    for (const [name, content] of reviewed) products.set(name, content);
+  }
   publishProducts(path.join(root, "data"), products);
   /** @type {Record<string, number>} */
   const domains = {};
@@ -155,14 +171,43 @@ function exportTaxonomy(repositoryRoot) {
 
 module.exports = { exportTaxonomy };
 if (require.main === module) {
-  if (
-    process.argv.length !== 2 &&
-    (process.argv.length !== 4 || process.argv[2] !== "--root")
-  )
-    throw new Error("Usage: export_taxonomy.cjs [--root REPOSITORY]");
-  const repositoryRoot =
-    process.argv.length === 4
-      ? path.resolve(process.argv[3])
-      : path.resolve(__dirname, "../..");
-  console.log(JSON.stringify(exportTaxonomy(repositoryRoot)));
+  try {
+    let repositoryRoot = path.resolve(__dirname, "../..");
+    /** @type {string|undefined} */
+    let reviewsFile;
+    const seen = new Set();
+    for (let index = 2; index < process.argv.length; index += 2) {
+      const flag = process.argv[index],
+        value = process.argv[index + 1];
+      if (
+        !["--root", "--reviews"].includes(flag) ||
+        value === undefined ||
+        value.startsWith("--") ||
+        seen.has(flag)
+      )
+        throw new ExportUsageError();
+      seen.add(flag);
+      if (flag === "--root") repositoryRoot = path.resolve(value);
+      else reviewsFile = path.resolve(value);
+    }
+    console.log(
+      JSON.stringify(
+        exportTaxonomy(
+          repositoryRoot,
+          reviewsFile ??
+            path.join(
+              repositoryRoot,
+              "metadata/evidence_profiles/author_reviews.json",
+            ),
+        ),
+      ),
+    );
+  } catch (error) {
+    console.error(
+      error instanceof ExportUsageError
+        ? "Usage: export_taxonomy.cjs [--root REPOSITORY] [--reviews AUTHOR_INPUT]"
+        : "Taxonomy export refused.",
+    );
+    process.exitCode = 1;
+  }
 }

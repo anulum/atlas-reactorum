@@ -132,7 +132,10 @@ is reported as a failure rather than as a check that passed.
 The taxonomy detail view retains 599 source-inspected statements for 135 entries,
 including 480 statements bound to complete physical fields, with exact
 locators and support boundaries. Unknown original retrieval dates remain
-explicit. Full entry review remains pending.
+explicit. All 135 entries have a completed author review of their original
+fields against selected sources, with scoped maturity/evidence decisions and
+explicit unsupported outcomes. Independent acceptance and current activity
+remain unasserted; the original profiles retain their historical review state.
 Research configurations distinguish pool/tank geometry, dissolved aqueous fuel,
 critical versus source-driven subcritical operation, and pulsing as a mode.
 Homogeneous composition does not imply uniform gas or neutron distributions.
@@ -149,7 +152,7 @@ temperature options retain process-specific benefits and coupled-stage limits.
 The [citation contract](metadata/taxonomy_audit/README.md) documents the authored
 metadata, catalogue-only source custody and schema 1.3.0 audit exports.
 
-`python3 tools/preflight.py --check reproducibility` rebuilds the 22 offline
+`python3 tools/preflight.py --check reproducibility` rebuilds the 24 offline
 release products in a fresh external temporary tree and requires identical
 bytes, including both JSON and JavaScript exports and the inventory receipts.
 It preserves accepted files. Use `--workspace /absolute/external/workspace`

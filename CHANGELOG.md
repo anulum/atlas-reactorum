@@ -15,6 +15,19 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Added — 2026-10-11
+
+- Complete the author review of all 135 taxonomy entries and their 21 original
+  fields against selected sources. Preserve all 599 original claims and 148
+  source identities alongside scoped observations and explicit corrections.
+- Separate author completion, independent acceptance and current activity in
+  author-review schema 1.1 and reviewed-profile schema 2.1. Current downloads
+  include the author, review date and complete original context.
+- Display eight industrial-deployment claims as unqualified by their selected
+  sources; retain separately supported laboratory, pilot and industrial stages.
+  Historical operation, component results, forecasts and net-energy claims keep
+  distinct evidence boundaries.
+
 ### Added — 2026-10-04
 
 - Review all 358 originally missing operator, purpose and first-criticality

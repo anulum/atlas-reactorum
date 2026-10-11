@@ -16,14 +16,26 @@ var AtlasTaxonomyCatalogue = (() => {
   /**
    * Create browsing controls and original details for one admitted catalogue.
    * @param {Document} document Actual Atlas document containing the controls and dialog.
-   * @param {import("./scripts/taxonomy_export_inputs.cjs").TaxonomyRow[]} taxonomyRows Complete admitted original source rows.
+   * @param {import("./scripts/taxonomy_export_inputs.cjs").TaxonomyRow[]} taxonomyRows Complete admitted current source rows.
    * @param {ReturnType<typeof globalThis.AtlasApplicationData.audits>} taxonomyAuditRows Original admitted audit records.
+   * @param {import("./taxonomy-author-review.js").AuthorEntry[]} [authorReviews] Whole-admitted author assessments for the source rows; absent for a legacy or fallback caller.
    * @returns {{rows:CatalogueTaxonomyRow[],start:()=>void,open:(name:string|undefined)=>void}} Original source or unattributed fallback cards and their actual controls.
    */
-  function create(document, taxonomyRows, taxonomyAuditRows) {
+  function create(
+    document,
+    taxonomyRows,
+    taxonomyAuditRows,
+    authorReviews = [],
+  ) {
     const fallbackReactors = globalThis.AtlasFallbackTaxonomy;
     const taxonomyAuditById = Object.fromEntries(
       taxonomyAuditRows.map((row) => [row.id, row]),
+    );
+    const maturitySupport = new Map(
+      authorReviews.map((review) => [
+        review.entry_id,
+        review.fields.maturity.disposition,
+      ]),
     );
     const reactors = (
       taxonomyRows.length ? taxonomyRows : fallbackReactors
@@ -43,9 +55,9 @@ var AtlasTaxonomyCatalogue = (() => {
     );
     const maturityLabels = new Map(
       Object.entries({
-        deployed: "industrial deployment",
+        deployed: "deployment in a stated application",
         demonstrated: "experimental demonstration",
-        research: "active research",
+        research: "research stage",
         contested: "contested",
         concept: "concept",
       }),
@@ -63,6 +75,17 @@ var AtlasTaxonomyCatalogue = (() => {
     const esc = globalThis.AtlasPresentationText.escape;
     const sourceLinks = globalThis.AtlasPresentationText.sourceLinks;
     let activeDomain = "all";
+    /**
+     * Distinguish a retained deployment label from source-qualified attainment.
+     * @param {CatalogueTaxonomyRow} row Actual source or unattributed fallback row.
+     * @returns {string} Unsupported deployment claims are explicitly unqualified.
+     */
+    function maturityText(row) {
+      return row.id !== undefined &&
+        maturitySupport.get(row.id) === "unsupported"
+        ? "maturity claim unqualified"
+        : maturityLabels.get(row.maturity) || row.maturity;
+    }
     /**
      * Populate taxonomy kinds and domain controls, then bind the four existing filters.
      * @returns {void} Original catalogue facets and the initial card view are ready.
@@ -161,7 +184,7 @@ var AtlasTaxonomyCatalogue = (() => {
         rows
           .map(
             (r) =>
-              `<button class="reactor-card" data-name="${esc(r.name)}"><span class="domain"><i class="dot ${esc(r.domain)}"></i>${esc(domainLabels.get(r.domain) || r.domain)} · ${esc(r.family)}</span><h3>${esc(r.name)}</h3><p>${esc(r.principle)}</p><footer><span class="maturity">${esc(r.kind || "entry")} · ${esc(maturityLabels.get(r.maturity) || r.maturity)}</span><span>↗</span></footer></button>`,
+              `<button class="reactor-card" data-name="${esc(r.name)}"><span class="domain"><i class="dot ${esc(r.domain)}"></i>${esc(domainLabels.get(r.domain) || r.domain)} · ${esc(r.family)}</span><h3>${esc(r.name)}</h3><p>${esc(r.principle)}</p><footer><span class="maturity">${esc(r.kind || "entry")} · ${esc(maturityText(r))}</span><span>↗</span></footer></button>`,
           )
           .join("") || "<p>No matching systems.</p>";
       elements
@@ -183,7 +206,30 @@ var AtlasTaxonomyCatalogue = (() => {
       let r = reactors.find((x) => x.name === n);
       if (!r) return;
       const parent = r.parent || r.family;
-      const original = taxonomyRows.find((row) => row.name === n);
+      const selected = taxonomyRows.find((row) => row.id === r.id);
+      /** @type {import("./scripts/taxonomy_export_inputs.cjs").TaxonomyRow|undefined} */
+      let original;
+      if (selected) {
+        const admitted = globalThis.AtlasTaxonomyReviewedProfiles.readProfile(
+          window.REACTOR_TAXONOMY_REVIEWED_PROFILES,
+          window.REACTOR_TAXONOMY_REVIEWED_PROFILE_INPUTS,
+          window.REACTOR_TAXONOMY_EVIDENCE_PROFILES,
+          selected.id,
+        );
+        if (
+          Object.entries(admitted.taxonomy_record).some(
+            ([field, value]) =>
+              JSON.stringify(value) !==
+              JSON.stringify(
+                selected[/** @type {keyof typeof selected} */ (field)],
+              ),
+          )
+        )
+          throw new Error(
+            "Reviewed profile differs from the selected taxonomy row",
+          );
+        original = admitted.original_profile.taxonomy_record;
+      }
       const profile = original
         ? globalThis.AtlasTaxonomyEvidenceProfiles.render(
             window.REACTOR_TAXONOMY_EVIDENCE_PROFILES,
@@ -191,8 +237,16 @@ var AtlasTaxonomyCatalogue = (() => {
             original,
           )
         : '<p role="status">Source-bound evidence is unavailable for this authored fallback entry.</p>';
+      const assessment = original
+        ? globalThis.AtlasTaxonomyReviewedPresentation.render(
+            window.REACTOR_TAXONOMY_REVIEWED_PROFILES,
+            window.REACTOR_TAXONOMY_REVIEWED_PROFILE_INPUTS,
+            window.REACTOR_TAXONOMY_EVIDENCE_PROFILES,
+            original.id,
+          )
+        : "";
       elements.requireElement(document, "dialogBody", "div").innerHTML =
-        `<div class="dialog-body"><span class="kicker">${esc(domainLabels.get(r.domain) || r.domain)} / ${esc(r.family)}</span><h2 id="dialogTitle">${esc(r.name)}</h2><p class="hierarchy">${esc(parent)} → ${esc(r.name)}${r.kind ? " · " + esc(r.kind) : ""}</p><div class="dialog-meta"><span>${esc(maturityLabels.get(r.maturity) || r.maturity)}</span><span>evidence: ${esc(evidenceLabels.get(r.evidence) || r.evidence)}</span></div><p class="principle">${esc(r.principle)}</p><dl>${[
+        `<div class="dialog-body"><span class="kicker">${esc(domainLabels.get(r.domain) || r.domain)} / ${esc(r.family)}</span><h2 id="dialogTitle">${esc(r.name)}</h2><p class="hierarchy">${esc(parent)} → ${esc(r.name)}${r.kind ? " · " + esc(r.kind) : ""}</p><div class="dialog-meta"><span>${esc(maturityText(r))}</span><span>evidence: ${esc(evidenceLabels.get(r.evidence) || r.evidence)}</span></div><p class="principle">${esc(r.principle)}</p><dl>${[
           ["Strength", r.strength],
           ["Critical challenge", r.challenge],
           ["Temperature", r.temp],
@@ -215,7 +269,7 @@ var AtlasTaxonomyCatalogue = (() => {
           )
           .join(
             "",
-          )}</dl>${profile}<h3>Sources</h3><div class="detail-sources">${sourceLinks(r.source_urls) || "Source mapping pending."}</div></div>`;
+          )}</dl>${assessment}${profile}<h3>Sources</h3><div class="detail-sources">${sourceLinks(r.source_urls) || "Source mapping pending."}</div></div>`;
       elements.requireElement(document, "reactorDialog", "dialog").showModal();
     }
     return Object.freeze({

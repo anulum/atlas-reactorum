@@ -81,6 +81,10 @@ declare global {
     ReturnType<typeof globalThis.AtlasPageNavigation.start> | undefined;
   /** Complete journal emitted only after native shape and integrity admission. */
   var REACTOR_EVIDENCE_HISTORY: AtlasEvidenceJournal;
+  /** Complete current/original profile emitted after source-bound author admission. */
+  var REACTOR_TAXONOMY_REVIEWED_PROFILES: import("./scripts/taxonomy_reviewed_products.cjs").ReviewedProfileDocument;
+  /** Explicit frozen source bindings emitted separately by the owning producer. */
+  var REACTOR_TAXONOMY_REVIEWED_PROFILE_INPUTS: import("./scripts/taxonomy_reviewed_products.cjs").ReviewedProfileDocument["inputs"];
   /** Complete profile product admitted by its source-bound Python exporter. */
   var REACTOR_TAXONOMY_EVIDENCE_PROFILES: AtlasEvidenceDocument;
 }

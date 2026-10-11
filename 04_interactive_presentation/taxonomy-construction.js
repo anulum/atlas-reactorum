@@ -8,8 +8,8 @@
 "use strict";
 
 /**
- * Original entry-specific source/scope/date overrides; absence retains family defaults.
- * @typedef {{source?:string,evidence_scope?:string,reviewed_on?:string}} TaxonomyOverrides
+ * Explicit stable identities and source/scope/date overrides; absence retains authored defaults.
+ * @typedef {{id?:string,parent_id?:string|null,source?:string,evidence_scope?:string,reviewed_on?:string}} TaxonomyOverrides
  */
 /**
  * Original ordered name, parent, maturity, evidence and descriptive fields.
@@ -34,6 +34,10 @@ var AtlasTaxonomyConstruction = (() => {
     const sources = /** @type {Record<string, unknown>} */ (input);
     /** @type {import("./scripts/taxonomy_export_inputs.cjs").TaxonomyRow[]} */
     const rows = [];
+    /** @type {Set<string>} Constructed catalogue identities. */
+    const identities = new Set();
+    /** @type {Map<string,string|null>} Explicit parent identities independent of captions. */
+    const declaredParents = new Map();
     /**
      * Resolve only an owned textual locator before constructing source reference cells.
      * @param {string} identity Original source key in an entry or family list.
@@ -55,7 +59,7 @@ var AtlasTaxonomyConstruction = (() => {
      * @param {string} source Original space-separated family source keys.
      * @param {TaxonomyDefinition[]} definitions Original ordered entry tuples.
      * @returns {void} Original rows append in order; numeric scores remain explicitly absent.
-     * @throws {Error} A selected source locator is unavailable.
+     * @throws {Error} A source locator or stable identity is invalid or duplicated.
      */
     function add(domain, family, source, definitions) {
       for (const [
@@ -69,11 +73,27 @@ var AtlasTaxonomyConstruction = (() => {
         kind = "architecture",
         overrides = {},
       ] of definitions) {
-        const id = name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "");
+        const id = Object.hasOwn(overrides, "id")
+          ? overrides.id
+          : name
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, "");
+        if (typeof id !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))
+          throw new Error("Taxonomy stable identity is invalid");
+        if (identities.has(id)) throw new Error("Duplicate ID");
+        const explicitParent = Object.hasOwn(overrides, "parent_id");
+        const parentId = overrides.parent_id;
+        if (
+          explicitParent &&
+          parentId !== null &&
+          (typeof parentId !== "string" ||
+            !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(parentId))
+        )
+          throw new Error("Taxonomy parent identity is invalid");
         const entrySource = overrides.source || source;
+        const sourceIds = entrySource.split(" ");
+        const sourceUrls = sourceIds.map(sourceUrl);
         const defaultScope =
           evidence === "established"
             ? "Established process or reactor architecture; individual designs require separate qualification."
@@ -99,24 +119,37 @@ var AtlasTaxonomyConstruction = (() => {
               : "Design dependent",
           scale: null,
           control: null,
-          source_ids: entrySource.split(" "),
-          source_urls: entrySource.split(" ").map(sourceUrl),
+          source_ids: sourceIds,
+          source_urls: sourceUrls,
           evidence_scope: overrides.evidence_scope || defaultScope,
           reviewed_on: overrides.reviewed_on || "2026-09-26",
           parent_id: null,
           source_audit:
             "Introductory reference mapping; per-claim source audit pending",
         });
+        identities.add(id);
+        if (explicitParent && parentId !== undefined)
+          declaredParents.set(id, parentId);
       }
     }
     /**
      * Link parents only after every original authored entry has been constructed.
      * @returns {import("./scripts/taxonomy_export_inputs.cjs").TaxonomyRow[]} Original rows in insertion order, retaining missing parent identities as null.
+     * @throws {Error} An explicit parent identity has no catalogue entry.
      */
     function complete() {
+      for (const parentId of declaredParents.values())
+        if (parentId !== null && !identities.has(parentId))
+          throw new Error("Missing parent");
       for (const row of rows) {
-        const parent = rows.find((candidate) => candidate.name === row.parent);
-        row.parent_id = parent ? parent.id : null;
+        const explicitParent = declaredParents.get(row.id);
+        if (explicitParent !== undefined) row.parent_id = explicitParent;
+        else {
+          const parent = rows.find(
+            (candidate) => candidate.name === row.parent,
+          );
+          row.parent_id = parent ? parent.id : null;
+        }
       }
       return rows;
     }

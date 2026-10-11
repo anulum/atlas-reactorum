@@ -31,8 +31,11 @@ Dated, forward-only. Items move to `CHANGELOG.md` when they land.
   geometry is marked as a combination of two parents rather than a third
   independent principle. Claim-level citations now supply 599 source-inspected
   statements for all 135 entries; 480 statements bind all 405 physical fields.
-  Complete entry review and source-supported maturity/evidence classification
-  remain pending. The [citation contract](metadata/taxonomy_audit/README.md)
+  All 135 entries now have a completed author review of the original 21 fields
+  against selected sources, with explicit maturity/evidence support boundaries,
+  historical observations and source-supported corrections. Eight industrial
+  deployment labels remain unqualified by those sources. Independent acceptance
+  and current activity remain separate; source updates require dated reassessment. The [citation contract](metadata/taxonomy_audit/README.md)
   records the current coverage and each statement's support boundary.
 - Company depth round 8 now has ten reviewed profiles, a 33-source registry,
   field associations, generated overlays and a native validator. Its

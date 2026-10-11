@@ -86,7 +86,7 @@ shows a refusal rather than a fabricated comparison.
 
 ## Evidence boundary
 
-The expanded taxonomy indexes 135 entries: 29 fission, 32 fusion, 52 chemical/biochemical and 22 hybrid/emerging. These include architectures, subtypes and operating modes that can overlap. `data/taxonomy-expanded.sources.tsv` exposes each source mapping. The scientific/editorial audit from `../metadata/taxonomy_audit/` is integrated into `data/taxonomy-audit.*` and the detail dialog for all 135 entries. The first pass covered 123; the 11 later additions were audited on 2026-09-29, and the merged critical/subcritical entry was split into two, so no entry is marked `not-yet-audited`. This is classification and source-scope triage, not full per-claim verification. Rebuild all five taxonomy products with `node scripts/export_taxonomy.cjs`. The [evidence profile contract](../metadata/evidence_profiles/README.md) adds a versioned whole-catalogue profile, explicit snapshot validation, provisional entity categories, dated historical questions and a single-profile JSON download. Original claim and source locators remain available; source support is distinct from an independent whole-entry decision.
+The expanded taxonomy indexes 135 entries: 29 fission, 32 fusion, 52 chemical/biochemical and 22 hybrid/emerging. These include architectures, subtypes and operating modes that can overlap. `data/taxonomy-expanded.sources.tsv` exposes each source mapping. The scientific/editorial audit from `../metadata/taxonomy_audit/` is integrated into `data/taxonomy-audit.*` and the detail dialog for all 135 entries. The first pass covered 123; the 11 later additions were audited on 2026-09-29, and the merged critical/subcritical entry was split into two, so no entry is marked `not-yet-audited`. This is classification and source-scope triage, not full per-claim verification. Rebuild all seven taxonomy products with `node scripts/export_taxonomy.cjs`. The [evidence profile contract](../metadata/evidence_profiles/README.md) adds a versioned whole-catalogue profile, explicit snapshot validation, provisional entity categories, dated historical questions and a single-profile JSON download. Original claim and source locators remain available; source support is distinct from an independent whole-entry decision.
 
 The detail dialog now shows 599 source-inspected statements for 135 entries,
 including exact sections, separate printed/PDF pages and each source's support
@@ -124,8 +124,10 @@ are not inferred. AEM precious-metal reduction remains potential.
 Source-copy retrieval dates are shown separately from inspection dates.
 Unknown historical retrieval dates remain explicit; an inspection date does
 not fill that gap.
-Entries without claim citations show pending review. These statements
-do not establish complete scientific review for any entry. The
+Entries without claim citations show pending review. The separate completed
+author review covers all original fields and selected sources for each of the
+135 entries; unknown and unsupported outcomes remain explicit. This does not
+establish independent acceptance, current activity or hardware qualification. The
 [citation data contract](../metadata/taxonomy_audit/README.md) binds all 135
 current catalogue entries before export; source originals remain catalogue-only.
 
@@ -211,13 +213,24 @@ a display limit. Missing optional map namespace/geometry keeps records listed;
 missing required controls refuses. Test candidates alter real source metadata
 or DOM controls without replacing native Window, dialog or canvas behavior.
 
-
 The authored taxonomy loads the shared constructor before its data declarations.
 Native exporters and profile validation use that same constructor. It retains
 the original source lists, entry overrides, default wording and null scores;
 missing, inherited or nontextual source locators refuse before construction.
+An entry override can supply `id` and `parent_id` independently of its display
+name. Both use stable lowercase hyphen-separated identities; `parent_id: null`
+explicitly leaves the entry without a parent. Only owned identity overrides
+apply. Duplicate or malformed identities refuse before appending a row, and
+an explicit parent must exist when construction completes. Without these
+overrides, the original caption-derived IDs and parent-name linking remain.
+An unavailable source locator appends no row and reserves no identity.
 `tests/taxonomy_construction.test.cjs` exercises the actual catalogue and source
-defaults, while the complete exporter cohort verifies source/context refusal.
+defaults, corrected-caption identities and parent links in native and classic
+browser construction, while the exporter cohort verifies source/context refusal.
+`tests/test_taxonomy_construction_browser.py` reconstructs all 135 actual rows
+in native Chrome, changes a caption while retaining all 599 claim identities,
+and records the original source and native execution ranges. Malformed identity,
+duplicate, missing-parent and failed-source cases use the same public API.
 
 Dataset admission retains the original record objects, order and unknown extra
 producer cells. Consumed text, source arrays, observations and coordinates are
@@ -326,7 +339,6 @@ until their native checks admit them. An authored answer outside its original
 example set refuses; a submitted form without a selected answer disables the
 obsolete view and exports. The complete original catalogue and both reading
 depths are exercised against source-validated profiles.
-
 
 ### Full-data browser checks
 

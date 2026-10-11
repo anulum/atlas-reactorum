@@ -17,33 +17,33 @@ scope. They provide evidence for that scope, not a whole-candidate verdict.
 
 ## Gates
 
-| Layer | Command | What it establishes |
-| --- | --- | --- |
-| Lint and format | `make lint` | Ruff/NumPy contracts, Python formatting, native shell checks and locked ESLint/JSDoc/Prettier |
-| Shell | `make native-shell` | ShellCheck 0.9.0 and shfmt 3.8.0; four-space formatting across tracked and new shell source |
-| HTML/CSS | `make native-web` | HTML-validate 11.16.2 semantic/accessibility contracts, CSS Tree 3.2.1 grammar/resolved values, Prettier 3.9.9 |
-| Notebook source | `make native-notebooks` | Native nbformat schema, Ruff notebook lint/format, nbQA 1.9.1 strict mypy across all cells |
-| Notebook runtime | `make native-notebook-runtime` | Complete unchanged source through Jupyter/nbclient 0.11.0 and ipykernel 7.4.0 in an isolated owned kernel |
-| First source | `make native-languages` | Block unqualified and unknown source/backend formats; route current asset suffixes and named metadata explicitly |
-| Declarations | `make native-js-lint native-js-types native-js-format` | Every current/new `.d.ts` uses native TypeScript parser, documented declarations, strict compiler and formatter |
-| Python interfaces | `make native-python-stubs` | Native generated interface equality and actual runtime `stubtest`; no allowlist or missing-symbol waiver |
-| Foreign interfaces | `make native-ffi` | Direct Python FFI imports bind to exact qualified source; ordinary JavaScript lint refuses unqualified imports/loading |
-| JavaScript syntax | `make native-javascript` | Node 24.21.0 parses tracked and new JS, CJS and MJS source; semantics remain owned by the dedicated native and browser suites |
-| Commit hooks | `make hooks` | The local and CI hook chain; formatters preserve captured and generated data formats |
-| Types | `make typecheck` | Strict mypy across every source directory and native strict TypeScript over handwritten JS/CJS/MJS |
-| Dependency locks | `make dependency-audit` | Blocking full Python and npm advisory audits, including development packages and every severity |
-| Python tests | `make test` | Enumerates every production Python source directory; requires 100 % statements and branches |
-| Map engine | `node --test 04_interactive_presentation/map/tests/*.test.js` | Projection, indexing, clustering and rendering behaviour |
-| Map runtime | `make native-map-runtime` | Complete source-bound V8 regions/functions for all nine map modules across genuine DOM/Cairo and Chrome |
-| Taxonomy citations | `make validate` | Complete 135-entry input, 599 statements, exact principle/strength/challenge bindings, real export and detail serializer; 100 % lines, branches and functions for the four owning modules |
-| Presentation | `04_interactive_presentation/validate.sh` | Actual assets, JSON schemas, interface language and native map/citation tests |
-| Learning contract | `04_interactive_presentation/validate.sh` | Six source-bound paths, original answer claims, identical evidence in both depths and dual-hash links; 100 % native lines, branches and functions for the authored catalogue and learning model |
-| Learning browser | `.venv/bin/python -m pytest tests/test_learning_paths_browser.py` | Real navigation, source-linked answers, version refusal, keyboard/mobile controls and actual file downloads; original CDP controller source/range/function evidence |
-| Browser | `.venv/bin/python -m pytest tests/test_browser_checks.py` | Complete loaded presentation through native Chrome, including the public DevTools CLI |
-| Licences | `.venv/bin/python -m reuse lint` | File-level attribution and licensing metadata; publisher grants remain a separate review |
-| Source security | `.venv/bin/python -m bandit -r . -x ./tests -f json` | Unsuppressed production-source scan; current residuals are described below |
-| Repository | `make preflight` | Reproducibility, documented paths, credential content and headers |
-| Per-layer | Each import's own builder and validator | Source schema, provenance, earlier-layer immutability and declared failure behaviour |
+| Layer              | Command                                                           | What it establishes                                                                                                                                                                             |
+| ------------------ | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lint and format    | `make lint`                                                       | Ruff/NumPy contracts, Python formatting, native shell checks and locked ESLint/JSDoc/Prettier                                                                                                   |
+| Shell              | `make native-shell`                                               | ShellCheck 0.9.0 and shfmt 3.8.0; four-space formatting across tracked and new shell source                                                                                                     |
+| HTML/CSS           | `make native-web`                                                 | HTML-validate 11.16.2 semantic/accessibility contracts, CSS Tree 3.2.1 grammar/resolved values, Prettier 3.9.9                                                                                  |
+| Notebook source    | `make native-notebooks`                                           | Native nbformat schema, Ruff notebook lint/format, nbQA 1.9.1 strict mypy across all cells                                                                                                      |
+| Notebook runtime   | `make native-notebook-runtime`                                    | Complete unchanged source through Jupyter/nbclient 0.11.0 and ipykernel 7.4.0 in an isolated owned kernel                                                                                       |
+| First source       | `make native-languages`                                           | Block unqualified and unknown source/backend formats; route current asset suffixes and named metadata explicitly                                                                                |
+| Declarations       | `make native-js-lint native-js-types native-js-format`            | Every current/new `.d.ts` uses native TypeScript parser, documented declarations, strict compiler and formatter                                                                                 |
+| Python interfaces  | `make native-python-stubs`                                        | Native generated interface equality and actual runtime `stubtest`; no allowlist or missing-symbol waiver                                                                                        |
+| Foreign interfaces | `make native-ffi`                                                 | Direct Python FFI imports bind to exact qualified source; ordinary JavaScript lint refuses unqualified imports/loading                                                                          |
+| JavaScript syntax  | `make native-javascript`                                          | Node 24.21.0 parses tracked and new JS, CJS and MJS source; semantics remain owned by the dedicated native and browser suites                                                                   |
+| Commit hooks       | `make hooks`                                                      | The local and CI hook chain; formatters preserve captured and generated data formats                                                                                                            |
+| Types              | `make typecheck`                                                  | Strict mypy across every source directory and native strict TypeScript over handwritten JS/CJS/MJS                                                                                              |
+| Dependency locks   | `make dependency-audit`                                           | Blocking full Python and npm advisory audits, including development packages and every severity                                                                                                 |
+| Python tests       | `make test`                                                       | Enumerates every production Python source directory; requires 100 % statements and branches                                                                                                     |
+| Map engine         | `node --test 04_interactive_presentation/map/tests/*.test.js`     | Projection, indexing, clustering and rendering behaviour                                                                                                                                        |
+| Map runtime        | `make native-map-runtime`                                         | Complete source-bound V8 regions/functions for all nine map modules across genuine DOM/Cairo and Chrome                                                                                         |
+| Taxonomy citations | `make validate`                                                   | Complete 135-entry input, 599 statements, exact principle/strength/challenge bindings, real export and detail serializer; 100 % lines, branches and functions for the four owning modules       |
+| Presentation       | `04_interactive_presentation/validate.sh`                         | Actual assets, JSON schemas, interface language and native map/citation tests                                                                                                                   |
+| Learning contract  | `04_interactive_presentation/validate.sh`                         | Six source-bound paths, original answer claims, identical evidence in both depths and dual-hash links; 100 % native lines, branches and functions for the authored catalogue and learning model |
+| Learning browser   | `.venv/bin/python -m pytest tests/test_learning_paths_browser.py` | Real navigation, source-linked answers, version refusal, keyboard/mobile controls and actual file downloads; original CDP controller source/range/function evidence                             |
+| Browser            | `.venv/bin/python -m pytest tests/test_browser_checks.py`         | Complete loaded presentation through native Chrome, including the public DevTools CLI                                                                                                           |
+| Licences           | `.venv/bin/python -m reuse lint`                                  | File-level attribution and licensing metadata; publisher grants remain a separate review                                                                                                        |
+| Source security    | `.venv/bin/python -m bandit -r . -x ./tests -f json`              | Unsuppressed production-source scan; current residuals are described below                                                                                                                      |
+| Repository         | `make preflight`                                                  | Reproducibility, documented paths, credential content and headers                                                                                                                               |
+| Per-layer          | Each import's own builder and validator                           | Source schema, provenance, earlier-layer immutability and declared failure behaviour                                                                                                            |
 
 The locked development environment supplies Python tooling. Native Node,
 Chrome or Chromium, Poppler `pdftotext` and the shell inventory tools are also
@@ -67,10 +67,10 @@ and keeps `skipLibCheck=false`; it does not infer third-party JavaScript under
 `node_modules`. Native source syntax and dedicated semantic suites remain
 separate gates.
 
-Six individually named generated data wrappers preserve their source bytes
+Individually named generated data wrappers preserve their source bytes
 and generator contracts instead of entering formatter writes or handwritten
 type inference. Node syntax, owning source/schema validators and the complete
-24-product reproduction still check them. The executable retained taxonomy
+26-product reproduction still check them. The executable retained taxonomy
 input stays in the native code gates, and new handwritten `data/` source
 does not inherit an exclusion.
 
@@ -126,9 +126,10 @@ inventory's empty-file report.
 ## Reproducibility and selected sources
 
 `preflight.py` copies public source files into a fresh external temporary
-tree, omitting all 24 expected offline release products. It runs the native
-Node taxonomy exporter, retained-history builder, Python dataset integrator, Python coverage report and
-shell inventory builder, in that order. Every output must be created and
+tree, omitting all 26 expected offline release products. It runs the native
+Node taxonomy exporter, retained-history builder, Python dataset integrator,
+country-boundary builder, Python coverage report and shell inventory builder,
+in that order. Every output must be created and
 match its accepted bytes; staged inputs must remain intact, and undeclared
 outputs fail. The accepted candidate is never deleted or overwritten.
 A builder that does nothing cannot pass.
@@ -233,16 +234,16 @@ measurement or a fresh run of every earlier check.
 The counts below describe that source revision; they are not coverage results
 for subsequent changes to the historical replay contract.
 
-| Owning source | Native evidence | Statements | Branches |
-| --- | --- | --- | --- |
-| FFDB namespace package: framing, selection, reader, catalogue, producer and integration | 129 cases on each of Python 3.12.14 and 3.14.7 | 411/411 | 120/120 |
-| Main dataset integrator, including complete historical selection | 233 focused cases, 12 status cases and actual historical CLI replay | 355/355 | 150/150 |
-| Browser checker | 48 native Chrome cases in explicit local no-sandbox mode | 211/211 | 50/50 |
-| Historical frozen-input selection and binding | 24 owning cases on each pinned Python version | 70/70 | 20/20 |
-| Historical first-pass enrichment validator | Current focused validator cases | 132/132 | 76/76 |
-| Historical second-pass gap generator and validator | Focused cases and actual frozen CLI with external report output | 227/227 | 88/88 |
-| Historical third-pass gap generator and validator | Focused cases and actual frozen CLI with external report output | 213/213 | 84/84 |
-| Historical live-acquisition refusal | 11 public CLI cases on each pinned Python version | 14/14 | 2/2 |
+| Owning source                                                                           | Native evidence                                                     | Statements | Branches |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------- | -------- |
+| FFDB namespace package: framing, selection, reader, catalogue, producer and integration | 129 cases on each of Python 3.12.14 and 3.14.7                      | 411/411    | 120/120  |
+| Main dataset integrator, including complete historical selection                        | 233 focused cases, 12 status cases and actual historical CLI replay | 355/355    | 150/150  |
+| Browser checker                                                                         | 48 native Chrome cases in explicit local no-sandbox mode            | 211/211    | 50/50    |
+| Historical frozen-input selection and binding                                           | 24 owning cases on each pinned Python version                       | 70/70      | 20/20    |
+| Historical first-pass enrichment validator                                              | Current focused validator cases                                     | 132/132    | 76/76    |
+| Historical second-pass gap generator and validator                                      | Focused cases and actual frozen CLI with external report output     | 227/227    | 88/88    |
+| Historical third-pass gap generator and validator                                       | Focused cases and actual frozen CLI with external report output     | 213/213    | 84/84    |
+| Historical live-acquisition refusal                                                     | 11 public CLI cases on each pinned Python version                   | 14/14      | 2/2      |
 
 The seven historical consumer modules at that checkpoint collectively covered all 997
 statements and 418 branches on both pinned Python versions, with no missing or

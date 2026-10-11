@@ -10,13 +10,16 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from http.server import ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
 
 import pytest
 
 from ._native_browser_ranges import browser_ranges, verify_ranges
 from .browser_checks_runtime import BrowserEndpoints
 from .browser_checks_runtime import native_browser as native_browser
+from .test_application_data_browser import FallbackHandler
 from .test_evidence_profiles_browser import Browser
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -95,3 +98,24 @@ def test_actual_startup_and_every_authored_panel_control(browser: Browser) -> No
         == ["function"] * 4
     )
     assert browser.evaluate("filteredFacilities().length") == 13459
+
+
+def test_actual_missing_original_source_uses_unattributed_fallback(browser: Browser) -> None:
+    """Load the real omitted-script page and retain the explicit fallback catalogue."""
+    server = ThreadingHTTPServer(("127.0.0.1", 0), FallbackHandler)
+    thread = Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        browser.command(
+            "Page.navigate", {"url": f"http://127.0.0.1:{server.server_port}/index.html"}
+        )
+        browser.wait_ready()
+        assert browser.evaluate("reactors.length") == 31
+        browser.evaluate("document.querySelector('.reactor-card').click()")
+        assert browser.evaluate("dialogBody.querySelector('.author-assessment')===null") is True
+        assert browser.evaluate("dialogBody.querySelector('.evidence-profile')===null") is True
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+        assert not thread.is_alive()

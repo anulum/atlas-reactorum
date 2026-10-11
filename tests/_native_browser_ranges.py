@@ -16,11 +16,11 @@ from contextlib import contextmanager
 from itertools import pairwise
 from pathlib import Path
 from typing import cast
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 import requests
 
-from .browser_checks_runtime import BrowserEndpoints
+from .browser_checks_runtime import ASSETS, BrowserEndpoints
 from .conftest import load_module
 from .test_evidence_profiles_browser import Browser
 from .test_taxonomy_comparison_browser import NativeScript, native_count, reload_page
@@ -39,7 +39,7 @@ def browser_ranges(
     directory : pathlib.Path
         Test-owned receipt directory; each case is created exclusively.
     modules : sequence of pathlib.Path
-        Complete actual module sources whose native bytes must match the checkout.
+        Complete module sources bound to their exact presentation paths and checkout bytes.
     case : str
         Unique registered test identity, retained in the receipt filename.
 
@@ -79,11 +79,14 @@ def browser_ranges(
             assert isinstance(result, list)
             captured = []
             for source in modules:
+                expected_path = urlsplit(
+                    urljoin(native["page"], source.relative_to(ASSETS).as_posix())
+                ).path
                 scripts = [
                     script
                     for script in result
                     if isinstance(script, dict)
-                    and str(script.get("url", "")).endswith("/" + source.name)
+                    and urlsplit(str(script.get("url", ""))).path == expected_path
                 ]
                 assert scripts, source.name
                 for script in scripts:
@@ -94,6 +97,7 @@ def browser_ranges(
                 captured.append(
                     {
                         "source": str(source),
+                        "source_url_path": expected_path,
                         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
                         "native_source_equal": True,
                         "scripts": scripts,

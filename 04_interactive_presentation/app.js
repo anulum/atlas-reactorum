@@ -12,8 +12,16 @@ const facilityRows = globalThis.AtlasApplicationData.facilities(
 const companyRows = globalThis.AtlasApplicationData.companies(
   window.FUSION_COMPANIES,
 );
-const taxonomyRows = globalThis.AtlasApplicationData.taxonomy(
+const originalTaxonomyRows = globalThis.AtlasApplicationData.taxonomy(
   window.REACTOR_TAXONOMY,
+);
+const reviewedTaxonomy = globalThis.AtlasTaxonomyReviewedProfiles.read(
+  window.REACTOR_TAXONOMY_REVIEWED_PROFILES,
+  window.REACTOR_TAXONOMY_REVIEWED_PROFILE_INPUTS,
+  window.REACTOR_TAXONOMY_EVIDENCE_PROFILES,
+);
+const taxonomyRows = globalThis.AtlasApplicationData.taxonomy(
+  originalTaxonomyRows.length ? reviewedTaxonomy.records : [],
 );
 const taxonomyAuditRows = globalThis.AtlasApplicationData.audits(
   window.REACTOR_TAXONOMY_AUDIT,
@@ -23,7 +31,7 @@ const repositoryRows = globalThis.AtlasApplicationData.repositories(
 );
 window.REACTOR_FACILITIES = facilityRows;
 window.FUSION_COMPANIES = companyRows;
-window.REACTOR_TAXONOMY = taxonomyRows;
+window.REACTOR_TAXONOMY = originalTaxonomyRows;
 window.REACTOR_TAXONOMY_AUDIT = taxonomyAuditRows;
 window.ANULUM_REACTOR_REPOS = repositoryRows;
 
@@ -31,6 +39,7 @@ const taxonomyCatalogue = globalThis.AtlasTaxonomyCatalogue.create(
   document,
   taxonomyRows,
   taxonomyAuditRows,
+  reviewedTaxonomy.author_reviews.records,
 );
 const companyCatalogue = globalThis.AtlasCompanyCatalogue.create(
   document,

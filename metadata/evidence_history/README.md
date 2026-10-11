@@ -83,7 +83,8 @@ explicit first journal observation. It must not reset existing project history.
 digest to match the current exported catalogue before generating either
 presentation output. It records no new observation and performs no acquisition.
 Output I/O failure rolls back prior presentation products and removes its owned
-staging directory. The whole release build reproduces 22 declared products.
+staging directory. The whole release build reproduces 26 declared products,
+including the original and reviewed taxonomy profiles and country boundaries.
 
 ## Pending proposals and curator decisions
 

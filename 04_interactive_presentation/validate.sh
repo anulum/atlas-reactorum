@@ -32,6 +32,12 @@ node --test --experimental-test-coverage \
 for file in taxonomy-catalogue-controller.js company-catalogue-controller.js repository-catalogue-controller.js facility-field-sources.js facility-detail-controller.js facility-export.js facility-catalogue-controller.js; do
     node --check "$root_dir/$file"
 done
+for file in author-review-values.js author-review-dimensions.js author-review-revisions.js taxonomy-author-review.js taxonomy-reviewed-profiles.js taxonomy-reviewed-presentation.js scripts/taxonomy_reviewed_products.cjs data/taxonomy-reviewed-profiles.js; do
+    test -s "$root_dir/$file"
+    node --check "$root_dir/$file"
+done
+test -s "$root_dir/data/taxonomy-reviewed-profiles.json"
+test -s "$root_dir/../metadata/evidence_profiles/author_reviews.json"
 node --test --test-concurrency=1 --experimental-test-coverage \
     --test-coverage-include="$root_dir/company-catalogue-controller.js" \
     --test-coverage-include="$root_dir/repository-catalogue-controller.js" \
@@ -106,6 +112,22 @@ node --test --test-concurrency=1 --experimental-test-coverage \
     "$root_dir/../tests/taxonomy_claim_sources.test.cjs" \
     "$root_dir/../tests/taxonomy_evidence_profiles.test.cjs" \
     "$root_dir/../tests/export_taxonomy.test.cjs"
+node --test --test-concurrency=1 --experimental-test-coverage \
+    --test-coverage-include="$root_dir/author-review-values.js" \
+    --test-coverage-include="$root_dir/author-review-dimensions.js" \
+    --test-coverage-include="$root_dir/author-review-revisions.js" \
+    --test-coverage-include="$root_dir/taxonomy-author-review.js" \
+    --test-coverage-include="$root_dir/scripts/taxonomy_reviewed_products.cjs" \
+    --test-coverage-include="$root_dir/taxonomy-reviewed-profiles.js" \
+    --test-coverage-include="$root_dir/taxonomy-reviewed-presentation.js" \
+    --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \
+    "$root_dir/../tests/author_review_values.test.cjs" \
+    "$root_dir/../tests/author_review_dimensions.test.cjs" \
+    "$root_dir/../tests/author_review_revisions.test.cjs" \
+    "$root_dir/../tests/taxonomy_author_review.test.cjs" \
+    "$root_dir/../tests/taxonomy_reviewed_products.test.cjs" \
+    "$root_dir/../tests/taxonomy_reviewed_presentation.test.cjs" \
+    "$root_dir/../tests/default_taxonomy_review.test.cjs"
 node --test --test-concurrency=1 --experimental-test-coverage \
     --test-coverage-include="$root_dir/taxonomy-comparison.js" \
     --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 \
