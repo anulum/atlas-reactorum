@@ -107,14 +107,16 @@ for (const fault of [
         precision: "day",
       };
     else if (fault === "pages") row.observations[0].pdf_pages = [100000];
-    else
-      for (const entry of doc.records)
-        entry.observations = entry.observations.filter(
-          (item) => item.source_id !== doc.additional_sources[0].id,
-        );
+    else {
+      const unused = structuredClone(doc.additional_sources[0]);
+      unused.id = "unused-" + unused.id;
+      doc.additional_sources.push(unused);
+    }
     assert.throws(
       () => api.read(doc, fixture.baseline),
-      /Author|author|source|score|scientific|future|attained/,
+      fault === "unused-source"
+        ? /Author review includes an unused additional source/
+        : /Author|author|source|score|scientific|future|attained/,
     );
   });
 }
