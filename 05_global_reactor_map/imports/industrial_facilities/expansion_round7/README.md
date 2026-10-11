@@ -92,6 +92,10 @@ previously reviewed capture. This does not broaden the resource-specific grant.
 The page retrieved on 2026-10-08 changes that footer counter to 16,560;
 every other byte matches the original reviewed page. Its exact SHA-256 is
 accepted separately, without changing any rights wording or grant scope.
+The page retrieved on 2026-10-11 changes only the dataset counter from 16,560
+to 16,567 and the showcase counter from 136 to 138. Every other byte matches
+the 2026-10-08 capture. Its exact SHA-256 is accepted separately; the full
+body and receipt remain in private custody.
 Any other page hash still requires a new source-specific review. Original HTML
 and dated retrieval receipts remain in private custody.
 

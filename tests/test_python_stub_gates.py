@@ -246,8 +246,8 @@ def test_native_version_mismatch_refuses_under_real_optimization(stub_candidate:
     shutil.copytree(source, metadata)
     path = metadata / "METADATA"
     original = path.read_text()
-    assert "Version: 2.3.1" in original
-    path.write_text(original.replace("Version: 2.3.1", "Version: 0.0.0"))
+    assert "Version: 2.4.0" in original
+    path.write_text(original.replace("Version: 2.4.0", "Version: 0.0.0"))
     result = run_stub(stub_candidate, optimized=True)
     assert result.returncode != 0
     assert "native Python stub tool version mismatch" in result.stderr

@@ -84,7 +84,7 @@ function main(mode) {
     for (const file of files) css.validate(fs.readFileSync(file, "utf8"));
     return 0;
   }
-  version("prettier", "3.9.9");
+  version("prettier", "3.9.10");
   return native("node_modules/prettier/bin/prettier.cjs", [
     "--check",
     "--",

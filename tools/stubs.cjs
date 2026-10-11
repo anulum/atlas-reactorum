@@ -60,7 +60,7 @@ function main(workspace = os.tmpdir()) {
         python,
         [
           "-c",
-          "from importlib.metadata import version\nif version('mypy') != '2.3.1' or version('ruff') != '0.16.9':\n    raise RuntimeError('native Python stub tool version mismatch')",
+          "from importlib.metadata import version\nif version('mypy') != '2.4.0' or version('ruff') != '0.17.0':\n    raise RuntimeError('native Python stub tool version mismatch')",
         ],
         env,
       );

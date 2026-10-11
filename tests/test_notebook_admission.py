@@ -365,8 +365,8 @@ def test_actual_changed_distribution_metadata_refuses(tmp_path: Path) -> None:
     shutil.copytree(original, candidate)
     path = candidate / "METADATA"
     text = path.read_text()
-    assert "Version: 2.3.1" in text
-    path.write_text(text.replace("Version: 2.3.1", "Version: 0.0.0"))
+    assert "Version: 2.4.0" in text
+    path.write_text(text.replace("Version: 2.4.0", "Version: 0.0.0"))
     result = subprocess.run(
         [sys.executable, "-m", "tools.notebooks", str(NOTEBOOK)],
         cwd=ROOT,

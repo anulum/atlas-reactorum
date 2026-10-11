@@ -21,7 +21,7 @@ scope. They provide evidence for that scope, not a whole-candidate verdict.
 | ------------------ | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Lint and format    | `make lint`                                                       | Ruff/NumPy contracts, Python formatting, native shell checks and locked ESLint/JSDoc/Prettier                                                                                                   |
 | Shell              | `make native-shell`                                               | ShellCheck 0.9.0 and shfmt 3.8.0; four-space formatting across tracked and new shell source                                                                                                     |
-| HTML/CSS           | `make native-web`                                                 | HTML-validate 11.16.2 semantic/accessibility contracts, CSS Tree 3.2.1 grammar/resolved values, Prettier 3.9.9                                                                                  |
+| HTML/CSS           | `make native-web`                                                 | HTML-validate 11.16.2 semantic/accessibility contracts, CSS Tree 3.2.1 grammar/resolved values, Prettier 3.9.10                                                                                  |
 | Notebook source    | `make native-notebooks`                                           | Native nbformat schema, Ruff notebook lint/format, nbQA 1.9.1 strict mypy across all cells                                                                                                      |
 | Notebook runtime   | `make native-notebook-runtime`                                    | Complete unchanged source through Jupyter/nbclient 0.11.0 and ipykernel 7.4.0 in an isolated owned kernel                                                                                       |
 | First source       | `make native-languages`                                           | Block unqualified and unknown source/backend formats; route current asset suffixes and named metadata explicitly                                                                                |
@@ -59,13 +59,18 @@ Run these commands from the repository root with a writable temporary parent
 selected through `TMPDIR`.
 
 The public `package-lock.json` pins the complete JavaScript development graph.
-Install it with `npm ci` using Node24.21.0/npm11.19.0. ESLint10.12.0,
-JSDoc65.1.0, TypeScript6.0.3 and Prettier3.9.9 run through
+Install it with `npm ci` using Node24.21.0/npm12.2.0. ESLint10.12.0,
+JSDoc65.2.4, TypeScript6.0.3 and Prettier3.9.10 run through
 `tools/javascript.cjs`; the same native entry points are used by Make,
 pre-commit hooks and CI. Strict type checking uses declarations for dependencies
 and keeps `skipLibCheck=false`; it does not infer third-party JavaScript under
 `node_modules`. Native source syntax and dedicated semantic suites remain
 separate gates.
+
+The npm12 installation policy approves only the exact canvas3.2.3 lifecycle
+script required by the native renderer. All other dependency scripts retain
+the package manager's default refusal. TypeScript6.0.3 matches the native
+parser's declared `>=4.8.4 <6.1.0` peer range; TypeScript7 is outside it.
 
 Individually named generated data wrappers preserve their source bytes
 and generator contracts instead of entering formatter writes or handwritten

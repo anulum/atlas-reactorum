@@ -122,7 +122,7 @@ function main(mode) {
       "jsconfig.json",
     ]);
   }
-  return nativeTool("prettier", "3.9.9", "bin/prettier.cjs", [
+  return nativeTool("prettier", "3.9.10", "bin/prettier.cjs", [
     "--check",
     "--",
     ...files,

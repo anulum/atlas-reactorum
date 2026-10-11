@@ -51,6 +51,7 @@ test("completed field review preserves unknown outcomes and refuses independent 
     8,
   );
   for (const change of [
+    { current_activity: "operating" },
     { review_scope: "all-hardware-qualified" },
     { review_basis: "independent-review" },
     { independent_review: { accepted: true } },

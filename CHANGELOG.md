@@ -15,6 +15,15 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Fixed — 2026-10-11
+
+- Cover refusal of asserted current operation in a completed author review, retaining
+  unknown activity and independent-review boundaries.
+- Accept the separately inspected Swiss terms-page capture whose only changes
+  are two footer catalogue counters. All other unreviewed page hashes refuse.
+- Align the complete compatible development graph, native tool gates and hosted
+  Python matrix with current upstream releases.
+
 ### Added — 2026-10-11
 
 - Complete the author review of all 135 taxonomy entries and their 21 original
