@@ -26,6 +26,7 @@ from tools.rebuild import copy_source
 
 from ._facility_field_sources import PINS, ROOT, document
 from ._facility_field_sources import original_source as original_source
+from .test_power_bundle import build_power_product
 
 
 def release_projection(root: Path) -> list[dict[str, object]]:
@@ -250,6 +251,7 @@ def test_real_consumer_runs_without_any_original_preparation_fixture(
     """
     source = tmp_path / "release"
     copy_source(ROOT, source)
+    build_power_product(source)
     (source / "tests").rename(tmp_path / "original-research-fixtures")
     data = source / "04_interactive_presentation/data"
     result = subprocess.run(

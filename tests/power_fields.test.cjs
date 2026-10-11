@@ -276,3 +276,32 @@ test("actual classic consumer and native consumer project identical original cel
     rows.filter((row) => row.power_field_decisions).map((row) => R.render(row)),
   );
 });
+
+test("an unavailable HTTP result stays a capture attempt in actual details", () => {
+  const rows = globalThis.AtlasApplicationData.facilities(
+    originalDocument("global_reactors.sample"),
+  );
+  const original = rows.find((row) =>
+    row.power_field_decisions?.some((decision) =>
+      decision.observations.some(
+        (observation) => observation.capture_attempts.length,
+      ),
+    ),
+  );
+  assert.ok(original?.power_field_decisions);
+  const row = structuredClone(original);
+  assert.ok(row.power_field_decisions);
+  for (const decision of row.power_field_decisions)
+    for (const observation of decision.observations) {
+      for (const attempt of observation.capture_attempts) {
+        attempt.http_status = null;
+        attempt.body_bytes = null;
+        attempt.body_sha256 = "";
+        attempt.body_complete = false;
+      }
+    }
+  const admitted = globalThis.AtlasApplicationData.facilities([row])[0];
+  assert.equal(admitted.operator, original.operator);
+  assert.equal(admitted.reactor_type, original.reactor_type);
+  assert.ok(R.render(admitted).includes("Capture attempt · HTTP unavailable"));
+});

@@ -23,6 +23,16 @@ BUNDLE = importlib.import_module(
 )
 
 
+def build_power_product(root: Path) -> None:
+    """Execute the owning producer API for a complete fresh release source copy."""
+    cli = importlib.import_module(
+        "05_global_reactor_map.imports.power_units.official_source_enrichment.build_power_projection"
+    )
+    source = root / SOURCE.relative_to(ROOT)
+    directory = root / DIRECTORY.relative_to(ROOT)
+    assert cli.main([str(source), str(directory)]) == 0
+
+
 def test_whole_bundle_preserves_original_cells_and_complete_decisions() -> None:
     """Reconstruct every original row and qualify exactly the source-bound blank fills.
 

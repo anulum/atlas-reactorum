@@ -148,6 +148,9 @@ def test_default_map_cli_and_node_exports_use_only_the_new_fusion_catalogue(
     """
     source = tmp_path / "source"
     copy_source(ROOT, source)
+    from .test_power_bundle import build_power_product
+
+    build_power_product(source)
     data = source / "04_interactive_presentation/data"
     result = run_cli(
         BUILDER, "--source-root", str(source), "--data-dir", str(data), optimize=optimize
@@ -242,6 +245,9 @@ def test_explicit_historical_route_preserves_its_original_records_and_input_scop
     """Select historical rows explicitly and preserve their input pin without adding FFDB rows."""
     source = tmp_path / "historical"
     copy_source(ROOT, source)
+    from .test_power_bundle import build_power_product
+
+    build_power_product(source)
     data = source / "04_interactive_presentation/data"
     result = run_cli(
         BUILDER,

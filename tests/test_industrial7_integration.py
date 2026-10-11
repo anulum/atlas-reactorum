@@ -52,6 +52,9 @@ def complete_source(tmp_path: Path) -> Path:
     """
     source = tmp_path / "source"
     copy_source(ROOT, source)
+    from .test_power_bundle import build_power_product
+
+    build_power_product(source)
     return source
 
 

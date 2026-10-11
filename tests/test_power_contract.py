@@ -252,7 +252,7 @@ def test_raw_validator_and_actual_builder_refuse_partial_source_bundle(tmp_path:
     rebuild.copy_source(ROOT, stage)
     relative = DIRECTORY.relative_to(ROOT)
     # The release product is generated from the two original producer members.
-    cli = stage / relative / "build_power_projection.py"
+    cli = DIRECTORY / "build_power_projection.py"
     source = stage / SOURCE.relative_to(ROOT)
     result = subprocess.run(
         [
@@ -268,7 +268,7 @@ def test_raw_validator_and_actual_builder_refuse_partial_source_bundle(tmp_path:
         check=False,
     )
     assert result.returncode == 0, result.stderr
-    validator = stage / "05_global_reactor_map/imports/power_units/scripts/validate.py"
+    validator = ROOT / "05_global_reactor_map/imports/power_units/scripts/validate.py"
     command = [
         os.environ.get("ATLAS_PYTHON", str(ROOT / ".venv/bin/python")),
         str(validator),
@@ -284,9 +284,16 @@ def test_raw_validator_and_actual_builder_refuse_partial_source_bundle(tmp_path:
         command, cwd=stage, capture_output=True, text=True, timeout=60, check=False
     )
     assert refused.returncode == 1 and "documentary power bundle" in refused.stdout
-    builder = stage / "04_interactive_presentation/scripts/build_datasets.py"
+    builder = ROOT / "04_interactive_presentation/scripts/build_datasets.py"
     refused = subprocess.run(
-        [command[0], str(builder)],
+        [
+            command[0],
+            str(builder),
+            "--source-root",
+            str(stage),
+            "--data-dir",
+            str(stage / "04_interactive_presentation/data"),
+        ],
         cwd=stage,
         capture_output=True,
         text=True,
