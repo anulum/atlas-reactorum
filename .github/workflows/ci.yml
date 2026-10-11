@@ -117,6 +117,16 @@ jobs:
       - name: Install immutable native JavaScript graph
         run: npm ci
       - run: make validate
+        env:
+          NODE_V8_COVERAGE: ${{ runner.temp }}/native-js-coverage
+      - name: Preserve native JavaScript coverage on failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-js-coverage
+          path: ${{ runner.temp }}/native-js-coverage
+          retention-days: 3
+          if-no-files-found: error
       - run: make preflight
   dependency-audit:
     name: Complete locked dependency audits
