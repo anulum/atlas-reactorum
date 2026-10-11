@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import cast
 
 import pytest
+from coverage import Coverage
 
 from metadata.evidence_profiles.review_contract import ReviewError, validate_author_reviews
 from metadata.evidence_profiles.validate import INPUTS
@@ -29,6 +30,46 @@ SCRIPT = ROOT / "metadata/evidence_profiles/review_contract.py"
 PROFILE = Path("metadata/evidence_profiles/profiles.json")
 REVIEW = Path("metadata/evidence_profiles/author_reviews.json")
 SNAPSHOT = hashlib.sha256((ROOT / INPUTS["taxonomy_sha256"]).read_bytes()).hexdigest()
+
+
+def run_owner_cli(args: list[str], owner: Path, cwd: Path) -> subprocess.CompletedProcess[str]:
+    """Measure an exact source-copy CLI when its parent collects coverage.
+
+    Parameters
+    ----------
+    args : list of str
+        Real interpreter, owning script and complete public CLI arguments.
+    owner : pathlib.Path
+        Tree containing the byte-verified Python modules and damaged schema.
+    cwd : pathlib.Path
+        Working directory for the isolated native process.
+
+    Returns
+    -------
+    subprocess.CompletedProcess
+        Actual CLI output and status, with subprocess measurements retained
+        in the active parent's data allocation when coverage is enabled.
+    """
+    environment = os.environ.copy()
+    active = Coverage.current()
+    if active is not None:
+        environment["COVERAGE_FILE"] = str(
+            Path(cast(str, active.get_option("run:data_file"))).resolve()
+        )
+        args = [
+            args[0],
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            str(ROOT / "pyproject.toml"),
+            "--source",
+            str(owner / "metadata/evidence_profiles"),
+            *args[1:],
+        ]
+    return subprocess.run(
+        args, cwd=cwd, env=environment, capture_output=True, text=True, timeout=65
+    )
 
 
 def read(path: Path) -> dict[str, object]:
@@ -264,13 +305,15 @@ def test_actual_additional_capture_custody_refuses(candidate: Path, mutation: st
     elif mutation == "nonpdf-count":
         source["page_count"] = 1
     else:
-        for record in records(doc):
-            record["observations"] = [
-                item
-                for item in cast(list[dict[str, object]], record["observations"])
-                if item["source_id"] != source["id"]
-            ]
-    with pytest.raises(ReviewError):
+        unused = dict(source)
+        unused["id"] = "unused-" + str(source["id"])
+        sources.append(unused)
+    expected = (
+        "^Author review includes an unused additional source\\.$"
+        if mutation == "unused-source"
+        else None
+    )
+    with pytest.raises(ReviewError, match=expected):
         validate_author_reviews(candidate, SNAPSHOT, doc)
 
 
@@ -466,7 +509,7 @@ def test_real_owner_copy_refuses_damaged_schema(candidate: Path, damage: str) ->
         for record in records(doc):
             cast(dict[str, object], record["fields"]).pop("temp")
         (candidate / REVIEW).write_text(json.dumps(doc))
-    result = subprocess.run(
+    result = run_owner_cli(
         [
             sys.executable,
             str(candidate / source_paths[0]),
@@ -477,12 +520,16 @@ def test_real_owner_copy_refuses_damaged_schema(candidate: Path, damage: str) ->
             "--reviews",
             str(candidate / REVIEW),
         ],
-        cwd=candidate.parent,
-        capture_output=True,
-        text=True,
-        timeout=65,
+        candidate,
+        candidate.parent,
     )
-    assert result.returncode == 1 and "author reviews:" in result.stderr
+    expected = {
+        "schema-invalid": "Author review schema is unavailable.",
+        "schema-weakened": "Author review omits an original taxonomy field.",
+        "schema-missing": "Author review input cannot be read as strict JSON.",
+    }[damage]
+    assert result.returncode == 1 and not result.stdout
+    assert result.stderr == "author reviews: " + expected + "\n"
     assert "Traceback" not in result.stderr and str(candidate) not in result.stderr
 
 

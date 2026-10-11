@@ -27,7 +27,7 @@ from metadata.evidence_profiles.review_contract import ReviewError
 from metadata.evidence_profiles.reviewed_profiles import validate_reviewed_profiles
 from metadata.evidence_profiles.validate import INPUTS
 
-from .test_author_review_contract import PROFILE, REVIEW, ROOT, SNAPSHOT, read
+from .test_author_review_contract import PROFILE, REVIEW, ROOT, SNAPSHOT, read, run_owner_cli
 from .test_author_review_contract import candidate as candidate
 
 PRODUCT = Path("04_interactive_presentation/data/taxonomy-reviewed-profiles.json")
@@ -473,7 +473,7 @@ def test_real_owning_reviewed_schema_refuses_damage(emitted: Path, fault: str) -
                 "$ref": "urn:atlas-reactorum:absent"
             }
         schema.write_text(json.dumps(document))
-    result = subprocess.run(
+    result = run_owner_cli(
         [
             sys.executable,
             str(owner / "metadata/evidence_profiles/reviewed_profiles.py"),
@@ -484,9 +484,8 @@ def test_real_owning_reviewed_schema_refuses_damage(emitted: Path, fault: str) -
             "--reviews",
             str(emitted / REVIEW),
         ],
-        capture_output=True,
-        text=True,
-        timeout=65,
+        owner,
+        emitted.parent,
     )
     assert result.returncode == 1 and not result.stdout
     assert result.stderr == "reviewed profiles: Reviewed profile schema cannot be validated.\n"

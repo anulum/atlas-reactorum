@@ -178,6 +178,13 @@ omit = ["/etc/*", "*/sitecustomize.py", "*/.venv/*"]
 # tree. The case requires byte equality before execution; retain those actual
 # regions under their owning module when subprocess data are combined.
 history_input = ["tools", "*/test_real_candidate_with_unava*/tools"]
+# These cases copy every executed Python module byte-for-byte before damaging
+# only its schema. Count the real native refusals under the canonical owners.
+review_schema_owners = [
+    "metadata/evidence_profiles",
+    "*/test_real_owner_copy_refuse*/metadata/evidence_profiles",
+    "*/test_real_owning_reviewed_sc*/owner/metadata/evidence_profiles",
+]
 
 [tool.coverage.report]
 # 100 per cent, and never lowered. Anything below the line is coverage debt:
