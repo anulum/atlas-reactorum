@@ -36,6 +36,10 @@ The 29 local expansion scaffolds receive no fabricated remote URL. The existing
 30-record public ecosystem panel remains a different view: it also includes
 control and supporting projects outside this Reactor group.
 
+The public [group and project map](../../docs/ecosystem.md) is built from its
+own dated source snapshot in [`metadata/group_map/`](../group_map/README.md)
+and is checked against the project identities and categories cited here.
+
 ## Consuming citations and landscape records
 
 A consumer selects a project by exact `project_id`, checks the snapshot schema

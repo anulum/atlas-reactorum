@@ -17,6 +17,7 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ### Added — 2026-10-12
 
+- Group and project map of the SCPN Reactor Systems Research Group (`docs/ecosystem.md`), generated offline from a dated source snapshot of all 55 projects with their own declared state, licence and checkable links (`metadata/group_map/`). ADR 0002 records the atlas as host of the map.
 - Complete 930-field review of the original GEM power unit gaps, with 54 qualified fills, 35 held and 841 bounded unknown outcomes. Preserve original source bytes and known values.
 - Explicit historical, intended, designated and licensed roles plus documentary dates, scope observations and capture refusals in actual map details and standalone downloads. Independent review remains null.
 - Offline hash-bound producer, matching Python/Node/browser admission and facility schema 1.4.0. CSV adds class, model, original tracker stage and complete decision JSON.

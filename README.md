@@ -102,6 +102,10 @@ Canonical Reactor project citations, including local expansion proposals,
 are available in [the versioned portfolio snapshot](metadata/reactor_portfolio/README.md).
 These citations preserve producer revisions and do not certify their claims.
 
+The [SCPN Reactor Systems group and project map](docs/ecosystem.md) presents
+the whole portfolio the atlas belongs to: every project, its state on a stated
+date and the links between them, generated from a dated source snapshot.
+
 ## Repository guide
 
 - [`00_index/README.md`](00_index/README.md) — scope, coverage and evidence rules

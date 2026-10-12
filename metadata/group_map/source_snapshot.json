@@ -1,0 +1,2213 @@
+{
+  "schema": "scpn.reactor-group-source-snapshot.v1",
+  "group": "SCPN-REACTOR-SYSTEMS",
+  "captured": "2026-10-12",
+  "sources": {
+    "repositories": "local canonical checkouts at the recorded commits",
+    "index": "https://pypi.org/pypi/<package>/json",
+    "hosting": "public repository listing of github.com/anulum"
+  },
+  "count": 55,
+  "records": [
+    {
+      "project": "ATLAS-REACTORUM",
+      "commit": "309f75abfc9c5a371833663710f398f3c8c8c949",
+      "commit_date": "2026-10-12",
+      "package_name": "atlas-reactorum",
+      "description": "Evidence-bounded atlas and research library of reactor technology",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": null,
+      "hosting": {
+        "slug": "anulum/atlas-reactorum",
+        "visibility": "public"
+      },
+      "release_tags": 1,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-ADS-CORE",
+      "commit": "7e2582bd6072751470449661ca5688ddaeec76ab",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Subcritical blanket design and a typed beam-target interface; accelerator ownership remains separate.",
+        "plan_id": "F10",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-BEAM-TARGET-CORE",
+      "commit": "63633923ff92b33771159b82a90dc2e39307c064",
+      "commit_date": "2026-09-20",
+      "package_name": "scpn-beam-target-core",
+      "description": "Device configuration model of the SCPN-BEAM-TARGET-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "beam_target",
+        "confinement_family": "beam_target",
+        "configurations": [
+          "beam_target",
+          "colliding_beam"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-beam-target-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 31
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-BIOCHEM-CORE",
+      "commit": "510da404352f6c424b68611fec7a15c9069eb890",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Biochemical reaction engineering design, fermentation and enzymatic-kinetics boundaries.",
+        "plan_id": "C6",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-BREED-BURN-CORE",
+      "commit": "c43a70489af6581f4d3aef80f54fe74534b63547",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Breed-and-burn fuel-management concepts and evidence limitations; no moving burn-wave claim.",
+        "plan_id": "F14",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-BWR-CORE",
+      "commit": "3c236c3715d43c2df859415308959b853f5cf465",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Boiling-channel fission design and void-feedback evidence; no two-phase solver is implemented.",
+        "plan_id": "F2",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-CATALYTIC-BED-CORE",
+      "commit": "e343b7ea6b67fe11f5d4f97008f77743d7cb9ff0",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Fixed-bed catalysis design, effectiveness and pressure-drop interfaces.",
+        "plan_id": "C2",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-CHANNEL-CORE",
+      "commit": "dcc1606b5b3fc5fead561e655d29568f8ec33ef1",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Graphite-moderated channel reactor geometry and physics; F3 exclusively owns heavy-water pressure tubes.",
+        "plan_id": "F13",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-CHEM-KINETICS-CORE",
+      "commit": "40e16d11f470ffe5ec16e9348e285640f2c4d31d",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Ideal gas-phase reactor kinetics and CSTR/PFR design; shared kinetics belongs in the kernel library.",
+        "plan_id": "C1",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-CHEM-PROCESS-HYBRID-CORE",
+      "commit": "3b990422499fff76c36c8064b6ef33d9cefa424a",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "hybrid_composition",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Typed composition of chemical process families and carbon-capture interfaces.",
+        "plan_id": "H4",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-DENSE-PLASMA-FOCUS-CORE",
+      "commit": "b653836f07e78998afa77faa72b93c9e6048d477",
+      "commit_date": "2026-10-04",
+      "package_name": "scpn-dense-plasma-focus-core",
+      "description": "Device configuration model of the SCPN-DENSE-PLASMA-FOCUS-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "dense_plasma_focus",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "dense_plasma_focus"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-dense-plasma-focus-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 25
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 35
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-ELECTROCHEM-CORE",
+      "commit": "e130c7abf7a845ee5b5f9fb35714c54eeeee2c68",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Electrochemical reactor design for electrolyser and fuel-cell process boundaries.",
+        "plan_id": "C5",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-FRC-CORE",
+      "commit": "defa4abc11156d9958c2dd0b9b12633d714367d4",
+      "commit_date": "2026-09-20",
+      "package_name": "scpn-frc-core",
+      "description": "Device configuration model of the SCPN-FRC-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "field_reversed_configuration",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "field_reversed_configuration"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-frc-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 28
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 38
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-FUSION-CORE",
+      "commit": "8ba0e1968766fce179b75b00d30b32e6b9befd34",
+      "commit_date": "2026-10-12",
+      "package_name": "scpn-fusion",
+      "description": "SCPN Fusion Core - Advanced Plasma Physics & Control Suite",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 20
+      },
+      "classifier": "Development Status :: 4 - Beta",
+      "manifest": null,
+      "hosting": {
+        "slug": "anulum/scpn-fusion-core",
+        "visibility": "public"
+      },
+      "release_tags": 50,
+      "requirements": [
+        {
+          "extra": "studio",
+          "requirement": "scpn-studio-platform>=0.11.3.dev0,<0.12",
+          "to": "SCPN-STUDIO-PLATFORM",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "line": 82
+        }
+      ],
+      "index": {
+        "name": "scpn-fusion",
+        "version": "4.0.0",
+        "versions": 22
+      }
+    },
+    {
+      "project": "SCPN-FUSION-FISSION-HYBRID-CORE",
+      "commit": "b868a66c9358ff187a3f5e5414f5a9c14bd6762d",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-fusion-fission-hybrid-core",
+      "description": "Device configuration model of the SCPN-FUSION-FISSION-HYBRID-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "fusion_fission_hybrid",
+        "confinement_family": "hybrid",
+        "configurations": [
+          "fusion_fission_hybrid"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-fusion-fission-hybrid-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-FUSION-PROCESS-HEAT-CORE",
+      "commit": "b477d491c879bebec0ac255d05c0e5892d9f0c2f",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "hybrid_composition",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Typed fusion-to-chemical-process heat and material coupling records.",
+        "plan_id": "H6",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-GFR-CORE",
+      "commit": "fb8ee6c33f3e084affe40c008a6f61ebe247c753",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Fast-spectrum gas-cooled reactor design and heat-removal boundaries.",
+        "plan_id": "F11",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-HEAT-PIPE-CORE",
+      "commit": "b64695ce058b0cde05679d46f3a2780ffe8e885e",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Solid-core heat-pipe microreactor design and heat-transport interfaces.",
+        "plan_id": "F9",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-HTGR-CORE",
+      "commit": "775034ac56064c8e43da9cff76fb2df83e49b050",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Graphite-moderated, gas-cooled and TRISO design evidence with a declared process-heat interface.",
+        "plan_id": "F4",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-HYBRID-ENERGY-CORE",
+      "commit": "19f9ad46e2dbcb636bf677acd66eefbf7d09ec86",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "hybrid_composition",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Typed fission, renewable and storage energy-flow coupling records.",
+        "plan_id": "H3",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-HYDROGEN-PROCESS-CORE",
+      "commit": "0a82f00ede86cc95f387f30cc375b12be736b621",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Hydrogen production process designs for thermal and electrical feed interfaces.",
+        "plan_id": "C4",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-ICF-BEAM-CORE",
+      "commit": "7b288468fd3fc927c617eaed6bf1f142662f3e75",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-icf-beam-core",
+      "description": "Device configuration model of the SCPN-ICF-BEAM-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "beam_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "ion_beam_icf",
+          "pulsed_electron_beam_icf"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-icf-beam-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-ICF-IMPACT-CORE",
+      "commit": "c580b791e6e46947aee477b6892f10b0cd0792a3",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-icf-impact-core",
+      "description": "Device configuration model of the SCPN-ICF-IMPACT-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "impact_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "projectile_or_impact_icf"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-icf-impact-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-ICF-LASER-CORE",
+      "commit": "c5050cbd2defa79826046b8f375e3d99ef2d7db5",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-icf-laser-core",
+      "description": "Device configuration model of the SCPN-ICF-LASER-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "laser_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "laser_icf_direct_drive",
+          "laser_icf_fast_or_shock_ignition",
+          "laser_icf_indirect_drive"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-icf-laser-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-IEC-CORE",
+      "commit": "5357a656a7eb57ce9c4819e1d6e3edfd6d98acbb",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-iec-core",
+      "description": "Device configuration model of the SCPN-IEC-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "iec",
+        "confinement_family": "electrostatic",
+        "configurations": [
+          "gridded_iec",
+          "polywell"
+        ],
+        "capabilities": 3,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-iec-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-LATTICE-FUSION-CORE",
+      "commit": "6cb74f90af4c3d02a3744c23b9fd1d5b8438bd1b",
+      "commit_date": "2026-09-19",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "architecture_only",
+        "category": null,
+        "device_family": "lattice_confinement_fusion",
+        "confinement_family": "extension",
+        "configurations": [
+          "scpn.reactor_systems:lattice_confinement_fusion"
+        ],
+        "capabilities": 0,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.1.0",
+          "digest_sha256": "6741f25892d81b24aa621ee4f56b5e785e8323eca6ccf9d9009ce2c8e53f4912"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-lattice-fusion-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-LEVITATED-DIPOLE-CORE",
+      "commit": "8c25082c25aff18b421d72aa987e4b5baee180b3",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-levitated-dipole-core",
+      "description": "Device configuration model of the SCPN-LEVITATED-DIPOLE-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "levitated_dipole",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "levitated_dipole"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-levitated-dipole-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-LFR-CORE",
+      "commit": "46d649d4502e28f0a8857f6ff43d5f39337c903d",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Fast-spectrum lead or lead-bismuth cooled system design and corrosion boundary.",
+        "plan_id": "F6",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-MAGNETIC-CUSP-CORE",
+      "commit": "dd0635af936e0eff9b056cb4811943add36632b3",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-magnetic-cusp-core",
+      "description": "Device configuration model of the SCPN-MAGNETIC-CUSP-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "magnetic_cusp",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "cusp"
+        ],
+        "capabilities": 2,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-magnetic-cusp-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-MEMBRANE-CORE",
+      "commit": "50df62b6f01b4b1a989da4f7607eaf059c7a49fa",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Coupled reaction-and-separation design and transport interfaces.",
+        "plan_id": "C8",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-METHANE-REFORMER-CORE",
+      "commit": "666e86219f464c62150bcfe27542d8b18b4782db",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Steam-methane reforming process design and hydrogen stream interfaces.",
+        "plan_id": "C3",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-MIF-CORE",
+      "commit": "cb3b104362c1f821ebc4e7861257dce572fab188",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-mif-core",
+      "description": "Deterministic phase synchronisation and hardware synthesis for high-beta pulsed magneto-inertial fusion plasmas",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 2
+      },
+      "classifier": "Development Status :: 2 - Pre-Alpha",
+      "manifest": null,
+      "hosting": {
+        "slug": "anulum/scpn-mif-core",
+        "visibility": "public"
+      },
+      "release_tags": 3,
+      "requirements": [
+        {
+          "extra": "ecosystem",
+          "requirement": "sc-neurocore>=3.16.0",
+          "to": "SC-NEUROCORE",
+          "to_group": "SC-NEUROMORPHIC-COMPUTING-SYSTEMS",
+          "line": 66
+        },
+        {
+          "extra": "ecosystem",
+          "requirement": "scpn-phase-orchestrator>=1.0.0",
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "line": 67
+        },
+        {
+          "extra": "ecosystem",
+          "requirement": "scpn-control>=0.23.0",
+          "to": "SCPN-CONTROL",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "line": 68
+        },
+        {
+          "extra": "ecosystem",
+          "requirement": "scpn-fusion>=4.0.0",
+          "to": "SCPN-FUSION-CORE",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 69
+        },
+        {
+          "extra": "ecosystem",
+          "requirement": "scpn-quantum-control>=1.0.0",
+          "to": "SCPN-QUANTUM-CONTROL",
+          "to_group": "SCPN-QUANTUM-COMPUTING-SYSTEMS",
+          "line": 70
+        },
+        {
+          "extra": "studio",
+          "requirement": "scpn-studio-platform>=0.11.2,<0.12",
+          "to": "SCPN-STUDIO-PLATFORM",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "line": 116
+        }
+      ],
+      "index": {
+        "name": "scpn-mif-core",
+        "version": "0.1.1",
+        "versions": 3
+      }
+    },
+    {
+      "project": "SCPN-MIF-LINER-CORE",
+      "commit": "b4a373e1fe6c5e7ecd240f17b5c1cb2261d32b54",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-mif-liner-core",
+      "description": "Device configuration model of the SCPN-MIF-LINER-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "mif_material_liner",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "mechanical_or_liquid_liner_mif"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-mif-liner-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 27
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 36
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-MIF-MAGLIF-CORE",
+      "commit": "526bdbb17f769feac9f9db0a161ab72c0a4eeaa5",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-mif-maglif-core",
+      "description": "Device configuration model of the SCPN-MIF-MAGLIF-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "mif_maglif",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "maglif"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-mif-maglif-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 27
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 35
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-MIF-PLASMA-JET-CORE",
+      "commit": "6fc3f905006d0f62423a88d0656a291c92a832e5",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-mif-plasma-jet-core",
+      "description": "Device configuration model of the SCPN-MIF-PLASMA-JET-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "mif_plasma_jet",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "plasma_jet_mif"
+        ],
+        "capabilities": 3,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-mif-plasma-jet-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 28
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-MIRROR-CORE",
+      "commit": "63e16dd0c437bf5965b26e13794ce56c44738aec",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-mirror-core",
+      "description": "Device configuration model of the SCPN-MIRROR-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "magnetic_mirror",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "gas_dynamic_mirror",
+          "simple_magnetic_mirror",
+          "tandem_mirror"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-mirror-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 25
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 36
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-MSR-CORE",
+      "commit": "2259400a34c8ec3692c305195b9efb7ab8934064",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Liquid-fuel molten-salt design with chemistry and depletion interfaces; thermal and fast variants remain facets.",
+        "plan_id": "F7",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-MUON-FUSION-CORE",
+      "commit": "14b629dd7cc856e9feeb1f48c4931e49e30567cf",
+      "commit_date": "2026-09-19",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "architecture_only",
+        "category": null,
+        "device_family": "muon_catalysed_fusion",
+        "confinement_family": "extension",
+        "configurations": [
+          "scpn.reactor_systems:muon_catalysed_fusion"
+        ],
+        "capabilities": 0,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.1.0",
+          "digest_sha256": "6741f25892d81b24aa621ee4f56b5e785e8323eca6ccf9d9009ce2c8e53f4912"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-muon-fusion-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-NTP-CORE",
+      "commit": "c3704302865d83f66b9f3dce0fbf703f2569a569",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Reactor-side nuclear thermal propulsion design; no verified source anchor or thrust result yet.",
+        "plan_id": "F15",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-NUCLEAR-DESALINATION-CORE",
+      "commit": "544fb4952077812a84bd3edd7d08e19c21bbca0d",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "hybrid_composition",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Typed fission-to-desalination thermal and material coupling records.",
+        "plan_id": "H5",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-NUCLEAR-HYDROGEN-CORE",
+      "commit": "ebf7069a08249d30175693add59156e6e3f9d718",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "hybrid_composition",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Typed fission-to-hydrogen thermal, electrical and material coupling records.",
+        "plan_id": "H2",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-PHOTOCATALYTIC-CORE",
+      "commit": "918906ccfed4edea3cb36819954859eb47be6a94",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "chemical_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Photon-driven chemical reaction design with source and optical-flux interfaces.",
+        "plan_id": "C7",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-PHWR-CORE",
+      "commit": "e82da0674bad6b5a730b9ad42fd6d6a39e2c361a",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Heavy-water pressure-tube design and on-power refuelling interfaces; graphite channel physics belongs to F13.",
+        "plan_id": "F3",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-PWR-CORE",
+      "commit": "42388b00469a6b9203984e68b1382de79010df2a",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Light-water moderated and cooled fission-system design records; pressure vessel and primary circuit are in scope.",
+        "plan_id": "F1",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-REACTOR-CATALOGUE",
+      "commit": "2ae9ec5e7acab74b6fec300d27ec2ba12c20bd89",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "catalogue",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Evidence-labelled catalogue of reactor-family records; inclusion does not validate a device or approve a candidate.",
+        "plan_id": "S1",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-REACTOR-KERNELS",
+      "commit": "905e2b9d271026364b0bba0981dad89770828221",
+      "commit_date": "2026-10-02",
+      "package_name": "scpn-reactor-kernels",
+      "description": "Shared physics and geometry kernels of the SCPN Reactor Systems Research Group",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "kernels-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": 17,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": "anulum/scpn-reactor-kernels",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-RESEARCH-REACTOR-CORE",
+      "commit": "561c6ef9a2bfec3b0eccfb81eb3d489cb36b2002",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Research and isotope-production reactor design, including pulse-operation boundaries.",
+        "plan_id": "F8",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-RFP-CORE",
+      "commit": "d3ded21f2dde5a5d41384e8d44fe322fb1035ed8",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-rfp-core",
+      "description": "Device configuration model of the SCPN-RFP-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "reversed_field_pinch",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "reversed_field_pinch"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-rfp-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 25
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 32
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-SCWR-CORE",
+      "commit": "bcafe5014f1958e95d53b5d0ff2b6b05cba4f467",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Supercritical-water reactor design and thermal-hydraulic applicability boundaries.",
+        "plan_id": "F12",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-SFR-CORE",
+      "commit": "1e024bf2a2e09274401921b3605523b2bb31ef08",
+      "commit_date": "2026-09-29",
+      "package_name": null,
+      "description": null,
+      "licence": {
+        "packaging": null,
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "project-boundary.json",
+        "evidence_maturity": "architecture_only",
+        "category": "fission_device",
+        "device_family": null,
+        "confinement_family": null,
+        "configurations": null,
+        "capabilities": null,
+        "kernels": null,
+        "boundary": "Fast-spectrum sodium-cooled system design, coolant and materials boundaries.",
+        "plan_id": "F5",
+        "registry_pin": null
+      },
+      "hosting": {
+        "slug": null,
+        "visibility": null
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-SPHEROMAK-CORE",
+      "commit": "5b25c49b1982679a6f805aead1b0b7fb4ca8bb24",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-spheromak-core",
+      "description": "Device configuration model of the SCPN-SPHEROMAK-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "spheromak",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "spheromak"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-spheromak-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 25
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 32
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-STELLARATOR-CORE",
+      "commit": "4a181b61d0a6591bedb0397d8513ec90ee661af9",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-stellarator-core",
+      "description": "Device configuration model of the SCPN-STELLARATOR-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "stellarator",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "heliotron",
+          "stellarator",
+          "torsatron"
+        ],
+        "capabilities": 2,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-stellarator-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [],
+      "index": null
+    },
+    {
+      "project": "SCPN-THETA-PINCH-CORE",
+      "commit": "46e57e20b93cc7d300b807850e790755b8bc497f",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-theta-pinch-core",
+      "description": "Device configuration model of the SCPN-THETA-PINCH-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "theta_pinch",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "theta_pinch"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-theta-pinch-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 26
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 36
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-TOKAMAK-CORE",
+      "commit": "9535ea78b587c1c8351fcc33fd0118e85fc5b9ce",
+      "commit_date": "2026-09-19",
+      "package_name": "scpn-tokamak-core",
+      "description": "Device configuration model of the SCPN tokamak device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "tokamak",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "conventional_tokamak",
+          "spherical_tokamak"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-tokamak-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 21
+        },
+        {
+          "extra": "cad",
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 29
+        }
+      ],
+      "index": null
+    },
+    {
+      "project": "SCPN-Z-PINCH-CORE",
+      "commit": "7a5f1dc52ab3f51162814c4268fbe830420427ad",
+      "commit_date": "2026-09-04",
+      "package_name": "scpn-z-pinch-core",
+      "description": "Device configuration model of the SCPN-Z-PINCH-CORE device family",
+      "licence": {
+        "packaging": "AGPL-3.0-or-later",
+        "readme_spdx": "AGPL-3.0-or-later",
+        "commercial_line": 3
+      },
+      "classifier": null,
+      "manifest": {
+        "file": "reactor-domain.json",
+        "evidence_maturity": "computational_prototype",
+        "category": null,
+        "device_family": "z_pinch",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "sheared_flow_z_pinch",
+          "z_pinch"
+        ],
+        "capabilities": 5,
+        "kernels": null,
+        "boundary": null,
+        "plan_id": null,
+        "registry_pin": {
+          "version": "1.0.0",
+          "digest_sha256": "786d9542ce76c56dd7748fa948b17efed6c073525e527ce90e6d5e29a2d00090"
+        }
+      },
+      "hosting": {
+        "slug": "anulum/scpn-z-pinch-core",
+        "visibility": "public"
+      },
+      "release_tags": 0,
+      "requirements": [
+        {
+          "extra": null,
+          "requirement": "scpn-reactor-kernels[cad]",
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "line": 25
+        }
+      ],
+      "index": null
+    }
+  ]
+}

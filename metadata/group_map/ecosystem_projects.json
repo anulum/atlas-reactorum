@@ -1,0 +1,2876 @@
+{
+  "format": "ecosystem-projects/0.2",
+  "group": "SCPN-REACTOR-SYSTEMS",
+  "as_of": "2026-10-12",
+  "source_snapshot": {
+    "file": "source_snapshot.json",
+    "sha256": "ed331f643dcbb324fe1db6a0397d98ccd3a60b0c4c06bd73a90bd3e27ac54d3c"
+  },
+  "projects": [
+    {
+      "name": "ATLAS-REACTORUM",
+      "family": "evidence_library",
+      "kind": "tool",
+      "function": "Evidence-bounded atlas and research library of reactor technology",
+      "function_source": "pyproject.toml [project].description",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": null,
+        "source": null
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "ATLAS-REACTORUM",
+        "visibility": "public",
+        "url": "https://github.com/anulum/atlas-reactorum"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-ADS-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Subcritical blanket design and a typed beam-target interface; accelerator ownership remains separate.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-ADS-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-BEAM-TARGET-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the beam target family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "beam_target",
+        "confinement_family": "beam_target",
+        "configurations": [
+          "beam_target",
+          "colliding_beam"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-BEAM-TARGET-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-beam-target-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-BEAM-TARGET-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-BEAM-TARGET-CORE/pyproject.toml line 31 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-BEAM-TARGET-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-BIOCHEM-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Biochemical reaction engineering design, fermentation and enzymatic-kinetics boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-BIOCHEM-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-BREED-BURN-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Breed-and-burn fuel-management concepts and evidence limitations; no moving burn-wave claim.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-BREED-BURN-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-BWR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Boiling-channel fission design and void-feedback evidence; no two-phase solver is implemented.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-BWR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-CATALYTIC-BED-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Fixed-bed catalysis design, effectiveness and pressure-drop interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-CATALYTIC-BED-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-CHANNEL-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Graphite-moderated channel reactor geometry and physics; SCPN-PHWR-CORE exclusively owns heavy-water pressure tubes.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-CHANNEL-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-CHEM-KINETICS-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Ideal gas-phase reactor kinetics and CSTR/PFR design; shared kinetics belongs in the kernel library.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-CHEM-KINETICS-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-CHEM-PROCESS-HYBRID-CORE",
+      "family": "hybrid_composition",
+      "kind": "component",
+      "function": "Typed composition of chemical process families and carbon-capture interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-CHEM-PROCESS-HYBRID-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-DENSE-PLASMA-FOCUS-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the dense plasma focus family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "dense_plasma_focus",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "dense_plasma_focus"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-DENSE-PLASMA-FOCUS-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-dense-plasma-focus-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-DENSE-PLASMA-FOCUS-CORE/pyproject.toml line 25"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-DENSE-PLASMA-FOCUS-CORE/pyproject.toml line 35 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-DENSE-PLASMA-FOCUS-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-ELECTROCHEM-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Electrochemical reactor design for electrolyser and fuel-cell process boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-ELECTROCHEM-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-FRC-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the field reversed configuration family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "field_reversed_configuration",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "field_reversed_configuration"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-FRC-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-frc-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-FRC-CORE/pyproject.toml line 28"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-FRC-CORE/pyproject.toml line 38 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-FRC-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-FUSION-CORE",
+      "family": "solver_library",
+      "kind": "package",
+      "function": "SCPN Fusion Core - Advanced Plasma Physics & Control Suite",
+      "function_source": "pyproject.toml [project].description",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "released",
+      "status_source": {
+        "where": "index entry scpn-fusion 4.0.0 with release tags",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": "4.0.0",
+        "source": "index entry scpn-fusion"
+      },
+      "maturity": {
+        "value": "beta",
+        "source": "pyproject.toml classifier"
+      },
+      "declared_evidence_maturity": {
+        "value": null,
+        "source": null
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-FUSION-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-fusion-core"
+      },
+      "package": {
+        "published": true,
+        "index": "PyPI scpn-fusion"
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-STUDIO-PLATFORM",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "optional interface",
+          "evidence": "SCPN-FUSION-CORE/pyproject.toml line 82 (extra studio)"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-FUSION-FISSION-HYBRID-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the fusion fission hybrid family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "fusion_fission_hybrid",
+        "confinement_family": "hybrid",
+        "configurations": [
+          "fusion_fission_hybrid"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-FUSION-FISSION-HYBRID-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-fusion-fission-hybrid-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-FUSION-FISSION-HYBRID-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-FUSION-FISSION-HYBRID-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-FUSION-FISSION-HYBRID-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-FUSION-PROCESS-HEAT-CORE",
+      "family": "hybrid_composition",
+      "kind": "component",
+      "function": "Typed fusion-to-chemical-process heat and material coupling records.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-FUSION-PROCESS-HEAT-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-GFR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Fast-spectrum gas-cooled reactor design and heat-removal boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-GFR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-HEAT-PIPE-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Solid-core heat-pipe microreactor design and heat-transport interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-HEAT-PIPE-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-HTGR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Graphite-moderated, gas-cooled and TRISO design evidence with a declared process-heat interface.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-HTGR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-HYBRID-ENERGY-CORE",
+      "family": "hybrid_composition",
+      "kind": "component",
+      "function": "Typed fission, renewable and storage energy-flow coupling records.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-HYBRID-ENERGY-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-HYDROGEN-PROCESS-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Hydrogen production process designs for thermal and electrical feed interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-HYDROGEN-PROCESS-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-ICF-BEAM-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the beam icf family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "beam_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "ion_beam_icf",
+          "pulsed_electron_beam_icf"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-ICF-BEAM-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-icf-beam-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-ICF-BEAM-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-ICF-BEAM-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-ICF-BEAM-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-ICF-IMPACT-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the impact icf family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "impact_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "projectile_or_impact_icf"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-ICF-IMPACT-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-icf-impact-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-ICF-IMPACT-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-ICF-IMPACT-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-ICF-IMPACT-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-ICF-LASER-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the laser icf family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "laser_icf",
+        "confinement_family": "inertial",
+        "configurations": [
+          "laser_icf_direct_drive",
+          "laser_icf_fast_or_shock_ignition",
+          "laser_icf_indirect_drive"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-ICF-LASER-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-icf-laser-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-ICF-LASER-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-ICF-LASER-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-ICF-LASER-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-IEC-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the iec family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "iec",
+        "confinement_family": "electrostatic",
+        "configurations": [
+          "gridded_iec",
+          "polywell"
+        ],
+        "implemented_capabilities": 3
+      },
+      "repository": {
+        "hosted_in": "SCPN-IEC-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-iec-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-IEC-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-LATTICE-FUSION-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the lattice confinement fusion family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "reactor-domain.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "lattice_confinement_fusion",
+        "confinement_family": "extension",
+        "configurations": [
+          "scpn.reactor_systems:lattice_confinement_fusion"
+        ],
+        "implemented_capabilities": 0
+      },
+      "repository": {
+        "hosted_in": "SCPN-LATTICE-FUSION-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-lattice-fusion-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-LATTICE-FUSION-CORE/reactor-domain.json spo_registry version 1.1.0 digest 6741f25892d8"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-LEVITATED-DIPOLE-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the levitated dipole family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "levitated_dipole",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "levitated_dipole"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-LEVITATED-DIPOLE-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-levitated-dipole-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-LEVITATED-DIPOLE-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-LEVITATED-DIPOLE-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-LEVITATED-DIPOLE-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-LFR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Fast-spectrum lead or lead-bismuth cooled system design and corrosion boundary.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-LFR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-MAGNETIC-CUSP-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the magnetic cusp family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "magnetic_cusp",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "cusp"
+        ],
+        "implemented_capabilities": 2
+      },
+      "repository": {
+        "hosted_in": "SCPN-MAGNETIC-CUSP-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-magnetic-cusp-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MAGNETIC-CUSP-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MEMBRANE-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Coupled reaction-and-separation design and transport interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-MEMBRANE-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-METHANE-REFORMER-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Steam-methane reforming process design and hydrogen stream interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-METHANE-REFORMER-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-MIF-CORE",
+      "family": "solver_library",
+      "kind": "package",
+      "function": "Deterministic phase synchronisation and hardware synthesis for high-beta pulsed magneto-inertial fusion plasmas",
+      "function_source": "pyproject.toml [project].description",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "released",
+      "status_source": {
+        "where": "index entry scpn-mif-core 0.1.1 with release tags",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": "0.1.1",
+        "source": "index entry scpn-mif-core"
+      },
+      "maturity": {
+        "value": "pre-alpha",
+        "source": "pyproject.toml classifier"
+      },
+      "declared_evidence_maturity": {
+        "value": null,
+        "source": null
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-MIF-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-mif-core"
+      },
+      "package": {
+        "published": true,
+        "index": "PyPI scpn-mif-core"
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SC-NEUROCORE",
+          "to_group": "SC-NEUROMORPHIC-COMPUTING-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 66 (extra ecosystem)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 67 (extra ecosystem)"
+        },
+        {
+          "to": "SCPN-CONTROL",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 68 (extra ecosystem)"
+        },
+        {
+          "to": "SCPN-FUSION-CORE",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 69 (extra ecosystem)"
+        },
+        {
+          "to": "SCPN-QUANTUM-CONTROL",
+          "to_group": "SCPN-QUANTUM-COMPUTING-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 70 (extra ecosystem)"
+        },
+        {
+          "to": "SCPN-STUDIO-PLATFORM",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-CORE/pyproject.toml line 116 (extra studio)"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MIF-LINER-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the mif material liner family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "mif_material_liner",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "mechanical_or_liquid_liner_mif"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-MIF-LINER-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-mif-liner-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-MIF-LINER-CORE/pyproject.toml line 27"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-LINER-CORE/pyproject.toml line 36 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MIF-LINER-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MIF-MAGLIF-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the mif maglif family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "mif_maglif",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "maglif"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-MIF-MAGLIF-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-mif-maglif-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-MIF-MAGLIF-CORE/pyproject.toml line 27"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIF-MAGLIF-CORE/pyproject.toml line 35 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MIF-MAGLIF-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MIF-PLASMA-JET-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the mif plasma jet family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "mif_plasma_jet",
+        "confinement_family": "magneto_inertial",
+        "configurations": [
+          "plasma_jet_mif"
+        ],
+        "implemented_capabilities": 3
+      },
+      "repository": {
+        "hosted_in": "SCPN-MIF-PLASMA-JET-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-mif-plasma-jet-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-MIF-PLASMA-JET-CORE/pyproject.toml line 28"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MIF-PLASMA-JET-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MIRROR-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the magnetic mirror family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "magnetic_mirror",
+        "confinement_family": "magnetic_open",
+        "configurations": [
+          "gas_dynamic_mirror",
+          "simple_magnetic_mirror",
+          "tandem_mirror"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-MIRROR-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-mirror-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-MIRROR-CORE/pyproject.toml line 25"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-MIRROR-CORE/pyproject.toml line 36 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MIRROR-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-MSR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Liquid-fuel molten-salt design with chemistry and depletion interfaces; thermal and fast variants remain facets.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-MSR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-MUON-FUSION-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the muon catalysed fusion family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "reactor-domain.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "muon_catalysed_fusion",
+        "confinement_family": "extension",
+        "configurations": [
+          "scpn.reactor_systems:muon_catalysed_fusion"
+        ],
+        "implemented_capabilities": 0
+      },
+      "repository": {
+        "hosted_in": "SCPN-MUON-FUSION-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-muon-fusion-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-MUON-FUSION-CORE/reactor-domain.json spo_registry version 1.1.0 digest 6741f25892d8"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-NTP-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Reactor-side nuclear thermal propulsion design; no verified source anchor or thrust result yet.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-NTP-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-NUCLEAR-DESALINATION-CORE",
+      "family": "hybrid_composition",
+      "kind": "component",
+      "function": "Typed fission-to-desalination thermal and material coupling records.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-NUCLEAR-DESALINATION-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-NUCLEAR-HYDROGEN-CORE",
+      "family": "hybrid_composition",
+      "kind": "component",
+      "function": "Typed fission-to-hydrogen thermal, electrical and material coupling records.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-NUCLEAR-HYDROGEN-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-PHOTOCATALYTIC-CORE",
+      "family": "chemical_device",
+      "kind": "component",
+      "function": "Photon-driven chemical reaction design with source and optical-flux interfaces.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-PHOTOCATALYTIC-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-PHWR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Heavy-water pressure-tube design and on-power refuelling interfaces; graphite channel physics belongs to SCPN-CHANNEL-CORE.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-PHWR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-PWR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Light-water moderated and cooled fission-system design records; pressure vessel and primary circuit are in scope.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-PWR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-REACTOR-CATALOGUE",
+      "family": "catalogue",
+      "kind": "component",
+      "function": "Evidence-labelled catalogue of reactor-family records; inclusion does not validate a device or approve a candidate.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-REACTOR-CATALOGUE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-REACTOR-KERNELS",
+      "family": "shared_kernel_library",
+      "kind": "package",
+      "function": "Shared physics and geometry kernels of the SCPN Reactor Systems Research Group",
+      "function_source": "pyproject.toml [project].description",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "kernels-domain.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-REACTOR-KERNELS",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-reactor-kernels"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-RESEARCH-REACTOR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Research and isotope-production reactor design, including pulse-operation boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-RESEARCH-REACTOR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-RFP-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the reversed field pinch family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "reversed_field_pinch",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "reversed_field_pinch"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-RFP-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-rfp-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-RFP-CORE/pyproject.toml line 25"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-RFP-CORE/pyproject.toml line 32 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-RFP-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-SCWR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Supercritical-water reactor design and thermal-hydraulic applicability boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-SCWR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-SFR-CORE",
+      "family": "fission_device",
+      "kind": "component",
+      "function": "Fast-spectrum sodium-cooled system design, coolant and materials boundaries.",
+      "function_source": "project-boundary.json boundary",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "architecture stage",
+      "status_source": {
+        "where": "project-boundary.json evidence_maturity",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "architecture_only",
+        "source": "project-boundary.json"
+      },
+      "device": null,
+      "repository": {
+        "hosted_in": "SCPN-SFR-CORE",
+        "visibility": "not published",
+        "url": null
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "README.md SPDX line",
+      "commercial_licence_available": true,
+      "links": []
+    },
+    {
+      "name": "SCPN-SPHEROMAK-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the spheromak family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "spheromak",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "spheromak"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-SPHEROMAK-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-spheromak-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-SPHEROMAK-CORE/pyproject.toml line 25"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-SPHEROMAK-CORE/pyproject.toml line 32 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-SPHEROMAK-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-STELLARATOR-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the stellarator family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "stellarator",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "heliotron",
+          "stellarator",
+          "torsatron"
+        ],
+        "implemented_capabilities": 2
+      },
+      "repository": {
+        "hosted_in": "SCPN-STELLARATOR-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-stellarator-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-STELLARATOR-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-THETA-PINCH-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the theta pinch family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "theta_pinch",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "theta_pinch"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-THETA-PINCH-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-theta-pinch-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-THETA-PINCH-CORE/pyproject.toml line 26"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-THETA-PINCH-CORE/pyproject.toml line 36 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-THETA-PINCH-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-TOKAMAK-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the tokamak family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "tokamak",
+        "confinement_family": "magnetic_closed",
+        "configurations": [
+          "conventional_tokamak",
+          "spherical_tokamak"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-TOKAMAK-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-tokamak-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-TOKAMAK-CORE/pyproject.toml line 21"
+        },
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "optional interface",
+          "evidence": "SCPN-TOKAMAK-CORE/pyproject.toml line 29 (extra cad)"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-TOKAMAK-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    },
+    {
+      "name": "SCPN-Z-PINCH-CORE",
+      "family": "fusion_device",
+      "kind": "component",
+      "function": "Device-level description of the z pinch family",
+      "function_source": "reactor-domain.json device_family",
+      "owning_groups": [
+        "SCPN-REACTOR-SYSTEMS"
+      ],
+      "primary_group": "SCPN-REACTOR-SYSTEMS",
+      "status": "under development",
+      "status_source": {
+        "where": "public repository without a package release",
+        "date": "2026-10-12"
+      },
+      "version": {
+        "value": null,
+        "source": null
+      },
+      "maturity": {
+        "value": null,
+        "source": null
+      },
+      "declared_evidence_maturity": {
+        "value": "computational_prototype",
+        "source": "reactor-domain.json"
+      },
+      "device": {
+        "device_family": "z_pinch",
+        "confinement_family": "self_magnetic",
+        "configurations": [
+          "sheared_flow_z_pinch",
+          "z_pinch"
+        ],
+        "implemented_capabilities": 5
+      },
+      "repository": {
+        "hosted_in": "SCPN-Z-PINCH-CORE",
+        "visibility": "public",
+        "url": "https://github.com/anulum/scpn-z-pinch-core"
+      },
+      "package": {
+        "published": false,
+        "index": null
+      },
+      "licence": "AGPL-3.0-or-later",
+      "licence_source": "pyproject.toml [project].license",
+      "commercial_licence_available": true,
+      "links": [
+        {
+          "to": "SCPN-REACTOR-KERNELS",
+          "to_group": "SCPN-REACTOR-SYSTEMS",
+          "kind": "package dependency",
+          "evidence": "SCPN-Z-PINCH-CORE/pyproject.toml line 25"
+        },
+        {
+          "to": "SCPN-PHASE-ORCHESTRATOR",
+          "to_group": "SCPN-SYSTEMS-INTEGRATION-AND-CONTROL",
+          "kind": "pinned contract",
+          "evidence": "SCPN-Z-PINCH-CORE/reactor-domain.json spo_registry version 1.0.0 digest 786d9542ce76"
+        }
+      ]
+    }
+  ]
+}
