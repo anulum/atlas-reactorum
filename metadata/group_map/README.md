@@ -63,9 +63,9 @@ names another scaffold by its plan identifier, the builder writes the project
 that the snapshot records under that identifier instead; no other word of a
 source is changed.
 
-The file follows the working shape `ecosystem-projects/0.2` shared by the
-groups of the ecosystem, which may still change. Beside the shared fields it
-carries what this group's repositories state about themselves:
+The file follows the format `ecosystem-projects/1.0` shared by the groups of
+the ecosystem. Beside the shared fields it carries what this group's
+repositories state about themselves:
 `declared_evidence_maturity`, `device` (family, confinement family,
 configurations, number of listed capabilities), `family`, and the source of the
 function and licence fields.

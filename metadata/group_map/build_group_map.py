@@ -277,7 +277,7 @@ def build_data(
     Returns
     -------
     dict
-        Project data in the ``ecosystem-projects/0.2`` shape, with the group's
+        Project data in the ``ecosystem-projects/1.0`` shape, with the group's
         declared evidence maturity and field sources beside it.
 
     Raises
@@ -335,10 +335,9 @@ def build_data(
                     if visibility
                     else None,
                 },
-                "package": {
-                    "published": bool(index),
-                    "index": f"PyPI {index['name']}" if index else None,
-                },
+                "packages": [{"index": f"PyPI {index['name']}", "published": True}]
+                if index
+                else [],
                 "licence": licence,
                 "licence_source": licence_source,
                 "commercial_licence_available": record["licence"]["commercial_line"] is not None,
@@ -348,7 +347,7 @@ def build_data(
     if {project["name"] for project in projects} != set(cited) | {ATLAS}:
         raise ValueError("source snapshot and portfolio citations name different projects")
     return {
-        "format": "ecosystem-projects/0.2",
+        "format": "ecosystem-projects/1.0",
         "group": GROUP,
         "as_of": snapshot["captured"],
         "source_snapshot": {"file": "source_snapshot.json", "sha256": source_sha256},
@@ -370,7 +369,7 @@ def _is_local_scaffold(project: dict[str, Any]) -> bool:
         project["repository"]["visibility"] == "not published"
         and project["status"] == "architecture stage"
         and project["declared_evidence_maturity"]["value"] == "architecture_only"
-        and not project["package"]["published"]
+        and not project["packages"]
     )
 
 
@@ -391,8 +390,8 @@ def _project_row(project: dict[str, Any]) -> str:
     repository = project["repository"]
     name = _name(project)
     package = "none"
-    if project["package"]["published"]:
-        package = f"{project['package']['index']} {project['version']['value']}"
+    if project["packages"]:
+        package = f"{project['packages'][0]['index']} {project['version']['value']}"
         if project["maturity"]["value"]:
             package += f" ({project['maturity']['value']})"
     declared = project["declared_evidence_maturity"]["value"]

@@ -94,7 +94,8 @@ def test_accepted_data_bind_the_snapshot_and_every_cited_project() -> None:
     assert {p["name"] for p in data["projects"]} == cited | {"ATLAS-REACTORUM"}
     assert all(p["owning_groups"] == ["SCPN-REACTOR-SYSTEMS"] for p in data["projects"])
     released = {p["name"] for p in data["projects"] if p["status"] == "released"}
-    assert released == {p["name"] for p in data["projects"] if p["package"]["published"]}
+    assert released == {p["name"] for p in data["projects"] if p["packages"]}
+    assert data["format"] == "ecosystem-projects/1.0"
     page = PAGE.read_text(encoding="utf-8")
     assert all(p["name"] in page for p in data["projects"])
     assert "SCPN-PHWR-CORE exclusively owns heavy-water pressure tubes" in page

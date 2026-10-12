@@ -1,5 +1,5 @@
 {
-  "format": "ecosystem-projects/0.2",
+  "format": "ecosystem-projects/1.0",
   "group": "SCPN-REACTOR-SYSTEMS",
   "as_of": "2026-10-12",
   "source_snapshot": {
@@ -40,10 +40,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/atlas-reactorum"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -82,10 +79,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -132,10 +126,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-beam-target-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -193,10 +184,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -235,10 +223,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -277,10 +262,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -319,10 +301,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -361,10 +340,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -403,10 +379,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -445,10 +418,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -494,10 +464,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-dense-plasma-focus-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -555,10 +522,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -604,10 +568,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-frc-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -665,10 +626,12 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-fusion-core"
       },
-      "package": {
-        "published": true,
-        "index": "PyPI scpn-fusion"
-      },
+      "packages": [
+        {
+          "index": "PyPI scpn-fusion",
+          "published": true
+        }
+      ],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -721,10 +684,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-fusion-fission-hybrid-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -782,10 +742,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -824,10 +781,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -866,10 +820,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -908,10 +859,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -950,10 +898,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -992,10 +937,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -1042,10 +984,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-icf-beam-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1110,10 +1049,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-icf-impact-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1180,10 +1116,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-icf-laser-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1249,10 +1182,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-iec-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1305,10 +1235,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-lattice-fusion-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -1361,10 +1288,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-levitated-dipole-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1422,10 +1346,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -1471,10 +1392,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-magnetic-cusp-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1520,10 +1438,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -1562,10 +1477,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -1604,10 +1516,12 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-mif-core"
       },
-      "package": {
-        "published": true,
-        "index": "PyPI scpn-mif-core"
-      },
+      "packages": [
+        {
+          "index": "PyPI scpn-mif-core",
+          "published": true
+        }
+      ],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1690,10 +1604,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-mif-liner-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1758,10 +1669,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-mif-maglif-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1826,10 +1734,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-mif-plasma-jet-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1890,10 +1795,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-mirror-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -1951,10 +1853,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2000,10 +1899,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-muon-fusion-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2049,10 +1945,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2091,10 +1984,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2133,10 +2023,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2175,10 +2062,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2217,10 +2101,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2259,10 +2140,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2301,10 +2179,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2343,10 +2218,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-reactor-kernels"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2385,10 +2257,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2434,10 +2303,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-rfp-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2495,10 +2361,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2537,10 +2400,7 @@
         "visibility": "not published",
         "url": null
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "README.md SPDX line",
       "commercial_licence_available": true,
@@ -2586,10 +2446,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-spheromak-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2656,10 +2513,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-stellarator-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2712,10 +2566,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-theta-pinch-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2781,10 +2632,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-tokamak-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
@@ -2850,10 +2698,7 @@
         "visibility": "public",
         "url": "https://github.com/anulum/scpn-z-pinch-core"
       },
-      "package": {
-        "published": false,
-        "index": null
-      },
+      "packages": [],
       "licence": "AGPL-3.0-or-later",
       "licence_source": "pyproject.toml [project].license",
       "commercial_licence_available": true,
