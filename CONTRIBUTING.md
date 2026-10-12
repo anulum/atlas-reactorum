@@ -73,6 +73,18 @@ refuse authored answers outside their retained original examples. The native
 cases use complete source-validated profiles; browser cases cover missing
 answers and damaged actual controls alongside the original journeys.
 
+**Third-party sources stay outside the gate.** The atlas is informational about
+what others publish; a publisher changing a page must not turn the correctness
+gate red. A case that reaches a third-party publisher carries the pytest marker
+`live_source`. `make test` leaves those cases out. `make source-drift
+CUSTODY=/absolute/absent/directory` runs them and acquires the live sources; the
+scheduled `source-drift` workflow does that once a day, reports a change in its
+run summary and, when the sources validate, retains them for the gate. The
+gate's industrial round-seven cases read that retained set
+(`ATLAS_INDUSTRIAL7_CAPTURE_DIR`) and reach no publisher; only when no set is
+retained do they acquire the sources themselves. A red `source-drift` run asks
+for a look at the source. It never blocks a change.
+
 `make lint` includes `make native-test-docs`, which requires native contracts
 throughout the complete maintained test tree, including fixtures, shared
 Chrome support and protocol decoders. Ruff also enforces these contracts

@@ -321,6 +321,7 @@ def test_real_native_acquisition_cli(source_custody: Path, tmp_path: Path, optim
     assert "Traceback" not in failure.stderr
 
 
+@pytest.mark.live_source
 def test_live_original_source_acquisition(tmp_path: Path) -> None:
     """Require complete current publisher acquisition with canonical origin receipts.
 

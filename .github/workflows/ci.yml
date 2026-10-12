@@ -89,6 +89,20 @@ jobs:
           command -v pdftotext
       - name: Install immutable native JavaScript graph
         run: npm ci
+      # The industrial round-seven cases need the publishers' complete
+      # originals. The gate reads the last set that the source-drift workflow
+      # acquired and validated, so a publisher's change cannot fail this job.
+      # Without a retained set the cases acquire the sources themselves.
+      - name: Restore the last validated publisher sources
+        id: custody
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ${{ runner.temp }}/industrial7-custody
+          key: industrial7-custody-${{ github.run_id }}
+          restore-keys: industrial7-custody-
+      - name: Use the retained sources
+        if: ${{ steps.custody.outputs.cache-matched-key != '' }}
+        run: echo "ATLAS_INDUSTRIAL7_CAPTURE_DIR=$RUNNER_TEMP/industrial7-custody" >>"$GITHUB_ENV"
       - run: make test
   datasets:
     name: Data and presentation checks

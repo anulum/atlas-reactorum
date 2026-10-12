@@ -105,6 +105,11 @@ All seven captures reviewed so far give the same masked digest. A manifest
 records the complete page's hash as custody of what was captured; it carries
 no page bytes, so offline validation of a manifest does not review the terms.
 The review is made once, at capture, on the page itself.
+
+The live capture runs once a day in the `source-drift` workflow, outside the
+correctness gate. The gate's cases read the originals that workflow last
+validated and retained in the workflow cache; the terms page is not committed
+and is not published by the repository.
 Any other page hash still requires a new source-specific review. Original HTML
 and dated retrieval receipts remain in private custody.
 

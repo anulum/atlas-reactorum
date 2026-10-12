@@ -23,6 +23,10 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 - Offline hash-bound producer, matching Python/Node/browser admission and facility schema 1.4.0. CSV adds class, model, original tracker stage and complete decision JSON.
 
 
+### Changed — 2026-10-12
+
+- Live acquisition from third-party publishers runs in the scheduled `source-drift` workflow and no longer in the correctness gate. The gate's industrial round-seven cases read the last validated sources retained by that workflow; a publisher's change is reported there and blocks nothing. Cases that reach a publisher carry the `live_source` marker; `make test` leaves them out and `make source-drift` runs them.
+
 ### Fixed — 2026-10-12
 
 - Identify the reviewed Swiss terms page with its two footer catalogue counters masked. A change of those counters no longer refuses a live acquisition; any other changed byte still does. The terms are reviewed at capture, on the page; a manifest records the page hash as custody and is no longer matched against a list of earlier page versions.

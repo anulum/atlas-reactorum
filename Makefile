@@ -12,6 +12,7 @@ ATLAS_PYTHON ?= $(abspath $(VENV))/bin/python
 SHELL  := /bin/bash
 
 .DEFAULT_GOAL := help
+.PHONY: source-drift
 .PHONY: help setup hooks lint native-test-docs native-shell native-javascript native-js-lint native-js-types native-js-format native-map-runtime native-web native-html native-css native-web-format dependency-audit typecheck test validate build verify preflight clean research-example
 
 help:  ## List the available targets
@@ -115,7 +116,13 @@ test:  ## Python tests at the 100 per cent coverage floor
 	  test "$${#source_dirs[@]}" -gt 0 || exit 1; \
 	  coverage_args=(); \
 	  for directory in "$${source_dirs[@]}"; do coverage_args+=("--cov=$$directory"); done; \
-	  ATLAS_PYTHON="$(ATLAS_PYTHON)" $(VENV)/bin/python -m pytest tests/ "$${coverage_args[@]}"
+	  ATLAS_PYTHON="$(ATLAS_PYTHON)" $(VENV)/bin/python -m pytest tests/ -m "not live_source" "$${coverage_args[@]}"
+
+CUSTODY ?=
+source-drift:  ## Run the live publisher cases, then acquire the sources into CUSTODY; never part of the gate
+	@test -n "$(CUSTODY)" || { printf 'CUSTODY must name an absent directory outside the repository\n' >&2; exit 1; }
+	ATLAS_PYTHON="$(ATLAS_PYTHON)" $(VENV)/bin/python -m pytest tests/ -m live_source --no-cov
+	$(VENV)/bin/python 05_global_reactor_map/imports/industrial_facilities/expansion_round7/acquisition.py --directory "$(CUSTODY)"
 
 validate: native-javascript native-web native-notebook-runtime  ## Presentation checks, including the map engine tests
 	PATH="$(abspath $(VENV))/bin:$$PATH" bash 04_interactive_presentation/validate.sh

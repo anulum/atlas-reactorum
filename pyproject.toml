@@ -160,6 +160,10 @@ quote-style = "double"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+# A publisher changing a page must not turn the correctness gate red. Cases
+# that reach a third-party publisher carry this marker; `make test` leaves
+# them out and `make source-drift` runs them, outside the gate.
+markers = ["live_source: reaches a third-party publisher; runs outside the blocking gate"]
 
 [tool.coverage.run]
 branch = true
