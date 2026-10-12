@@ -15,10 +15,13 @@ script introduced it.
 
 from __future__ import annotations
 
+import json
 from typing import Any
 
 import pytest
 from jsonschema import Draft202012Validator, FormatChecker
+
+from .conftest import DATA
 
 EXPECTED_FACILITIES = 13459
 EXPECTED_MAPPED = 13357
@@ -252,7 +255,10 @@ class TestSchemaConformance:
         self, facilities: list[dict[str, Any]], facility_schema: dict[str, Any]
     ) -> None:
         # The schema describes the whole document, wrapper included.
-        """Validate the complete facility wrapper and every record using the shipped schema.
+        """Validate the published facility document, wrapper and records, using the shipped schema.
+
+        The document is read as published, so its declared schema version is the
+        producer's own and is not restated here.
 
         Parameters
         ----------
@@ -261,11 +267,9 @@ class TestSchemaConformance:
         facility_schema : dict[str, Any]
             Published facility JSON Schema, including the release wrapper.
         """
-        document = {
-            "schema_version": "1.3.0",
-            "record_count": len(facilities),
-            "records": facilities,
-        }
+        document = json.loads((DATA / "global_reactors.sample.json").read_text(encoding="utf-8"))
+        assert document["records"] == facilities
+        assert document["record_count"] == len(facilities)
         validator = Draft202012Validator(facility_schema, format_checker=FormatChecker())
         errors = list(validator.iter_errors(document))
         assert errors == [], (

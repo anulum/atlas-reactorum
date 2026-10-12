@@ -328,7 +328,7 @@ def test_actual_release_cli_and_schema_keep_primary_decisions_and_legacy_sources
     document = json.loads((data / "global_reactors.sample.json").read_text())
     schema = json.loads((data / "global_reactors.schema.json").read_text())
     Draft202012Validator(schema).validate(document)
-    assert document["schema_version"] == "1.3.0"
+    assert document["schema_version"] == "1.4.0"
     projection = json.loads((primary_bundle / PRIMARY.MEMBERS[2]).read_text())
     by_id = {row["id"]: row for row in document["records"]}
     for original in projection["rows"]:

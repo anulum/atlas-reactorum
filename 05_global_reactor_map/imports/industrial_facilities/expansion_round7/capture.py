@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -32,7 +33,8 @@ ARPAE_SERVICE = (
 )
 TERMS_URL = "https://opendata.swiss/terms-of-use#terms_by"
 APPROVED_TERMS_SHA256 = "da4b7868e59693e5ac09ba5e3eed66acfb21a022ffc45fc3f38d29fdfa3ddf15"
-# Reviewed versions differ solely in unrelated footer catalogue counters.
+# Reviewed versions differ solely in unrelated footer catalogue counters. This set
+# remains the admission list for manifests, which carry a hash and no page bytes.
 APPROVED_TERMS_SHA256S = frozenset(
     {
         APPROVED_TERMS_SHA256,
@@ -43,6 +45,11 @@ APPROVED_TERMS_SHA256S = frozenset(
         "88212e7ef80ad669fcfe1d70eb238ac6a798f754b880eb1cdf32c232b333a63d",
     }
 )
+# The terms page ends in a footer that states how many datasets and showcases
+# the catalogue holds today. Those two numbers change with the catalogue, not
+# with the terms, so the reviewed page is identified with them masked.
+TERMS_FOOTER_COUNTER = re.compile(rb'\d+(\s*<i class="fa fa-(?:files-o|puzzle-piece)"></i>)')
+APPROVED_TERMS_FINGERPRINT = "63449f36e26ae47886e68a0990845b38e64207a3e59252a41dd255732f01fc37"
 BASE_URLS = {
     "SFOE_METADATA.json": "https://ckan.opendata.swiss/api/3/action/package_show?id=biogasanlagen",
     "SFOE_ORIGINAL.csv.zip": SFOE_URL,
@@ -88,6 +95,23 @@ def checked_url(url: str) -> SplitResult:
     ):
         raise ImportRefused("source URL must be anonymous HTTPS without a fragment")
     return parsed
+
+
+def terms_fingerprint(page: bytes) -> str:
+    """Identify a captured Swiss terms page independently of its footer counters.
+
+    Parameters
+    ----------
+    page : bytes
+        Complete captured terms page.
+
+    Returns
+    -------
+    str
+        SHA-256 of the page with the two footer catalogue counters masked. Every
+        other byte, including the whole terms text, enters the digest unchanged.
+    """
+    return hashlib.sha256(TERMS_FOOTER_COUNTER.sub(rb"#\1", page)).hexdigest()
 
 
 def page_plan(layer: Path, count: Path) -> tuple[int, int]:
@@ -269,8 +293,8 @@ def read_captures(directory: Path) -> tuple[list[dict[str, str]], list[dict[str,
     ):
         raise ImportRefused("Swiss exact resource does not bind the reviewed terms-by grant")
     if (
-        hashlib.sha256((directory / "SFOE_TERMS.html").read_bytes()).hexdigest()
-        not in APPROVED_TERMS_SHA256S
+        terms_fingerprint((directory / "SFOE_TERMS.html").read_bytes())
+        != APPROVED_TERMS_FINGERPRINT
     ):
         raise ImportRefused("Swiss terms capture differs and needs a fresh source-specific review")
     italian_resources = object_rows(italian_meta.get("resources"))

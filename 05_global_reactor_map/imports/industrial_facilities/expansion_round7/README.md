@@ -96,6 +96,14 @@ The page retrieved on 2026-10-11 changes only the dataset counter from 16,560
 to 16,567 and the showcase counter from 136 to 138. Every other byte matches
 the 2026-10-08 capture. Its exact SHA-256 is accepted separately; the full
 body and receipt remain in private custody.
+
+From 2026-10-12 a live capture is identified by the SHA-256 of the page with
+those two footer counters masked, so a change of the catalogue's size no
+longer needs a new review. Every other byte, the whole terms text included,
+still enters the digest, and a page that differs anywhere else is refused.
+All seven captures reviewed so far give the same masked digest. Manifests
+carry a hash without the page and keep the list of reviewed complete-page
+versions.
 Any other page hash still requires a new source-specific review. Original HTML
 and dated retrieval receipts remain in private custody.
 

@@ -23,6 +23,11 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 - Offline hash-bound producer, matching Python/Node/browser admission and facility schema 1.4.0. CSV adds class, model, original tracker stage and complete decision JSON.
 
 
+### Fixed — 2026-10-12
+
+- Identify the reviewed Swiss terms page with its two footer catalogue counters masked. A change of those counters no longer refuses a live acquisition; any other changed byte still does.
+- Validate the published facility document as published, read the current release schema version in the two research integration checks, and cover validation of a power layer that has no documentary bundle beside it.
+
 ### Fixed — 2026-10-11
 
 - Keep navigation evidence in one freshly created Chrome target, capturing every

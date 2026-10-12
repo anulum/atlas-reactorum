@@ -33,6 +33,23 @@ def test_canonical_power_units_are_accepted_without_mutation() -> None:
     assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == before
 
 
+def test_historical_layer_without_documentary_bundle_passes_without_decisions(
+    tmp_path: Path,
+) -> None:
+    """A byte-identical layer with no documentary bundle beside it passes and reports no decisions."""
+    before = hashlib.sha256(SOURCE.read_bytes()).hexdigest()
+    copy = tmp_path / SOURCE.name
+    copy.write_bytes(SOURCE.read_bytes())
+    result = run_cli(SCRIPT, str(copy))
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "VALIDATION PASSED" in result.stdout
+    assert "records\t1823" in result.stdout
+    assert "documentary_decisions" not in result.stdout
+    assert hashlib.sha256(copy.read_bytes()).hexdigest() == before
+    assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == before
+    assert [path.name for path in tmp_path.iterdir()] == [SOURCE.name]
+
+
 @pytest.mark.parametrize(
     ("field", "value", "message"),
     [

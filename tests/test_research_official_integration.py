@@ -104,7 +104,7 @@ def test_real_release_cli_keeps_every_original_field_and_frozen_assertion(tmp_pa
     )
     assert result.returncode == 0, result.stderr
     document = json.loads((tmp_path / "global_reactors.sample.json").read_text())
-    assert document["schema_version"] == "1.3.0"
+    assert document["schema_version"] == "1.4.0"
     assert document["record_count"] == 13459
     published = json.loads(
         (ROOT / "04_interactive_presentation/data/global_reactors.sample.json").read_text()

@@ -163,6 +163,27 @@ def test_full_native_exact_resource_rights(source_custody: Path, tmp_path: Path,
         CAPTURE.read_captures(directory)
 
 
+def test_footer_catalogue_counters_do_not_change_the_reviewed_terms(
+    source_custody: Path, tmp_path: Path
+) -> None:
+    """Admit the real terms page with other footer counters; refuse a changed grant sentence."""
+    directory = tmp_path / "copy"
+    copy_custody(directory, source_custody)
+    path = directory / "SFOE_TERMS.html"
+    original = path.read_bytes()
+    recounted, replaced = CAPTURE.TERMS_FOOTER_COUNTER.subn(rb"1\1", original)
+    assert replaced == 2 and recounted != original
+    path.write_bytes(recounted)
+    receipt_change(directory, path.name, "bytes", len(recounted))
+    receipt_change(directory, path.name, "sha256", hashlib.sha256(recounted).hexdigest())
+    assert len(CAPTURE.read_captures(directory)[0]) == 421
+    assert CAPTURE.terms_fingerprint(recounted) == CAPTURE.terms_fingerprint(original)
+    assert CAPTURE.terms_fingerprint(original) == CAPTURE.APPROVED_TERMS_FINGERPRINT
+    regranted = original.replace(b"<strong>may</strong>", b"<strong>may not</strong>", 1)
+    assert regranted != original
+    assert CAPTURE.terms_fingerprint(regranted) != CAPTURE.APPROVED_TERMS_FINGERPRINT
+
+
 @pytest.mark.parametrize("kind", ["empty", "ambiguous", "page_filename"])
 def test_complete_page_membership(source_custody: Path, tmp_path: Path, kind: str) -> None:
     """Reject absent or ambiguous complete-page membership and an unaccepted page filename."""
