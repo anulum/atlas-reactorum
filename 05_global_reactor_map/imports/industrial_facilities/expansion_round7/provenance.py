@@ -16,7 +16,6 @@ from pathlib import Path
 
 from .build_dataset import table_bytes
 from .capture import (
-    APPROVED_TERMS_SHA256S,
     ARPAE_SERVICE,
     BASE_URLS,
     SFOE_URL,
@@ -175,8 +174,6 @@ def check_manifest(
     for name, url in expected_urls.items():
         if by_name[name]["origin_url"] != url:
             raise ImportRefused("manifest receipt is not bound to its canonical publisher resource")
-    if by_name["SFOE_TERMS.html"]["sha256"] not in APPROVED_TERMS_SHA256S:
-        raise ImportRefused("manifest Swiss terms need a new exact-source review")
     dates = {
         "ch-sfoe-biogas": receipt_date(by_name["SFOE_ORIGINAL.csv.zip"]["retrieved_utc"]),
         "it-arpae-biogas": receipt_date(by_name[pages[-1]]["retrieved_utc"]),

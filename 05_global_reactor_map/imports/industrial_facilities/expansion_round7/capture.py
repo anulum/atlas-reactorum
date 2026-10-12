@@ -32,19 +32,6 @@ ARPAE_SERVICE = (
     "https://servizi-gis.arpae.it/server/rest/services/Geoportal/ENERGIAImpianti/MapServer"
 )
 TERMS_URL = "https://opendata.swiss/terms-of-use#terms_by"
-APPROVED_TERMS_SHA256 = "da4b7868e59693e5ac09ba5e3eed66acfb21a022ffc45fc3f38d29fdfa3ddf15"
-# Reviewed versions differ solely in unrelated footer catalogue counters. This set
-# remains the admission list for manifests, which carry a hash and no page bytes.
-APPROVED_TERMS_SHA256S = frozenset(
-    {
-        APPROVED_TERMS_SHA256,
-        "39ce38674a42d807593e8972d5291e6c8c9074a7297264c22da3f3ad4f80fcc6",
-        "9378e28971b8a7bc5a1a8e6a7520ce2a551091f0750e0ed045e6745d377f7914",
-        "5988df8ae7ec81a6a654126fec367de9fcbe616de99de8f81579b80500c98b5f",
-        "b859556c2d9f0417a6a8a9cd77c3b80ae3dffe620325cdeff63ff753d6746e32",
-        "88212e7ef80ad669fcfe1d70eb238ac6a798f754b880eb1cdf32c232b333a63d",
-    }
-)
 # The terms page ends in a footer that states how many datasets and showcases
 # the catalogue holds today. Those two numbers change with the catalogue, not
 # with the terms, so the reviewed page is identified with them masked.

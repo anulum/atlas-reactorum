@@ -25,7 +25,7 @@ Keep a Changelog, and the project adheres to Semantic Versioning.
 
 ### Fixed — 2026-10-12
 
-- Identify the reviewed Swiss terms page with its two footer catalogue counters masked. A change of those counters no longer refuses a live acquisition; any other changed byte still does.
+- Identify the reviewed Swiss terms page with its two footer catalogue counters masked. A change of those counters no longer refuses a live acquisition; any other changed byte still does. The terms are reviewed at capture, on the page; a manifest records the page hash as custody and is no longer matched against a list of earlier page versions.
 - Validate the published facility document as published, read the current release schema version in the two research integration checks, and cover validation of a power layer that has no documentary bundle beside it.
 
 ### Fixed — 2026-10-11
