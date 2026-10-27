@@ -76,3 +76,18 @@ def test_drift_report_runs_on_a_schedule_outside_the_gate() -> None:
     assert str(steps[-1]["with"]["key"]).startswith(CACHE_PREFIX)
     gate = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text())
     assert "source-drift" not in str(gate["jobs"]["ci-gate"])
+
+
+def test_changed_source_is_a_warning_and_never_replaces_the_retained_set() -> None:
+    """A drifted source ends the run green with a warning; only a validated set is saved."""
+    job = workflow_job(".github/workflows/source-drift.yml", "industrial-round-seven")
+    steps = job["steps"]
+    assert isinstance(steps, list)
+    acquire = next(step for step in steps if step.get("id") == "acquire")
+    script = str(acquire["run"])
+    failure_branch = script.split("then", 1)[1].split("fi", 1)[0]
+    assert "::warning title=Publisher source drift::" in failure_branch
+    assert 'echo "validated=false" >>"$GITHUB_OUTPUT"' in failure_branch
+    assert "exit 0" in failure_branch and "exit 1" not in script
+    assert script.rstrip().endswith('echo "validated=true" >>"$GITHUB_OUTPUT"')
+    assert steps[-1]["if"] == "steps.acquire.outputs.validated == 'true'"
