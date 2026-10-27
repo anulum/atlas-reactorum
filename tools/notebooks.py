@@ -22,7 +22,7 @@ from jsonschema import Draft4Validator, FormatChecker
 from tools.research_objects import object_fields, object_rows
 
 PINS = {
-    "ruff": "0.17.0",
+    "ruff": "0.17.2",
     "mypy": "2.4.0",
     "nbqa": "1.9.1",
     "nbclient": "0.11.0",

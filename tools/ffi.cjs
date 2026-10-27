@@ -30,7 +30,7 @@ function main() {
     encoding: "utf8",
     timeout: 30000,
   });
-  if (version.trim() !== "ruff 0.17.0")
+  if (version.trim() !== "ruff 0.17.2")
     throw Error("native FFI checker version mismatch");
   for (const file of files) {
     if (
